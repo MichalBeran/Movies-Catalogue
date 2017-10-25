@@ -13,7 +13,8 @@
     <packaging>pom</packaging>
 
     <name>Movies-Catalogue</name>
-
+    
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.8</maven.compiler.source>

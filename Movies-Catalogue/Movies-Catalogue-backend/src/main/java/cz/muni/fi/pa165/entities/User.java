@@ -2,18 +2,35 @@ package cz.muni.fi.pa165.entities;
 
 import cz.muni.fi.pa165.enums.Role;
 
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 
 /**
  * Created by Michal on 25.10.2017.
  */
+@Entity
 public class User {
+
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private String nick;
+
+    @NotNull
     private String password;
+
+    @NotNull
     private String firstName;
+
+    @NotNull
     private String lastName;
+
+    @NotNull
     private String mail;
+
     private Set<Role> roles;
 
     public Long getId() {

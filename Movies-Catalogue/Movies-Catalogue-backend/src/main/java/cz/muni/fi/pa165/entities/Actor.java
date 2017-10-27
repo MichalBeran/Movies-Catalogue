@@ -62,6 +62,8 @@ public class Actor {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
+    
+    
 
     //public Set<Movie> getMovies() {
     //    return movies;
@@ -70,6 +72,11 @@ public class Actor {
     //public void addMovie(Movie movie) {
     //    this.movies.add(movie);
     //}
+
+    @Override
+    public String toString() {
+        return "Actor{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + '}';
+    }
     
     
     

@@ -29,8 +29,8 @@ public class Director {
     @NotNull
     private String lastName;
     private LocalDate dateOfBirth;
-    //@OneToMany
-    //private Set<Movie> movies;
+    @OneToMany
+    private Set<Movie> movies;
 
     public Long getId() {
         return id;
@@ -64,10 +64,10 @@ public class Director {
         this.dateOfBirth = dateOfBirth;
     }
 
-    //public Set<Movie> getMovies() {
-    //    return movies;
-    //}
-//
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
     //public void assignMovie(Movie movie) {
     //    this.movies.add(id);
     //}

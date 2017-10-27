@@ -25,9 +25,8 @@ public class Movie {
     @NotNull
     private LocalDate dateOfRelease;
 
-//    TODO: Uncomment after implementing entity Genre
-//    @OneToMany
-//    private Set<Genre> genres;
+    @ManyToMany(mappedBy = "movies")
+    private Set<Genre> genres;
 
     @NotNull
     @OneToMany
@@ -77,15 +76,13 @@ public class Movie {
         this.dateOfRelease = dateOfRelease;
     }
 
-//    TODO: Uncomment after implementing entity Genre
-//    public Set<Genre> getGenres() {
-//        return genres;
-//    }
+    public Set<Genre> getGenres() {
+        return genres;
+    }
 
-//    TODO: Uncomment after implementing entity Genre
-//    public void setGenres(Set<Genre> genres) {
-//        this.genres = genres;
-//    }
+    public void setGenres(Set<Genre> genres) {
+        this.genres = genres;
+    }
 
     public Set<Actor> getActors() {
         return actors;

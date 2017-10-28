@@ -28,8 +28,8 @@ public class Actor {
     @NotNull
     private String lastName;
     private LocalDate dateOfBirth;
-    //@OneToMany
-    //private Set<Movie> movies;
+    @OneToMany
+    private Set<Movie> movies;
 
     public Long getId() {
         return id;
@@ -65,13 +65,13 @@ public class Actor {
     
     
 
-    //public Set<Movie> getMovies() {
-    //    return movies;
-    //}
-//
-    //public void addMovie(Movie movie) {
-    //    this.movies.add(movie);
-    //}
+    public Set<Movie> getMovies() {
+        return movies;
+    }
+
+    public void addMovie(Movie movie) {
+        this.movies.add(movie);
+    }
 
     @Override
     public String toString() {

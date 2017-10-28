@@ -27,7 +27,7 @@ public interface ActorDao {
      *
      * @return List<Actor> a list of entities
      */
-    List<Actor> findAll();
+    List findAll();
 
     /**
      * Finds entity with corresponding id
@@ -35,12 +35,12 @@ public interface ActorDao {
      * @param id unique identifier of entity
      * @return Actor the found entity
      */
-    Actor findById(long id);
+    Actor findById(Long id);
 
     /**
      * Removes specified entity from the repository
      *
      * @param id id of entity
      */
-    void delete(long id);
+    void delete(Long id);
 }

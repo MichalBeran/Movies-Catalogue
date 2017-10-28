@@ -27,7 +27,7 @@ public interface ActorDao {
      *
      * @return List<Actor> a list of entities
      */
-    List findAll();
+    List<Actor> findAll();
 
     /**
      * Finds entity with corresponding id

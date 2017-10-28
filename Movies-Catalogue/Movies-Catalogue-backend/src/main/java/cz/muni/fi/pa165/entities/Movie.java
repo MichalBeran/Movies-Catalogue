@@ -102,19 +102,20 @@ public class Movie {
 
     @Override
     public int hashCode() {
-        final int prime = 47;
-        return prime * title.hashCode() * dateOfRelease.hashCode();
+        int result = 17;
+        int prime = 47;
+        result = prime * result + ((title == null) ? 0 : title.hashCode());
+        result = prime * result + ((dateOfRelease == null) ? 0 : dateOfRelease.hashCode());
+        return result;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (obj == null)
-            return false;
         if (!(obj instanceof Movie))
             return false;
-        Movie other = (Movie) obj;
+        final Movie other = (Movie) obj;
 
         return Objects.equals(title, other.getTitle())
                 && Objects.equals(dateOfRelease, other.getDateOfRelease());

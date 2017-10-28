@@ -35,12 +35,12 @@ public interface DirectorDao {
      * @param id unique identifier of entity
      * @return Director the found entity
      */
-    Director findById(long id);
+    Director findById(Long id);
 
     /**
      * Removes specified entity from the repository
      *
      * @param id id of entity
      */
-    void delete(long id);
+    void delete(Long id);
 }

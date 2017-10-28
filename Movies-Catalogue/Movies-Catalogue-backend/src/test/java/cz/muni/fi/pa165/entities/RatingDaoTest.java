@@ -11,6 +11,7 @@ import javax.persistence.Persistence;
  */
 public class RatingDaoTest extends TestCase {
     // TODO: implement RatingDao
+    public void testBlank(){}
 /*
     private RatingDao dao;
     private EntityManager em;

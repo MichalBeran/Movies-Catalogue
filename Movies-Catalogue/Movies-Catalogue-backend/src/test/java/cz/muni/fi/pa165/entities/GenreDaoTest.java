@@ -15,6 +15,7 @@ import static org.assertj.core.api.Assertions.*;
  */
 public class GenreDaoTest extends TestCase {
     // TODO: implement GenreDao please
+    public void testBlank(){}
 /*
     private GenreDao dao;
     private EntityManager em;

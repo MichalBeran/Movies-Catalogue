@@ -30,10 +30,6 @@ public class Rating {
     @ManyToOne
     private Movie movie;
 
-    @NotNull
-    @ManyToOne
-    private Director director;
-
     public Long getId() {
         return id;
     }
@@ -72,14 +68,6 @@ public class Rating {
 
     public void setActorsRating(int actorsRating) {
         this.actorsRating = actorsRating;
-    }
-
-    public Director getDirector() {
-        return director;
-    }
-
-    public void setDirector(Director director) {
-        this.director = director;
     }
     
     public Movie getMovie() {

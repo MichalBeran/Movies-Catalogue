@@ -1,17 +1,11 @@
 package cz.muni.fi.pa165.entities;
 
-import cz.muni.fi.pa165.dao.GenreDao;
+import cz.muni.fi.pa165.InMemoryDatabaseSpring;
 import cz.muni.fi.pa165.dao.GenreDaoImpl;
-import jdk.jfr.internal.LogLevel;
-import jdk.jfr.internal.LogTag;
-import jdk.jfr.internal.Logger;
-import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.junit.runner.RunWith;
-import sun.rmi.runtime.Log;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -21,6 +15,8 @@ import java.util.List;
 import java.util.logging.Level;
 
 import static org.assertj.core.api.Assertions.*;
+import org.junit.BeforeClass;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 /**
  * @author Marek
@@ -33,7 +29,12 @@ public class GenreDaoTest {
 
     private Genre action;
     private Genre scifi;
-
+    
+    @BeforeClass
+    public static void setUpEMFactory(){
+        new AnnotationConfigApplicationContext(InMemoryDatabaseSpring.class);
+    }
+    
     @Before
     public void setUp() throws Exception {
 
@@ -57,6 +58,7 @@ public class GenreDaoTest {
 
     @After
     public void tearDown() throws Exception {
+        em.close();
     }
 
     @Test

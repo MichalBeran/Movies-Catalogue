@@ -2,18 +2,23 @@ package cz.muni.fi.pa165.entities;
 
 import cz.muni.fi.pa165.dao.GenreDao;
 import cz.muni.fi.pa165.dao.GenreDaoImpl;
+import jdk.jfr.internal.LogLevel;
+import jdk.jfr.internal.LogTag;
+import jdk.jfr.internal.Logger;
 import junit.framework.TestCase;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import sun.rmi.runtime.Log;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 import java.util.List;
+import java.util.logging.Level;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -82,7 +87,27 @@ public class GenreDaoTest {
 
     @Test
     public void testUpdate() {
+        em.getTransaction().begin();
+        dao.create(action);
+        em.getTransaction().commit();
 
+        Long id = action.getId();
+        assertThat(id).isNotNull();
+
+        Genre genreFromStorage = dao.findById(id);
+
+        assertThat(genreFromStorage).isNotNull();
+        String description = "Action movies are best";
+        genreFromStorage.setDescription(description);
+
+        em.getTransaction().begin();
+        dao.update(genreFromStorage);
+        em.getTransaction().commit();
+
+        genreFromStorage = dao.findById(id);
+        String descriptionFromStorage = genreFromStorage.getDescription();
+        assertThat(descriptionFromStorage.equals(description));
+        java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, descriptionFromStorage);
     }
 
     @Test

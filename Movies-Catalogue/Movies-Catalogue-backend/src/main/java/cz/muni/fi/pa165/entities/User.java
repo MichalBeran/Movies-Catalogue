@@ -4,10 +4,11 @@ import cz.muni.fi.pa165.enums.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Objects;
 import java.util.Set;
 
 /**
- * Created by Michal on 25.10.2017.
+ * @author Michal, Marek
  */
 @Entity
 public class User {
@@ -89,5 +90,24 @@ public class User {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int prime = 47;
+        result = prime * result + ((nick == null) ? 0 : nick.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof User))
+            return false;
+        final User other = (User) obj;
+
+        return Objects.equals(nick, other.getNick());
     }
 }

@@ -3,6 +3,7 @@ package cz.muni.fi.pa165.entities;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -77,7 +78,7 @@ public class Movie {
     }
 
     public Set<Genre> getGenres() {
-        return genres;
+        return Collections.unmodifiableSet(genres);
     }
 
     public void setGenres(Set<Genre> genres) {
@@ -87,7 +88,7 @@ public class Movie {
     public void addGenre(Genre genre){ this.genres.add(genre); }
 
     public Set<Actor> getActors() {
-        return actors;
+        return Collections.unmodifiableSet(actors);
     }
 
     public void setActors(Set<Actor> actors) {

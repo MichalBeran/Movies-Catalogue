@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.entities;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -77,8 +78,27 @@ public class Actor {
     public String toString() {
         return "Actor{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth + '}';
     }
-    
-    
-    
-    
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int prime = 47;
+        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Actor))
+            return false;
+        final Actor other = (Actor) obj;
+
+        return Objects.equals(firstName, other.getFirstName())
+                && Objects.equals(lastName, other.getLastName())
+                && Objects.equals(dateOfBirth, other.getDateOfBirth());
+    }
 }

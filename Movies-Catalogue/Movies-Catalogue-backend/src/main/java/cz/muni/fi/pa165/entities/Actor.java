@@ -63,12 +63,10 @@ public class Actor {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-    
-    
 
-    public Set<Movie> getMovies() {
-        return movies;
-    }
+    public Set<Movie> getMovies(){ return movies; }
+
+    public void setMovies(Set<Movie> movies){ this.movies = movies; }
 
     public void addMovie(Movie movie) {
         this.movies.add(movie);

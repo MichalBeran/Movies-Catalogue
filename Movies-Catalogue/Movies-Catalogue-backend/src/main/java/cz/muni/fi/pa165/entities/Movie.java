@@ -84,6 +84,8 @@ public class Movie {
         this.genres = genres;
     }
 
+    public void addGenre(Genre genre){ this.genres.add(genre); }
+
     public Set<Actor> getActors() {
         return actors;
     }
@@ -91,6 +93,8 @@ public class Movie {
     public void setActors(Set<Actor> actors) {
         this.actors = actors;
     }
+
+    public void addActor(Actor actor){ this.actors.add(actor); }
 
     public Director getDirector() {
         return director;

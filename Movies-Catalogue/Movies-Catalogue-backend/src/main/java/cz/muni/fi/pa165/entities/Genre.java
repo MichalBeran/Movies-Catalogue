@@ -53,6 +53,9 @@ public class Genre {
     public Set<Movie> getMovies() {
         return movies;
     }
+
+    public void setMovies(Set<Movie> movies) { this.movies = movies; }
+
     public void addMovie(Movie movie) {
         this.movies.add(movie);
     }

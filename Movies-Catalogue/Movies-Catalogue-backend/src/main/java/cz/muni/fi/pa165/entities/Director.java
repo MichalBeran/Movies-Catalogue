@@ -73,6 +73,12 @@ public class Director {
         return movies;
     }
 
+    public void setMovies(Set<Movie> movies) { this.movies = movies; }
+
+    public void addMovie(Movie movie) {
+        this.movies.add(movie);
+    }
+
     @Override
     public int hashCode() {
         int result = 17;

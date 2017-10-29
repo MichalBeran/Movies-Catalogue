@@ -24,12 +24,16 @@ public class Director {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
     @NotNull
     private String firstName;
+
     @NotNull
     private String lastName;
+
     private LocalDate dateOfBirth;
-    @OneToMany
+
+    @OneToMany(mappedBy = "director")
     private Set<Movie> movies;
 
     public Long getId() {

@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.entities;
 
+import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -61,4 +62,22 @@ public class Genre {
         return "Genre {" + "id=" + id + ", name=" + name + ", description=" + description + '}';
     }
 
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int prime = 47;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof Genre))
+            return false;
+        final Genre other = (Genre) obj;
+
+        return Objects.equals(name, other.getName());
+    }
 }

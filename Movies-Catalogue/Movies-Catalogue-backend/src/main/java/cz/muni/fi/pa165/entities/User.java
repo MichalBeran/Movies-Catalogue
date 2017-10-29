@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.enums.Role;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -86,12 +87,14 @@ public class User {
     }
 
     public Set<Role> getRoles() {
-        return roles;
+        return Collections.unmodifiableSet(roles);
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
     }
+
+    public void addRole(Role role){ this.roles.add(role); }
 
     @Override
     public int hashCode() {

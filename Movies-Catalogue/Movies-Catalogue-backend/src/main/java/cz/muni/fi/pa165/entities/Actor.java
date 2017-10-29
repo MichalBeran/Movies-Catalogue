@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.entities;
 
 import java.time.LocalDate;
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
@@ -63,12 +64,10 @@ public class Actor {
     public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-    
-    
 
-    public Set<Movie> getMovies() {
-        return movies;
-    }
+    public Set<Movie> getMovies(){ return Collections.unmodifiableSet(movies); }
+
+    public void setMovies(Set<Movie> movies){ this.movies = movies; }
 
     public void addMovie(Movie movie) {
         this.movies.add(movie);

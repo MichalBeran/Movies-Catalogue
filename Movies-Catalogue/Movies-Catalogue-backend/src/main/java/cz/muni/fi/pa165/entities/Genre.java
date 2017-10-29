@@ -5,6 +5,7 @@
  */
 package cz.muni.fi.pa165.entities;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -51,8 +52,11 @@ public class Genre {
     }
 
     public Set<Movie> getMovies() {
-        return movies;
+        return Collections.unmodifiableSet(movies);
     }
+
+    public void setMovies(Set<Movie> movies) { this.movies = movies; }
+
     public void addMovie(Movie movie) {
         this.movies.add(movie);
     }

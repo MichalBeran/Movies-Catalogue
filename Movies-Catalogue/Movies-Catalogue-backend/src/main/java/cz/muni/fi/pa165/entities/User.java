@@ -11,6 +11,7 @@ import java.util.Set;
  * @author Michal
  */
 @Entity
+@Table(name = "app_user")
 public class User {
 
     @Id

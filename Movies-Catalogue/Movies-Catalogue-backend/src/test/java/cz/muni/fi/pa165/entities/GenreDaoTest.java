@@ -1,6 +1,13 @@
 package cz.muni.fi.pa165.entities;
 
+import cz.muni.fi.pa165.dao.GenreDao;
+import cz.muni.fi.pa165.dao.GenreDaoImpl;
 import junit.framework.TestCase;
+import org.junit.After;
+import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -13,74 +20,78 @@ import static org.assertj.core.api.Assertions.*;
 /**
  * @author Marek
  */
-public class GenreDaoTest extends TestCase {
-    // TODO: implement GenreDao please
-    public void testBlank(){}
-/*
-    private GenreDao dao;
+public class GenreDaoTest {
+
+
+    private GenreDaoImpl dao;
     private EntityManager em;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    private Genre action;
+    private Genre scifi;
+
+    @Before
+    public void setUp() throws Exception {
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         em = emf.createEntityManager();
         dao = new GenreDaoImpl();
         dao.setEntityManager(em);
+
+        setEntities();
     }
 
-    @Override
-    protected void tearDown() throws Exception {
-        super.tearDown();
+    private void setEntities(){
+        action = new Genre();
+        action.setName("Action");
+        action.setDescription("Action movies");
+
+        scifi = new Genre();
+        scifi.setName("Sci-fi");
+        scifi.setDescription("Science-fiction movies");
     }
 
+    @After
+    public void tearDown() throws Exception {
+    }
+
+    @Test
     public void testStore() {
-        Genre genre = new Genre();
-        genre.setName("Action");
-        genre.setDescription("Action movies");
-
         em.getTransaction().begin();
-        dao.create(genre);
+        dao.create(action);
         em.getTransaction().commit();
 
-        assertThat(genre.getId()).isNotNull();
+        assertThat(action.getId()).isNotNull();
     }
 
+    @Test
     public void testFindById() {
-        Genre genre = new Genre();
-        genre.setName("Action");
-        genre.setDescription("Action movies");
-
         em.getTransaction().begin();
-        dao.create(genre);
+        dao.create(action);
         em.getTransaction().commit();
 
-        Long id = genre.getId();
+        Long id = action.getId();
         assertThat(id).isNotNull();
 
         Genre fromStorage = dao.findById(id);
 
         assertThat(fromStorage).isNotNull();
 
-        assertThat(fromStorage.getName()).isEqualTo(genre.getName());
-        assertThat(fromStorage.getDescription()).isEqualTo(genre.getDescription());
+        assertThat(fromStorage.getName()).isEqualTo(action.getName());
+        assertThat(fromStorage.getDescription()).isEqualTo(action.getDescription());
     }
 
+    @Test
     public void testUpdate() {
 
     }
 
+    @Test
     public void testDelete() {
-        Genre genre = new Genre();
-        genre.setName("Action");
-        genre.setDescription("Action movies");
-
         em.getTransaction().begin();
-        dao.create(genre);
+        dao.create(action);
         em.getTransaction().commit();
 
-        Long id = genre.getId();
+        Long id = action.getId();
         assertThat(id).isNotNull();
 
         em.getTransaction().begin();
@@ -89,22 +100,16 @@ public class GenreDaoTest extends TestCase {
 
         try {
             Genre nonexistent = dao.findById(id);
-            fail();
+            Assert.fail();
         } catch (IllegalArgumentException ex) {
         }
     }
 
+    @Test
     public void testFindAll() {
-        Genre genre = new Genre();
-        genre.setName("Action");
-        genre.setDescription("Action movies");
-        Genre genre2 = new Genre();
-        genre2.setName("Sci-fi");
-        genre2.setDescription("Science-fiction movies");
-
         em.getTransaction().begin();
-        dao.create(genre);
-        dao.create(genre2);
+        dao.create(action);
+        dao.create(scifi);
         em.getTransaction().commit();
 
         List<Genre> genres = dao.findAll();
@@ -112,5 +117,4 @@ public class GenreDaoTest extends TestCase {
         assertThat(genres.size()).isEqualTo(2);
     }
 
-*/
 }

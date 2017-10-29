@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.entities;
 
+import cz.muni.fi.pa165.dao.RatingDao;
+import cz.muni.fi.pa165.dao.RatingDaoImpl;
 import junit.framework.TestCase;
 
 import javax.persistence.EntityManager;
@@ -10,10 +12,9 @@ import javax.persistence.Persistence;
  * @author Marek
  */
 public class RatingDaoTest extends TestCase {
-    // TODO: implement RatingDao
-    public void testBlank(){}
-/*
-    private RatingDao dao;
+
+
+    private RatingDaoImpl dao;
     private EntityManager em;
 
     @Override
@@ -45,5 +46,5 @@ public class RatingDaoTest extends TestCase {
 
     public void testFindAll() {
     }
-*/
+
 }

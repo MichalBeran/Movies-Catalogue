@@ -17,7 +17,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Dominik, Marek
+ * @author Dominik
  */
 @Entity
 public class Director {

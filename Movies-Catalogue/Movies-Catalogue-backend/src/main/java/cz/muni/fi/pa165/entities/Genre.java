@@ -16,7 +16,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  *
- * @author Maros, Marek
+ * @author Maros
  */
 @Entity
 public class Genre {

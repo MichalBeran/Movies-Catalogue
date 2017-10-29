@@ -8,7 +8,7 @@ import java.util.Objects;
 import java.util.Set;
 
 /**
- * @author Michal, Marek
+ * @author Michal
  */
 @Entity
 public class User {

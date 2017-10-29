@@ -29,7 +29,7 @@ public class Movie {
     private Set<Genre> genres;
 
     @NotNull
-    @ManyToMany
+    @ManyToMany(mappedBy = "movies")
     private Set<Actor> actors;
 
     @NotNull

@@ -28,7 +28,7 @@ public class Actor {
 
     private LocalDate dateOfBirth;
 
-    @ManyToMany(mappedBy = "actors")
+    @ManyToMany
     private Set<Movie> movies;
 
     public Long getId() {

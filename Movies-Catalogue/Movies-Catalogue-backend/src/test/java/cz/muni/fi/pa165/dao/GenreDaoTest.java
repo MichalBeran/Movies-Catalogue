@@ -1,7 +1,10 @@
-package cz.muni.fi.pa165.entities;
+package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.InMemoryDatabaseSpring;
 import cz.muni.fi.pa165.dao.GenreDaoImpl;
+import cz.muni.fi.pa165.entities.Genre;
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -10,9 +13,9 @@ import org.junit.Test;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.persistence.PersistenceContext;
 
 import java.util.List;
-import java.util.logging.Level;
 
 import static org.assertj.core.api.Assertions.*;
 import org.junit.BeforeClass;
@@ -24,8 +27,11 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 public class GenreDaoTest {
 
 
-    private GenreDaoImpl dao;
+    @PersistenceContext
     private EntityManager em;
+    private GenreDaoImpl dao;
+
+    private Logger logger;
 
     private Genre action;
     private Genre scifi;
@@ -37,11 +43,11 @@ public class GenreDaoTest {
     
     @Before
     public void setUp() throws Exception {
-
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         em = emf.createEntityManager();
         dao = new GenreDaoImpl();
         dao.setEntityManager(em);
+        logger = LogManager.getLogger("GenreDaoTest");
 
         setEntities();
     }
@@ -109,7 +115,9 @@ public class GenreDaoTest {
         genreFromStorage = dao.findById(id);
         String descriptionFromStorage = genreFromStorage.getDescription();
         assertThat(descriptionFromStorage.equals(description));
-        java.util.logging.Logger.getAnonymousLogger().log(Level.INFO, descriptionFromStorage);
+
+        logger.info(descriptionFromStorage);
+
     }
 
     @Test

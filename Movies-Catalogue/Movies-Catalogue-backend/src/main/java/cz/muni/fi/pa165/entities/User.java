@@ -35,7 +35,7 @@ public class User {
     private String mail;
 
     @ElementCollection
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)
     private Set<Role> roles;
 
     public Long getId() {

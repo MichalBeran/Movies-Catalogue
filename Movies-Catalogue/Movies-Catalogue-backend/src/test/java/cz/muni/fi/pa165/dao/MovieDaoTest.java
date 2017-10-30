@@ -50,7 +50,6 @@ public class MovieDaoTest {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         em = emf.createEntityManager();
         dao = new MovieDaoImpl();
-        //dao.setEntityManager(em);
         logger = LogManager.getLogger("GenreDaoTest");
         setEntities();
     }

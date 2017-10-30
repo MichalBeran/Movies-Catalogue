@@ -18,13 +18,16 @@ public interface MovieDao {
      * Persits a newly created entity
      *
      * @param entity entity to create
+     * @throws IllegalArgumentException, if some of required attributes is not set
+     * or @param entity is null
      */
     void create(Movie entity);
 
     /**
-     * Persits a newly created entity
+     * Update entity attributes due to Id of parameter entity
      *
-     * @param entity entity to create
+     * @param entity entity to be updated
+     * @throws IllegalArgumentException, if entity with the same Id does not exists
      */
     void update(Movie entity);
 
@@ -40,6 +43,7 @@ public interface MovieDao {
      *
      * @param id unique identifier of entity
      * @return Movie the found entity
+     * @throws IllegalArgumentException, if entity was not found in database
      */
     Movie findById(Long id);
 
@@ -47,6 +51,7 @@ public interface MovieDao {
      * Removes specified entity from the repository
      *
      * @param id id of entity
+     * @throws IllegalArgumentException, if entity was not found in database
      */
     void delete(Long id);
 }

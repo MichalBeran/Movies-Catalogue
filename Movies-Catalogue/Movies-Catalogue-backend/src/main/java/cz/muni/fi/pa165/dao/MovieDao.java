@@ -41,12 +41,12 @@ public interface MovieDao {
      * @param id unique identifier of entity
      * @return Movie the found entity
      */
-    Movie findById(long id);
+    Movie findById(Long id);
 
     /**
      * Removes specified entity from the repository
      *
      * @param id id of entity
      */
-    void delete(long id);
+    void delete(Long id);
 }

@@ -27,6 +27,12 @@ public class MovieDaoImpl implements MovieDao{
         if (entity == null) {
             throw new IllegalArgumentException("Entity can not be null");
         }
+        if(entity.getId() != null || entity.getTitle() == null || 
+                entity.getDateOfRelease() == null || entity.getActors() == null ||
+                entity.getDirector() == null){
+            throw new IllegalArgumentException("Entity has not all of required "
+                    + "attributes set or it has set Id already");
+        }
         em.persist(entity);
     }
 

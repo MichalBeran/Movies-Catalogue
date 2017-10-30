@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.entities.User;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import org.springframework.stereotype.Repository;
 
@@ -30,6 +31,13 @@ public class UserDaoImpl implements UserDao{
     public void create(User entity) {
         if (entity == null) {
             throw new IllegalArgumentException("Entity can not be null");
+        }
+        if(entity.getId() != null || entity.getFirstName() == null || 
+                entity.getLastName() == null || entity.getNick() == null ||
+                entity.getPassword() == null || entity.getMail() == null ||
+                entity.getRoles().isEmpty()){
+            throw new IllegalArgumentException("Entity has set id or it has no "
+                    + "all required attributes set.");
         }
         manager.persist(entity);
     }

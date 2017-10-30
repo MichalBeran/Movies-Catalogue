@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.enums.Role;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -35,8 +36,12 @@ public class User {
     private String mail;
 
     @ElementCollection
-    @Enumerated(EnumType.ORDINAL)
+    @Enumerated(EnumType.STRING)
     private Set<Role> roles;
+    
+    public User(){
+        this.roles = new HashSet<>();
+    }
 
     public Long getId() {
         return id;

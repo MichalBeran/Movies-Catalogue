@@ -54,8 +54,8 @@ public class UserDaoImplTest {
     @Before
     public void setUp() {
         userDaoImpl = new UserDaoImpl();
-        
-        userDaoImpl.setEntityManager(emf.createEntityManager());
+        em = emf.createEntityManager();
+        userDaoImpl.setEntityManager(em);
         init();
     }
     
@@ -76,6 +76,7 @@ public class UserDaoImplTest {
         userNormal1.setMail("janko.hrasko@fi.muni.cz");
         userNormal1.setNick("janicko");
         userNormal1.setPassword("Mar1enka5");
+        userNormal1.addRole(Role.USER);
         
         userNormal2 = new User();
         userNormal2.setFirstName("Marienka");
@@ -83,6 +84,7 @@ public class UserDaoImplTest {
         userNormal2.setMail("marienka.kovacova@fi.muni.cz");
         userNormal2.setNick("marienka");
         userNormal2.setPassword("Jan1ck0");
+        userNormal2.addRole(Role.USER);
         
         userAdmin = new User();
         userAdmin.setFirstName("Dominik");
@@ -90,6 +92,7 @@ public class UserDaoImplTest {
         userAdmin.setMail("dominik.mlynka@fi.muni.cz");
         userAdmin.setNick("domeniqo");
         userAdmin.setPassword("Mov1esCatalogue");
+        userAdmin.addRole(Role.ADMINISTRATOR);
     }
 
     /**
@@ -102,7 +105,7 @@ public class UserDaoImplTest {
     }
     
     /**
-     * Test of create method, entity has not set any atribute before persisting.
+     * Test of create method, entity has not set any required atribute before persisting.
      */
     @Test
     public void testCreateUserWithoutProperties() {
@@ -120,7 +123,7 @@ public class UserDaoImplTest {
     }
     
     /**
-     * Test of create method, entity is null.
+     * Test of create method, entity is fully initialized.
      */
     @Test
     public void testCreateUser() {
@@ -128,6 +131,7 @@ public class UserDaoImplTest {
         userDaoImpl.create(userNormal1);
         em.getTransaction().commit();
         assertThat(userNormal1.getId()).isNotNull();
+        assertThat(userDaoImpl.findAll()).contains(userNormal1);
     }
 
     /**
@@ -135,12 +139,15 @@ public class UserDaoImplTest {
      */
     @Test
     public void testUpdate() {
-        System.out.println("update");
-        User entity = null;
-        UserDaoImpl instance = new UserDaoImpl();
-        instance.update(entity);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        em.getTransaction().begin();
+        userDaoImpl.create(userNormal1);
+        userNormal1.setFirstName("Updated");
+        userDaoImpl.update(userNormal1);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        User updatedUser = userDaoImpl.findById(userNormal1.getId());
+        assertThat(updatedUser.getFirstName()).isEqualTo("Updated");
+        
     }
 
     /**
@@ -148,13 +155,14 @@ public class UserDaoImplTest {
      */
     @Test
     public void testFindAll() {
-        System.out.println("findAll");
-        UserDaoImpl instance = new UserDaoImpl();
-        List<User> expResult = null;
-        List<User> result = instance.findAll();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        em.getTransaction().begin();
+        userDaoImpl.create(userNormal1);
+        userDaoImpl.create(userNormal2);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        List<User> stored = userDaoImpl.findAll();
+        assertThat(stored).containsOnly(userNormal1, userNormal2);
+        
     }
 
     /**
@@ -162,14 +170,10 @@ public class UserDaoImplTest {
      */
     @Test
     public void testFindById() {
-        System.out.println("findById");
-        Long id = null;
-        UserDaoImpl instance = new UserDaoImpl();
-        User expResult = null;
-        User result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        em.getTransaction().begin();
+        userDaoImpl.create(userNormal1);
+        em.getTransaction().commit();
+        assertThat(userDaoImpl.findById(userNormal1.getId())).isEqualToComparingFieldByField(userNormal1);
     }
 
     /**
@@ -177,12 +181,15 @@ public class UserDaoImplTest {
      */
     @Test
     public void testDelete() {
-        System.out.println("delete");
-        Long id = null;
-        UserDaoImpl instance = new UserDaoImpl();
-        instance.delete(id);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        em.getTransaction().begin();
+        userDaoImpl.create(userNormal1);
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        userDaoImpl.delete(userNormal1.getId());
+        em.getTransaction().commit();
+        em.getTransaction().begin();
+        ex.expect(IllegalArgumentException.class);
+        userDaoImpl.findById(userNormal1.getId());
     }
     
 }

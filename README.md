@@ -4,3 +4,8 @@
 Project from PA165, FACULTY OF INFORMATICS MASARYK UNIVERSITY
 <br />
 [PROJECT WIKI](https://github.com/MichalBeran/Movies-Catalogue/wiki)
+<br />
+<br />
+<br />
+GIT:
+https://github.com/MichalBeran/Movies-Catalogue

@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -26,17 +27,22 @@ public class Movie {
     @NotNull
     private LocalDate dateOfRelease;
 
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany(mappedBy = "movies", cascade=CascadeType.REMOVE)
     private Set<Genre> genres;
 
     @NotNull
-    @ManyToMany(mappedBy = "movies")
+    @ManyToMany(mappedBy = "movies", cascade=CascadeType.REMOVE)
     private Set<Actor> actors;
 
     @NotNull
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.REMOVE)
     private Director director;
 
+    public Movie(){
+        this.actors = new HashSet<>();
+        this.genres = new HashSet<>();
+    }
+    
     public Long getId() {
         return id;
     }

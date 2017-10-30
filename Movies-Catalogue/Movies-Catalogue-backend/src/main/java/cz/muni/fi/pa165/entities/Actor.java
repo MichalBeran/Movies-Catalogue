@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.entities;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.*;
@@ -33,6 +34,10 @@ public class Actor {
     @ManyToMany
     private Set<Movie> movies;
 
+    public Actor(){
+        this.movies = new HashSet<>();
+    }
+    
     public Long getId() {
         return id;
     }

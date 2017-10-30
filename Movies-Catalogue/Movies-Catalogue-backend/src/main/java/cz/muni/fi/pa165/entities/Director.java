@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.entities;
 
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -38,6 +39,10 @@ public class Director {
     @OneToMany(mappedBy = "director")
     private Set<Movie> movies;
 
+    public Director(){
+        this.movies = new HashSet<>();
+    }
+    
     public Long getId() {
         return id;
     }

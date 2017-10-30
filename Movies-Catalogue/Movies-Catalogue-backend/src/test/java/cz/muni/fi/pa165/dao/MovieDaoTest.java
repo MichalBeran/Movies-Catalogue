@@ -50,6 +50,7 @@ public class MovieDaoTest {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("default");
         em = emf.createEntityManager();
         dao = new MovieDaoImpl();
+        dao.setEntityManager(em);
         logger = LogManager.getLogger("GenreDaoTest");
         setEntities();
     }
@@ -87,15 +88,19 @@ public class MovieDaoTest {
         movie.setTitle("Best movie ever !");
         movie.setImage("not ready yet");
         movie.setDirector(stevenSpielberg);
+        movie.setDateOfRelease(LocalDate.MIN);
+        
         Set<Movie> awesomeMovies = new HashSet<Movie>();
         awesomeMovies.add(movie);
         stevenSpielberg.setMovies(awesomeMovies);
+        angelinaJolie.setMovies(awesomeMovies);
+        bradPitt.setMovies(awesomeMovies);
+        
         Set<Actor> awesomeActors = new HashSet<Actor>();
         awesomeActors.add(angelinaJolie);
         awesomeActors.add(bradPitt);
         movie.setActors(awesomeActors);
-        angelinaJolie.setMovies(awesomeMovies);
-        bradPitt.setMovies(awesomeMovies);
+        
         Set<Genre> awesomeGenres = new HashSet<Genre>();
         awesomeGenres.add(comedy);
         movie.setGenres(awesomeGenres);
@@ -109,7 +114,7 @@ public class MovieDaoTest {
         em.close();
     }
 
-    @Test(expected = NullPointerException.class)
+    @Test(expected = IllegalArgumentException.class)
     public void testCreateNullMovie(){
         em.getTransaction().begin();
         dao.create(null);
@@ -127,8 +132,13 @@ public class MovieDaoTest {
 
     @Test
     public void testFindById(){
+        em.getTransaction().begin();
+        dao.create(movie);
+        em.getTransaction().commit();
+        
+        em.getTransaction().begin();
         Movie foundMovie = dao.findById(movie.getId());
-
+        
         assertThat(foundMovie).isNotNull();
         assertThat(foundMovie.getTitle()).isEqualTo(movie.getTitle());
         assertThat(foundMovie).isEqualTo(movie);
@@ -137,15 +147,23 @@ public class MovieDaoTest {
     @Test
     public void testFindAllMovies(){
         em.getTransaction().begin();
+        dao.create(movie);
+        em.getTransaction().commit();
+        
         List<Movie> movies = dao.findAll();
-        assertThat(movies.size()).isEqualTo(1);
         assertThat(movies).contains(movie);
     }
 
     @Test
     public void testDelete(){
-        em.getTransaction();
+        em.getTransaction().begin();
+        dao.create(movie);
+        em.getTransaction().commit();
+        
+        em.getTransaction().begin();
         dao.delete(movie.getId());
         em.getTransaction().commit();
+     
+        assertThat(dao.findAll()).doesNotContain(movie);
     }
 }

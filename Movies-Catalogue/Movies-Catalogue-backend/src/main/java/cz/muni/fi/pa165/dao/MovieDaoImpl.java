@@ -5,6 +5,8 @@
  */
 package cz.muni.fi.pa165.dao;
 
+import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -28,7 +30,7 @@ public class MovieDaoImpl implements MovieDao{
             throw new IllegalArgumentException("Entity can not be null");
         }
         if(entity.getId() != null || entity.getTitle() == null || 
-                entity.getDateOfRelease() == null || entity.getActors() == null ||
+                entity.getDateOfRelease() == null || entity.getActors().isEmpty() ||
                 entity.getDirector() == null){
             throw new IllegalArgumentException("Entity has not all of required "
                     + "attributes set or it has set Id already");

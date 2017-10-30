@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.entities;
 
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 import javax.persistence.Entity;
@@ -30,6 +31,10 @@ public class Genre {
     @ManyToMany
     private Set<Movie> movies;
 
+    public Genre(){
+        this.movies = new HashSet<>();
+    }
+    
     public void setId(Long id) {
         this.id = id;
     }

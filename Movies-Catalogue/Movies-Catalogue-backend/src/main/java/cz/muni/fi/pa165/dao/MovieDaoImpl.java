@@ -8,6 +8,7 @@ package cz.muni.fi.pa165.dao;
 import cz.muni.fi.pa165.entities.Movie;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
 /**
  *
@@ -15,31 +16,50 @@ import javax.persistence.EntityManager;
  */
 public class MovieDaoImpl implements MovieDao{
     
-    EntityManager em;
+    private EntityManager em;
+
+    public void setEntityManager(EntityManager em){
+        this.em = em;
+    }
 
     @Override
     public void create(Movie entity) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity can not be null");
+        }
+        em.persist(entity);
     }
 
     @Override
     public void update(Movie entity) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity can not be null");
+        }
+        em.merge(entity);
     }
 
     @Override
     public List<Movie> findAll() {
-        throw new UnsupportedOperationException("Not supported yet.");
+        Query query = em.createQuery("SELECT m FROM Movie m", Movie.class);
+        return (List<Movie>) query.getResultList();
     }
 
     @Override
-    public Movie findById(long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public Movie findById(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Id can not be null");
+        }
+        Movie entity = em.find(Movie.class, id);
+        if (entity == null) {
+            throw new IllegalArgumentException("Entity with id " + id + " does not exist");
+        }
+        return entity;
     }
 
     @Override
-    public void delete(long id) {
-        throw new UnsupportedOperationException("Not supported yet.");
+    public void delete(Long id) {
+        Movie entity = findById(id);
+        em.remove(entity);
     }
     
 }

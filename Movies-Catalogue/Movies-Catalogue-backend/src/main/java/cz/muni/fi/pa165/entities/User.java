@@ -102,6 +102,11 @@ public class User {
     public void addRole(Role role){ this.roles.add(role); }
 
     @Override
+    public String toString() {
+        return "User{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", nick=" + nick + ", mail=" + mail + "}";
+    }
+
+    @Override
     public int hashCode() {
         int result = 17;
         int prime = 47;

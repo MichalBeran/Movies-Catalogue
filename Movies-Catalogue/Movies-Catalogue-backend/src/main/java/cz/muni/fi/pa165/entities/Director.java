@@ -84,6 +84,11 @@ public class Director {
     }
 
     @Override
+    public String toString() {
+        return "Director{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth.toString() + '}';
+    }
+
+    @Override
     public int hashCode() {
         int result = 17;
         int prime = 47;

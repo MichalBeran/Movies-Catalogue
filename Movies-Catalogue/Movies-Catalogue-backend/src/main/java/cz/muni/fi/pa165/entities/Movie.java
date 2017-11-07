@@ -112,6 +112,11 @@ public class Movie {
     }
 
     @Override
+    public String toString() {
+        return "Movie{" + "id=" + id + ", title=" + title + ", description=" + description + ", dateOfRelease=" + dateOfRelease.toString() + '}';
+    }
+
+    @Override
     public int hashCode() {
         int result = 17;
         int prime = 47;

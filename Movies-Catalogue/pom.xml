@@ -10,6 +10,7 @@
     <modules>
         <module>Movies-Catalogue-backend</module>
         <module>Movies-Catalogue-business-layer</module>
+        <module>Movies-Catalogue-api</module>
     </modules>
     <packaging>pom</packaging>
 

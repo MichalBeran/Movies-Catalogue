@@ -11,5 +11,11 @@
 
     <artifactId>Movies-Catalogue-business-layer</artifactId>
 
-
+    <dependencies>
+        <dependency>
+            <groupId>cz.muni.fi.pa165</groupId>
+            <artifactId>Movies-Catalogue-api</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+    </dependencies>
 </project>

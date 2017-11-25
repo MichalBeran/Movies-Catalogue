@@ -38,7 +38,10 @@ public class User {
     @ElementCollection
     @Enumerated(EnumType.STRING)
     private Set<Role> roles;
-    
+
+    @OneToMany
+    private Set<Rating> ratings;
+
     public User(){
         this.roles = new HashSet<>();
     }
@@ -91,15 +94,21 @@ public class User {
         this.mail = mail;
     }
 
-    public Set<Role> getRoles() {
-        return Collections.unmodifiableSet(roles);
-    }
+    public Set<Role> getRoles() { return Collections.unmodifiableSet(roles); }
 
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+    public void setRoles(Set<Role> roles){ this.roles = roles; }
 
     public void addRole(Role role){ this.roles.add(role); }
+
+    public Set<Rating> getRatings() {
+        return Collections.unmodifiableSet(ratings);
+    }
+
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
+
+    public void addRating(Rating rating){ this.ratings.add(rating); }
 
     @Override
     public String toString() {

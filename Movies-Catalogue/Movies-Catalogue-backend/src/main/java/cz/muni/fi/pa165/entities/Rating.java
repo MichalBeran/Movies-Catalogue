@@ -29,6 +29,9 @@ public class Rating {
     @ManyToOne
     private Movie movie;
 
+    @ManyToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -76,7 +79,15 @@ public class Rating {
     public void setMovie(Movie movie) {
         this.movie = movie;
     }
-    
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Rating {" + "id=" + id + ", overallRating=" + overallRating + ", scenarioRating=" + scenarioRating + ",actorsRating" + actorsRating +'}';

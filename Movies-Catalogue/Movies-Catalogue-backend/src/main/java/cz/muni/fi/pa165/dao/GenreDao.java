@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entities.Genre;
 import java.util.List;
+import java.util.Set;
 
 /**
  *
@@ -48,4 +49,18 @@ public interface GenreDao {
      * @param id id of entity
      */
     void delete(Long id);
+
+    /**
+     * Finds entities with corresponding movie
+     * @param id movie id
+     * @return set of genres
+     */
+    Set<Genre> findByMovieId(Long id);
+
+    /**
+     * Finds entity with corresponding name
+     * @param name name
+     * @return found entity
+     */
+    Genre findByName(String name);
 }

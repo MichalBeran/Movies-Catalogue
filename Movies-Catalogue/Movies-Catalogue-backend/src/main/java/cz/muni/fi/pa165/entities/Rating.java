@@ -9,8 +9,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToOne;
 import java.util.Objects;
+import javax.persistence.OneToOne;
 
 /**
  *
@@ -26,7 +26,7 @@ public class Rating {
     private int scenarioRating;
     private int actorsRating;
     
-    @ManyToOne
+    @OneToOne
     private Movie movie;
 
     @ManyToOne

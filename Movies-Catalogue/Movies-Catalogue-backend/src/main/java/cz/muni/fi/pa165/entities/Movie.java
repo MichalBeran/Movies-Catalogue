@@ -37,6 +37,9 @@ public class Movie {
     @NotNull
     @ManyToOne(cascade=CascadeType.REMOVE)
     private Director director;
+    
+    @OneToOne
+    private Rating rating;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
     private Set<Rating> ratings;
@@ -119,6 +122,14 @@ public class Movie {
 
     public void setDirector(Director director) {
         this.director = director;
+    }
+
+    public Rating getRating() {
+        return rating;
+    }
+
+    public void setRating(Rating rating) {
+        this.rating = rating;
     }
 
     @Override

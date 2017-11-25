@@ -40,6 +40,22 @@ public interface UserDao {
     User findById(Long id);
 
     /**
+     * Finds entity with corresponding id
+     *
+     * @param mail unique identifier of entity
+     * @return User the found entity
+     */
+    User findByMail(String mail);
+
+    /**
+     * Finds entity with corresponding id
+     *
+     * @param nick unique identifier of entity
+     * @return User the found entity
+     */
+    User findByNick(String nick);
+
+    /**
      * Removes specified entity from the repository
      *
      * @param id id of entity

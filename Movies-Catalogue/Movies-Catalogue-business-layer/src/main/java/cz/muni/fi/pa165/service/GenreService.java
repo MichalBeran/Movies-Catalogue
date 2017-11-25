@@ -45,8 +45,25 @@ public interface GenreService {
 
     /**
      * Creates new {@link Genre} entity
+     *
      * @param entity created entity
      * @return id of created entity
      */
     Long create(Genre entity);
+
+
+    /**
+     * Updates {@link Genre} entity
+     *
+     * @param entity created entity
+     * @return id of created entity
+     */
+    Genre update(Genre entity);
+
+    /**
+     * Deletes {@link Genre} entity
+     *
+     * @param id identifier
+     */
+    void delete(Long id);
 }

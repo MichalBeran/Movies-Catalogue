@@ -41,4 +41,15 @@ public class GenreServiceImpl implements GenreService {
         genreDao.create(entity);
         return entity.getId();
     }
+
+    @Override
+    public Genre update(Genre entity) {
+        genreDao.update(entity);
+        return entity;
+    }
+
+    @Override
+    public void delete(Long id) {
+        genreDao.delete(id);
+    }
 }

@@ -46,4 +46,14 @@ public class GenreFacadeImpl implements GenreFacade {
     public Long create(GenreDto dto) {
         return genreService.create(mapper.mapTo(dto, Genre.class));
     }
+
+    @Override
+    public GenreDto update(GenreDto dto) {
+        return mapper.mapTo(genreService.update(mapper.mapTo(dto, Genre.class)), GenreDto.class);
+    }
+
+    @Override
+    public void delete(GenreDto dto) {
+        genreService.delete(dto.getId());
+    }
 }

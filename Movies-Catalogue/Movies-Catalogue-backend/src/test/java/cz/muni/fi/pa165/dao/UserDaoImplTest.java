@@ -61,6 +61,14 @@ public class UserDaoImplTest {
     
     @After
     public void tearDown() {
+        List<User> users = em.createQuery("select u from User u").getResultList();
+        for (User u : users){
+            if(!em.getTransaction().isActive()) {
+                em.getTransaction().begin();
+            }
+            em.remove(u);
+            em.getTransaction().commit();
+        }
         userDaoImpl = null;
     }
     

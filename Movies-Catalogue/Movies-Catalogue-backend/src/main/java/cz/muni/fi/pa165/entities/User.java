@@ -21,6 +21,7 @@ public class User {
     private Long id;
 
     @NotNull
+    @Column(unique=true)
     private String nick;
 
     @NotNull
@@ -33,6 +34,7 @@ public class User {
     private String lastName;
 
     @NotNull
+    @Column(unique=true)
     private String mail;
 
     @ElementCollection

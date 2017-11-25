@@ -7,10 +7,8 @@ package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entities.User;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.PersistenceException;
-import javax.persistence.Query;
+import javax.persistence.*;
+
 import org.springframework.stereotype.Repository;
 
 /**
@@ -64,6 +62,36 @@ public class UserDaoImpl implements UserDao{
             throw new IllegalArgumentException("Entity with id " + id + " does not exist");
         }
         return entity;
+    }
+
+    @Override
+    public User findByMail(String mail) {
+        if (mail == null) {
+            throw new IllegalArgumentException("Id can not be null");
+        }
+        try {
+            return manager
+                    .createQuery("select u from app_user u where mail=:mailParameter",
+                            User.class).setParameter("mailParameter", mail)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
+    }
+
+    @Override
+    public User findByNick(String nick) {
+        if (nick == null) {
+            throw new IllegalArgumentException("Id can not be null");
+        }
+        try {
+            return manager
+                    .createQuery("select u from app_user u where nick=:nickParameter",
+                            User.class).setParameter("nickParameter", nick)
+                    .getSingleResult();
+        } catch (NoResultException nre) {
+            return null;
+        }
     }
 
     @Override

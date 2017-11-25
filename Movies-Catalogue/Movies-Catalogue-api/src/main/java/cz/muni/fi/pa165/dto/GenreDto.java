@@ -1,5 +1,8 @@
 package cz.muni.fi.pa165.dto;
 
+/**
+ * @author Marek Urban
+ */
 public class GenreDto {
 
     private Long id;

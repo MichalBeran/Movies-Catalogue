@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.dao;
 
+import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.Rating;
 import org.springframework.stereotype.Repository;
 
@@ -58,5 +59,11 @@ public class RatingDaoImpl implements RatingDao {
     public void delete(Long id) {
         Rating entity = findById(id);
         manager.remove(entity);
+    }
+
+    @Override
+    public List<Rating> findByMovieId(Long id) {
+        Movie movie = manager.find(Movie.class, id);
+        return (List<Rating>) movie.getRatings();
     }
 }

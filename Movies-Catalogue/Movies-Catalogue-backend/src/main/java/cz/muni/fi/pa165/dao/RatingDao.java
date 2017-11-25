@@ -49,4 +49,11 @@ public interface RatingDao {
      */
     void delete(Long id);
 
+    /**
+     * Finds all entities corresponding to movie id
+     *
+     * @param id movie id
+     * @return list of ratings
+     */
+    List<Rating> findByMovieId(Long id);
 }

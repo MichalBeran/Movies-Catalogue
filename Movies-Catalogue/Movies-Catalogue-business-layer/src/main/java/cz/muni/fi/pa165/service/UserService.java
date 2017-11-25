@@ -36,4 +36,12 @@ public interface UserService {
      * Get user by nick.
      */
     User findUserByNick(String nick);
+    /**
+     * Update user.
+     */
+    User update(User u, String password);
+    /**
+     * Remove user.
+     */
+    void delete(User u);
 }

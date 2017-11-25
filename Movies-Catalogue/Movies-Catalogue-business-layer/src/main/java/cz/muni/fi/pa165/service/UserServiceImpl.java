@@ -54,6 +54,18 @@ public class UserServiceImpl implements UserService {
         return userDao.findByNick(nick);
     }
 
+    @Override
+    public User update(User u, String password) {
+        u.setPassword(getSha256(password));
+        userDao.update(u);
+        return u;
+    }
+
+    @Override
+    public void delete(User u) {
+        userDao.delete(u.getId());
+    }
+
     public static String getSha256(String value) {
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-256");

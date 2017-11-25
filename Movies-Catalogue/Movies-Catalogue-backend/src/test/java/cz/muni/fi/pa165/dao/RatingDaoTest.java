@@ -7,6 +7,8 @@ import cz.muni.fi.pa165.dao.RatingDaoImpl;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.Rating;
+import cz.muni.fi.pa165.entities.User;
+import cz.muni.fi.pa165.enums.Role;
 import junit.framework.TestCase;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
@@ -36,6 +38,7 @@ public class RatingDaoTest {
     private Rating firstRating;
     private Rating secondRating;
     private Movie ratedMovie;
+    private User author;
 
     @BeforeClass
     public static void setUpEMFactory(){
@@ -57,8 +60,17 @@ public class RatingDaoTest {
         ratedMovie.setTitle("After Earth");
         ratedMovie.setDateOfRelease(LocalDate.of(2013, 6, 6));
 
+        author = new User();
+        author.setFirstName("Janko");
+        author.setLastName("Hrasko");
+        author.setMail("janko.hrasko@fi.muni.cz");
+        author.setNick("janicko");
+        author.setPassword("Mar1enka5");
+        author.addRole(Role.USER);
+
         em.getTransaction().begin();
         em.persist(ratedMovie);
+        em.persist(author);
         em.getTransaction().commit();
 
         firstRating = new Rating();
@@ -66,6 +78,7 @@ public class RatingDaoTest {
         firstRating.setActorsRating(7);
         firstRating.setScenarioRating(8);
         firstRating.setMovie(ratedMovie);
+        firstRating.setUser(author);
 
 
         secondRating = new Rating();
@@ -73,6 +86,7 @@ public class RatingDaoTest {
         secondRating.setActorsRating(7);
         secondRating.setScenarioRating(8);
         secondRating.setMovie(ratedMovie);
+        secondRating.setUser(author);
     }
 
     @After

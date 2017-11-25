@@ -38,8 +38,26 @@ public interface RatingService {
 
     /**
      * Creates new {@link Rating} entity
+     *
      * @param entity created entity
      * @return id of created entity
      */
     Long create(Rating entity);
+
+
+    /**
+     * Updates {@link Rating} entity
+     *
+     * @param entity updated entity
+     * @return updated entity
+     */
+    Rating update(Rating entity);
+
+
+    /**
+     * Deletes {@link Rating} entity
+     *
+     * @param id identifier
+     */
+    void delete(Long id);
 }

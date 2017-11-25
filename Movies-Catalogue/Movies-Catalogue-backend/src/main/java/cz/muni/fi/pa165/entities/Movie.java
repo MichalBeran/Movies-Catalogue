@@ -38,6 +38,16 @@ public class Movie {
     @ManyToOne(cascade=CascadeType.REMOVE)
     private Director director;
 
+    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
+    private Set<Rating> ratings;
+
+    public Set<Rating> getRatings() {
+        return ratings;
+    }
+    public void addRating(Rating rating){
+        this.ratings.add(rating);
+    }
+
     public Movie(){
         this.actors = new HashSet<>();
         this.genres = new HashSet<>();
@@ -136,4 +146,6 @@ public class Movie {
         return Objects.equals(title, other.getTitle())
                 && Objects.equals(dateOfRelease, other.getDateOfRelease());
     }
+
+
 }

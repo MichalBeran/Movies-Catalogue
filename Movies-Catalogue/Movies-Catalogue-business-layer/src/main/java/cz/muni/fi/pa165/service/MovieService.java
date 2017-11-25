@@ -18,8 +18,8 @@ import org.springframework.stereotype.Service;
 public interface MovieService {
     
     void create(Movie m);
-    void delete(Movie m);
-    void edit(Movie m);
+    void delete(Long id);
+    void edit(Movie edited);
     Movie findById(Long id);
     List<Movie> getAllMovies();
     

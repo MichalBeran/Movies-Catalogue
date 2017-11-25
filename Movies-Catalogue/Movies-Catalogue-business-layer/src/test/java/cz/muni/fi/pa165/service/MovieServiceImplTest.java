@@ -5,15 +5,24 @@
  */
 package cz.muni.fi.pa165.service;
 
+import cz.muni.fi.pa165.builders.MovieBuilder;
+import cz.muni.fi.pa165.dao.MovieDao;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
+import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.AfterClass;
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import org.mockito.Mock;
+import static org.mockito.Mockito.when;
+import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
@@ -21,8 +30,15 @@ import static org.junit.Assert.*;
  */
 public class MovieServiceImplTest {
     
-    public MovieServiceImplTest() {
-    }
+    @Mock
+    private MovieDao movieDao;
+    
+    private Movie testMovie;
+    
+    @Autowired
+    private MovieService movieService;
+    
+    private MovieBuilder movieBuilder;
     
     @BeforeClass
     public static void setUpClass() {
@@ -34,78 +50,23 @@ public class MovieServiceImplTest {
     
     @Before
     public void setUp() {
+        
+        MockitoAnnotations.initMocks(this);
+        movieService = new MovieServiceImpl();
+        movieBuilder = new MovieBuilder();
     }
     
     @After
     public void tearDown() {
     }
-
-    /**
-     * Test of create method, of class MovieServiceImpl.
-     */
-    @Test
-    public void testCreate() {
-        System.out.println("create");
-        Movie m = null;
-        MovieServiceImpl instance = new MovieServiceImpl();
-        instance.create(m);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of delete method, of class MovieServiceImpl.
-     */
-    @Test
-    public void testDelete() {
-        System.out.println("delete");
-        Movie m = null;
-        MovieServiceImpl instance = new MovieServiceImpl();
-        instance.delete(m);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of edit method, of class MovieServiceImpl.
-     */
-    @Test
-    public void testEdit() {
-        System.out.println("edit");
-        Movie m = null;
-        MovieServiceImpl instance = new MovieServiceImpl();
-        instance.edit(m);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of findById method, of class MovieServiceImpl.
-     */
-    @Test
-    public void testFindById() {
-        System.out.println("findById");
-        Long id = null;
-        MovieServiceImpl instance = new MovieServiceImpl();
-        Movie expResult = null;
-        Movie result = instance.findById(id);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of getAllMovies method, of class MovieServiceImpl.
-     */
-    @Test
-    public void testGetAllMovies() {
-        System.out.println("getAllMovies");
-        MovieServiceImpl instance = new MovieServiceImpl();
-        List<Movie> expResult = null;
-        List<Movie> result = instance.getAllMovies();
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+    
+    private Movie testMovie(int y, int m, int d){
+        Movie movie = new Movie();
+        movie.setTitle("MovieTitle");
+        movie.setDateOfRelease(LocalDate.of(y, m, d));
+        movie.setDescription("Date of relase" + y + m + d + ".");
+        movie.setImage("IHaveNoImage");
+        return movie;
     }
 
     /**
@@ -113,14 +74,14 @@ public class MovieServiceImplTest {
      */
     @Test
     public void testGetNewestMovies() {
-        System.out.println("getNewestMovies");
-        int number = 0;
-        MovieServiceImpl instance = new MovieServiceImpl();
-        List<Movie> expResult = null;
-        List<Movie> result = instance.getNewestMovies(number);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Movie> movies = new ArrayList<>();
+        movies.add(movieBuilder.dateOfRelase(LocalDate.of(2016,1,1)).build());
+        movies.add(movieBuilder.dateOfRelase(LocalDate.of(2015,1,1)).build());
+        movies.add(movieBuilder.dateOfRelase(LocalDate.of(2017,1,1)).build());
+        
+        when(movieDao.findAll()).thenReturn(movies);
+        List<Movie> foundMovies = movieService.getNewestMovies(2);
+        assertThat(foundMovies).containsOnly(movies.get(0), movies.get(2));
     }
 
     /**
@@ -128,14 +89,28 @@ public class MovieServiceImplTest {
      */
     @Test
     public void testGetRecommendedMovies() {
-        System.out.println("getRecommendedMovies");
-        Movie m = null;
-        MovieServiceImpl instance = new MovieServiceImpl();
-        List<Movie> expResult = null;
-        List<Movie> result = instance.getRecommendedMovies(m);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        List<Movie> movies = new ArrayList<>();
+        Genre action = new Genre("Action");
+        Genre romantic = new Genre("Romantic");
+        Genre drama = new Genre("Drama");
+        Genre fantastic = new Genre("Fantastic");
+        
+        movies.add(movieBuilder.genres(action).genres(drama).build());
+        movies.add(movieBuilder.genres(action).genres(romantic).build());
+        movies.add(movieBuilder.genres(action).build());
+        
+        Movie model = movieBuilder.genres(action).build();
+        List<Movie> foundMovies = movieService.getRecommendedMovies(model);
+        assertThat(foundMovies).containsAll(movies);
+        
+        model = movieBuilder.genres(drama).build();
+        foundMovies = movieService.getRecommendedMovies(model);
+        assertThat(foundMovies).containsOnly(movies.get(0));
+        
+        model = movieBuilder.genres(fantastic).build();
+        foundMovies = movieService.getRecommendedMovies(model);
+        Assert.assertNotNull(foundMovies);
+        assertThat(foundMovies).isEmpty();
     }
 
     /**
@@ -143,14 +118,6 @@ public class MovieServiceImplTest {
      */
     @Test
     public void testGetTopMovies() {
-        System.out.println("getTopMovies");
-        Genre g = null;
-        MovieServiceImpl instance = new MovieServiceImpl();
-        List<Movie> expResult = null;
-        List<Movie> result = instance.getTopMovies(g);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
     
 }

@@ -24,42 +24,45 @@ public class MovieServiceImpl implements MovieService{
     
     @Override
     public void create(Movie m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        movieDao.create(m);
     }
 
     @Override
-    public void delete(Movie m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void delete(Long id) {
+        movieDao.delete(id);
     }
 
     @Override
-    public void edit(Movie m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void edit(Movie edited) {
+        movieDao.update(edited);
     }
 
     @Override
     public Movie findById(Long id) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return movieDao.findById(id);
     }
 
     @Override
     public List<Movie> getAllMovies() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return movieDao.findAll();
     }
 
     @Override
     public List<Movie> getNewestMovies(int number) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("blabla");
+        return null;
     }
 
     @Override
     public List<Movie> getRecommendedMovies(Movie m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("blabla");
+        return null;
     }
 
     @Override
     public List<Movie> getTopMovies(Genre g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        System.out.println("blabla");   
+        return null;
     }
     
 }

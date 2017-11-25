@@ -26,7 +26,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean signIn(User u, String password) {
-        return(u.getPassword().equals(getSha256(password)));
+        User user = userDao.findByMail(u.getMail());
+        return(user.getPassword().equals(getSha256(password)));
     }
 
     @Override
@@ -52,6 +53,18 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findUserByNick(String nick) {
         return userDao.findByNick(nick);
+    }
+
+    @Override
+    public User update(User u, String password) {
+        u.setPassword(getSha256(password));
+        userDao.update(u);
+        return u;
+    }
+
+    @Override
+    public void delete(User u) {
+        userDao.delete(u.getId());
     }
 
     public static String getSha256(String value) {

@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.builders.MovieBuilder;
+import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dao.MovieDao;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
@@ -19,40 +20,39 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import static org.mockito.Mockito.when;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /**
  *
  * @author Dominik
  */
-public class MovieServiceImplTest {
+@ContextConfiguration(classes = ServiceConfiguration.class)
+public class MovieServiceImplTest extends AbstractJUnit4SpringContextTests{
     
     @Mock
     private MovieDao movieDao;
     
+    @Mock
+    private TimeService timeService;
+    
     private Movie testMovie;
     
     @Autowired
+    @InjectMocks
     private MovieService movieService;
     
     private MovieBuilder movieBuilder;
-    
-    @BeforeClass
-    public static void setUpClass() {
-    }
-    
-    @AfterClass
-    public static void tearDownClass() {
-    }
     
     @Before
     public void setUp() {
         
         MockitoAnnotations.initMocks(this);
-        movieService = new MovieServiceImpl();
         movieBuilder = new MovieBuilder();
     }
     
@@ -80,6 +80,8 @@ public class MovieServiceImplTest {
         movies.add(movieBuilder.dateOfRelase(LocalDate.of(2017,1,1)).build());
         
         when(movieDao.findAll()).thenReturn(movies);
+        when(timeService.getCurrentDate()).thenReturn(LocalDate.MAX);
+        
         List<Movie> foundMovies = movieService.getNewestMovies(2);
         assertThat(foundMovies).containsOnly(movies.get(0), movies.get(2));
     }

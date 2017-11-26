@@ -13,7 +13,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class DirectorDaoImpl implements DirectorDao{
 
-    @PersistenceContext
+    
     protected EntityManager manager;
 
     public void setEntityManager(EntityManager manager){

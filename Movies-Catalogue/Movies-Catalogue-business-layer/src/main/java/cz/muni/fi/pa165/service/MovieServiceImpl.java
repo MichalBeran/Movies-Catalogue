@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.dao.MovieDao;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import java.util.List;
+import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,10 @@ public class MovieServiceImpl implements MovieService{
 
     @Autowired
     private MovieDao movieDao;
+    
+    @Autowired
+    @Inject
+    private TimeService timeService;
     
     @Override
     public void create(Movie m) {
@@ -49,7 +54,7 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public List<Movie> getNewestMovies(int number) {
-        System.out.println("blabla");
+        System.out.println(timeService.getCurrentDate().toString() + " number of films=" + number);
         return null;
     }
 

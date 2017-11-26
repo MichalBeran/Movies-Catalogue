@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.service;
 
 import java.time.LocalDate;
+import java.time.Month;
 import org.springframework.stereotype.Service;
 
 /**
@@ -17,7 +18,7 @@ public class TimeServiceImpl implements TimeService{
 
     @Override
     public LocalDate getCurrentDate() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("not implemented method");
     }
     
 }

@@ -34,7 +34,7 @@ public class MovieBuilder {
 
     private Set<Actor> actors;
     
-    private Rating rating;
+    private Set<Rating> ratings;
 
     private Director director;
     
@@ -42,6 +42,7 @@ public class MovieBuilder {
     public MovieBuilder() {
         genres = new HashSet();
         actors = new HashSet();
+        ratings = new HashSet();
     }
     
     public MovieBuilder id(Long id){
@@ -80,7 +81,7 @@ public class MovieBuilder {
     }
     
     public MovieBuilder rating(Rating rating){
-        this.rating = rating;
+        this.ratings.add(rating);
         return this;
     }
     
@@ -100,7 +101,8 @@ public class MovieBuilder {
         entity.setGenres(genres);
         if(!actors.isEmpty())
         entity.setActors(actors);
-        entity.setRating(rating);
+        if(!ratings.isEmpty());
+        entity.setRatings(ratings);
         entity.setDirector(director);
         return null;
     }

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class UserDaoImpl implements UserDao{
 
-    @PersistenceContext
+    
     protected EntityManager manager;
 
     public void setEntityManager(EntityManager manager) {

@@ -60,4 +60,20 @@ public interface RatingService {
      * @param id identifier
      */
     void delete(Long id);
+
+    /**
+     * Calculates the average {@link Rating} from a list of ratings
+     * @param entities list of ratings
+     * @return average rating
+     */
+    Rating getAverageRating(List<Rating> entities);
+
+    /**
+     * Calculates single numeric rating representation for
+     * {@link Rating} rating values
+     * @param entity Rating entity
+     * @return simplified rating numeric representation in range 0-100
+     */
+    int getSimplifiedRatingValue(Rating entity);
+
 }

@@ -63,7 +63,7 @@ public interface RatingFacade {
     RatingDto getAverageRating(List<RatingDto> dtos);
 
     /**
-     * Calculates single percentual rating representation for
+     * Calculates single numeric rating representation for
      * {@link RatingDto} rating values
      * @param dto RatingDto
      * @return simplified rating numeric representation in range 0-100

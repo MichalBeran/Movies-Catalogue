@@ -43,4 +43,33 @@ public class RatingServiceImpl implements RatingService {
     public void delete(Long id) {
         ratingDao.delete(id);
     }
+
+    @Override
+    public Rating getAverageRating(List<Rating> entities) {
+        Rating averageRating = new Rating();
+        averageRating.setActorsRating(0);
+        averageRating.setScenarioRating(0);
+        averageRating.setOverallRating(0);
+        int count = entities.size();
+
+        for (Rating entity : entities) {
+            averageRating.setScenarioRating(
+                    averageRating.getScenarioRating() + entity.getScenarioRating());
+            averageRating.setActorsRating(
+                    averageRating.getActorsRating() + entity.getActorsRating());
+            averageRating.setOverallRating(
+                    averageRating.getOverallRating() + entity.getOverallRating());
+        }
+
+        averageRating.setScenarioRating(averageRating.getScenarioRating() / count);
+        averageRating.setActorsRating(averageRating.getActorsRating() / count);
+        averageRating.setOverallRating(averageRating.getOverallRating() / count);
+
+        return averageRating;
+    }
+
+    @Override
+    public int getSimplifiedRatingValue(Rating entity) {
+        return (entity.getOverallRating() + entity.getActorsRating() + entity.getScenarioRating()) / 3;
+    }
 }

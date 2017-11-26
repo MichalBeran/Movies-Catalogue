@@ -15,6 +15,7 @@ import java.util.List;
 @Repository
 public class RatingDaoImpl implements RatingDao {
     
+    @PersistenceContext
     protected EntityManager manager;
 
     public void setEntityManager(EntityManager manager){

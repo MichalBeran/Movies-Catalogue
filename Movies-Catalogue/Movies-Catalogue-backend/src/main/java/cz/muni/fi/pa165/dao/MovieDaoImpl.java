@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MovieDaoImpl implements MovieDao{
     
-   
+    @PersistenceContext
     private EntityManager em;
 
     public void setEntityManager(EntityManager em){

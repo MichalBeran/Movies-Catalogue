@@ -6,7 +6,13 @@
 package cz.muni.fi.pa165.persistence;
 
 import cz.muni.fi.pa165.PersistenceApplicationContext;
-import cz.muni.fi.pa165.dao.MovieDao;
+import cz.muni.fi.pa165.dao.ActorDao;
+import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Director;
+import cz.muni.fi.pa165.entities.Movie;
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import org.junit.Test;
@@ -22,13 +28,17 @@ import org.springframework.test.context.junit4.AbstractTransactionalJUnit4Spring
 public class ContainerManagedEntityManagerTest extends AbstractTransactionalJUnit4SpringContextTests{
     
     @Autowired
-    private MovieDao movieDao;
+    private ActorDao actorDao;
     
     @PersistenceContext
     private EntityManager em;
     
     @Test
     public void test(){
-        System.out.println("ano");
+        Actor a = new Actor();
+        a.setFirstName("name");
+        a.setLastName("last");
+        actorDao.create(a);
+        System.out.println(a.getId() + "myId");
     }
 }

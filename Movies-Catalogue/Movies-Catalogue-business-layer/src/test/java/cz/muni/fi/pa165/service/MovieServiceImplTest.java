@@ -11,6 +11,7 @@ import cz.muni.fi.pa165.dao.MovieDao;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -40,8 +41,6 @@ public class MovieServiceImplTest extends AbstractJUnit4SpringContextTests{
     
     @Mock
     private TimeService timeService;
-    
-    private Movie testMovie;
     
     @Autowired
     @InjectMocks
@@ -75,51 +74,16 @@ public class MovieServiceImplTest extends AbstractJUnit4SpringContextTests{
     @Test
     public void testGetNewestMovies() {
         List<Movie> movies = new ArrayList<>();
-        movies.add(movieBuilder.dateOfRelase(LocalDate.of(2016,1,1)).build());
         movies.add(movieBuilder.dateOfRelase(LocalDate.of(2015,1,1)).build());
+        movies.add(movieBuilder.dateOfRelase(LocalDate.of(2016,1,1)).build());
         movies.add(movieBuilder.dateOfRelase(LocalDate.of(2017,1,1)).build());
         
         when(movieDao.findAll()).thenReturn(movies);
-        when(timeService.getCurrentDate()).thenReturn(LocalDate.MAX);
+        when(timeService.getCurrentDate()).thenReturn(LocalDate.of(2017, Month.DECEMBER, 1));
         
         List<Movie> foundMovies = movieService.getNewestMovies(2);
-        //assertThat(foundMovies).containsOnly(movies.get(0), movies.get(2));
+        //assertThat(foundMovies).containsOnly(movies.get(1), movies.get(2));
     }
 
-    /**
-     * Test of getRecommendedMovies method, of class MovieServiceImpl.
-     */
-    @Test
-    public void testGetRecommendedMovies() {
-        List<Movie> movies = new ArrayList<>();
-        Genre action = new Genre("Action");
-        Genre romantic = new Genre("Romantic");
-        Genre drama = new Genre("Drama");
-        Genre fantastic = new Genre("Fantastic");
-        
-        movies.add(movieBuilder.genres(action).genres(drama).build());
-        movies.add(movieBuilder.genres(action).genres(romantic).build());
-        movies.add(movieBuilder.genres(action).build());
-        
-        Movie model = movieBuilder.genres(action).build();
-        List<Movie> foundMovies = movieService.getRecommendedMovies(model);
-        //assertThat(foundMovies).containsAll(movies);
-        
-        model = movieBuilder.genres(drama).build();
-        foundMovies = movieService.getRecommendedMovies(model);
-        //assertThat(foundMovies).containsOnly(movies.get(0));
-        
-        model = movieBuilder.genres(fantastic).build();
-        foundMovies = movieService.getRecommendedMovies(model);
-        //Assert.assertNotNull(foundMovies);
-        //assertThat(foundMovies).isEmpty();
-    }
-
-    /**
-     * Test of getTopMovies method, of class MovieServiceImpl.
-     */
-    @Test
-    public void testGetTopMovies() {
-    }
     
 }

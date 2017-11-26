@@ -8,8 +8,9 @@ package cz.muni.fi.pa165.service;
 import cz.muni.fi.pa165.dao.MovieDao;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import org.dozer.inject.Inject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -53,20 +54,12 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public List<Movie> getNewestMovies(int number) {
-        System.out.println(timeService.getCurrentDate().toString() + " number of films=" + number);
-        return null;
-    }
-
-    @Override
-    public List<Movie> getRecommendedMovies(Movie m) {
-        System.out.println("blabla");
-        return null;
-    }
-
-    @Override
-    public List<Movie> getTopMovies(Genre g) {
-        System.out.println("blabla");   
-        return null;
+        List<Movie> movies = movieDao.findAll();
+        int numberOfFilms = movies.size();
+        if(numberOfFilms < number){
+            throw new IllegalStateException("There are not enough films.");
+        }
+        return movies.subList(numberOfFilms - number, numberOfFilms - 1);
     }
     
 }

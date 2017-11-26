@@ -4,13 +4,15 @@ import cz.muni.fi.pa165.dao.RatingDao;
 import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class RatingServiceImpl implements RatingService {
+
     @Autowired
     private RatingDao ratingDao;
-
 
     @Override
     public Rating findById(Long id) {
@@ -50,7 +52,13 @@ public class RatingServiceImpl implements RatingService {
         averageRating.setActorsRating(0);
         averageRating.setScenarioRating(0);
         averageRating.setOverallRating(0);
+        if (entities == null || entities.isEmpty()) {
+            return averageRating;
+        }
         int count = entities.size();
+        if(count == 1){
+            return entities.get(0);
+        }
 
         for (Rating entity : entities) {
             averageRating.setScenarioRating(
@@ -70,6 +78,9 @@ public class RatingServiceImpl implements RatingService {
 
     @Override
     public int getSimplifiedRatingValue(Rating entity) {
+        if(entity == null){
+            return 0;
+        }
         return (entity.getOverallRating() + entity.getActorsRating() + entity.getScenarioRating()) / 3;
     }
 }

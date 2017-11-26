@@ -24,7 +24,6 @@ public class MovieServiceImpl implements MovieService{
     private MovieDao movieDao;
     
     @Autowired
-    @Inject
     private TimeService timeService;
     
     @Override

@@ -52,6 +52,7 @@ public class RatingServiceImpl implements RatingService {
         averageRating.setActorsRating(0);
         averageRating.setScenarioRating(0);
         averageRating.setOverallRating(0);
+        
         if (entities == null || entities.isEmpty()) {
             return averageRating;
         }
@@ -59,7 +60,7 @@ public class RatingServiceImpl implements RatingService {
         if(count == 1){
             return entities.get(0);
         }
-
+      
         for (Rating entity : entities) {
             averageRating.setScenarioRating(
                     averageRating.getScenarioRating() + entity.getScenarioRating());

@@ -15,7 +15,7 @@ import java.util.Set;
  */
 @Repository
 public class GenreDaoImpl implements GenreDao {
-    @PersistenceContext
+    
     protected EntityManager manager;
 
     public void setEntityManager(EntityManager manager){

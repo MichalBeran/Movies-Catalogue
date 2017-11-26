@@ -48,6 +48,11 @@ public class Movie {
         this.ratings.add(rating);
     }
 
+    public void setRatings(Set<Rating> ratings) {
+        this.ratings = ratings;
+    }
+    
+
     public Movie(){
         this.actors = new HashSet<>();
         this.genres = new HashSet<>();

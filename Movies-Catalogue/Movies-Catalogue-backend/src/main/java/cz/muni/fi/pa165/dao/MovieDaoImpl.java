@@ -5,19 +5,21 @@
  */
 package cz.muni.fi.pa165.dao;
 
-import cz.muni.fi.pa165.entities.Actor;
-import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import java.util.List;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import org.springframework.stereotype.Repository;
 
 /**
  *
  * @author Dominik
  */
+@Repository
 public class MovieDaoImpl implements MovieDao{
     
+   
     private EntityManager em;
 
     public void setEntityManager(EntityManager em){

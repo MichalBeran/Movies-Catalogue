@@ -27,7 +27,7 @@ public class Rating {
     private int scenarioRating;
     private int actorsRating;
     
-    @ManyToOne
+    @OneToOne
     private Movie movie;
 
     @ManyToOne

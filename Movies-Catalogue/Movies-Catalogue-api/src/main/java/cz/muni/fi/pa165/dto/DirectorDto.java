@@ -5,7 +5,6 @@
  */
 package cz.muni.fi.pa165.dto;
 
-import cz.muni.fi.pa165.entities.Director;
 import java.time.LocalDate;
 import java.util.Set;
 
@@ -14,6 +13,14 @@ import java.util.Set;
  * @author Maros
  */
 public class DirectorDto {
+
+    private String firstName;
+
+    private String lastName;
+
+    private LocalDate dateOfBirth;
+
+    private Set<MovieDto> movies;
 
     private Long id;
 
@@ -49,19 +56,11 @@ public class DirectorDto {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Set<Director> getMovies() {
+    public Set<MovieDto> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Director> movies) {
+    public void setMovies(Set<MovieDto> movies) {
         this.movies = movies;
     }
-
-    private String firstName;
-
-    private String lastName;
-
-    private LocalDate dateOfBirth;
-
-    private Set<Director> movies;
 }

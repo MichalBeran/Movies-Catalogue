@@ -11,12 +11,5 @@
 
     <artifactId>Movies-Catalogue-api</artifactId>
 
-    <dependencies>
-        <dependency>
-            <groupId>cz.muni.fi.pa165</groupId>
-            <artifactId>Movies-Catalogue-backend</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
-    </dependencies>
 
 </project>

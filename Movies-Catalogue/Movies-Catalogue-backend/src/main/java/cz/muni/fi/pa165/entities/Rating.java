@@ -91,7 +91,7 @@ public class Rating {
 
     @Override
     public String toString() {
-        return "Rating {" + "id=" + id + ", overallRating=" + overallRating + ", scenarioRating=" + scenarioRating + ",actorsRating" + actorsRating +'}';
+        return "Rating {" + "id=" + id + ", overallRating=" + overallRating + ", scenarioRating=" + scenarioRating + ",actorsRating=" + actorsRating +'}';
     }
 
     @Override

@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
  *
  * @author Dominik
  */
-@Service
 public interface TimeService {
     
     public LocalDate getCurrentDate();

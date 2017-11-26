@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
  *
  * @author Dominik
  */
-@Service
 public interface MovieService {
     
     void create(Movie m);

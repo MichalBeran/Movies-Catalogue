@@ -51,4 +51,33 @@ public class RatingFacadeImpl implements RatingFacade {
     public void delete(RatingDto dto) {
         ratingService.delete(dto.getId());
     }
+
+    @Override
+    public RatingDto getAverageRating(List<RatingDto> dtos) {
+        RatingDto averageRating = new RatingDto();
+        averageRating.setActorsRating(0);
+        averageRating.setScenarioRating(0);
+        averageRating.setOverallRating(0);
+        int count = dtos.size();
+
+        for (RatingDto dto : dtos) {
+            averageRating.setScenarioRating(
+                    averageRating.getScenarioRating() + dto.getScenarioRating());
+            averageRating.setActorsRating(
+                    averageRating.getActorsRating() + dto.getActorsRating());
+            averageRating.setOverallRating(
+                    averageRating.getOverallRating() + dto.getOverallRating());
+        }
+
+        averageRating.setScenarioRating(averageRating.getScenarioRating() / count);
+        averageRating.setActorsRating(averageRating.getActorsRating() / count);
+        averageRating.setOverallRating(averageRating.getOverallRating() / count);
+
+        return averageRating;
+    }
+
+    @Override
+    public int getSimplifiedRatingValue(RatingDto dto) {
+        return (dto.getOverallRating() + dto.getActorsRating() + dto.getScenarioRating()) / 3;
+    }
 }

@@ -39,7 +39,7 @@ public class ActorDaoImpl implements ActorDao{
     @Override
     public List<Actor> findAll() {
         Query query = manager.createQuery("SELECT a FROM Actor a", Actor.class);
-        return (List<Actor>) query.getResultList();
+        return query.getResultList();
     }
 
     @Override

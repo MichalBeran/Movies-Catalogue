@@ -39,7 +39,7 @@ public class DirectorDaoImpl implements DirectorDao{
     @Override
     public List<Director> findAll() {
         Query query = manager.createQuery("SELECT d FROM Director d", Director.class);
-        return (List<Director>) query.getResultList();
+        return query.getResultList();
     }
 
     @Override

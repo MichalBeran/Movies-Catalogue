@@ -5,9 +5,6 @@
  */
 package cz.muni.fi.pa165.dto;
 
-import cz.muni.fi.pa165.entities.Actor;
-import cz.muni.fi.pa165.entities.Director;
-import cz.muni.fi.pa165.entities.Genre;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +26,13 @@ public class CreateMovieDTO {
     @NotNull
     private LocalDate dateOfRelease;
 
-    private List<Genre> genres = new ArrayList();
+    private List<GenreDto> genres = new ArrayList();
 
     @NotNull
-    private List<Actor> actors = new ArrayList();
+    private List<ActorDto> actors = new ArrayList();
 
     @NotNull
-    private Director director;
+    private DirectorDto director;
 
     public String getTitle() {
         return title;
@@ -69,27 +66,27 @@ public class CreateMovieDTO {
         this.dateOfRelease = dateOfRelease;
     }
 
-    public List<Genre> getGenres() {
+    public List<GenreDto> getGenres() {
         return genres;
     }
 
-    public void setGenres(List<Genre> genres) {
+    public void setGenres(List<GenreDto> genres) {
         this.genres = genres;
     }
 
-    public List<Actor> getActors() {
+    public List<ActorDto> getActors() {
         return actors;
     }
 
-    public void setActors(List<Actor> actors) {
+    public void setActors(List<ActorDto> actors) {
         this.actors = actors;
     }
 
-    public Director getDirector() {
+    public DirectorDto getDirector() {
         return director;
     }
 
-    public void setDirector(Director director) {
+    public void setDirector(DirectorDto director) {
         this.director = director;
     }
     

@@ -56,8 +56,9 @@ public class MovieFacadeImpl implements MovieFacade{
 
     @Override
     public Long createMovie(CreateMovieDto movie) {
-        beanMappingService.mapTo(movie, Movie.class);
-        return Long.valueOf(1);
+        Movie m = beanMappingService.mapTo(movie, Movie.class);
+        movieService.create(m);
+        return m.getId();
     }
 
     @Override

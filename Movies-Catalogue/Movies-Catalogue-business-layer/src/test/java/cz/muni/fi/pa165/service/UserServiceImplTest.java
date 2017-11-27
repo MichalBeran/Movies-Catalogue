@@ -200,13 +200,17 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testIsAdminSucces() {
-        when(userDao.findByMail(user1.getMail())).thenReturn(user1);
+        Long id = 1L;
+        user1.setId(id);
+        when(userDao.findById(user1.getId())).thenReturn(user1);
         assertThat(userService.isAdmin(user1)).isTrue();
     }
 
     @Test
     public void testIsAdminFail() {
-        when(userDao.findByMail(user2.getMail())).thenReturn(user2);
+        Long id = 1L;
+        user1.setId(id);
+        when(userDao.findById(user2.getId())).thenReturn(user2);
         assertThat(userService.isAdmin(user2)).isFalse();
     }
 

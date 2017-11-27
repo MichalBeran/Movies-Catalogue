@@ -13,7 +13,7 @@ import org.springframework.test.context.TestExecutionListeners;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -58,5 +58,22 @@ public class UserFacadeImplTest extends AbstractJUnit4SpringContextTests {
     public void testRegisterUser(){
         Long expectedId = userFacade.registerUser(userDto, "pepik");
         assertThat(expectedId).isNotNull();
+    }
+
+    @Test
+    public void testFindAll(){
+        userFacade.registerUser(userDto, "pepik");
+        assertThat(userFacade.findAllUsers().size()).isEqualTo(1);
+    }
+
+    @Test
+    public void testIsAdmin(){
+        Long id = userFacade.registerUser(userDto, "pepik");
+        userDto.setId(id);
+        userFacade.makeAdmin(userDto);
+
+        List<UserDto> users = userFacade.findAllUsers();
+        Boolean is = userFacade.isAdmin(userDto);
+        assertThat(userFacade.isAdmin(userDto)).isTrue();
     }
 }

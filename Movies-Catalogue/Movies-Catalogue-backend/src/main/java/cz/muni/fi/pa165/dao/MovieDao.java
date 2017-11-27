@@ -34,7 +34,7 @@ public interface MovieDao {
     /**
      * Gets all entities from the repository
      *
-     * @return List<Movie> a list of entities
+     * @return List<Movie> a list of entities ordered by dateOfRelease
      */
     List<Movie> findAll();
 

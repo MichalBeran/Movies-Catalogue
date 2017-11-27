@@ -25,9 +25,17 @@ public interface MovieService {
     /**
      * 
      * @param number specifies number of films to be returned
-     * @return Last added films 
+     * @return Last {@param number} added films
      */
     List<Movie> getNewestMovies(int number);
+    
+    /**
+     * 
+     * @param g Genre of the film
+     * @return Top movies in given category
+     */
+    List<Movie> getTopMovies(Genre g);
+    
     
     /**
      * Method returns similiar films
@@ -36,11 +44,5 @@ public interface MovieService {
      */
     List<Movie> getRecommendedMovies(Movie m);
     
-    /**
-     * 
-     * @param g Genre of the film
-     * @return Top movies in given category
-     */
-    List<Movie> getTopMovies(Genre g);
     
 }

@@ -4,10 +4,7 @@ import cz.muni.fi.pa165.InMemoryDatabaseSpring;
 import cz.muni.fi.pa165.dao.GenreDaoImpl;
 import cz.muni.fi.pa165.dao.RatingDao;
 import cz.muni.fi.pa165.dao.RatingDaoImpl;
-import cz.muni.fi.pa165.entities.Genre;
-import cz.muni.fi.pa165.entities.Movie;
-import cz.muni.fi.pa165.entities.Rating;
-import cz.muni.fi.pa165.entities.User;
+import cz.muni.fi.pa165.entities.*;
 import cz.muni.fi.pa165.enums.Role;
 import junit.framework.TestCase;
 import org.apache.log4j.LogManager;
@@ -21,7 +18,9 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -35,6 +34,9 @@ public class RatingDaoTest {
     private RatingDaoImpl dao;
     private Logger logger;
 
+    private Genre comedy;
+    private Actor angelinaJolie;
+    private Director stevenSpielberg;
     private Rating firstRating;
     private Rating secondRating;
     private Movie ratedMovie;
@@ -56,9 +58,34 @@ public class RatingDaoTest {
     }
 
     private void setEntities(){
+        comedy = new Genre();
+        comedy.setName("Comedy");
+        comedy.setDescription("Comedy movies");
+
+        angelinaJolie = new Actor();
+        angelinaJolie.setFirstName("Angelina");
+        angelinaJolie.setLastName("Jolie");
+        angelinaJolie.setDateOfBirth(LocalDate.of(1975, 6, 4));
+
+        stevenSpielberg = new Director();
+        stevenSpielberg.setFirstName("Steven");
+        stevenSpielberg.setLastName("Spielberg");
+        stevenSpielberg.setDateOfBirth(LocalDate.of(1946, 12, 18));
+
+        em.getTransaction().begin();
+        em.persist(comedy);
+        em.persist(angelinaJolie);
+        em.persist(stevenSpielberg);
+        em.getTransaction().commit();
+
+        Set<Actor> actors = new HashSet<>();
+        actors.add(angelinaJolie);
+
         ratedMovie = new Movie();
         ratedMovie.setTitle("After Earth");
         ratedMovie.setDateOfRelease(LocalDate.of(2013, 6, 6));
+        ratedMovie.setActors(actors);
+        ratedMovie.setDirector(stevenSpielberg);
 
         author = new User();
         author.setFirstName("Janko");

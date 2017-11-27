@@ -36,7 +36,8 @@ public class Genre {
     }
 
     public Genre(String name) {
-        this.name = name;
+        this.setName(name);
+        this.movies = new HashSet();
     }
     
     public void setId(Long id) {

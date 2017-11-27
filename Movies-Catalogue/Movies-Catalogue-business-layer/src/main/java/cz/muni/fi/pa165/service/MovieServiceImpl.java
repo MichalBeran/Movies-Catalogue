@@ -8,8 +8,10 @@ package cz.muni.fi.pa165.service;
 import cz.muni.fi.pa165.dao.MovieDao;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
-import org.dozer.inject.Inject;
+import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +26,12 @@ public class MovieServiceImpl implements MovieService{
     private MovieDao movieDao;
     
     @Autowired
-    @Inject
+    private GenreService genreService;
+    
+    @Autowired
+    private RatingService ratingService;
+    
+    @Autowired
     private TimeService timeService;
     
     @Override
@@ -54,20 +61,39 @@ public class MovieServiceImpl implements MovieService{
 
     @Override
     public List<Movie> getNewestMovies(int number) {
-        System.out.println(timeService.getCurrentDate().toString() + " number of films=" + number);
-        return null;
+        List<Movie> movies = movieDao.findAll();
+        int numberOfFilms = movies.size();
+        if(numberOfFilms < number){
+            throw new IllegalStateException("There are not enough films.");
+        }
+        return movies.subList(numberOfFilms - number, numberOfFilms);
     }
-
+    
     @Override
     public List<Movie> getRecommendedMovies(Movie m) {
-        System.out.println("blabla");
-        return null;
+        Set<Genre> genresOfFilm = m.getGenres();
+        Iterator itr = genresOfFilm.iterator();
+        if(itr.hasNext()){
+            Genre genreOfFilm = genreService.findById(((Genre) itr.next()).getId());
+            Set<Movie> recommendedMovies = genreOfFilm.getMovies();
+            return new ArrayList<>(recommendedMovies);
+        }else{
+            return new ArrayList<>();
+        }
     }
 
     @Override
     public List<Movie> getTopMovies(Genre g) {
-        System.out.println("blabla");   
-        return null;
+        Iterator itr = g.getMovies().iterator();
+        List<Movie> topMovies = new ArrayList<>();
+        while(itr.hasNext()){
+            Movie movie = (Movie) itr.next();
+            //Rating overallRating = ratingService.getOverallRating();
+            //if(overallRating.getOverallRating() > 4){
+            //    topMovies.add(movie);
+            //}
+        }
+        return topMovies;
     }
     
 }

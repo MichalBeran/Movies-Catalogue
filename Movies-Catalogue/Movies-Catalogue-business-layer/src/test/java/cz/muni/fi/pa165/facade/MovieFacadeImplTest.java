@@ -50,7 +50,9 @@ public class MovieFacadeImplTest extends AbstractTransactionalJUnit4SpringContex
     @Test
     public void testCreateMovie() {
         CreateMovieDto movieDto = new CreateMovieDto();
-        movieFacade.createMovie(movieDto);
+        
+        Long id = movieFacade.createMovie(movieDto);
+        System.out.println("");
     }
 
     @Test

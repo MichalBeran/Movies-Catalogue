@@ -9,18 +9,18 @@ import cz.muni.fi.pa165.dto.DirectorDto;
 import cz.muni.fi.pa165.entities.Director;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.service.DirectorService;
+
 import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
- *
  * @author Maros
  */
-@Transactional
 @Service
+@Transactional
 public class DirectorFacadeImpl implements DirectorFacade {
 
     @Autowired

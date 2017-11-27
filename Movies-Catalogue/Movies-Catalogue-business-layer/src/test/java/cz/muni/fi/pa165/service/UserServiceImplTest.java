@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dao.UserDao;
+import cz.muni.fi.pa165.entities.Rating;
 import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.enums.Role;
 import org.junit.After;
@@ -117,6 +118,10 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests {
     @Test
     public void testUpdateUser() {
         userService.registerUser(user1, "newPass");
+
+        Long id = 1L;
+        user1.setId(id);
+        when(userDao.findById(id)).thenReturn(user1);
         assertThat(userService.update(user1, "newPass")).isEqualTo(user1);
         verify(userDao, times(1)).update(user1);
     }
@@ -195,13 +200,17 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testIsAdminSucces() {
-        when(userDao.findByMail(user1.getMail())).thenReturn(user1);
+        Long id = 1L;
+        user1.setId(id);
+        when(userDao.findById(user1.getId())).thenReturn(user1);
         assertThat(userService.isAdmin(user1)).isTrue();
     }
 
     @Test
     public void testIsAdminFail() {
-        when(userDao.findByMail(user2.getMail())).thenReturn(user2);
+        Long id = 1L;
+        user1.setId(id);
+        when(userDao.findById(user2.getId())).thenReturn(user2);
         assertThat(userService.isAdmin(user2)).isFalse();
     }
 

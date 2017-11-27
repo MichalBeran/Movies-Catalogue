@@ -5,6 +5,7 @@ import cz.muni.fi.pa165.entities.Rating;
 import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
@@ -46,7 +47,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean isAdmin(User u) {
-        return u.getRoles().contains(Role.ADMINISTRATOR);
+        User databaseUser = userDao.findById(u.getId());
+        return databaseUser.getRoles().contains(Role.ADMINISTRATOR);
     }
 
     @Override
@@ -70,7 +72,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User update(User u, String password) {
+    public User update(User u, String password){
+        User databaseUser = userDao.findById(u.getId());
+        if (databaseUser.getRoles() != null) {
+            u.setRoles(databaseUser.getRoles());
+        }
+        else{
+            u.setRoles(new ArrayList<Role>());
+        }
+        u.setRatings(databaseUser.getRatings());
         u.setPassword(getSha256(password));
         userDao.update(u);
         return u;
@@ -79,6 +89,13 @@ public class UserServiceImpl implements UserService {
     @Override
     public void delete(User u) {
         userDao.delete(u.getId());
+    }
+
+    @Override
+    public void makeAdmin(User u){
+        User databaseUser = userDao.findById(u.getId());
+        databaseUser.addRole(Role.ADMINISTRATOR);
+        userDao.update(databaseUser);
     }
 
     public static String getSha256(String value) {

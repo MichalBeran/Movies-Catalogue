@@ -2,11 +2,10 @@ package cz.muni.fi.pa165.facades;
 
 import cz.muni.fi.pa165.builders.RatingDtoBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
-import cz.muni.fi.pa165.dto.MovieDto;
-import cz.muni.fi.pa165.dto.RatingDto;
-import cz.muni.fi.pa165.dto.UserDto;
+import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.facade.*;
+import jdk.vm.ci.meta.Local;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,6 +18,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,42 +32,77 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Transactional
 public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
     @Autowired
-    private RatingFacade ratingFacade;
+    private static RatingFacade ratingFacade;
 
-    private RatingDtoBuilder ratingDtoBuilder;
+    private static RatingDtoBuilder ratingDtoBuilder;
 
-    private MovieDto testMovie;
-    private UserDto testUser;
-    private UserDto testUser2;
-
-    @Autowired
-    private MovieFacade movieFacade;
+    private static MovieDto testMovie;
+    private static UserDto testUser;
+    private static UserDto testUser2;
 
     @Autowired
-    private ActorFacade actorFacade;
+    private static MovieFacade movieFacade;
 
     @Autowired
-    private DirectorFacade directorFacade;
+    private static ActorFacade actorFacade;
 
     @Autowired
-    private UserFacade userFacade;
+    private static DirectorFacade directorFacade;
 
-    // TODO: wait for implementation of other parts of system
+    @Autowired
+    private static UserFacade userFacade;
 
     @Test
     public void dummyTest(){}
-    /*
+
     @BeforeClass
-    public void init(){
-        testMovie = new MovieDto();
+    public static void init(){
+        DirectorDto director = new DirectorDto();
+        director.setDateOfBirth(LocalDate.of(1980,1,1));
+        director.setFirstName("Director");
+        director.setLastName("Happy");
+        director.setId(directorFacade.create(director));
+
+        ActorDto actor = new ActorDto();
+        actor.setDateOfBirth(LocalDate.of(1985,1,1));
+        actor.setFirstName("Jackie");
+        actor.setLastName("Chan");
+        actor.setId(actorFacade.create(actor));
+
+        CreateMovieDto testMovie = new CreateMovieDto();
+        testMovie.setDateOfRelease(LocalDate.of(2016,1,1));
+        testMovie.setTitle("movie");
+        testMovie.setDescription("description");
+        RatingFacadeImplTest.testMovie = movieFacade.findById(movieFacade.createMovie(testMovie));
+
+
         testUser = new UserDto();
+        testUser.setFirstName("John");
+        testUser.setLastName("doe");
+        testUser.setMail("m@m.m");
+        testUser.setNick("nick");
+        testUser.setPassword("pass");
+        userFacade.registerUser(testUser, testUser.getPassword());
+        testUser = userFacade.findUserByMail("m@m.m");
+
+
         testUser2 = new UserDto();
+        testUser2.setFirstName("Johnny");
+        testUser2.setLastName("doey");
+        testUser2.setMail("m@mnm.m");
+        testUser2.setNick("nickam");
+        testUser2.setPassword("passw");
+        userFacade.registerUser(testUser2, testUser2.getPassword());
+        testUser2 = userFacade.findUserByMail("m@mnm.m");
+
+
+        ratingDtoBuilder = new RatingDtoBuilder();
     }
 
     @Before
     public void setUp() {
         //MockitoAnnotations.initMocks(this);
-        ratingDtoBuilder = new RatingDtoBuilder();
+        //ratingDtoBuilder = new RatingDtoBuilder();
 
     }
 
@@ -145,5 +180,5 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
         int actualResult = ratingFacade.getSimplifiedRatingValue(dto);
         assertThat(actualResult).isEqualTo(expectedResult);
-    }*/
+    }
 }

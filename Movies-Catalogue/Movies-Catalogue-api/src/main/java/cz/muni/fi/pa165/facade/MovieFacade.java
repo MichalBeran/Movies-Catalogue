@@ -30,5 +30,6 @@ public interface MovieFacade {
     List<MovieDto> getRecommendedMovies(MovieDto m);
     
     List<MovieDto> getNewestMovies(int i);
-    
+
+    MovieDto findById(Long id);
 }

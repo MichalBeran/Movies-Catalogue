@@ -73,6 +73,11 @@ public class MovieFacadeImpl implements MovieFacade {
         return name;
     }
 
+    @Override
+    public MovieDto findById(Long id)
+    {
+        return beanMappingService.mapTo(movieService.findById(id), MovieDto.class);
+    }
 }
 
 

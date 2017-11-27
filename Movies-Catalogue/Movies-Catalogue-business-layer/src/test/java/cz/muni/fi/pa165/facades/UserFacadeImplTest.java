@@ -64,7 +64,7 @@ public class UserFacadeImplTest extends AbstractJUnit4SpringContextTests {
     @Test
     public void testFindAll(){
         userFacade.registerUser(userDto, "pepik");
-      
+
         assertThat(userFacade.findAllUsers()).contains(userDto);
     }
 
@@ -82,6 +82,20 @@ public class UserFacadeImplTest extends AbstractJUnit4SpringContextTests {
         Long id = userFacade.registerUser(userDto, "pepik");
 
         assertThat(userFacade.findUserById(id)).isEqualTo(userDto);
+    }
+
+    @Test
+    public void testFindUserByMail(){
+        Long id = userFacade.registerUser(userDto, "pepik");
+
+        assertThat(userFacade.findUserByMail("josef@novak.cz")).isEqualTo(userDto);
+    }
+
+    @Test
+    public void testFindUserByNick(){
+        Long id = userFacade.registerUser(userDto, "pepik");
+
+        assertThat(userFacade.findUserByNick("pepa")).isEqualTo(userDto);
     }
 
 

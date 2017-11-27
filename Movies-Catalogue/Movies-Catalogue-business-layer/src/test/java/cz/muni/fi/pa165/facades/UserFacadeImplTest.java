@@ -16,6 +16,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import static org.assertj.core.api.Assertions.assertThat;
 
 import javax.transaction.Transactional;
+import java.security.MessageDigest;
 import java.util.List;
 
 /**
@@ -63,7 +64,8 @@ public class UserFacadeImplTest extends AbstractJUnit4SpringContextTests {
     @Test
     public void testFindAll(){
         userFacade.registerUser(userDto, "pepik");
-        assertThat(userFacade.findAllUsers().size()).isEqualTo(1);
+      
+        assertThat(userFacade.findAllUsers()).contains(userDto);
     }
 
     @Test
@@ -72,8 +74,17 @@ public class UserFacadeImplTest extends AbstractJUnit4SpringContextTests {
         userDto.setId(id);
         userFacade.makeAdmin(userDto);
 
-        List<UserDto> users = userFacade.findAllUsers();
-        Boolean is = userFacade.isAdmin(userDto);
         assertThat(userFacade.isAdmin(userDto)).isTrue();
     }
+
+    @Test
+    public void testFindUserById(){
+        Long id = userFacade.registerUser(userDto, "pepik");
+
+        assertThat(userFacade.findUserById(id)).isEqualTo(userDto);
+    }
+
+
+
+
 }

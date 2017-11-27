@@ -87,7 +87,7 @@ public class UserDto {
     public boolean equals(Object obj) {
         if (this == obj)
             return true;
-        if (!(obj instanceof RatingDto))
+        if (!(obj instanceof UserDto))
             return false;
         final UserDto other = (UserDto) obj;
 

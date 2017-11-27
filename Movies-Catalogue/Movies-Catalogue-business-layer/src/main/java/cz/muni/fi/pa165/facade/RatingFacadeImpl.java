@@ -58,7 +58,7 @@ public class RatingFacadeImpl implements RatingFacade {
 
     @Override
     public RatingDto getAverageRating(List<RatingDto> dtos) {
-       return mapper.mapTo(ratingService.getAverageRating(mapper.mapTo(dtos, Rating.class)), RatingDto.class);
+        return mapper.mapTo(ratingService.getAverageRating(mapper.mapTo(dtos, Rating.class)), RatingDto.class);
     }
 
     @Override

@@ -59,8 +59,6 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
     @Before
     public void setUp() {
-        //MockitoAnnotations.initMocks(this);
-        //ratingDtoBuilder = new RatingDtoBuilder();
         DirectorDto director = new DirectorDto();
         director.setDateOfBirth(LocalDate.of(1980,1,1));
         director.setFirstName("Director");
@@ -92,8 +90,6 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         testMovie.setGenres(genres);
         this.testMovie = movieFacade.findById(movieFacade.createMovie(testMovie));
 
-        Set<Role> roles = new HashSet<>();
-        roles.add(Role.ADMINISTRATOR);
         testUser = new UserDto();
         testUser.setFirstName("John");
         testUser.setLastName("doe");
@@ -135,15 +131,6 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         for (DirectorDto dto : directorDtos) {
             directorFacade.delete(dto);
         }
-
-        /*
-        TODO: org.springframework.dao.InvalidDataAccessApiUsageException: Removing a detached instance cz.muni.fi.pa165.entities.Actor#1; nested exception is java.lang.IllegalArgumentException: Removing a detached instance cz.muni.fi.pa165.entities.Actor#1
-         */
-
-//                List<MovieDto> movieDtos = movieFacade.findAll();
-//        for (MovieDto dto : movieDtos) {
-//            movieFacade.deleteMovie(dto.getId());
-//        }
     }
 
     @Test
@@ -196,16 +183,6 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         assertThat(ratingFacade.findAll().size()).isEqualTo(1);
         ratingFacade.delete(dto);
         assertThat(ratingFacade.findAll().size()).isEqualTo(0);
-    }
-
-    @Test
-    public void testFindByMovie() {
-//        RatingDto expectedDto = ratingDtoBuilder.actorRtg(100).overallRtg(100).scenarioRtg(100).movie(testMovie).user(testUser).build();
-//        expectedDto.setId(ratingFacade.create(expectedDto));
-//
-//        List<RatingDto> actualDtos = ratingFacade.findByMovie(testMovie);
-//        assertThat(actualDtos.size()).isEqualTo(1);
-//        assertThat(actualDtos.get(0)).isEqualTo(expectedDto);
     }
 
     @Test

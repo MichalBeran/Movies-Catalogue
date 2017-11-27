@@ -33,11 +33,6 @@ public class RatingServiceImplTest extends AbstractJUnit4SpringContextTests {
     @Mock
     private RatingDao ratingDao;
 
-    @Mock
-    private TimeService timeService;
-
-    private Rating testRating;
-
     private RatingBuilder ratingBuilder;
 
     @Autowired

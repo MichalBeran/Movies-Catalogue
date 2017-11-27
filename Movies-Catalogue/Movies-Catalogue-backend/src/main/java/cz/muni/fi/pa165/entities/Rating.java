@@ -5,13 +5,8 @@
  */
 package cz.muni.fi.pa165.entities;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.Objects;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 
 /**
  *
@@ -27,7 +22,7 @@ public class Rating {
     private int scenarioRating;
     private int actorsRating;
     
-    @OneToOne
+    @ManyToOne
     private Movie movie;
 
     @ManyToOne

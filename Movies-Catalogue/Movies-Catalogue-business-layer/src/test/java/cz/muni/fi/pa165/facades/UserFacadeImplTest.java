@@ -98,6 +98,32 @@ public class UserFacadeImplTest extends AbstractJUnit4SpringContextTests {
         assertThat(userFacade.findUserByNick("pepa")).isEqualTo(userDto);
     }
 
+    @Test
+    public void testSignIn(){
+        Long id = userFacade.registerUser(userDto, "pepik");
+
+        assertThat(userFacade.signIn(userDto, "pepik")).isTrue();
+    }
+
+    @Test
+    public void testUpdate(){
+        Long id = userFacade.registerUser(userDto, "pepik");
+        userDto.setFirstName("Michal");
+        userDto.setId(id);
+        userFacade.update(userDto, "pepik");
+
+        assertThat(userFacade.findUserById(id)).isEqualTo(userDto);
+    }
+
+    @Test
+    public void testDelete(){
+        Long id = userFacade.registerUser(userDto, "pepik");
+        userDto.setId(id);
+        userFacade.delete(userDto);
+
+        assertThat(userFacade.findAllUsers().size()).isEqualTo(0);
+    }
+
 
 
 

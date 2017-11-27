@@ -8,6 +8,10 @@ package cz.muni.fi.pa165.mapping;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dto.CreateMovieDto;
 import cz.muni.fi.pa165.dto.DirectorDto;
+import cz.muni.fi.pa165.dto.MovieDto;
+import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Director;
+import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -26,6 +30,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 public class BeanMappingServiceImplTest extends AbstractJUnit4SpringContextTests{
     
     CreateMovieDto createMovieDto;
+    MovieDto movieDto;
     Movie movie;
     
     @Autowired
@@ -51,6 +56,19 @@ public class BeanMappingServiceImplTest extends AbstractJUnit4SpringContextTests
         createMovieDto.setDirector(new DirectorDto());
         movie = bms.mapTo(createMovieDto, Movie.class);
         assertThat(movie.getTitle()).isEqualTo("title");
+    }
+    
+    @Test
+    public void testMapTo_MovieDto(){
+        Movie m = new Movie();
+        m.setTitle("title2");
+        m.setDateOfRelease(LocalDate.MAX);
+        m.addActor(new Actor());
+        m.addGenre(new Genre("Action"));
+        m.setDirector(new Director());
+        m.setId(Long.MIN_VALUE);
+        movieDto = bms.mapTo(m, MovieDto.class);
+        assertThat(movieDto).hasNoNullFieldsOrPropertiesExcept("description", "image");
     }
 
 }

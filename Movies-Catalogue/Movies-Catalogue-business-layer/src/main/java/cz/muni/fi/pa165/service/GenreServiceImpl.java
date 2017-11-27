@@ -18,7 +18,6 @@ public class GenreServiceImpl implements GenreService {
     @Autowired
     private GenreDao genreDao;
 
-
     @Override
     public Genre findById(Long id) {
         return genreDao.findById(id);

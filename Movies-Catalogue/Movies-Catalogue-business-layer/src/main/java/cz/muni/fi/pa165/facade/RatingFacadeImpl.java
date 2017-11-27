@@ -7,12 +7,16 @@ import cz.muni.fi.pa165.entities.Rating;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.service.RatingService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * @author Marek Urban
  */
+@Service
+@Transactional
 public class RatingFacadeImpl implements RatingFacade {
 
     @Autowired
@@ -54,7 +58,7 @@ public class RatingFacadeImpl implements RatingFacade {
 
     @Override
     public RatingDto getAverageRating(List<RatingDto> dtos) {
-       return mapper.mapTo(ratingService.getAverageRating(mapper.mapTo(dtos, Rating.class)), RatingDto.class);
+        return mapper.mapTo(ratingService.getAverageRating(mapper.mapTo(dtos, Rating.class)), RatingDto.class);
     }
 
     @Override

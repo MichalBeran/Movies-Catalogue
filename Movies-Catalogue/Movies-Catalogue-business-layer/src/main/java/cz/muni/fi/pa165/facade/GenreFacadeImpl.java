@@ -6,13 +6,19 @@ import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.service.GenreService;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
 
 /**
  * @author Marek Urban
  */
+@Service
+@Transactional
 public class GenreFacadeImpl implements GenreFacade {
 
     @Autowired

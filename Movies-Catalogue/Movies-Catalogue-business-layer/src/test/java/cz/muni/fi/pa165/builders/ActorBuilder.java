@@ -40,7 +40,7 @@ public class ActorBuilder {
     }
 
     public ActorBuilder movies(List<Movie> movies){
-        this.actor.setMovies((Set<Movie>)movies);
+        this.actor.setMovies(movies);
         return this;
     }
 

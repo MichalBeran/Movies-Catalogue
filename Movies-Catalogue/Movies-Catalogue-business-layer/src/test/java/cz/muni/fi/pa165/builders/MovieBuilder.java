@@ -11,7 +11,9 @@ import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.Rating;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,11 +32,11 @@ public class MovieBuilder {
 
     private LocalDate dateOfRelease;
 
-    private Set<Genre> genres;
+    private List<Genre> genres;
 
-    private Set<Actor> actors;
+    private List<Actor> actors;
     
-    private Set<Rating> ratings;
+    private List<Rating> ratings;
 
     private Director director;
     
@@ -107,9 +109,9 @@ public class MovieBuilder {
     
     private void init(){
         
-        genres = new HashSet();
-        actors = new HashSet();
-        ratings = new HashSet();
+        genres = new ArrayList<>();
+        actors = new ArrayList<>();
+        ratings = new ArrayList<>();
         id = null;
         title = null;
         description = null;

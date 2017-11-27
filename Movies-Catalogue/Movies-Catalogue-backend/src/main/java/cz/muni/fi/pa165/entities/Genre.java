@@ -5,10 +5,7 @@
  */
 package cz.muni.fi.pa165.entities;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -29,15 +26,15 @@ public class Genre {
     private String name;
     private String description;
     @ManyToMany
-    private Set<Movie> movies;
+    private List<Movie> movies;
 
     public Genre(){
-        this.movies = new HashSet<>();
+        this.movies = new ArrayList<>();
     }
 
     public Genre(String name) {
         this.setName(name);
-        this.movies = new HashSet();
+        this.movies = new ArrayList<>();
     }
     
     public void setId(Long id) {
@@ -61,11 +58,11 @@ public class Genre {
         return description;
     }
 
-    public Set<Movie> getMovies() {
+    public List<Movie> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) { this.movies = movies; }
+    public void setMovies(List<Movie> movies) { this.movies = movies; }
 
     public void addMovie(Movie movie) {
         this.movies.add(movie);

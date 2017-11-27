@@ -9,6 +9,7 @@ import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dto.CreateMovieDto;
 import cz.muni.fi.pa165.dto.MovieDto;
 import cz.muni.fi.pa165.entities.Movie;
+import java.time.LocalDate;
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.Before;
@@ -46,6 +47,7 @@ public class BeanMappingServiceImplTest extends AbstractJUnit4SpringContextTests
     public void testMapTo_Object_Class() {
         createMovieDto = new CreateMovieDto();
         createMovieDto.setTitle("title");
+        createMovieDto.setDateOfRelease(LocalDate.MAX);
         movie = bms.mapTo(createMovieDto, Movie.class);
         assertThat(movie.getTitle()).isEqualTo("title");
     }

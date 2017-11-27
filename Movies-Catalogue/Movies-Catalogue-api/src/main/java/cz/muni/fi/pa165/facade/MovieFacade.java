@@ -28,4 +28,6 @@ public interface MovieFacade {
      */
     List<Movie> getRecommendedMovies(Movie m);
     
+    List<Movie> getNewestMovies(int i);
+    
 }

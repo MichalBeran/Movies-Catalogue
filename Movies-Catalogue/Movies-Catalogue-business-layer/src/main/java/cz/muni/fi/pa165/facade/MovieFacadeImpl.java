@@ -56,5 +56,10 @@ public class MovieFacadeImpl implements MovieFacade{
     public List<Movie> getRecommendedMovies(Movie m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+
+    @Override
+    public List<Movie> getNewestMovies(int i) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }

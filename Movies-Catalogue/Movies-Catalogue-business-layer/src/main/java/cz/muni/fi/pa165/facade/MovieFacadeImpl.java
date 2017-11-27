@@ -8,6 +8,7 @@ package cz.muni.fi.pa165.facade;
 import cz.muni.fi.pa165.dto.CreateMovieDto;
 import cz.muni.fi.pa165.dto.GenreDto;
 import cz.muni.fi.pa165.dto.MovieDto;
+import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.service.GenreService;
@@ -42,17 +43,19 @@ public class MovieFacadeImpl implements MovieFacade {
 
     @Override
     public List<MovieDto> getTopMovies(GenreDto g) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Movie> foundMovies = movieService.getTopMovies(beanMappingService.mapTo(g, Genre.class));
+        return beanMappingService.mapTo(foundMovies, MovieDto.class);
     }
 
     @Override
     public List<MovieDto> getRecommendedMovies(MovieDto m) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Movie> foundMovies = movieService.getRecommendedMovies(beanMappingService.mapTo(m,Movie.class));
+        return beanMappingService.mapTo(foundMovies, MovieDto.class);
     }
 
     @Override
     public List<MovieDto> getNewestMovies(int i) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return beanMappingService.mapTo(movieService.getNewestMovies(i), MovieDto.class);
     }
 
     @Override
@@ -63,8 +66,11 @@ public class MovieFacadeImpl implements MovieFacade {
     }
 
     @Override
-    public String deleteMovie(Long movieId) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public String deleteMovie(Long movieId) throws IllegalArgumentException{
+        Movie m = movieService.findById(movieId);
+        String name = m.getTitle();
+        movieService.delete(movieId);
+        return name;
     }
 
 }

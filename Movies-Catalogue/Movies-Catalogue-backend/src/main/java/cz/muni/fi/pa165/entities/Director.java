@@ -75,7 +75,7 @@ public class Director {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Set<Movie> getMovies() { return Collections.unmodifiableSet(movies); }
+    public Set<Movie> getMovies() { return movies; }
 
     public void setMovies(Set<Movie> movies) { this.movies = movies; }
 

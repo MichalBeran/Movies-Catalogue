@@ -102,7 +102,7 @@ public class Movie {
     }
 
     public Set<Genre> getGenres() {
-        return Collections.unmodifiableSet(genres);
+        return genres;
     }
 
     public void setGenres(Set<Genre> genres) {
@@ -112,7 +112,7 @@ public class Movie {
     public void addGenre(Genre genre){ this.genres.add(genre); }
 
     public Set<Actor> getActors() {
-        return Collections.unmodifiableSet(actors);
+        return actors;
     }
 
     public void setActors(Set<Actor> actors) {

@@ -7,6 +7,11 @@ package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dto.CreateMovieDto;
+import cz.muni.fi.pa165.dto.DirectorDto;
+import cz.muni.fi.pa165.entities.Director;
+import cz.muni.fi.pa165.mapping.BeanMappingService;
+import cz.muni.fi.pa165.service.DirectorService;
+import java.time.LocalDate;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -24,11 +29,27 @@ public class MovieFacadeImplTest extends AbstractTransactionalJUnit4SpringContex
     @Autowired
     private MovieFacade movieFacade;
     
+    @Autowired
+    private DirectorService directorService;
+    
+    @Autowired
+    private BeanMappingService beanMappingService;
+    
+    private CreateMovieDto movieDto;
+    
     public MovieFacadeImplTest() {
     }
     
     @Before
     public void setUp() {
+        movieDto = new CreateMovieDto();
+        Director d = new Director();
+        d.setFirstName("First");
+        d.setLastName("Last");
+        directorService.create(d);
+        movieDto.setDirector(beanMappingService.mapTo(d, DirectorDto.class));
+        movieDto.setTitle("title");
+        movieDto.setDateOfRelease(LocalDate.MAX);
     }
     
     @After
@@ -49,8 +70,6 @@ public class MovieFacadeImplTest extends AbstractTransactionalJUnit4SpringContex
 
     @Test
     public void testCreateMovie() {
-        CreateMovieDto movieDto = new CreateMovieDto();
-        
         Long id = movieFacade.createMovie(movieDto);
         System.out.println("");
     }

@@ -1,6 +1,6 @@
 package cz.muni.fi.pa165.facade;
 
-import cz.muni.fi.pa165.dto.CreateMovieDTO;
+import cz.muni.fi.pa165.dto.CreateMovieDto;
 import cz.muni.fi.pa165.dto.GenreDto;
 import cz.muni.fi.pa165.dto.MovieDto;
 
@@ -12,8 +12,8 @@ import java.util.List;
  */
 public interface MovieFacade {
     
-    void createMovie(CreateMovieDTO movie);
-    void deleteMovie(Long movieId);
+    Long createMovie(CreateMovieDto movie);
+    String deleteMovie(Long movieId);
     /**
      * 
      * @param g Genre of the film

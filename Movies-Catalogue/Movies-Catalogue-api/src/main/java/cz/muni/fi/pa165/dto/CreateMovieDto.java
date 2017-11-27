@@ -8,34 +8,39 @@ package cz.muni.fi.pa165.dto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 
 /**
  *
  * @author Dominik
  */
-public class CreateMovieDTO {
+public class CreateMovieDto {
     
-    @NotNull
+    //@NotNull
     private String title;
 
     private String description;
 
     private String image;
 
-    @NotNull
+    //@NotNull
     private LocalDate dateOfRelease;
 
-    private List<GenreDto> genres = new ArrayList();
+    private List<GenreDto> genres;
 
-    @NotNull
-    private List<ActorDto> actors = new ArrayList();
+    //@NotNull
+    private List<ActorDto> actors;
 
-    @NotNull
+    //@NotNull
     private DirectorDto director;
 
+    
     public String getTitle() {
         return title;
+    }
+
+    public CreateMovieDto() {
+        this.genres = new ArrayList();
+        this.actors = new ArrayList();
     }
 
     public void setTitle(String title) {
@@ -64,22 +69,6 @@ public class CreateMovieDTO {
 
     public void setDateOfRelease(LocalDate dateOfRelease) {
         this.dateOfRelease = dateOfRelease;
-    }
-
-    public List<GenreDto> getGenres() {
-        return genres;
-    }
-
-    public void setGenres(List<GenreDto> genres) {
-        this.genres = genres;
-    }
-
-    public List<ActorDto> getActors() {
-        return actors;
-    }
-
-    public void setActors(List<ActorDto> actors) {
-        this.actors = actors;
     }
 
     public DirectorDto getDirector() {

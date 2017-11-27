@@ -1,13 +1,9 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.builders.ActorBuilder;
-import cz.muni.fi.pa165.builders.GenreBuilder;
-import cz.muni.fi.pa165.builders.GenreBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dao.ActorDao;
-import cz.muni.fi.pa165.dao.GenreDao;
 import cz.muni.fi.pa165.entities.Actor;
-import cz.muni.fi.pa165.entities.Genre;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

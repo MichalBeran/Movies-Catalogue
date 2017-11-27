@@ -1,16 +1,9 @@
 package cz.muni.fi.pa165.facades;
 
-import cz.muni.fi.pa165.builders.ActorDtoBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dto.*;
-import cz.muni.fi.pa165.entities.Actor;
-import cz.muni.fi.pa165.entities.Director;
 import cz.muni.fi.pa165.entities.Genre;
-import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.facade.ActorFacade;
-import cz.muni.fi.pa165.facade.DirectorFacade;
-import cz.muni.fi.pa165.facade.GenreFacade;
-import cz.muni.fi.pa165.facade.MovieFacade;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -23,7 +16,6 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDate;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -36,15 +28,14 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Transactional
 public class ActorFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
+
+
     @Autowired
     private ActorFacade actorFacade;
-
-    private ActorDtoBuilder actorBuilder;
 
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
-        actorBuilder = new ActorDtoBuilder();
     }
 
     @After
@@ -55,48 +46,57 @@ public class ActorFacadeImplTest extends AbstractJUnit4SpringContextTests {
         }
     }
 
-    @Test
-    public void testFindAll() {
 
-        actorFacade.create(
-                actorBuilder.firstName("Lebowski").lastName("chua").dateOfBirth(LocalDate.of(1975, 6, 4)).build());
-        actorFacade.create(
-                actorBuilder.firstName("Angelina").lastName("jolie").build());
+    ActorDto createActorDto(String FirstName, String lastName){
+        ActorDto dto = new ActorDto();
+        dto.setFirstName(FirstName);
+        dto.setLastName(lastName);
+        dto.setId(actorFacade.create(dto));
+        return dto;
+    }
 
-        List<ActorDto> dtos = actorFacade.findAll();
-        assertThat(dtos.size()).isEqualTo(2);
+    Genre createFakeGenre(String name, Long id){
+        Genre entity = new Genre();
+        entity.setName(name);
+        entity.setDescription(name + " description");
+        entity.setId(id);
+        return entity;
     }
 
     @Test
     public void testCreate() {
-        ActorDto expectedDto = actorBuilder.firstName("Lebowski").lastName("chua").build();
-        expectedDto.setId(actorFacade.create(expectedDto));
+        ActorDto expectedDto = createActorDto("Peter", "petrovic");
 
         assertThat(expectedDto.getId()).isNotNull();
     }
 
     @Test
-    public void testUpdate() {
-        ActorDto expectedDto = actorBuilder.firstName("Lebowski").lastName("chua").build();
-        expectedDto.setId(actorFacade.create(expectedDto));
+    public void testFindById(){
+        ActorDto expectedDto = createActorDto("Peter", "petrovic");
 
         ActorDto actualDto = actorFacade.findById(expectedDto.getId());
-        assertThat(actualDto).isEqualTo(expectedDto);
-        expectedDto.setFirstName("Joey");
-
-        actualDto = actorFacade.update(expectedDto);
-
         assertThat(actualDto).isEqualTo(expectedDto);
     }
 
     @Test
-    public void testFindById(){
-        ActorDto expectedDto = actorBuilder.firstName("Lebowski").lastName("chua").build();
-        expectedDto.setId(actorFacade.create(expectedDto));
+    public void testUpdate() {
+        ActorDto expectedDto = createActorDto("Peter", "petrovic");
 
-        ActorDto actualDto = actorFacade.findById(expectedDto.getId());
+        assertThat(expectedDto.getId()).isNotNull();
+
+        expectedDto.setLastName("Peterenko");
+
+        ActorDto actualDto = actorFacade.update(expectedDto);
         assertThat(actualDto).isEqualTo(expectedDto);
     }
 
+    @Test
+    public void testFindAll() {
+        createActorDto("Peter", "petrovic");
+        createActorDto("Head", "Hunterz");
+
+        List<ActorDto> dtos = actorFacade.findAll();
+        assertThat(dtos.size()).isEqualTo(2);
+    }
 
 }

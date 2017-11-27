@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.dto;
 
 import java.time.LocalDate;
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -62,5 +63,33 @@ public class DirectorDto {
 
     public void setMovies(Set<MovieDto> movies) {
         this.movies = movies;
+    }
+
+    @Override
+    public String toString() {
+        return "Director{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", dateOfBirth=" + dateOfBirth.toString() + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int prime = 47;
+        result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
+        result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
+        result = prime * result + ((dateOfBirth == null) ? 0 : dateOfBirth.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof DirectorDto))
+            return false;
+        final DirectorDto other = (DirectorDto) obj;
+
+        return Objects.equals(firstName, other.getFirstName())
+                && Objects.equals(lastName, other.getLastName())
+                && Objects.equals(dateOfBirth, other.getDateOfBirth());
     }
 }

@@ -11,7 +11,7 @@ public interface UserFacade {
     /**
      * Register user u with given password.
      */
-    void registerUser(UserDto u, String password);
+    Long registerUser(UserDto u, String password);
     /**
      * Check if user can sign in
      */

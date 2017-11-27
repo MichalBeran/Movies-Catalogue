@@ -1,13 +1,17 @@
 package cz.muni.fi.pa165.configuration;
 
 import cz.muni.fi.pa165.PersistenceApplicationContext;
+import cz.muni.fi.pa165.dto.CreateMovieDto;
+import cz.muni.fi.pa165.dto.MovieDto;
 import cz.muni.fi.pa165.dto.UserDto;
+import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.facade.ActorFacadeImpl;
 import cz.muni.fi.pa165.service.ActorServiceImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
+import org.dozer.loader.api.FieldsMappingOptions;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -32,6 +36,8 @@ public class ServiceConfiguration {
         @Override
         protected void configure() {
             mapping(User.class, UserDto.class);
+            mapping(CreateMovieDto.class, Movie.class).fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference());
+            mapping(MovieDto.class, Movie.class).fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference());
         }
     }
 }

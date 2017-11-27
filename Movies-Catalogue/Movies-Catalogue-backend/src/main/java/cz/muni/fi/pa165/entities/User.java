@@ -96,14 +96,14 @@ public class User {
         this.mail = mail;
     }
 
-    public Set<Role> getRoles() { return Collections.unmodifiableSet(roles); }
+    public Set<Role> getRoles() { return roles; }
 
     public void setRoles(Set<Role> roles){ this.roles = roles; }
 
     public void addRole(Role role){ this.roles.add(role); }
 
     public Set<Rating> getRatings() {
-        return Collections.unmodifiableSet(ratings);
+        return ratings;
     }
 
     public void setRatings(Set<Rating> ratings) {

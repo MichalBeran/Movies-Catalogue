@@ -62,7 +62,7 @@ public class Genre {
     }
 
     public Set<Movie> getMovies() {
-        return Collections.unmodifiableSet(movies);
+        return movies;
     }
 
     public void setMovies(Set<Movie> movies) { this.movies = movies; }

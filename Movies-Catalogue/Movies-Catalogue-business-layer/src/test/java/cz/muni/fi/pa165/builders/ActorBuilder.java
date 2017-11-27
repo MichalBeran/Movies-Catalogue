@@ -33,7 +33,7 @@ public class ActorBuilder {
         return this;
     }
 
-    public ActorBuilder description(LocalDate dateOfBirth){
+    public ActorBuilder dateOfBirth(LocalDate dateOfBirth){
         this.actor.setDateOfBirth(dateOfBirth);
         return this;
     }

@@ -7,13 +7,17 @@ import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.service.UserService;
 import org.dozer.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * @author Michal
  */
-public class UserFacadeImpl implements UserFacade{
+@Service
+@Transactional
+public class UserFacadeImpl implements UserFacade {
     @Autowired
     private UserService userService;
 

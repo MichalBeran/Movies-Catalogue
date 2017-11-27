@@ -44,4 +44,8 @@ public interface UserService {
      * Remove user.
      */
     void delete(User u);
+    /**
+     * Make user admin
+     */
+    void makeAdmin(User u);
 }

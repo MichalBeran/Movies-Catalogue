@@ -19,9 +19,8 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.*;
 /**
@@ -90,18 +89,18 @@ public class MovieDaoTest {
         movie.setDirector(stevenSpielberg);
         movie.setDateOfRelease(LocalDate.MIN);
         
-        Set<Movie> awesomeMovies = new HashSet<Movie>();
+        List<Movie> awesomeMovies = new ArrayList<>();
         awesomeMovies.add(movie);
         stevenSpielberg.setMovies(awesomeMovies);
         angelinaJolie.setMovies(awesomeMovies);
         bradPitt.setMovies(awesomeMovies);
         
-        Set<Actor> awesomeActors = new HashSet<Actor>();
+        List<Actor> awesomeActors = new ArrayList<>();
         awesomeActors.add(angelinaJolie);
         awesomeActors.add(bradPitt);
         movie.setActors(awesomeActors);
         
-        Set<Genre> awesomeGenres = new HashSet<Genre>();
+        List<Genre> awesomeGenres = new ArrayList<>();
         awesomeGenres.add(comedy);
         movie.setGenres(awesomeGenres);
         comedy.setMovies(awesomeMovies);

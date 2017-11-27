@@ -51,7 +51,7 @@ public class MovieDaoImpl implements MovieDao{
     @Override
     public List<Movie> findAll() {
         Query query = em.createQuery("SELECT m FROM Movie m ORDER by m.dateOfRelease", Movie.class);
-        return (List<Movie>) query.getResultList();
+        return query.getResultList();
     }
 
     @Override

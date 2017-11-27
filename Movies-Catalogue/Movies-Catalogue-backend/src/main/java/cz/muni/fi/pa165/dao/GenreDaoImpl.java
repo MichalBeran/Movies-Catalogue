@@ -42,7 +42,7 @@ public class GenreDaoImpl implements GenreDao {
     @Override
     public List<Genre> findAll() {
         Query query = manager.createQuery("SELECT a FROM Genre a", Genre.class);
-        return (List<Genre>) query.getResultList();
+        return query.getResultList();
     }
 
     @Override

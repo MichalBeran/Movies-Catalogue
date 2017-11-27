@@ -18,9 +18,8 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 import java.time.LocalDate;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -78,7 +77,7 @@ public class RatingDaoTest {
         em.persist(stevenSpielberg);
         em.getTransaction().commit();
 
-        Set<Actor> actors = new HashSet<>();
+        List<Actor> actors = new ArrayList<>();
         actors.add(angelinaJolie);
 
         ratedMovie = new Movie();

@@ -11,7 +11,6 @@ import cz.muni.fi.pa165.entities.Movie;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -71,11 +70,11 @@ public class MovieServiceImpl implements MovieService{
     
     @Override
     public List<Movie> getRecommendedMovies(Movie m) {
-        Set<Genre> genresOfFilm = m.getGenres();
+        List<Genre> genresOfFilm = m.getGenres();
         Iterator itr = genresOfFilm.iterator();
         if(itr.hasNext()){
             Genre genreOfFilm = genreService.findById(((Genre) itr.next()).getId());
-            Set<Movie> recommendedMovies = genreOfFilm.getMovies();
+            List<Movie> recommendedMovies = genreOfFilm.getMovies();
             return new ArrayList<>(recommendedMovies);
         }else{
             return new ArrayList<>();

@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.Actor;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Maros on 11/27/2017.
@@ -40,7 +39,7 @@ public class ActorBuilder {
     }
 
     public ActorBuilder movies(List<Movie> movies){
-        this.actor.setMovies((Set<Movie>)movies);
+        this.actor.setMovies(movies);
         return this;
     }
 

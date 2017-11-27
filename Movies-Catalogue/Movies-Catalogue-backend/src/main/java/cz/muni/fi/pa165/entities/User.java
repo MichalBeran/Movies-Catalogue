@@ -5,9 +5,9 @@ import cz.muni.fi.pa165.enums.Role;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Michal
@@ -39,13 +39,13 @@ public class User {
 
     @ElementCollection
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+    private List<Role> roles;
 
     @OneToMany
-    private Set<Rating> ratings;
+    private List<Rating> ratings;
 
     public User(){
-        this.roles = new HashSet<>();
+        this.roles = new ArrayList<>();
     }
 
     public Long getId() {
@@ -96,17 +96,17 @@ public class User {
         this.mail = mail;
     }
 
-    public Set<Role> getRoles() { return roles; }
+    public List<Role> getRoles() { return roles; }
 
-    public void setRoles(Set<Role> roles){ this.roles = roles; }
+    public void setRoles(List<Role> roles){ this.roles = roles; }
 
     public void addRole(Role role){ this.roles.add(role); }
 
-    public Set<Rating> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
 
-    public void setRatings(Set<Rating> ratings) {
+    public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
 

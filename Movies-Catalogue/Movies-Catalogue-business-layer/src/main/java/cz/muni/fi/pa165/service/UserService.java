@@ -11,7 +11,7 @@ public interface UserService {
     /**
      * Register user u with given password.
      */
-    void registerUser(User u, String password);
+    Long registerUser(User u, String password);
     /**
      * Check if user can sign in
      */

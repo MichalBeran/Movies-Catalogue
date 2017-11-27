@@ -19,9 +19,16 @@ public class UserServiceImpl implements UserService {
     private UserDao userDao;
 
     @Override
-    public void registerUser(User u, String password) {
+    public Long registerUser(User u, String password) {
+        if(password == null){
+            throw new NullPointerException("password cannot be null");
+        }
+        if(password.equals("")){
+            throw new IllegalArgumentException("password cannot be empty");
+        }
         u.setPassword(getSha256(password));
         userDao.create(u);
+        return u.getId();
     }
 
     @Override

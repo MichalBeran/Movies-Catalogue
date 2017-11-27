@@ -1,83 +1,101 @@
 package cz.muni.fi.pa165.facades;
 
-import cz.muni.fi.pa165.builders.CreateMovieDtoBuilder;
+import cz.muni.fi.pa165.builders.ActorDtoBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
-import cz.muni.fi.pa165.dto.ActorDto;
-import cz.muni.fi.pa165.dto.CreateMovieDto;
-import cz.muni.fi.pa165.dto.DirectorDto;
+import cz.muni.fi.pa165.dto.*;
+import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Director;
+import cz.muni.fi.pa165.entities.Genre;
+import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.facade.ActorFacade;
 import cz.muni.fi.pa165.facade.DirectorFacade;
+import cz.muni.fi.pa165.facade.GenreFacade;
 import cz.muni.fi.pa165.facade.MovieFacade;
-import cz.muni.fi.pa165.mapping.BeanMappingService;
-import java.time.LocalDate;
-import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.After;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
+import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.AbstractTransactionalJUnit4SpringContextTests;
+import org.springframework.test.context.TestExecutionListeners;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
+import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
+import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
+import java.util.*;
+
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
 /**
  * Created by Maros on 11/27/2017.
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class ActorFacadeImplTest extends AbstractTransactionalJUnit4SpringContextTests{
-
-    @Autowired
-    private MovieFacade movieFacade;
-
-    @Autowired
-    private DirectorFacade directorFacade;
+@TestExecutionListeners(TransactionalTestExecutionListener.class)
+@Transactional
+public class ActorFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
     @Autowired
     private ActorFacade actorFacade;
 
-    @Autowired
-    private BeanMappingService beanMappingService;
-
-    private Long idA;
-    private Long idD;
-
-
-
-    public ActorFacadeImplTest() {
-    }
-
-    @BeforeClass
-    public static void beforeClass(){
-
-    }
+    private ActorDtoBuilder actorBuilder;
 
     @Before
     public void setUp() {
-
-        DirectorDto dir = new DirectorDto();
-        dir.setFirstName("First");
-        dir.setLastName("Last");
-        idD = directorFacade.create(dir);
-
-        ActorDto act = new ActorDto();
-        act.setFirstName("Firsta");
-        act.setLastName("Lasta");
-        idA = actorFacade.create(act);
-
+        MockitoAnnotations.initMocks(this);
+        actorBuilder = new ActorDtoBuilder();
     }
 
     @After
     public void tearDown() {
+        List<ActorDto> actorDtos = actorFacade.findAll();
+        for (ActorDto dto : actorDtos) {
+            actorFacade.delete(dto);
+        }
     }
 
     @Test
-    public void testCreateActor() {
-        CreateMovieDto movieDto = new CreateMovieDtoBuilder().title("Film1")
-                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
-                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+    public void testFindAll() {
 
-        Long id = movieFacade.createMovie(movieDto);
-        assertThat(id).isNotNull();
+        actorFacade.create(
+                actorBuilder.firstName("Lebowski").lastName("chua").dateOfBirth(LocalDate.of(1975, 6, 4)).build());
+        actorFacade.create(
+                actorBuilder.firstName("Angelina").lastName("jolie").build());
+
+        List<ActorDto> dtos = actorFacade.findAll();
+        assertThat(dtos.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void testCreate() {
+        ActorDto expectedDto = actorBuilder.firstName("Lebowski").lastName("chua").build();
+        expectedDto.setId(actorFacade.create(expectedDto));
+
+        assertThat(expectedDto.getId()).isNotNull();
+    }
+
+    @Test
+    public void testUpdate() {
+        ActorDto expectedDto = actorBuilder.firstName("Lebowski").lastName("chua").build();
+        expectedDto.setId(actorFacade.create(expectedDto));
+
+        ActorDto actualDto = actorFacade.findById(expectedDto.getId());
+        assertThat(actualDto).isEqualTo(expectedDto);
+        expectedDto.setFirstName("Joey");
+
+        actualDto = actorFacade.update(expectedDto);
+
+        assertThat(actualDto).isEqualTo(expectedDto);
+    }
+
+    @Test
+    public void testFindById(){
+        ActorDto expectedDto = actorBuilder.firstName("Lebowski").lastName("chua").build();
+        expectedDto.setId(actorFacade.create(expectedDto));
+
+        ActorDto actualDto = actorFacade.findById(expectedDto.getId());
+        assertThat(actualDto).isEqualTo(expectedDto);
     }
 
 

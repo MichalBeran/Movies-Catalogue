@@ -38,12 +38,14 @@ public class RatingFacadeImpl implements RatingFacade {
     @Override
     public List<RatingDto> findByMovie(MovieDto movie) {
         Movie movieEntity = mapper.mapTo(movie, Movie.class);
-        return mapper.mapTo(ratingService.findByMovie(movieEntity), RatingDto.class);
+        List<Rating> list = ratingService.findByMovie(movieEntity);
+        return mapper.mapTo(list, RatingDto.class);
     }
 
     @Override
     public Long create(RatingDto dto) {
-        return ratingService.create(mapper.mapTo(dto, Rating.class));
+        Rating r = mapper.mapTo(dto, Rating.class);
+        return ratingService.create(r);
     }
 
     @Override

@@ -8,6 +8,7 @@ package cz.muni.fi.pa165.dto;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -97,6 +98,36 @@ public class CreateMovieDto {
     public void setDirector(DirectorDto director) {
         this.director = director;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        hash = 29 * hash + Objects.hashCode(this.title);
+        hash = 29 * hash + Objects.hashCode(this.dateOfRelease);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final CreateMovieDto other = (CreateMovieDto) obj;
+        if (!Objects.equals(this.title, other.title)) {
+            return false;
+        }
+        if (!Objects.equals(this.dateOfRelease, other.dateOfRelease)) {
+            return false;
+        }
+        return true;
+    }
+    
     
     
 }

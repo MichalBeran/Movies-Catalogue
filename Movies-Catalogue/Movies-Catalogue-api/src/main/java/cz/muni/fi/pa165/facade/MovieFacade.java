@@ -32,4 +32,6 @@ public interface MovieFacade {
     List<MovieDto> getNewestMovies(int i);
 
     MovieDto findById(Long id);
+    void delete(MovieDto dto);
+    List<MovieDto> findAll();
 }

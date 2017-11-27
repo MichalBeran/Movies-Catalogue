@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.facade.*;
-import jdk.vm.ci.meta.Local;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -32,7 +31,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 @Transactional
 public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
     @Autowired
-    private static RatingFacade ratingFacade;
+    private RatingFacade ratingFacade;
 
     private static RatingDtoBuilder ratingDtoBuilder;
 
@@ -41,22 +40,28 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
     private static UserDto testUser2;
 
     @Autowired
-    private static MovieFacade movieFacade;
+    private MovieFacade movieFacade;
 
     @Autowired
-    private static ActorFacade actorFacade;
+    private ActorFacade actorFacade;
 
     @Autowired
-    private static DirectorFacade directorFacade;
+    private DirectorFacade directorFacade;
 
     @Autowired
-    private static UserFacade userFacade;
+    private UserFacade userFacade;
 
     @Test
     public void dummyTest(){}
 
     @BeforeClass
     public static void init(){
+    }
+
+    @Before
+    public void setUp() {
+        //MockitoAnnotations.initMocks(this);
+        //ratingDtoBuilder = new RatingDtoBuilder();
         DirectorDto director = new DirectorDto();
         director.setDateOfBirth(LocalDate.of(1980,1,1));
         director.setFirstName("Director");
@@ -97,12 +102,6 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
 
         ratingDtoBuilder = new RatingDtoBuilder();
-    }
-
-    @Before
-    public void setUp() {
-        //MockitoAnnotations.initMocks(this);
-        //ratingDtoBuilder = new RatingDtoBuilder();
 
     }
 
@@ -111,6 +110,22 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         List<RatingDto> ratingDtos = ratingFacade.findAll();
         for (RatingDto dto : ratingDtos) {
             ratingFacade.delete(dto);
+        }
+        List<UserDto> userDtos = userFacade.findAllUsers();
+        for (UserDto dto : userDtos) {
+            userFacade.delete(dto);
+        }
+        List<MovieDto> movieDtos = movieFacade.findAll();
+        for (MovieDto dto : movieDtos) {
+            movieFacade.deleteMovie(dto.getId());
+        }
+        List<ActorDto> actorDtos = actorFacade.findAll();
+        for (ActorDto dto : actorDtos) {
+            actorFacade.delete(dto);
+        }
+        List<DirectorDto> directorDtos = directorFacade.findAll();
+        for (DirectorDto dto : directorDtos) {
+            directorFacade.delete(dto);
         }
     }
 

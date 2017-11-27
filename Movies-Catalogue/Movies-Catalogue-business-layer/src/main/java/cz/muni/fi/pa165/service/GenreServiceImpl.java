@@ -4,12 +4,15 @@ import cz.muni.fi.pa165.dao.GenreDao;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+import org.springframework.stereotype.Service;
 
 /**
  * @author Marek Urban
  */
+@Service
 public class GenreServiceImpl implements GenreService {
 
     @Autowired
@@ -33,7 +36,7 @@ public class GenreServiceImpl implements GenreService {
 
     @Override
     public List<Genre> findByMovie(Movie movie) {
-        return (List<Genre>) genreDao.findByMovieId(movie.getId());
+        return genreDao.findByMovieId(movie.getId());
     }
 
     @Override

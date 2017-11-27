@@ -6,9 +6,7 @@
 package cz.muni.fi.pa165.dto;
 
 import java.time.LocalDate;
-import java.util.HashSet;
 import java.util.Set;
-import cz.muni.fi.pa165.entities.*;
 
 /**
  *
@@ -24,7 +22,7 @@ public class ActorDto {
 
     private LocalDate dateOfBirth;
 
-    private Set<Movie> movies;
+    private Set<MovieDto> movies;
 
     public Long getId() {
         return id;
@@ -58,11 +56,11 @@ public class ActorDto {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Set<Movie> getMovies() {
+    public Set<MovieDto> getMovies() {
         return movies;
     }
 
-    public void setMovies(Set<Movie> movies) {
+    public void setMovies(Set<MovieDto> movies) {
         this.movies = movies;
-    }    
+    }
 }

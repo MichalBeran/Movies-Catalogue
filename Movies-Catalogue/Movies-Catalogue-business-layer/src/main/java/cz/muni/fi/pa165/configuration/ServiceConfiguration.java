@@ -1,11 +1,10 @@
 package cz.muni.fi.pa165.configuration;
 
 import cz.muni.fi.pa165.PersistenceApplicationContext;
-import cz.muni.fi.pa165.dao.ActorDaoImpl;
 import cz.muni.fi.pa165.dto.UserDto;
 import cz.muni.fi.pa165.entities.User;
-import cz.muni.fi.pa165.facade.UserFacadeImpl;
-import cz.muni.fi.pa165.service.UserServiceImpl;
+import cz.muni.fi.pa165.facade.ActorFacadeImpl;
+import cz.muni.fi.pa165.service.ActorServiceImpl;
 import org.dozer.DozerBeanMapper;
 import org.dozer.Mapper;
 import org.dozer.loader.api.BeanMappingBuilder;
@@ -18,7 +17,8 @@ import org.springframework.context.annotation.Import;
  * @author Michal
  */
 @Configuration
-@ComponentScan(basePackageClasses={UserServiceImpl.class, UserFacadeImpl.class, ActorDaoImpl.class})
+@Import(PersistenceApplicationContext.class)
+@ComponentScan(basePackageClasses={ActorServiceImpl.class, ActorFacadeImpl.class})
 public class ServiceConfiguration {
     
     @Bean

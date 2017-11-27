@@ -51,4 +51,14 @@ public class RatingFacadeImpl implements RatingFacade {
     public void delete(RatingDto dto) {
         ratingService.delete(dto.getId());
     }
+
+    @Override
+    public RatingDto getAverageRating(List<RatingDto> dtos) {
+       return mapper.mapTo(ratingService.getAverageRating(mapper.mapTo(dtos, Rating.class)), RatingDto.class);
+    }
+
+    @Override
+    public int getSimplifiedRatingValue(RatingDto dto) {
+        return ratingService.getSimplifiedRatingValue(mapper.mapTo(dto, Rating.class));
+    }
 }

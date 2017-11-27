@@ -55,7 +55,7 @@ public interface GenreDao {
      * @param id movie id
      * @return set of genres
      */
-    Set<Genre> findByMovieId(Long id);
+    List<Genre> findByMovieId(Long id);
 
     /**
      * Finds entity with corresponding name

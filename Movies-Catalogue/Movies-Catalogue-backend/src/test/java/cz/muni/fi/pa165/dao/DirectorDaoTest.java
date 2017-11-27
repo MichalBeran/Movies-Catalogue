@@ -44,6 +44,9 @@ public class DirectorDaoTest {
 
     private Logger logger;
 
+    private Genre comedy;
+    private Actor angelinaJolie;
+    private Director stevenSpielberg;
     private Director bay;
     private Director coen;
 
@@ -68,9 +71,34 @@ public class DirectorDaoTest {
     }
 
     private void setEntities() {
+        comedy = new Genre();
+        comedy.setName("Comedy");
+        comedy.setDescription("Comedy movies");
+
+        angelinaJolie = new Actor();
+        angelinaJolie.setFirstName("Angelina");
+        angelinaJolie.setLastName("Jolie");
+        angelinaJolie.setDateOfBirth(LocalDate.of(1975, 6, 4));
+
+        stevenSpielberg = new Director();
+        stevenSpielberg.setFirstName("Steven");
+        stevenSpielberg.setLastName("Spielberg");
+        stevenSpielberg.setDateOfBirth(LocalDate.of(1946, 12, 18));
+
+        em.getTransaction().begin();
+        em.persist(comedy);
+        em.persist(angelinaJolie);
+        em.persist(stevenSpielberg);
+        em.getTransaction().commit();
+
+        Set<Actor> actors = new HashSet<>();
+        actors.add(angelinaJolie);
+
         movie1 = new Movie();
         movie1.setTitle("The Big Lebowski");
         movie1.setDateOfRelease(LocalDate.of(1998, 6, 3));
+        movie1.setDirector(stevenSpielberg);
+        movie1.setActors(actors);
         em.getTransaction().begin();
         em.persist(movie1);
         em.getTransaction().commit();
@@ -78,6 +106,8 @@ public class DirectorDaoTest {
         movie2 = new Movie();
         movie2.setTitle("Armageddon ");
         movie2.setDateOfRelease(LocalDate.of(1998, 1, 7));
+        movie2.setDirector(stevenSpielberg);
+        movie2.setActors(actors);
         em.getTransaction().begin();
         em.persist(movie2);
         em.getTransaction().commit();
@@ -187,6 +217,7 @@ public class DirectorDaoTest {
 
         List<Director> directors = dao.findAll();
 
-        assertThat(directors.size()).isEqualTo(2);
+        //bay + coen + spielberg
+        assertThat(directors.size()).isEqualTo(3);
     }
 }

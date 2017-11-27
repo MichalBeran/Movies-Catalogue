@@ -2,7 +2,6 @@ package cz.muni.fi.pa165;
 
 import cz.muni.fi.pa165.dao.UserDao;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -15,6 +14,8 @@ import org.springframework.instrument.classloading.InstrumentationLoadTimeWeaver
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import javax.sql.DataSource;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 
 /**
  * @author Michal
@@ -24,6 +25,14 @@ import javax.sql.DataSource;
 @EnableJpaRepositories
 @ComponentScan(basePackageClasses = {UserDao.class}, basePackages = "cz.muni.fi.pa165")
 public class PersistenceApplicationContext {
+    /**
+     * Enables automatic translation of exceptions to DataAccessExceptions.
+     */
+    @Bean
+    public PersistenceExceptionTranslationPostProcessor postProcessor() {
+        return new PersistenceExceptionTranslationPostProcessor();
+    }
+
     @Bean
     public JpaTransactionManager transactionManager() {
         return new JpaTransactionManager(entityManagerFactory().getObject());

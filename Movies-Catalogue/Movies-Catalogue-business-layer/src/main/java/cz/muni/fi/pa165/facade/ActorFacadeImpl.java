@@ -5,17 +5,49 @@
  */
 package cz.muni.fi.pa165.facade;
 
-import java.util.Date;
-import java.util.List;
-import javax.inject.Inject;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import cz.muni.fi.pa165.dto.ActorDto;
+import cz.muni.fi.pa165.entities.Actor;
 
+import cz.muni.fi.pa165.mapping.BeanMappingService;
+import cz.muni.fi.pa165.service.ActorService;
+import java.util.List;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  *
  * @author Maros
  */
-public class ActorFacadeImpl {
-    
+public class ActorFacadeImpl implements ActorFacade {
+
+    @Autowired
+    private ActorService actorService;
+
+    @Autowired
+    private BeanMappingService mapper;
+
+    @Override
+    public Long create(ActorDto actor) {
+        return actorService.create(mapper.mapTo(actor, Actor.class));
+    }
+
+    @Override
+    public ActorDto update(ActorDto actor) {
+        return mapper.mapTo(actorService.update(mapper.mapTo(actor, Actor.class)), ActorDto.class);
+    }
+
+    @Override
+    public void delete(ActorDto actor) {
+        actorService.delete(actor.getId());
+    }
+
+    @Override
+    public ActorDto findById(Long id) {
+        return mapper.mapTo(actorService.findById(id), ActorDto.class);
+    }
+
+    @Override
+    public List<ActorDto> findAll() {
+        return mapper.mapTo(actorService.findAll(), ActorDto.class);
+    }
+
 }

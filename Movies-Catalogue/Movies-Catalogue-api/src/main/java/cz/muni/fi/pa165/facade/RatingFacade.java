@@ -54,5 +54,19 @@ public interface RatingFacade {
      * @param dto RatingDto
      */
     void delete(RatingDto dto);
-    
+
+    /**
+     * Calculates the average {@link RatingDto} from a list of ratings
+     * @param dtos list of ratings
+     * @return average rating
+     */
+    RatingDto getAverageRating(List<RatingDto> dtos);
+
+    /**
+     * Calculates single numeric rating representation for
+     * {@link RatingDto} rating values
+     * @param dto RatingDto
+     * @return simplified rating numeric representation in range 0-100
+     */
+    int getSimplifiedRatingValue(RatingDto dto);
 }

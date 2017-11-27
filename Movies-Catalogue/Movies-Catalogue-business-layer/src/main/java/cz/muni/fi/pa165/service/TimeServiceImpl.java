@@ -6,7 +6,6 @@
 package cz.muni.fi.pa165.service;
 
 import java.time.LocalDate;
-import java.time.Month;
 import org.springframework.stereotype.Service;
 
 /**

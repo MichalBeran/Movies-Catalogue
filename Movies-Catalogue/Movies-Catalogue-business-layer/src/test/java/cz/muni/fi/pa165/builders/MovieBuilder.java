@@ -40,9 +40,7 @@ public class MovieBuilder {
     
     
     public MovieBuilder() {
-        genres = new HashSet();
-        actors = new HashSet();
-        ratings = new HashSet();
+        init();
     }
     
     public MovieBuilder id(Long id){
@@ -104,6 +102,19 @@ public class MovieBuilder {
         if(!ratings.isEmpty());
         entity.setRatings(ratings);
         entity.setDirector(director);
-        return null;
+        return entity;
+    }
+    
+    private void init(){
+        
+        genres = new HashSet();
+        actors = new HashSet();
+        ratings = new HashSet();
+        id = null;
+        title = null;
+        description = null;
+        image = null;
+        dateOfRelease = null;
+        director = null;
     }
 }

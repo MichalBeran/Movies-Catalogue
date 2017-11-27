@@ -16,6 +16,7 @@ import java.util.Set;
 @Repository
 public class GenreDaoImpl implements GenreDao {
     
+    @PersistenceContext
     protected EntityManager manager;
 
     public void setEntityManager(EntityManager manager){
@@ -63,9 +64,9 @@ public class GenreDaoImpl implements GenreDao {
     }
 
     @Override
-    public Set<Genre> findByMovieId(Long id) {
+    public List<Genre> findByMovieId(Long id) {
         Movie movie = manager.find(Movie.class, id);
-        return movie.getGenres();
+        return (List<Genre>) movie.getGenres();
     }
 
     @Override

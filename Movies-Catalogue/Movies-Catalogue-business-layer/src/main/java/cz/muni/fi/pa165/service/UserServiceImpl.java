@@ -1,12 +1,14 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.dao.UserDao;
+import cz.muni.fi.pa165.entities.Rating;
 import cz.muni.fi.pa165.entities.User;
 import cz.muni.fi.pa165.enums.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.security.MessageDigest;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -20,12 +22,17 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Long registerUser(User u, String password) {
+        if(u == null){
+            throw new NullPointerException("entity cannot be null");
+        }
         if(password == null){
             throw new NullPointerException("password cannot be null");
         }
         if(password.equals("")){
             throw new IllegalArgumentException("password cannot be empty");
         }
+        u.addRole(Role.USER);
+        u.setRatings(new ArrayList<Rating>());
         u.setPassword(getSha256(password));
         userDao.create(u);
         return u.getId();

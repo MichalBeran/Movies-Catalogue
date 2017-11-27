@@ -66,7 +66,7 @@ public class GenreDaoImpl implements GenreDao {
     @Override
     public List<Genre> findByMovieId(Long id) {
         Movie movie = manager.find(Movie.class, id);
-        return (List<Genre>) movie.getGenres();
+        return movie.getGenres();
     }
 
     @Override

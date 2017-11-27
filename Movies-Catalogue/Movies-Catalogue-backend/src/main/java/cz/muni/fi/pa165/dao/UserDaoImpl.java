@@ -71,7 +71,7 @@ public class UserDaoImpl implements UserDao{
         }
         try {
             return manager
-                    .createQuery("select u from app_user u where mail=:mailParameter",
+                    .createQuery("select u from User u where mail=:mailParameter",
                             User.class).setParameter("mailParameter", mail)
                     .getSingleResult();
         } catch (NoResultException nre) {

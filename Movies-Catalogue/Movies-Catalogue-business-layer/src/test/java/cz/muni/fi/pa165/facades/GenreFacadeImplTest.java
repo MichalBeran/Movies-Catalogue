@@ -18,6 +18,8 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import org.springframework.transaction.annotation.Transactional;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -31,7 +33,6 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 public class GenreFacadeImplTest extends AbstractJUnit4SpringContextTests {
     @Autowired
     private GenreFacade genreFacade;
-/*
 
     @Autowired
     private MovieFacade movieFacade;
@@ -42,7 +43,6 @@ public class GenreFacadeImplTest extends AbstractJUnit4SpringContextTests {
     @Autowired
     private DirectorFacade directorFacade;
 
-*/
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -103,7 +103,7 @@ public class GenreFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testFindByMovie(){
-        /*
+
         createGenreDto("Sci-fi");
         createGenreDto("Action");
         List<GenreDto> genres = genreFacade.findAll();
@@ -123,7 +123,7 @@ public class GenreFacadeImplTest extends AbstractJUnit4SpringContextTests {
         directorDto.setId(directorFacade.create(directorDto));
 
 
-        CreateMovieDTO movieDto = new CreateMovieDTO();
+        CreateMovieDto movieDto = new CreateMovieDto();
         movieDto.setTitle("Terminator");
         movieDto.setGenres(genres);
         movieDto.setDateOfRelease(LocalDate.of(2017,01,01));
@@ -132,7 +132,7 @@ public class GenreFacadeImplTest extends AbstractJUnit4SpringContextTests {
         movieFacade.createMovie(movieDto);
         MovieDto savedMovieDto = (movieFacade.findAll()).get(0);
         assertThat(genreFacade.findByMovie(savedMovieDto)).isEqualTo(genres);
-        */
+
     }
 
     GenreDto createGenreDto(String name){

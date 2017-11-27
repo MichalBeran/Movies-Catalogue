@@ -33,7 +33,7 @@ public class GenreBuilder{
     }
 
     public GenreBuilder movies(List<Movie> movies){
-        this.genre.setMovies((Set<Movie>)movies);
+        this.genre.setMovies(movies);
         return this;
     }
 

@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.dto;
 
 import java.util.Set;
+import cz.muni.fi.pa165.enums.Role;
 
 /**
  * @author Michal
@@ -12,7 +13,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String mail;
-    //private Set<Role> roles;
+    private Set<Role> roles;
     //private Set<Rating> ratings;
 
     public Long getId() {
@@ -61,5 +62,13 @@ public class UserDto {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 }

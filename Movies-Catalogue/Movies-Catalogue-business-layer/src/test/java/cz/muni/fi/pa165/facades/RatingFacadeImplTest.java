@@ -4,6 +4,7 @@ import cz.muni.fi.pa165.builders.RatingDtoBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.entities.Genre;
+import cz.muni.fi.pa165.enums.Role;
 import cz.muni.fi.pa165.facade.*;
 import org.junit.After;
 import org.junit.Before;
@@ -19,7 +20,9 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import javax.transaction.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -51,13 +54,6 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
     @Autowired
     private UserFacade userFacade;
 
-    @Test
-    public void dummyTest(){}
-
-    @BeforeClass
-    public static void init(){
-    }
-
     @Before
     public void setUp() {
         //MockitoAnnotations.initMocks(this);
@@ -74,19 +70,26 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         actor.setLastName("Chan");
         actor.setId(actorFacade.create(actor));
 
+        List<ActorDto> actors = new ArrayList<>();
+        actors.add(actor);
+
         CreateMovieDto testMovie = new CreateMovieDto();
         testMovie.setDateOfRelease(LocalDate.of(2016,1,1));
         testMovie.setTitle("movie");
         testMovie.setDescription("description");
+        testMovie.setDirector(director);
+        testMovie.setActors(actors);
         RatingFacadeImplTest.testMovie = movieFacade.findById(movieFacade.createMovie(testMovie));
 
-
+        Set<Role> roles = new HashSet<>();
+        roles.add(Role.ADMINISTRATOR);
         testUser = new UserDto();
         testUser.setFirstName("John");
         testUser.setLastName("doe");
         testUser.setMail("m@m.m");
         testUser.setNick("nick");
         testUser.setPassword("pass");
+        testUser.setRoles(roles);
         userFacade.registerUser(testUser, testUser.getPassword());
         testUser = userFacade.findUserByMail("m@m.m");
 
@@ -97,6 +100,7 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         testUser2.setMail("m@mnm.m");
         testUser2.setNick("nickam");
         testUser2.setPassword("passw");
+        testUser2.setRoles(roles);
         userFacade.registerUser(testUser2, testUser2.getPassword());
         testUser2 = userFacade.findUserByMail("m@mnm.m");
 
@@ -115,10 +119,7 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         for (UserDto dto : userDtos) {
             userFacade.delete(dto);
         }
-        List<MovieDto> movieDtos = movieFacade.findAll();
-        for (MovieDto dto : movieDtos) {
-            movieFacade.deleteMovie(dto.getId());
-        }
+
         List<ActorDto> actorDtos = actorFacade.findAll();
         for (ActorDto dto : actorDtos) {
             actorFacade.delete(dto);
@@ -127,6 +128,15 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         for (DirectorDto dto : directorDtos) {
             directorFacade.delete(dto);
         }
+
+        /*
+        TODO: org.springframework.dao.InvalidDataAccessApiUsageException: Removing a detached instance cz.muni.fi.pa165.entities.Actor#1; nested exception is java.lang.IllegalArgumentException: Removing a detached instance cz.muni.fi.pa165.entities.Actor#1
+         */
+
+//                List<MovieDto> movieDtos = movieFacade.findAll();
+//        for (MovieDto dto : movieDtos) {
+//            movieFacade.deleteMovie(dto.getId());
+//        }
     }
 
     @Test

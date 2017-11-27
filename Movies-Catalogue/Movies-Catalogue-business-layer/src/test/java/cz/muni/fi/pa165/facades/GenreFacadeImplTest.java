@@ -9,6 +9,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -16,7 +17,7 @@ import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
  * @author Marek Urban
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
-public class GenreFacadeImplTest {
+public class GenreFacadeImplTest extends AbstractJUnit4SpringContextTests{
 
     @Autowired
     private GenreFacade genreFacade;

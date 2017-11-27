@@ -8,8 +8,6 @@ package cz.muni.fi.pa165.facade;
 import cz.muni.fi.pa165.dto.CreateMovieDTO;
 import cz.muni.fi.pa165.dto.GenreDto;
 import cz.muni.fi.pa165.dto.MovieDto;
-import cz.muni.fi.pa165.entities.Genre;
-import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.service.GenreService;
 import cz.muni.fi.pa165.service.MovieService;
@@ -48,17 +46,17 @@ public class MovieFacadeImpl implements MovieFacade{
     }
 
     @Override
-    public List<Movie> getTopMovies(Genre g) {
+    public List<MovieDto> getTopMovies(GenreDto g) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Movie> getRecommendedMovies(Movie m) {
+    public List<MovieDto> getRecommendedMovies(MovieDto m) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public List<Movie> getNewestMovies(int i) {
+    public List<MovieDto> getNewestMovies(int i) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     

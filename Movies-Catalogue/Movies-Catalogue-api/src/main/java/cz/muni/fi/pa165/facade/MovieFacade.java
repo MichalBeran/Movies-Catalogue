@@ -1,8 +1,9 @@
 package cz.muni.fi.pa165.facade;
 
 import cz.muni.fi.pa165.dto.CreateMovieDTO;
-import cz.muni.fi.pa165.entities.Genre;
-import cz.muni.fi.pa165.entities.Movie;
+import cz.muni.fi.pa165.dto.GenreDto;
+import cz.muni.fi.pa165.dto.MovieDto;
+
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ public interface MovieFacade {
      * @param g Genre of the film
      * @return Top movies in given category
      */
-    List<Movie> getTopMovies(Genre g);
+    List<MovieDto> getTopMovies(GenreDto g);
     
     
     /**
@@ -26,8 +27,8 @@ public interface MovieFacade {
      * @param m Specifies film, according to which film should be looked for
      * @return Similiar movies
      */
-    List<Movie> getRecommendedMovies(Movie m);
+    List<MovieDto> getRecommendedMovies(MovieDto m);
     
-    List<Movie> getNewestMovies(int i);
+    List<MovieDto> getNewestMovies(int i);
     
 }

@@ -3,6 +3,9 @@ package cz.muni.fi.pa165.builders;
 import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.Rating;
 
+/**
+ * @author Marek Urban
+ */
 public class RatingBuilder {
 
     private Rating rating;

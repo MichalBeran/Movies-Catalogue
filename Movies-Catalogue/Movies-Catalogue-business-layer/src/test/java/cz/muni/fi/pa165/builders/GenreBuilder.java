@@ -9,7 +9,7 @@ import java.util.Set;
 /**
  * @author Marek Urban
  */
-public class GenreBuilder {
+public class GenreBuilder{
 
     private Genre genre;
 

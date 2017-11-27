@@ -1,5 +1,7 @@
 package cz.muni.fi.pa165.dto;
 
+import java.util.Objects;
+
 /**
  * @author Marek Urban
  */
@@ -31,5 +33,29 @@ public class GenreDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public String toString() {
+        return "Genre {" + "id=" + id + ", name=" + name + ", description=" + description + '}';
+    }
+
+    @Override
+    public int hashCode() {
+        int result = 17;
+        int prime = 47;
+        result = prime * result + ((name == null) ? 0 : name.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (!(obj instanceof GenreDto))
+            return false;
+        final GenreDto other = (GenreDto) obj;
+
+        return Objects.equals(name, other.getName());
     }
 }

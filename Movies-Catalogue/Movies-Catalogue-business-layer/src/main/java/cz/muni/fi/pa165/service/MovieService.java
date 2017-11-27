@@ -29,5 +29,20 @@ public interface MovieService {
      */
     List<Movie> getNewestMovies(int number);
     
+    /**
+     * 
+     * @param g Genre of the film
+     * @return Top movies in given category
+     */
+    List<Movie> getTopMovies(Genre g);
+    
+    
+    /**
+     * Method returns similiar films
+     * @param m Specifies film, according to which film should be looked for
+     * @return Similiar movies
+     */
+    List<Movie> getRecommendedMovies(Movie m);
+    
     
 }

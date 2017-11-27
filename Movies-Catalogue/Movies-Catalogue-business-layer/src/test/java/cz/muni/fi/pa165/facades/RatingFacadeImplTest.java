@@ -2,10 +2,9 @@ package cz.muni.fi.pa165.facades;
 
 import cz.muni.fi.pa165.builders.RatingDtoBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
-import cz.muni.fi.pa165.dto.MovieDto;
-import cz.muni.fi.pa165.dto.RatingDto;
-import cz.muni.fi.pa165.dto.UserDto;
+import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.entities.Genre;
+import cz.muni.fi.pa165.enums.Role;
 import cz.muni.fi.pa165.facade.*;
 import org.junit.After;
 import org.junit.Before;
@@ -19,8 +18,11 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 import org.springframework.test.context.transaction.TransactionalTestExecutionListener;
 
 import javax.transaction.Transactional;
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 
@@ -47,28 +49,67 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
     private ActorFacade actorFacade;
 
     @Autowired
+    private GenreFacade genreFacade;
+
+    @Autowired
     private DirectorFacade directorFacade;
 
     @Autowired
     private UserFacade userFacade;
 
-    // TODO: wait for implementation of other parts of system
-
-    @Test
-    public void dummyTest(){}
-    /*
-    @BeforeClass
-    public void init(){
-        testMovie = new MovieDto();
-        testUser = new UserDto();
-        testUser2 = new UserDto();
-    }
-
     @Before
     public void setUp() {
-        //MockitoAnnotations.initMocks(this);
-        ratingDtoBuilder = new RatingDtoBuilder();
+        DirectorDto director = new DirectorDto();
+        director.setDateOfBirth(LocalDate.of(1980,1,1));
+        director.setFirstName("Director");
+        director.setLastName("Happy");
+        director.setId(directorFacade.create(director));
 
+        ActorDto actor = new ActorDto();
+        actor.setDateOfBirth(LocalDate.of(1985,1,1));
+        actor.setFirstName("Jackie");
+        actor.setLastName("Chan");
+        actor.setId(actorFacade.create(actor));
+
+        List<ActorDto> actors = new ArrayList<>();
+        actors.add(actor);
+
+        GenreDto genre = new GenreDto();
+        genre.setName("action");
+        genre.setDescription("action description");
+        genre.setId(genreFacade.create(genre));
+        List<GenreDto> genres = new ArrayList<>();
+        genres.add(genre);
+
+        CreateMovieDto testMovie = new CreateMovieDto();
+        testMovie.setDateOfRelease(LocalDate.of(2016,1,1));
+        testMovie.setTitle("movie");
+        testMovie.setDescription("description");
+        testMovie.setDirector(director);
+        testMovie.setActors(actors);
+        testMovie.setGenres(genres);
+        this.testMovie = movieFacade.findById(movieFacade.createMovie(testMovie));
+
+        testUser = new UserDto();
+        testUser.setFirstName("John");
+        testUser.setLastName("doe");
+        testUser.setMail("m@m.m");
+        testUser.setNick("nick");
+        testUser.setPassword("pass");
+        userFacade.registerUser(testUser, testUser.getPassword());
+        testUser = userFacade.findUserByMail("m@m.m");
+
+
+        testUser2 = new UserDto();
+        testUser2.setFirstName("Johnny");
+        testUser2.setLastName("doey");
+        testUser2.setMail("m@mnm.m");
+        testUser2.setNick("nickam");
+        testUser2.setPassword("passw");
+        userFacade.registerUser(testUser2, testUser2.getPassword());
+        testUser2 = userFacade.findUserByMail("m@mnm.m");
+
+        ratingDtoBuilder = new RatingDtoBuilder();
     }
 
     @After
@@ -76,6 +117,19 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
         List<RatingDto> ratingDtos = ratingFacade.findAll();
         for (RatingDto dto : ratingDtos) {
             ratingFacade.delete(dto);
+        }
+        List<UserDto> userDtos = userFacade.findAllUsers();
+        for (UserDto dto : userDtos) {
+            userFacade.delete(dto);
+        }
+
+        List<ActorDto> actorDtos = actorFacade.findAll();
+        for (ActorDto dto : actorDtos) {
+            actorFacade.delete(dto);
+        }
+        List<DirectorDto> directorDtos = directorFacade.findAll();
+        for (DirectorDto dto : directorDtos) {
+            directorFacade.delete(dto);
         }
     }
 
@@ -122,8 +176,13 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
     }
 
     @Test
-    public void testFindByMovie() {
+    public void testDelete() {
+        RatingDto dto = ratingDtoBuilder.actorRtg(100).overallRtg(100).scenarioRtg(100).movie(testMovie).user(testUser).build();
+        dto.setId(ratingFacade.create(dto));
 
+        assertThat(ratingFacade.findAll().size()).isEqualTo(1);
+        ratingFacade.delete(dto);
+        assertThat(ratingFacade.findAll().size()).isEqualTo(0);
     }
 
     @Test
@@ -145,5 +204,5 @@ public class RatingFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
         int actualResult = ratingFacade.getSimplifiedRatingValue(dto);
         assertThat(actualResult).isEqualTo(expectedResult);
-    }*/
+    }
 }

@@ -1,13 +1,9 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.builders.ActorBuilder;
-import cz.muni.fi.pa165.builders.GenreBuilder;
-import cz.muni.fi.pa165.builders.GenreBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dao.ActorDao;
-import cz.muni.fi.pa165.dao.GenreDao;
 import cz.muni.fi.pa165.entities.Actor;
-import cz.muni.fi.pa165.entities.Genre;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -58,9 +55,9 @@ public class ActorServiceImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testCreate() {
-        Actor calledActor = actorBuilder.firstName("Lebowski").lastName("chua").build();
+        Actor calledActor = actorBuilder.firstName("Lebowski").lastName("chua").dateOfBirth(LocalDate.of(1975, 6, 4)).build();
         Long id = 1L;
-        Actor expectedActor = actorBuilder.id(1L).firstName("Lebowski").lastName("chua").build();
+        Actor expectedActor = actorBuilder.id(1L).firstName("Lebowski").lastName("chua").dateOfBirth(LocalDate.of(1975, 6, 4)).build();
 
         doAnswer(invocation -> {
             Object[] args = invocation.getArguments();
@@ -74,7 +71,7 @@ public class ActorServiceImplTest extends AbstractJUnit4SpringContextTests {
     }
     @Test
     public void testDelete() {
-        Actor expectedActor = actorBuilder.firstName("Lebowski").lastName("chua").build();
+        Actor expectedActor = actorBuilder.firstName("Lebowski").lastName("chua").dateOfBirth(LocalDate.of(1975, 6, 4)).build();
 
         //doAnswer(null).when(ratingDao).delete(expectedRating.getId());
 
@@ -84,7 +81,7 @@ public class ActorServiceImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testUpdate() {
-        Actor expectedActor = actorBuilder.firstName("Lebowski").lastName("chua").build();
+        Actor expectedActor = actorBuilder.firstName("Lebowski").lastName("chua").dateOfBirth(LocalDate.of(1975, 6, 4)).build();
 
         //doAnswer(null).when(ratingDao).update(expectedRating);
 
@@ -95,7 +92,7 @@ public class ActorServiceImplTest extends AbstractJUnit4SpringContextTests {
     @Test
     public void testFindById() {
         Long id = 1L;
-        Actor expectedActor = actorBuilder.firstName("Lebowski").lastName("chua").build();
+        Actor expectedActor = actorBuilder.firstName("Lebowski").lastName("chua").dateOfBirth(LocalDate.of(1975, 6, 4)).build();
 
         when(actorDao.findById(id)).thenReturn(expectedActor);
 
@@ -106,9 +103,9 @@ public class ActorServiceImplTest extends AbstractJUnit4SpringContextTests {
     @Test
     public void testFindAll() {
         List<Actor> expectedActors = new ArrayList<>();
-        expectedActors.add(actorBuilder.firstName("Lebowski").lastName("chua").build());
-        expectedActors.add(actorBuilder.firstName("Angelina").lastName("jolie").build());
-        expectedActors.add(actorBuilder.firstName("Petr").lastName("Rychly").build());
+        expectedActors.add(actorBuilder.firstName("Lebowski").lastName("chua").dateOfBirth(LocalDate.of(1975, 6, 4)).build());
+        expectedActors.add(actorBuilder.firstName("Angelina").lastName("jolie").dateOfBirth(LocalDate.of(1975, 6, 4)).build());
+        expectedActors.add(actorBuilder.firstName("Petr").lastName("Rychly").dateOfBirth(LocalDate.of(1975, 6, 4)).build());
 
         when(actorDao.findAll()).thenReturn(expectedActors);
 

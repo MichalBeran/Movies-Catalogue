@@ -44,4 +44,8 @@ public interface UserFacade {
      * Remove user.
      */
     void delete(UserDto u);
+    /**
+     * Make user admin
+     */
+    void makeAdmin(UserDto u);
 }

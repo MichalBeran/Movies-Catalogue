@@ -1,15 +1,9 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.builders.DirectorBuilder;
-import cz.muni.fi.pa165.builders.GenreBuilder;
-import cz.muni.fi.pa165.builders.GenreBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
-import cz.muni.fi.pa165.dao.ActorDao;
 import cz.muni.fi.pa165.dao.DirectorDao;
-import cz.muni.fi.pa165.dao.GenreDao;
-import cz.muni.fi.pa165.entities.Actor;
 import cz.muni.fi.pa165.entities.Director;
-import cz.muni.fi.pa165.entities.Genre;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -60,9 +55,9 @@ public class DirectorServiceImplTest extends AbstractJUnit4SpringContextTests{
 
     @Test
     public void testCreate() {
-        Director calledDirector = directorBuilder.firstName("Lebowski").lastName("chua").build();
+        Director calledDirector = directorBuilder.firstName("Lebowski").lastName("chua").dateOfbirth(LocalDate.of(1975, 6, 4)).build();
         Long id = 1L;
-        Director expectedDirector = directorBuilder.id(1L).firstName("Lebowski").lastName("chua").build();
+        Director expectedDirector = directorBuilder.firstName("Lebowski").lastName("chua").dateOfbirth(LocalDate.of(1975, 6, 4)).build();
 
         doAnswer(invocation -> {
             Object[] args = invocation.getArguments();
@@ -76,7 +71,7 @@ public class DirectorServiceImplTest extends AbstractJUnit4SpringContextTests{
     }
     @Test
     public void testDelete() {
-        Director expectedDirector = directorBuilder.id(1L).firstName("Lebowski").lastName("chua").build();
+        Director expectedDirector = directorBuilder.firstName("Lebowski").lastName("chua").dateOfbirth(LocalDate.of(1975, 6, 4)).build();
 
         //doAnswer(null).when(ratingDao).delete(expectedRating.getId());
 
@@ -86,7 +81,7 @@ public class DirectorServiceImplTest extends AbstractJUnit4SpringContextTests{
 
     @Test
     public void testUpdate() {
-        Director expectedDirector = directorBuilder.id(1L).firstName("Lebowski").lastName("chua").build();
+        Director expectedDirector = directorBuilder.firstName("Lebowski").lastName("chua").dateOfbirth(LocalDate.of(1975, 6, 4)).build();
 
         //doAnswer(null).when(ratingDao).update(expectedRating);
 
@@ -97,7 +92,7 @@ public class DirectorServiceImplTest extends AbstractJUnit4SpringContextTests{
     @Test
     public void testFindById() {
         Long id = 1L;
-        Director expectedDirector = directorBuilder.id(1L).firstName("Lebowski").lastName("chua").build();
+        Director expectedDirector = directorBuilder.firstName("Lebowski").lastName("chua").dateOfbirth(LocalDate.of(1975, 6, 4)).build();
 
         when(directorDao.findById(id)).thenReturn(expectedDirector);
 
@@ -108,9 +103,9 @@ public class DirectorServiceImplTest extends AbstractJUnit4SpringContextTests{
     @Test
     public void testFindAll() {
         List<Director> expectedDirectors = new ArrayList<>();
-        expectedDirectors.add(directorBuilder.firstName("Lebowski").lastName("chua").build());
-        expectedDirectors.add(directorBuilder.firstName("Angelina").lastName("Jolie").build());
-        expectedDirectors.add(directorBuilder.firstName("Petr").lastName("Rychly").build());
+        expectedDirectors.add(directorBuilder.firstName("Lebowski").lastName("chua").dateOfbirth(LocalDate.of(1975, 6, 4)).build());
+        expectedDirectors.add(directorBuilder.firstName("Angelina").lastName("Jolie").dateOfbirth(LocalDate.of(1975, 6, 4)).build());
+        expectedDirectors.add(directorBuilder.firstName("Petr").lastName("Rychly").dateOfbirth(LocalDate.of(1975, 6, 4)).build());
 
         when(directorDao.findAll()).thenReturn(expectedDirectors);
 

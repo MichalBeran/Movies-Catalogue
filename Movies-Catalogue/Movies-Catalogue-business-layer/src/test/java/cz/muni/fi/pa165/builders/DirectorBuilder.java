@@ -33,7 +33,7 @@ public class DirectorBuilder {
         return this;
     }
 
-    public DirectorBuilder description(LocalDate dateOfBirth){
+    public DirectorBuilder dateOfbirth(LocalDate dateOfBirth){
         this.director.setDateOfBirth(dateOfBirth);
         return this;
     }

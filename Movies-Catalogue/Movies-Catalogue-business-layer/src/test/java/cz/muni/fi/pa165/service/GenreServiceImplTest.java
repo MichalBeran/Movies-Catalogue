@@ -1,7 +1,6 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.builders.GenreBuilder;
-import cz.muni.fi.pa165.builders.GenreBuilder;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dao.GenreDao;
 import cz.muni.fi.pa165.entities.Movie;
@@ -18,7 +17,6 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.*;
@@ -32,11 +30,6 @@ public class GenreServiceImplTest extends AbstractJUnit4SpringContextTests {
 
     @Mock
     private GenreDao genreDao;
-
-    @Mock
-    private TimeService timeService;
-
-    private Genre testGenre;
 
     private GenreBuilder genreBuilder;
 

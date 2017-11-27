@@ -1,43 +1,43 @@
 package cz.muni.fi.pa165.facades;
 
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
-import cz.muni.fi.pa165.dto.GenreDto;
-import cz.muni.fi.pa165.dto.MovieDto;
+import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.entities.Genre;
-import cz.muni.fi.pa165.entities.Movie;
+import cz.muni.fi.pa165.facade.ActorFacade;
+import cz.muni.fi.pa165.facade.DirectorFacade;
 import cz.muni.fi.pa165.facade.GenreFacade;
 import cz.muni.fi.pa165.facade.MovieFacade;
-import cz.muni.fi.pa165.service.GenreService;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.mockito.Matchers.any;
-import static org.mockito.Mockito.when;
 
 /**
  * @author Marek Urban
  */
 @ContextConfiguration(classes = ServiceConfiguration.class)
 public class GenreFacadeImplTest extends AbstractJUnit4SpringContextTests {
-
-    @Mock
-    private GenreService genreService;
+    @Autowired
+    private GenreFacade genreFacade;
+/*
 
     @Autowired
-    @InjectMocks
-    private GenreFacade genreFacade;
+    private MovieFacade movieFacade;
 
+    @Autowired
+    private ActorFacade actorFacade;
+
+    @Autowired
+    private DirectorFacade directorFacade;
+
+*/
     @Before
     public void setUp() {
         MockitoAnnotations.initMocks(this);
@@ -98,25 +98,36 @@ public class GenreFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testFindByMovie(){
-        List<GenreDto> expectedList = new ArrayList<>();
-        GenreDto dto = createGenreDto("Sci-fi");
-        GenreDto dto2 = createGenreDto("Action");
-        expectedList.add(dto);
-        expectedList.add(dto2);
+        /*
+        createGenreDto("Sci-fi");
+        createGenreDto("Action");
+        List<GenreDto> genres = genreFacade.findAll();
 
-        List<Genre> serviceList = new ArrayList<>();
-        Genre ent = createFakeGenre("Sci-fi", 1L);
-        Genre ent2 = createFakeGenre("Action", 2L);
-        serviceList.add(ent);
-        serviceList.add(ent2);
+        ActorDto actorDto = new ActorDto();
+        actorDto.setDateOfBirth(LocalDate.of(1990,1,1));
+        actorDto.setFirstName("Arnild");
+        actorDto.setLastName("Schwarzenegger");
 
-        MovieDto movieDto = new MovieDto();
-        movieDto.setId(1L);
+        actorFacade.create(actorDto);
+        List<ActorDto> actors = actorFacade.findAll();
 
-        Movie movie = new Movie();
-        movie.setId(1L);
-        when(genreService.findByMovie(any(Movie.class))).thenReturn(serviceList);
-        assertThat(genreFacade.findByMovie(movieDto)).isEqualTo(expectedList);
+        DirectorDto directorDto = new DirectorDto();
+        directorDto.setDateOfBirth(LocalDate.of(1980,1,1));
+        directorDto.setFirstName("Emanuel");
+        directorDto.setLastName("Bacigala");
+        directorDto.setId(directorFacade.create(directorDto));
+
+
+        CreateMovieDTO movieDto = new CreateMovieDTO();
+        movieDto.setTitle("Terminator");
+        movieDto.setGenres(genres);
+        movieDto.setDateOfRelease(LocalDate.of(2017,01,01));
+        movieDto.setActors(actors);
+        movieDto.setDirector(directorDto);
+        movieFacade.createMovie(movieDto);
+        MovieDto savedMovieDto = (movieFacade.findAll()).get(0);
+        assertThat(genreFacade.findByMovie(savedMovieDto)).isEqualTo(genres);
+        */
     }
 
     GenreDto createGenreDto(String name){

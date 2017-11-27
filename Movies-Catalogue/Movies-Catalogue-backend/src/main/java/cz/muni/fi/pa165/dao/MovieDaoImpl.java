@@ -19,7 +19,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class MovieDaoImpl implements MovieDao{
     
-   
+    @PersistenceContext
     private EntityManager em;
 
     public void setEntityManager(EntityManager em){
@@ -50,7 +50,7 @@ public class MovieDaoImpl implements MovieDao{
 
     @Override
     public List<Movie> findAll() {
-        Query query = em.createQuery("SELECT m FROM Movie m", Movie.class);
+        Query query = em.createQuery("SELECT m FROM Movie m ORDER by m.dateOfRelease", Movie.class);
         return (List<Movie>) query.getResultList();
     }
 

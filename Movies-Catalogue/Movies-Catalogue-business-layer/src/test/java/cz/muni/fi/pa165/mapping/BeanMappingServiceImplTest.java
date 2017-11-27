@@ -8,6 +8,7 @@ package cz.muni.fi.pa165.mapping;
 import cz.muni.fi.pa165.configuration.ServiceConfiguration;
 import cz.muni.fi.pa165.dto.CreateMovieDto;
 import cz.muni.fi.pa165.dto.DirectorDto;
+
 import cz.muni.fi.pa165.dto.MovieDto;
 import cz.muni.fi.pa165.entities.Actor;
 import cz.muni.fi.pa165.entities.Director;
@@ -30,6 +31,7 @@ import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 public class BeanMappingServiceImplTest extends AbstractJUnit4SpringContextTests{
     
     CreateMovieDto createMovieDto;
+
     MovieDto movieDto;
     Movie movie;
     
@@ -57,6 +59,7 @@ public class BeanMappingServiceImplTest extends AbstractJUnit4SpringContextTests
         movie = bms.mapTo(createMovieDto, Movie.class);
         assertThat(movie.getTitle()).isEqualTo("title");
     }
+
     
     @Test
     public void testMapTo_MovieDto(){

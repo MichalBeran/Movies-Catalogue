@@ -40,7 +40,7 @@ public class DirectorBuilder {
     }
 
     public DirectorBuilder movies(List<Movie> movies){
-        this.director.setMovies((Set<Movie>)movies);
+        this.director.setMovies(movies);
         return this;
     }
 

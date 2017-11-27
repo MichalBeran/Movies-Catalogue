@@ -71,11 +71,11 @@ public class MovieServiceImpl implements MovieService{
     
     @Override
     public List<Movie> getRecommendedMovies(Movie m) {
-        Set<Genre> genresOfFilm = m.getGenres();
+        List<Genre> genresOfFilm = m.getGenres();
         Iterator itr = genresOfFilm.iterator();
         if(itr.hasNext()){
             Genre genreOfFilm = genreService.findById(((Genre) itr.next()).getId());
-            Set<Movie> recommendedMovies = genreOfFilm.getMovies();
+            List<Movie> recommendedMovies = genreOfFilm.getMovies();
             return new ArrayList<>(recommendedMovies);
         }else{
             return new ArrayList<>();

@@ -6,10 +6,9 @@
 package cz.muni.fi.pa165.entities;
 
 import java.time.LocalDate;
-import java.util.Collections;
-import java.util.HashSet;
+import java.util.List;
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -32,10 +31,10 @@ public class Actor {
     private LocalDate dateOfBirth;
 
     @ManyToMany
-    private Set<Movie> movies;
+    private List<Movie> movies;
 
     public Actor(){
-        this.movies = new HashSet<>();
+        this.movies = new ArrayList<>();
     }
     
     public Long getId() {
@@ -70,9 +69,9 @@ public class Actor {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public Set<Movie> getMovies(){ return movies; }
+    public List<Movie> getMovies(){ return movies; }
 
-    public void setMovies(Set<Movie> movies){ this.movies = movies; }
+    public void setMovies(List<Movie> movies){ this.movies = movies; }
 
     public void addMovie(Movie movie) {
         this.movies.add(movie);

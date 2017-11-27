@@ -4,9 +4,9 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Set;
+import java.util.List;
 
 /**
  * @author Marek Urban
@@ -28,11 +28,11 @@ public class Movie {
     private LocalDate dateOfRelease;
 
     @ManyToMany(mappedBy = "movies", cascade=CascadeType.REMOVE)
-    private Set<Genre> genres;
+    private List<Genre> genres;
 
     @NotNull
     @ManyToMany(mappedBy = "movies", cascade=CascadeType.REMOVE)
-    private Set<Actor> actors;
+    private List<Actor> actors;
 
     @NotNull
     @ManyToOne(cascade=CascadeType.REMOVE)
@@ -42,23 +42,23 @@ public class Movie {
     private Rating rating;
 
     @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
-    private Set<Rating> ratings;
+    private List<Rating> ratings;
 
-    public Set<Rating> getRatings() {
+    public List<Rating> getRatings() {
         return ratings;
     }
     public void addRating(Rating rating){
         this.ratings.add(rating);
     }
 
-    public void setRatings(Set<Rating> ratings) {
+    public void setRatings(List<Rating> ratings) {
         this.ratings = ratings;
     }
     
 
     public Movie(){
-        this.actors = new HashSet<>();
-        this.genres = new HashSet<>();
+        this.actors = new ArrayList<>();
+        this.genres = new ArrayList<>();
     }
     
     public Long getId() {
@@ -101,21 +101,21 @@ public class Movie {
         this.dateOfRelease = dateOfRelease;
     }
 
-    public Set<Genre> getGenres() {
+    public List<Genre> getGenres() {
         return genres;
     }
 
-    public void setGenres(Set<Genre> genres) {
+    public void setGenres(List<Genre> genres) {
         this.genres = genres;
     }
 
     public void addGenre(Genre genre){ this.genres.add(genre); }
 
-    public Set<Actor> getActors() {
+    public List<Actor> getActors() {
         return actors;
     }
 
-    public void setActors(Set<Actor> actors) {
+    public void setActors(List<Actor> actors) {
         this.actors = actors;
     }
 

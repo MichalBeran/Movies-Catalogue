@@ -41,7 +41,7 @@ public class RatingDaoImpl implements RatingDao {
     @Override
     public List<Rating> findAll() {
         Query query = manager.createQuery("SELECT a FROM Rating a", Rating.class);
-        return (List<Rating>) query.getResultList();
+        return query.getResultList();
     }
 
     @Override
@@ -65,6 +65,6 @@ public class RatingDaoImpl implements RatingDao {
     @Override
     public List<Rating> findByMovieId(Long id) {
         Movie movie = manager.find(Movie.class, id);
-        return (List<Rating>) movie.getRatings();
+        return movie.getRatings();
     }
 }

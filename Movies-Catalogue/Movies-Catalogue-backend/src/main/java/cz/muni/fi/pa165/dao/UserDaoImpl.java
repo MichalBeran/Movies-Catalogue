@@ -51,7 +51,8 @@ public class UserDaoImpl implements UserDao{
     @Override
     public List<User> findAll() {
         Query query = manager.createQuery("SELECT d FROM User d", User.class);
-        return (List<User>) query.getResultList();    }
+        return query.getResultList();
+    }
 
     public User findById(Long id) {
         if (id == null) {

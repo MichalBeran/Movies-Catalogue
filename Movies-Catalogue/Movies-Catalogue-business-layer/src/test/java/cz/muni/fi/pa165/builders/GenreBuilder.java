@@ -4,7 +4,6 @@ import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.Genre;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * @author Marek Urban
@@ -33,7 +32,7 @@ public class GenreBuilder{
     }
 
     public GenreBuilder movies(List<Movie> movies){
-        this.genre.setMovies((Set<Movie>)movies);
+        this.genre.setMovies(movies);
         return this;
     }
 

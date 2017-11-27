@@ -12,7 +12,7 @@ import cz.muni.fi.pa165.entities.Director;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import java.time.LocalDate;
-import java.util.HashSet;
+import java.util.ArrayList;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.junit.After;
@@ -26,7 +26,6 @@ import javax.persistence.Persistence;
 import javax.persistence.PersistenceContext;
 
 import java.util.List;
-import java.util.Set;
 
 import org.junit.BeforeClass;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -52,7 +51,7 @@ public class ActorDaoTest {
 
     private Movie movie1;
     private Movie movie2;
-    private Set<Movie> setOfMovies = new HashSet<>();
+    private List<Movie> setOfMovies = new ArrayList<>();
 
     @BeforeClass
     public static void setUpEMFactory() {
@@ -91,7 +90,7 @@ public class ActorDaoTest {
         em.persist(stevenSpielberg);
         em.getTransaction().commit();
 
-        Set<Actor> actors = new HashSet<>();
+        List<Actor> actors = new ArrayList<>();
         actors.add(angelinaJolie);
 
         movie1 = new Movie();

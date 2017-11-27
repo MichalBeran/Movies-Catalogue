@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.entities.Director;
 
 import java.util.List;
-import java.util.Set;
 
 /**
  * Created by Maros on 11/27/2017.
@@ -40,7 +39,7 @@ public class DirectorBuilder {
     }
 
     public DirectorBuilder movies(List<Movie> movies){
-        this.director.setMovies((Set<Movie>)movies);
+        this.director.setMovies(movies);
         return this;
     }
 

@@ -9,11 +9,13 @@ import cz.muni.fi.pa165.dao.ActorDao;
 import cz.muni.fi.pa165.entities.Actor;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Maros
  */
+@Service
 public class ActorServiceImpl implements ActorService {
 
     @Autowired

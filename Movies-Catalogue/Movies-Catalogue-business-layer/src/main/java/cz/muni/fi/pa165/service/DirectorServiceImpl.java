@@ -9,11 +9,13 @@ import cz.muni.fi.pa165.dao.DirectorDao;
 import cz.muni.fi.pa165.entities.Director;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 /**
  *
  * @author Maros
  */
+@Service
 public class DirectorServiceImpl implements DirectorService {
 
     @Autowired

@@ -16,6 +16,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -47,32 +48,25 @@ public class DirectorFacadeImplTest extends AbstractJUnit4SpringContextTests {
     }
 
 
-    DirectorDto createDirectorDto(String FirstName, String lastName){
+    DirectorDto createDirectorDto(String FirstName, String lastName, LocalDate dateOfBirth){
         DirectorDto dto = new DirectorDto();
         dto.setFirstName(FirstName);
         dto.setLastName(lastName);
+        dto.setDateOfBirth(dateOfBirth);
         dto.setId(directorFacade.create(dto));
         return dto;
     }
 
-    Genre createFakeGenre(String name, Long id){
-        Genre entity = new Genre();
-        entity.setName(name);
-        entity.setDescription(name + " description");
-        entity.setId(id);
-        return entity;
-    }
-
     @Test
     public void testCreate() {
-        DirectorDto expectedDto = createDirectorDto("Peter", "petrovic");
+        DirectorDto expectedDto = createDirectorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
 
         assertThat(expectedDto.getId()).isNotNull();
     }
 
     @Test
     public void testFindById(){
-        DirectorDto expectedDto = createDirectorDto("Peter", "petrovic");
+        DirectorDto expectedDto = createDirectorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
 
         DirectorDto actualDto = directorFacade.findById(expectedDto.getId());
         assertThat(actualDto).isEqualTo(expectedDto);
@@ -80,7 +74,7 @@ public class DirectorFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testUpdate() {
-        DirectorDto expectedDto = createDirectorDto("Peter", "petrovic");
+        DirectorDto expectedDto = createDirectorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
 
         assertThat(expectedDto.getId()).isNotNull();
 
@@ -92,11 +86,20 @@ public class DirectorFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testFindAll() {
-        createDirectorDto("Peter", "petrovic");
-        createDirectorDto("Head", "Hunterz");
+        createDirectorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
+        createDirectorDto("Head", "Hunterz", LocalDate.of(1975, 6, 4));
 
         List<DirectorDto> dtos = directorFacade.findAll();
         assertThat(dtos.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void testDelete() {
+        DirectorDto dto = createDirectorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
+
+        assertThat(directorFacade.findAll().size()).isEqualTo(1);
+        directorFacade.delete(dto);
+        assertThat(directorFacade.findAll().size()).isEqualTo(0);
     }
 
 }

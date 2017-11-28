@@ -16,6 +16,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
 import java.util.*;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -47,32 +48,25 @@ public class ActorFacadeImplTest extends AbstractJUnit4SpringContextTests {
     }
 
 
-    ActorDto createActorDto(String FirstName, String lastName){
+    ActorDto createActorDto(String FirstName, String lastName, LocalDate dateOfBirth){
         ActorDto dto = new ActorDto();
         dto.setFirstName(FirstName);
         dto.setLastName(lastName);
+        dto.setDateOfBirth(dateOfBirth);
         dto.setId(actorFacade.create(dto));
         return dto;
     }
 
-    Genre createFakeGenre(String name, Long id){
-        Genre entity = new Genre();
-        entity.setName(name);
-        entity.setDescription(name + " description");
-        entity.setId(id);
-        return entity;
-    }
-
     @Test
     public void testCreate() {
-        ActorDto expectedDto = createActorDto("Peter", "petrovic");
+        ActorDto expectedDto = createActorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
 
         assertThat(expectedDto.getId()).isNotNull();
     }
 
     @Test
     public void testFindById(){
-        ActorDto expectedDto = createActorDto("Peter", "petrovic");
+        ActorDto expectedDto = createActorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
 
         ActorDto actualDto = actorFacade.findById(expectedDto.getId());
         assertThat(actualDto).isEqualTo(expectedDto);
@@ -80,7 +74,7 @@ public class ActorFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testUpdate() {
-        ActorDto expectedDto = createActorDto("Peter", "petrovic");
+        ActorDto expectedDto = createActorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
 
         assertThat(expectedDto.getId()).isNotNull();
 
@@ -92,11 +86,20 @@ public class ActorFacadeImplTest extends AbstractJUnit4SpringContextTests {
 
     @Test
     public void testFindAll() {
-        createActorDto("Peter", "petrovic");
-        createActorDto("Head", "Hunterz");
+        createActorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
+        createActorDto("Head", "Hunterz", LocalDate.of(1975, 6, 4));
 
         List<ActorDto> dtos = actorFacade.findAll();
         assertThat(dtos.size()).isEqualTo(2);
+    }
+
+    @Test
+    public void testDelete() {
+        ActorDto dto = createActorDto("Peter", "petrovic", LocalDate.of(1975, 6, 4));
+
+        assertThat(actorFacade.findAll().size()).isEqualTo(1);
+        actorFacade.delete(dto);
+        assertThat(actorFacade.findAll().size()).isEqualTo(0);
     }
 
 }

@@ -28,6 +28,11 @@ import { DirectorDetailComponent } from './catalogue/director/director-detail/di
 import { ActorIndexComponent } from './catalogue/actor/actor-index/actor-index.component';
 import { ActorCreateComponent } from './catalogue/actor/actor-create/actor-create.component';
 import { ActorDetailComponent } from './catalogue/actor/actor-detail/actor-detail.component';
+import { SidenavComponent } from './template/sidenav/sidenav.component';
+import {RestService} from './services/rest.service';
+import {HttpClientModule} from '@angular/common/http';
+import {FormsModule} from '@angular/forms';
+import {GenreCommonComponent} from './catalogue/genre/genre.common.component';
 
 
 @NgModule({
@@ -42,6 +47,7 @@ import { ActorDetailComponent } from './catalogue/actor/actor-detail/actor-detai
     RatingComponent,
     DirectorComponent,
     ActorComponent,
+    GenreCommonComponent,
     GenreCreateComponent,
     GenreDetailComponent,
     GenreIndexComponent,
@@ -56,13 +62,16 @@ import { ActorDetailComponent } from './catalogue/actor/actor-detail/actor-detai
     DirectorDetailComponent,
     ActorIndexComponent,
     ActorCreateComponent,
-    ActorDetailComponent
+    ActorDetailComponent,
+    SidenavComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [RestService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

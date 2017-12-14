@@ -1,11 +1,8 @@
-<p>
-  rating works!
-</p>
-<div>
-  <ul>
-    <li><a routerLink="index">Index</a></li>
-    <li><a routerLink="create">New</a></li>
-    <li><a routerLink="detail">Detail</a></li>
-  </ul>
+<div class="row">
+  <div class="col-md-2">
+    <app-sidenav></app-sidenav>
+  </div>
+  <div class="col-md-10 main">
+    <router-outlet></router-outlet>
+  </div>
 </div>
-<router-outlet></router-outlet>

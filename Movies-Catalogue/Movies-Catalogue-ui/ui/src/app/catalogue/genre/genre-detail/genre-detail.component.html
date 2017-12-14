@@ -1,3 +1,17 @@
-<p>
-  genre-detail works!
-</p>
+<h2>
+  Detail
+</h2>
+
+<form #genreForm="ngForm" name="missionForm">
+  <div class="form-group">
+    <label for="genre-name">Name</label>
+    <input disabled [(ngModel)]="genre.name" #name="ngModel" name="genre-name" type="text" class="form-control" id="genre-name" placeholder="Sci-Fi">
+  </div>
+  <div class="form-group">
+    <label for="genre-description">Description</label>
+    <textarea disabled [(ngModel)]="genre.description" #name="ngModel" name="genre-description" class="form-control" id="genre-description" rows="3"></textarea>
+  </div>
+  <a routerLink="/genres/edit/{{genre.id}}" class="btn btn-dark btn-sm">edit</a>
+  <button (click)="remove(genre.id)" class="btn btn-danger btn-sm">delete</button>
+
+</form>

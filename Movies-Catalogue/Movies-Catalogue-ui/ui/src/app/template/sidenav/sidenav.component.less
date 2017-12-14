@@ -1,0 +1,43 @@
+@import "../../../config";
+
+nav{
+  padding:40px 0 25px 0;
+  .title{
+    color:@clr-header-link--active;
+    font-size: 13px;
+    font-family: "Poppins", sans-serif;
+    font-weight:600;
+    display:block;
+    margin-bottom:15px;
+  }
+  ul{
+    list-style: none;
+    margin: 0 0 0 15px;
+    padding:0;
+    li{
+      position:relative;
+      &:before{
+        content:"";
+        display:inline-block;
+        width:4px;
+        height:4px;
+        border-radius: 4px;
+        position:absolute;
+        left:-10px;
+        top:13px;
+        background: @clr-header-link--active;
+      }
+      a{
+        color:@clr-header-top;
+        font-size:14px;
+        line-height:30px;
+        height:30px;
+        display: inline-block;
+        &:hover, &.active{
+          color: @clr-header-link;
+
+        }
+      }
+    }
+  }
+}

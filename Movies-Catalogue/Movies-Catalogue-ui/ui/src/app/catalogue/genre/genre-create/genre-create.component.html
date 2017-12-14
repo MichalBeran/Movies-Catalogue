@@ -1,3 +1,16 @@
-<p>
-  genre-create works!
-</p>
+<h2>
+  {{title}}
+</h2>
+
+<form #genreForm="ngForm" name="missionForm">
+  <div class="form-group">
+    <label for="genre-name">Name</label>
+    <input [(ngModel)]="genre.name" #name="ngModel" name="genre-name" type="text" class="form-control" id="genre-name" placeholder="Sci-Fi">
+  </div>
+  <div class="form-group">
+    <label for="genre-description">Description</label>
+    <textarea [(ngModel)]="genre.description" #name="ngModel" name="genre-description" class="form-control" id="genre-description" rows="3"></textarea>
+  </div>
+  <button class="btn btn-primary btn-sm" (click)="save()">Save</button>
+  <button *ngIf="editing==true" (click)="remove(genre.id)" class="btn btn-danger btn-sm">delete</button>
+</form>

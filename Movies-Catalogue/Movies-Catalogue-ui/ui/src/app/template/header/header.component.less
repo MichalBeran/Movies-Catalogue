@@ -1,0 +1,46 @@
+@import "../../../config";
+
+header {
+  box-shadow: 0px 1px 15px 1px rgba(113, 106, 202, 0.5);
+
+  #header-top {
+    height: 90px;
+    width: 100%;
+    background: @clr-header-top;
+    display: flex;
+    align-items: center;
+    h1 {
+      margin:0;
+      font-family: "Roboto", sans-serif;
+      font-size: 22px;
+      font-weight: 300;
+      color: @clr-header-link;
+    }
+  }
+  #header-bottom {
+    height: 60px;
+    background: @clr-header-bottom;
+    ul {
+      list-style-type: none;
+      margin:0;
+      padding:0;
+      li {
+        margin:0;
+        padding:0;
+        display: inline-block;
+        a {
+          display: flex;
+          height: 60px;
+          margin: 0 20px;
+          align-items: center;
+          font-weight: 300;
+          font-size: 15px;
+          color: @clr-header-link;
+          &:hover, &.active {
+            color: @clr-header-link--active;
+          }
+        }
+      }
+    }
+  }
+}

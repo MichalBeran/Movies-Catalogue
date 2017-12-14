@@ -48,8 +48,12 @@ const routes: Routes = [
             component: GenreCreateComponent
           },
           {
-            path: 'detail',
+            path: 'detail/:id',
             component: GenreDetailComponent
+          },
+          {
+            path: 'edit/:id',
+            component: GenreCreateComponent
           }
         ]
       },

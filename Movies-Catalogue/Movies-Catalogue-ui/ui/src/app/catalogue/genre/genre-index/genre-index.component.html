@@ -1,0 +1,20 @@
+<h2>Genres</h2>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Genre name</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let genre of genres">
+    <td>{{genre.name}}</td>
+    <td>
+      <button class="btn btn-primary btn-sm">show movies</button>
+      <a routerLink="/genres/detail/{{genre.id}}" class="btn btn-dark btn-sm">show detail</a>
+      <a routerLink="/genres/edit/{{genre.id}}" class="btn btn-dark btn-sm">edit</a>
+      <button (click)="remove(genre.id);" class="btn btn-danger btn-sm">delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

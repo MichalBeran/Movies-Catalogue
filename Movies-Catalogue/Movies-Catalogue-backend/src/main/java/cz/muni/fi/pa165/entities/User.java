@@ -13,7 +13,6 @@ import java.util.List;
  * @author Michal
  */
 @Entity
-@Table(name = "app_user")
 public class User {
 
     @Id
@@ -41,7 +40,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private List<Role> roles;
 
-    @OneToMany
+    @OneToMany(mappedBy="user")
     private List<Rating> ratings;
 
     public User(){

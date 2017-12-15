@@ -103,7 +103,6 @@ public class RatingDaoTest {
         firstRating.setOverallRating(10);
         firstRating.setActorsRating(7);
         firstRating.setScenarioRating(8);
-        firstRating.setMovie(ratedMovie);
         firstRating.setUser(author);
 
 
@@ -111,7 +110,6 @@ public class RatingDaoTest {
         secondRating.setOverallRating(10);
         secondRating.setActorsRating(7);
         secondRating.setScenarioRating(8);
-        secondRating.setMovie(ratedMovie);
         secondRating.setUser(author);
     }
 

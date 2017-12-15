@@ -30,11 +30,11 @@ public class Actor {
 
     private LocalDate dateOfBirth;
 
-    @ManyToMany
-    private List<Movie> movies;
+    @ManyToMany(mappedBy="actors")
+    private List<Movie> movies = new ArrayList();
 
     public Actor(){
-        this.movies = new ArrayList<>();
+        //this.movies = new ArrayList<>();
     }
     
     public Long getId() {

@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
 import {Observable} from 'rxjs/Observable';
+import {User} from "../models/user.model";
 
 const HttpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -40,5 +41,9 @@ export class RestService {
 
   delete(id): Observable<any> {
     return this.http.delete<any>(`${this.repository}/${id}`);
+  }
+
+  register(model: User, password): Observable<any> {
+    return this.http.post<User, password>(this.repository, model, HttpOptions);
   }
 }

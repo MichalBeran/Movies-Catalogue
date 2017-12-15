@@ -80,7 +80,7 @@ public class DatabaseSeeder {
         pepa.setId(userFacade.registerUser(pepa, passw));
     }
 
-    private void seedGenres() {
+        private void seedGenres() {
         adventure = new GenreDto();
         adventure.setName("Adventure");
         adventure.setDescription("Adventure films are usually exciting stories, with new experiences or exotic locales, very similar to or often paired with the action film genre.");
@@ -111,6 +111,7 @@ public class DatabaseSeeder {
         martin.setFirstName("Martin");
         martin.setLastName("Campbell");
         martin.setDateOfBirth(LocalDate.of(1943, 10, 24));
+
         martin.setId(directorFacade.create(martin));
 
         patty = new DirectorDto();

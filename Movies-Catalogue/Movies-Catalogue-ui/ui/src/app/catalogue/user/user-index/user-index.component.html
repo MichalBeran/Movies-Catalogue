@@ -1,0 +1,26 @@
+<h2>Users</h2>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Nick</th>
+    <th scope="col">Mail</th>
+    <th scope="col">First name</th>
+    <th scope="col">Last name</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let user of users">
+    <td>{{user.nick}}</td>
+    <td>{{user.mail}}</td>
+    <td>{{user.firstName}}</td>
+    <td>{{user.lastName}}</td>
+    <td>
+      <button class="btn btn-primary btn-sm">show user</button>
+      <a routerLink="/users/detail/{{user.id}}" class="btn btn-dark btn-sm">show detail</a>
+      <a routerLink="/users/edit/{{user.id}}" class="btn btn-dark btn-sm">edit</a>
+      <button (click)="remove(user.id);" class="btn btn-danger btn-sm">delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

@@ -1,0 +1,29 @@
+<h2>
+  {{title}}
+</h2>
+
+<form #genreForm="ngForm" name="missionForm">
+  <div class="form-group">
+    <label for="user-nick">Nick</label>
+    <input [(ngModel)]="user.nick" #name="ngModel" name="user-nick" type="text" class="form-control" id="user-nick" placeholder="Sci-Fi">
+  </div>
+  <div class="form-group">
+    <label for="user-mail">Mail</label>
+    <textarea [(ngModel)]="user.mail" #name="ngModel" name="user-mail" class="form-control" id="user-mail" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="user-firstName">First Name</label>
+    <textarea [(ngModel)]="user.firstName" #name="ngModel" name="user-firstName" class="form-control" id="user-firstName" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="user-lastName">Last Name</label>
+    <textarea [(ngModel)]="user.lastName" #name="ngModel" name="user-lastName" class="form-control" id="user-lastName" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="user-password">Password</label>
+    <textarea [(ngModel)]="user.password" #name="ngModel" name="user-password" class="form-control" id="user-password" rows="3"></textarea>
+  </div>
+  <button class="btn btn-primary btn-sm" (click)="save()">Save</button>
+  <button *ngIf="editing==true" (click)="remove(user.id)" class="btn btn-danger btn-sm">delete</button>
+</form>
+

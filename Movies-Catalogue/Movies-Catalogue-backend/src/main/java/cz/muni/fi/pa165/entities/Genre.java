@@ -28,7 +28,7 @@ public class Genre {
     @NotNull
     private String name;
     private String description;
-    @ManyToMany
+    @ManyToMany(mappedBy="genres")
     private List<Movie> movies;
 
     public Genre(){

@@ -21,9 +21,6 @@ public class Rating {
     private int overallRating;
     private int scenarioRating;
     private int actorsRating;
-    
-    @ManyToOne
-    private Movie movie;
 
     @ManyToOne
     private User user;
@@ -67,14 +64,6 @@ public class Rating {
     public void setActorsRating(int actorsRating) {
         this.actorsRating = actorsRating;
     }
-    
-    public Movie getMovie() {
-        return movie;
-    }
-
-    public void setMovie(Movie movie) {
-        this.movie = movie;
-    }
 
     public User getUser() {
         return user;
@@ -96,7 +85,6 @@ public class Rating {
         result = prime * result + overallRating;
         result = prime * result + scenarioRating;
         result = prime * result + actorsRating;
-        result = prime * result + movie.hashCode();
         return result;
     }
 
@@ -110,7 +98,6 @@ public class Rating {
 
         return Objects.equals(overallRating, other.getOverallRating())
                 && Objects.equals(scenarioRating, other.getScenarioRating())
-                && Objects.equals(actorsRating, other.getActorsRating())
-                && Objects.equals(movie, other.getMovie());
+                && Objects.equals(actorsRating, other.getActorsRating());
     }
 }

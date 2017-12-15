@@ -27,19 +27,19 @@ public class Movie {
     @NotNull
     private LocalDate dateOfRelease;
 
-    @ManyToMany(mappedBy = "movies", cascade=CascadeType.REMOVE)
-    private List<Genre> genres;
+    @ManyToMany
+    private List<Genre> genres = new ArrayList();
 
     @NotNull
-    @ManyToMany(mappedBy = "movies", cascade=CascadeType.REMOVE)
-    private List<Actor> actors;
+    @ManyToMany
+    private List<Actor> actors = new ArrayList();
 
     @NotNull
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne
     private Director director;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
-    private List<Rating> ratings;
+    @OneToMany
+    private List<Rating> ratings = new ArrayList();
 
     public List<Rating> getRatings() {
         return ratings;
@@ -54,9 +54,9 @@ public class Movie {
     
 
     public Movie(){
-        this.actors = new ArrayList<>();
-        this.genres = new ArrayList<>();
-        this.ratings = new ArrayList<>();
+        //this.actors = new ArrayList<>();
+        //this.genres = new ArrayList<>();
+        //this.ratings = new ArrayList<>();
     }
     
     public Long getId() {

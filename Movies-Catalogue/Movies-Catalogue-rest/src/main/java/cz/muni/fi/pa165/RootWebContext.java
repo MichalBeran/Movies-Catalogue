@@ -21,7 +21,7 @@ import org.springframework.http.converter.json.MappingJackson2HttpMessageConvert
 @EnableWebMvc
 @Configuration
 @Import(ServiceConfiguration.class)
-@ComponentScan(basePackages = {"cz.muni.fi.pa165.rest.controllers"})
+@ComponentScan(basePackages = {"cz.muni.fi.pa165"})
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override

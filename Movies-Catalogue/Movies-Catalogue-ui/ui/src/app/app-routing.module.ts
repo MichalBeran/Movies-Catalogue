@@ -21,6 +21,9 @@ import {DirectorDetailComponent} from './catalogue/director/director-detail/dire
 import {RatingIndexComponent} from './catalogue/rating/rating-index/rating-index.component';
 import {RatingCreateComponent} from './catalogue/rating/rating-create/rating-create.component';
 import {RatingDetailComponent} from './catalogue/rating/rating-detail/rating-detail.component';
+import {UserComponent} from './catalogue/user/user.component';
+import {UserIndexComponent} from './catalogue/user/user-index/user-index.component';
+import {UserRegisterComponent} from './catalogue/user/user-register/user-register.component';
 
 /**
  * @author Marek Urban
@@ -123,6 +126,25 @@ const routes: Routes = [
           {
             path: 'detail',
             component: DirectorDetailComponent
+          }
+        ]
+      },
+      {
+        path: 'users',
+        component: UserComponent,
+        children: [
+          {
+            path: '',
+            pathMatch: 'full',
+            redirectTo: 'index'
+          },
+          {
+            path: 'index',
+            component: UserIndexComponent
+          },
+          {
+            path: 'create',
+            component: UserRegisterComponent
           }
         ]
       },

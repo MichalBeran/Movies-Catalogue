@@ -36,6 +36,7 @@
         <module>Movies-Catalogue-business-layer</module>
         <module>Movies-Catalogue-api</module>
         <module>Movies-Catalogue-rest</module>
+        <module>Movies-Catalogue-ui</module>
     </modules>
 
     <packaging>pom</packaging>

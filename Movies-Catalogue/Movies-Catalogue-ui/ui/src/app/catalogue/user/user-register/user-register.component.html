@@ -24,6 +24,6 @@
     <textarea [(ngModel)]="user.password" #name="ngModel" name="user-password" class="form-control" id="user-password" rows="3"></textarea>
   </div>
   <button class="btn btn-primary btn-sm" (click)="save()">Save</button>
-  <button *ngIf="editing==true" (click)="remove(genre.id)" class="btn btn-danger btn-sm">delete</button>
+  <button *ngIf="editing==true" (click)="remove(user.id)" class="btn btn-danger btn-sm">delete</button>
 </form>
 

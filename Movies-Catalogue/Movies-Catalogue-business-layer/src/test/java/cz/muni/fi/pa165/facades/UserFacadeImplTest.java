@@ -15,7 +15,7 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import javax.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import java.security.MessageDigest;
 import java.util.List;
 

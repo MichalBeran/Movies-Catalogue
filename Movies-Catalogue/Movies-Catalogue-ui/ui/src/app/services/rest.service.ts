@@ -42,8 +42,5 @@ export class RestService {
   delete(id): Observable<any> {
     return this.http.delete<any>(`${this.repository}/${id}`);
   }
-
-  register(model: User, password): Observable<any> {
-    return this.http.post<User, password>(this.repository, model, HttpOptions);
-  }
+  
 }

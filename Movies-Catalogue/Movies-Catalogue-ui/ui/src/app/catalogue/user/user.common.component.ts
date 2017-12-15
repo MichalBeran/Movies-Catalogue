@@ -3,18 +3,18 @@ import {RestService} from '../../services/rest.service';
 import {Router} from '@angular/router';
 
 /**
- * @author Marek Urban
+ * @author Michal Beran
  */
 @Component({
   template: ''
 })
-export class GenreCommonComponent implements OnInit {
+export class UserCommonComponent implements OnInit {
 
   constructor(protected service: RestService, protected router: Router) {
   }
 
   ngOnInit() {
-    this.service.setRepository('genres');
+    this.service.setRepository('users');
   }
 
   protected delete(id, callback: () => void) {
@@ -26,6 +26,6 @@ export class GenreCommonComponent implements OnInit {
   }
 
   protected toIndexPage() {
-    this.router.navigateByUrl(`genres/index`);
+    this.router.navigateByUrl(`users/index`);
   }
 }

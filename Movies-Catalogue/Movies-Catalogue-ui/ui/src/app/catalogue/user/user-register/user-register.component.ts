@@ -3,6 +3,7 @@ import {User} from '../../../models/user.model';
 import {RestService} from '../../../services/rest.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNullOrUndefined} from 'util';
+import {UserCommonComponent} from "../user.common.component";
 
 /**
  * @author Michal Beran
@@ -12,7 +13,7 @@ import {isNullOrUndefined} from 'util';
   templateUrl: './user-register.component.html',
   styleUrls: ['./user-register.component.css']
 })
-export class UserRegisterComponent implements OnInit {
+export class UserRegisterComponent extends UserCommonComponent implements OnInit {
 
   user: User = new User();
 
@@ -20,14 +21,7 @@ export class UserRegisterComponent implements OnInit {
   editing = false;
 
   constructor(protected service: RestService, protected router: Router, private route: ActivatedRoute) {
-  }
-
-  protected delete(id, callback: () => void) {
-    this.service.delete(id).subscribe(res => callback());
-  }
-
-  protected toIndexPage() {
-    this.router.navigateByUrl(`users/index`);
+    super(service, router);
   }
 
   ngOnInit() {
@@ -44,7 +38,7 @@ export class UserRegisterComponent implements OnInit {
       this.service.create(this.user).subscribe(result => this.redirect(result));
     } else {
       // update
-      this.service.update(this.genre).subscribe(result => this.redirect(result));
+      this.service.update(this.user).subscribe(result => this.redirect(result));
     }
   }
 
@@ -53,7 +47,7 @@ export class UserRegisterComponent implements OnInit {
   }
 
   remove(id) {
-    this.delete(id, () => this.toIndexPage());
+    super.delete(id, () => super.toIndexPage());
   }
 
   private setFormForEdit(user: User) {

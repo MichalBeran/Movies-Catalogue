@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import cz.muni.fi.pa165.rest.interceptors.AllowOriginInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
@@ -18,10 +19,12 @@ import org.springframework.context.annotation.Primary;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 
+import javax.annotation.PostConstruct;
+
 @EnableWebMvc
 @Configuration
 @Import(ServiceConfiguration.class)
-@ComponentScan(basePackages = {"cz.muni.fi.pa165"})
+@ComponentScan(basePackages = {"cz.muni.fi.pa165.rest.controllers"}, basePackageClasses = DatabaseSeeder.class)
 public class RootWebContext extends WebMvcConfigurerAdapter {
 
     @Override
@@ -30,6 +33,13 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
     @Override
     public void configureDefaultServletHandling(DefaultServletHandlerConfigurer configurer) {
         configurer.enable();
+    }
+
+    @Autowired DatabaseSeeder databaseSeeder;
+
+    @PostConstruct
+    public void loadData(){
+        databaseSeeder.seed();
     }
 
     @Bean
@@ -55,5 +65,6 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
         registry.addViewController("/PA165").setViewName("forward:index.html");
 
     }
+
 
 }

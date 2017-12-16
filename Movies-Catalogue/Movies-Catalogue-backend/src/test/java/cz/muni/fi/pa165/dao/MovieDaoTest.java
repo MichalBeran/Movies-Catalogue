@@ -87,7 +87,7 @@ public class MovieDaoTest {
         movie.setTitle("Best movie ever !");
         movie.setImage("not ready yet");
         movie.setDirector(stevenSpielberg);
-        movie.setDateOfRelease(LocalDate.MIN);
+        movie.setDateOfRelease(LocalDate.of(2010,2,17));
         
         List<Movie> awesomeMovies = new ArrayList<>();
         awesomeMovies.add(movie);

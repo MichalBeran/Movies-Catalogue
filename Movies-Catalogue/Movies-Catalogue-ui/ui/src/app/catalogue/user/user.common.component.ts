@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RestService} from '../../services/rest.service';
 import {Router} from '@angular/router';
+import {UserService} from "../../services/user.service";
 
 /**
  * @author Michal Beran
@@ -10,10 +11,11 @@ import {Router} from '@angular/router';
 })
 export class UserCommonComponent implements OnInit {
 
-  constructor(protected service: RestService, protected router: Router) {
+  constructor(protected service: UserService, protected router: Router) {
   }
 
   ngOnInit() {
+    console.log("setting user repo:");
     this.service.setRepository('users');
   }
 

@@ -4,9 +4,11 @@
       <div class="row">
         <div class="col-md-12">
           <h1>Movies catalogue</h1>
+          <span *ngIf="isLoggedIn()">hello, {{user.firstName}}. <a href="#" (click)="logout()">Log out</a></span>
+          <span *ngIf="!isLoggedIn()">hello, stranger. <a routerLink="/users/login">Log in</a></span>
         </div>
         <div class="col-md-12">
-          <h2>Hi {{currentUser.nick}}</h2>
+          <!--<h2>Hi {{currentUser.nick}}</h2>-->
         </div>
       </div>
     </div>

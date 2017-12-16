@@ -13,14 +13,14 @@ export class RestService {
 
 
   //private baseUrl = 'https://jsonplaceholder.typicode.com/posts';
-  private baseUrl = 'http://localhost:8080/';
-  private repository = this.baseUrl;
+  protected baseUrl = 'http://localhost:8080/';
+  protected repository = this.baseUrl;
 
   public setRepository(name: string) {
     this.repository = this.baseUrl + name;
   }
 
-  constructor(private http: HttpClient) {
+  constructor(protected http: HttpClient) {
   }
 
   get(): Observable<any[]> {
@@ -42,5 +42,5 @@ export class RestService {
   delete(id): Observable<any> {
     return this.http.delete<any>(`${this.repository}/${id}`);
   }
-  
+
 }

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../../models/user.model';
 import {RestService} from '../../../services/rest.service';
 import {UserService} from '../../../services/user.service';
@@ -23,11 +23,12 @@ export class UserLoginComponent extends UserCommonComponent implements OnInit {
   returnUrl: string;
   loading = false;
 
-  constructor(protected service: RestService, protected router: Router, private route: ActivatedRoute, private userService: UserService) {
+  constructor(protected service: UserService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
   }
 
   ngOnInit() {
+    super.ngOnInit();
     this.route.params.subscribe(params => {
       if (!isNullOrUndefined(params['id'])) {
         this.service.find(params['id']).subscribe(res => this.setFormForEdit(res));
@@ -42,15 +43,8 @@ export class UserLoginComponent extends UserCommonComponent implements OnInit {
 
   login() {
     this.loading = true;
-    this.userService.login(this.user.mail, this.user.password)
-      .subscribe(
-        data => {
-          //this.router.navigate([this.returnUrl]);
-        },
-        error => {
-          //error
-          this.loading = false;
-        });
+    this.service.login(this.user.mail, this.user.password)
+      .subscribe(() => this.toIndexPage());
   }
 
   private setFormForEdit(user: User) {

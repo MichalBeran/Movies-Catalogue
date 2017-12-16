@@ -132,6 +132,7 @@ const routes: Routes = [
       },
       {
         path: 'users',
+        pathMatch: 'prefix',
         component: UserComponent,
         children: [
           {

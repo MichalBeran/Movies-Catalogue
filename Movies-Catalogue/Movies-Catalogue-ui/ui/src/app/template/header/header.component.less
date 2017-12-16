@@ -9,12 +9,21 @@ header {
     background: @clr-header-top;
     display: flex;
     align-items: center;
+
     h1 {
       margin:0;
       font-family: "Roboto", sans-serif;
       font-size: 22px;
       font-weight: 300;
+    }
+    h1,span,a{
       color: @clr-header-link;
+      &:hover{
+        counter-reset:@clr-header-link;
+      }
+    }
+    a{
+      text-decoration:underline;
     }
   }
   #header-bottom {

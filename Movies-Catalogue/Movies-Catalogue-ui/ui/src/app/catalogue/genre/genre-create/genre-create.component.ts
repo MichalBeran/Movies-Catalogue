@@ -4,6 +4,7 @@ import {RestService} from '../../../services/rest.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNullOrUndefined} from 'util';
 import {GenreCommonComponent} from '../genre.common.component';
+import {AppHelper} from '../../../app.helper';
 
 /**
  * @author Marek Urban
@@ -55,4 +56,6 @@ export class GenreCreateComponent extends GenreCommonComponent implements OnInit
     this.genre = genre;
     this.editing = true;
   }
+
+
 }

@@ -1,10 +1,8 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {Http, Headers, Response } from '@angular/http';
-import {User} from '../../../models/user.model';
 import {Observable} from 'rxjs/Observable';
 import {RestService} from "./rest.service";
-import 'rxjs/add/operator/map'
+import 'rxjs/add/operator/map';
 
 
 const HttpOptions = {
@@ -12,29 +10,23 @@ const HttpOptions = {
 }
 
 @Injectable()
-export class UserService{
+export class UserService extends RestService {
 
-  private baseUrl = 'http://localhost:8080/';
-  private repository = this.baseUrl;
   public token: string;
 
-  constructor(private http: HttpClient) {
-    var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-    this.token = currentUser && currentUser.token;
+  constructor(protected http: HttpClient) {
+    super(http);
+
+    // const currentUser = JSON.parse(localStorage.getItem('currentUser'));
   }
 
   login(mail: String, password: String): Observable<any> {
-    return this.http.post<any>(this.repository, {mail: mail, password: password}, HttpOptions)
-      .map((response: Response) => {
+    return this.http.post<any>(`${this.repository}/login`, {mail: mail, password: password}, HttpOptions)
+      .map(user => {
         // login successful if there's a jwt token in the response
-        let token = response.json() && response.json().token;
-        if (token) {
-          // set token property
-          this.token = token;
-
+        if (user && user.id) {
           // store username and jwt token in local storage to keep user logged in between page refreshes
-          localStorage.setItem('currentUser', JSON.stringify({ mail: mail, token: token }));
-
+          localStorage.setItem('currentUser', JSON.stringify(user));
           // return true to indicate successful login
           return true;
         } else {

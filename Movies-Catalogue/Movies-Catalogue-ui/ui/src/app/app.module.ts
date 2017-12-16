@@ -38,6 +38,8 @@ import {UserIndexComponent} from './catalogue/user/user-index/user-index.compone
 import {UserRegisterComponent} from './catalogue/user/user-register/user-register.component';
 import {UserCommonComponent} from './catalogue/user/user.common.component';
 import {UserLoginComponent} from "./catalogue/user/user-login/user-login.component";
+import {AppHelper} from "./app.helper";
+import {UserService} from "./services/user.service";
 
 
 @NgModule({
@@ -81,7 +83,7 @@ import {UserLoginComponent} from "./catalogue/user/user-login/user-login.compone
     HttpClientModule,
     FormsModule
   ],
-  providers: [RestService],
+  providers: [RestService, AppHelper, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -5,6 +5,8 @@
  */
 package cz.muni.fi.pa165.dao;
 
+import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -68,8 +70,19 @@ public class MovieDaoImpl implements MovieDao{
 
     @Override
     public void delete(Long id) {
-        Movie entity = findById(id);
-        em.remove(entity);
+        Movie movie = findById(id);
+        // fix for ManyToMany relationship from the owning entities
+        List<Genre> genres = movie.getGenres();
+        for (Genre genre : genres) {
+            genre.getMovies().remove(movie);
+            em.merge(genre);
+        }
+        List<Actor> actors = movie.getActors();
+        for (Actor actor : actors) {
+            actor.getMovies().remove(movie);
+            em.merge(actor);
+        }
+        em.remove(movie);
     }
     
 }

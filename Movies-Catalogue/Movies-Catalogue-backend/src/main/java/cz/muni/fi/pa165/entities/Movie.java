@@ -32,18 +32,18 @@ public class Movie {
     @NotNull
     private LocalDate dateOfRelease;
 
-    @ManyToMany(mappedBy = "movies", cascade=CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "movies")
     private List<Genre> genres;
 
     @NotNull
-    @ManyToMany(mappedBy = "movies", cascade=CascadeType.REMOVE)
+    @ManyToMany(mappedBy = "movies")
     private List<Actor> actors;
 
     @NotNull
-    @ManyToOne(cascade=CascadeType.REMOVE)
+    @ManyToOne
     private Director director;
 
-    @OneToMany(mappedBy = "movie", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "movie")
     private List<Rating> ratings;
 
     public List<Rating> getRatings() {

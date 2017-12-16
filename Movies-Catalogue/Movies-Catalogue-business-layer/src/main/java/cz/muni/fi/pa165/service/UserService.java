@@ -15,7 +15,7 @@ public interface UserService {
     /**
      * Check if user can sign in
      */
-    boolean signIn(User u, String password);
+    User signIn(User u, String password);
     /**
      * Check if user is admin.
      */

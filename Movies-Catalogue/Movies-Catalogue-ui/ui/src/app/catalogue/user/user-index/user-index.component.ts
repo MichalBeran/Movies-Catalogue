@@ -3,7 +3,8 @@ import {RestService} from '../../../services/rest.service';
 import {User} from '../../../models/user.model';
 import {UserComponent} from '../user.component';
 import {Router} from '@angular/router';
-import {UserCommonComponent} from "../user.common.component";
+import {UserCommonComponent} from '../user.common.component';
+import {UserService} from '../../../services/user.service';
 
 @Component({
   selector: 'app-user-index',
@@ -16,7 +17,7 @@ export class UserIndexComponent extends UserCommonComponent implements OnInit {
 
   users: User[];
 
-  constructor(protected service: RestService, protected router: Router) {
+  constructor(protected service: UserService, protected router: Router) {
     super(service, router);
   }
 

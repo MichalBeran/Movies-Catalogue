@@ -15,7 +15,7 @@ public interface UserFacade {
     /**
      * Check if user can sign in
      */
-    boolean signIn(UserDto u, String password);
+    UserDto signIn(UserDto u, String password);
     /**
      * Check if user is admin.
      */

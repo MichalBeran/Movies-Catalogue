@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.UserDto;
+import cz.muni.fi.pa165.dto.UserLoginDto;
 import cz.muni.fi.pa165.facade.UserFacade;
 import cz.muni.fi.pa165.rest.Api;
 import org.slf4j.Logger;
@@ -44,6 +45,17 @@ public class UsersController {
         UserDto userDto = userFacade.findUserById(id);
         if(userDto == null){
             throw new Exception("NOT FOUND");
+        }
+        return userDto;
+    }
+
+    @RequestMapping(value="/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto login(@RequestBody UserLoginDto dto) throws Exception {
+        UserDto loginUser = new UserDto();
+        loginUser.setMail(dto.getMail());
+        UserDto userDto = userFacade.signIn(loginUser, dto.getPassword());
+        if(userDto == null){
+            throw new Exception("LOGIN FAILED");
         }
         return userDto;
     }

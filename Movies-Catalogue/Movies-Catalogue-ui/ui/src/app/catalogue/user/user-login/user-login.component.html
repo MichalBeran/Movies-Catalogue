@@ -2,14 +2,20 @@
   {{title}}
 </h2>
 
-<form name="form" (ngSubmit)="f.form.valid && login()" #f="ngForm" novalidate>
+<form name="missionForm" #userForm="ngForm" (ngSubmit)="userForm.form.valid && login()">
   <div class="form-group">
     <label for="user-mail">Mail</label>
-    <textarea [(ngModel)]="user.mail" #name="ngModel" name="user-mail" class="form-control" id="user-mail" rows="3"></textarea>
+    <input type="email" [(ngModel)]="user.mail" #mail="ngModel" name="mail" class="form-control" id="user-mail" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required [ngClass]="{'is-invalid': invalid(mail)}">
+    <div *ngIf="invalid(mail)" class="invalid-feedback">
+      Please enter a valid e-mail.
+    </div>
   </div>
   <div class="form-group">
     <label for="user-password">Password</label>
-    <textarea [(ngModel)]="user.password" #name="ngModel" name="user-password" class="form-control" id="user-password" rows="3"></textarea>
+    <input type="password" [(ngModel)]="user.password" #pass="ngModel" name="user-password" class="form-control" id="user-password" required [ngClass]="{'is-invalid': invalid(password)}">
+    <div *ngIf="invalid(password)" class="invalid-feedback">
+      Please enter your password.
+    </div>
   </div>
   <div class="form-group">
     <button [disabled]="loading" class="btn btn-primary">Login</button>
@@ -17,4 +23,5 @@
     <a routerLink="/users/create" class="btn btn-link">Register</a>
   </div>
 </form>
+
 

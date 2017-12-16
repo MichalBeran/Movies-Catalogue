@@ -23,10 +23,18 @@ export class HeaderComponent implements OnInit {
   loadUser() {
     const parsed = JSON.parse(localStorage.getItem('currentUser'));
     this.user = !isNullOrUndefined(parsed) ? parsed : this.user;
+    console.log("user loaded")
   }
 
   isLoggedIn() {
     return !isNullOrUndefined(this.user.id);
+  }
+
+  isAdmin(){
+    if(this.isLoggedIn()){
+      return this.user.admin;
+    }
+    return false;
   }
 
   logout() {

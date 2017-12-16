@@ -35,16 +35,25 @@ export class UserLoginComponent extends UserCommonComponent implements OnInit {
       }
     });
     // reset login status
-    //this.userService.logout();
+    this.service.logout();
 
     // get return url from route parameters or default to '/'
-    //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
   }
 
   login() {
     this.loading = true;
     this.service.login(this.user.mail, this.user.password)
-      .subscribe(() => this.toIndexPage());
+      .subscribe(
+        data => {
+          this.toIndexPage();
+
+          //this.router.navigateByUrl(this.returnUrl);
+        },
+        error => {
+          this.loading = false;
+        });
+    //.subscribe(() => this.toIndexPage());
   }
 
   private setFormForEdit(user: User) {

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../../models/user.model';
-import {RestService} from '../../../services/rest.service';
+import {UserService} from '../../../services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNullOrUndefined} from 'util';
 import {UserCommonComponent} from "../user.common.component";
@@ -20,7 +20,7 @@ export class UserRegisterComponent extends UserCommonComponent implements OnInit
   title = 'Register';
   editing = false;
 
-  constructor(protected service: RestService, protected router: Router, private route: ActivatedRoute) {
+  constructor(protected service: UserService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
   }
 

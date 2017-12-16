@@ -5,6 +5,8 @@
  */
 package cz.muni.fi.pa165.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -17,7 +19,10 @@ public class Rating {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
+
+    @Length(max = 600)
     private String description;
+
     private int overallRating;
     private int scenarioRating;
     private int actorsRating;

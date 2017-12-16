@@ -1,5 +1,8 @@
 package cz.muni.fi.pa165.entities;
 
+import org.hibernate.annotations.Type;
+import org.hibernate.validator.constraints.Length;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
@@ -20,8 +23,10 @@ public class Movie {
     @NotNull
     private String title;
 
+    @Length(max = 600)
     private String description;
 
+    @Type(type="text")
     private String image;
 
     @NotNull

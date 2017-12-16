@@ -5,15 +5,13 @@
  */
 package cz.muni.fi.pa165.entities;
 
+import org.hibernate.validator.constraints.Length;
+
 import java.util.Collections;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -27,6 +25,8 @@ public class Genre {
     private Long id;
     @NotNull
     private String name;
+
+    @Length(max = 600)
     private String description;
     @ManyToMany
     private List<Movie> movies;

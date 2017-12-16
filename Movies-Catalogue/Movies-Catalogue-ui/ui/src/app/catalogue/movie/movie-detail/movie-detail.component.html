@@ -1,3 +1,25 @@
-<p>
-  movie-detail works!
-</p>
+<h2>
+  Detail
+</h2>
+
+<form #movieForm="ngForm" name="missionForm">
+  <div class="form-group">
+    <label for="movie-title">Name</label>
+    <input disabled [(ngModel)]="movie.title" #name="ngModel" name="movie-title" type="text" class="form-control" id="movie-title" placeholder="Mash">
+  </div>
+  <div class="form-group">
+    <label for="movie-description">Description</label>
+    <textarea disabled [(ngModel)]="movie.description" #name="ngModel" name="movie-description" class="form-control" id="movie-description" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="movie-image">Image</label>
+    <img src="{{movie.image}}">
+  </div>
+  <div class="form-group">
+    <label for="movie-dateOfRelease">Date of Release</label>
+    <textarea disabled [(ngModel)]="movie.dateOfRelease" #name="ngModel" name="movie-dateOfRelease" class="form-control" id="movie-dateOfRelease" rows="3"></textarea>
+  </div>
+  <a routerLink="/movies/edit/{{movie.id}}" class="btn btn-dark btn-sm">edit</a>
+  <button (click)="remove(movie.id)" class="btn btn-danger btn-sm">delete</button>
+
+</form>

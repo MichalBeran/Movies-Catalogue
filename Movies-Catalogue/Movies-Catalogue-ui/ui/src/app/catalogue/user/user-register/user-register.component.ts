@@ -4,7 +4,7 @@ import {UserService} from '../../../services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNullOrUndefined} from 'util';
 import {UserCommonComponent} from "../user.common.component";
-
+import {AppHelper} from '../../../app.helper';
 /**
  * @author Michal Beran
  */
@@ -43,7 +43,7 @@ export class UserRegisterComponent extends UserCommonComponent implements OnInit
   }
 
   redirect(created: User) {
-    this.router.navigateByUrl(`users/detail/${created.id}`);
+    this.router.navigateByUrl(`users/index`);
   }
 
   remove(id) {

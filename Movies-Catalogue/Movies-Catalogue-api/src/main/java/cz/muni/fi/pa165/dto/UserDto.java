@@ -12,6 +12,7 @@ public class UserDto {
     private String firstName;
     private String lastName;
     private String mail;
+    private boolean admin;
 
     public Long getId() {
         return id;
@@ -59,6 +60,14 @@ public class UserDto {
 
     public void setMail(String mail) {
         this.mail = mail;
+    }
+
+    public void setAdmin(boolean admin){
+        this.admin = admin;
+    }
+
+    public boolean getAdmin(){
+        return this.admin;
     }
 
     @Override

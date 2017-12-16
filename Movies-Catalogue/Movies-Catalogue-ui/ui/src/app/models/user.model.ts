@@ -8,5 +8,4 @@ export class User extends BaseModel {
   lastName: string;
   password: string;
 
-
 }

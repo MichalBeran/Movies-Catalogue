@@ -36,7 +36,10 @@ import {GenreCommonComponent} from './catalogue/genre/genre.common.component';
 import {UserComponent} from './catalogue/user/user.component';
 import {UserIndexComponent} from './catalogue/user/user-index/user-index.component';
 import {UserRegisterComponent} from './catalogue/user/user-register/user-register.component';
-import {UserCommonComponent} from "./catalogue/user/user.common.component";
+import {UserCommonComponent} from './catalogue/user/user.common.component';
+import {UserLoginComponent} from "./catalogue/user/user-login/user-login.component";
+import {AppHelper} from "./app.helper";
+import {UserService} from "./services/user.service";
 
 
 @NgModule({
@@ -71,7 +74,8 @@ import {UserCommonComponent} from "./catalogue/user/user.common.component";
     UserComponent,
     UserIndexComponent,
     UserRegisterComponent,
-    UserCommonComponent
+    UserCommonComponent,
+    UserLoginComponent
   ],
   imports: [
     BrowserModule,
@@ -79,7 +83,7 @@ import {UserCommonComponent} from "./catalogue/user/user.common.component";
     HttpClientModule,
     FormsModule
   ],
-  providers: [RestService],
+  providers: [RestService, AppHelper, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

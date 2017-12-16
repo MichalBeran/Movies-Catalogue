@@ -40,9 +40,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public boolean signIn(User u, String password) {
+    public User signIn(User u, String password) {
         User user = userDao.findByMail(u.getMail());
-        return(user.getPassword().equals(getSha256(password)));
+        if (user.getPassword().equals(getSha256(password))){
+            return user;
+        }else{
+            return null;
+        }
     }
 
     @Override

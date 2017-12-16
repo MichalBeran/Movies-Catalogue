@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RestService} from '../../services/rest.service';
 import {Router} from '@angular/router';
+import {AppHelper} from '../../app.helper';
 
 /**
  * @author Marek Urban
@@ -9,6 +10,7 @@ import {Router} from '@angular/router';
   template: ''
 })
 export class GenreCommonComponent implements OnInit {
+
 
   constructor(protected service: RestService, protected router: Router) {
   }
@@ -28,4 +30,9 @@ export class GenreCommonComponent implements OnInit {
   protected toIndexPage() {
     this.router.navigateByUrl(`genres/index`);
   }
+
+  invalid(model: any): boolean {
+    return AppHelper.invalid(model);
+  }
+
 }

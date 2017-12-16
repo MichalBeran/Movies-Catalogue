@@ -30,8 +30,8 @@ public class UserFacadeImpl implements UserFacade {
     }
 
     @Override
-    public boolean signIn(UserDto u, String password) {
-        return userService.signIn(mapper.mapTo(u, User.class), password);
+    public UserDto signIn(UserDto u, String password) {
+        return mapper.mapTo(userService.signIn(mapper.mapTo(u, User.class), password), UserDto.class);
     }
 
     @Override

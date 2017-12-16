@@ -57,6 +57,7 @@ public class UsersController {
         if(userDto == null){
             throw new Exception("LOGIN FAILED");
         }
+        userDto.setAdmin(userFacade.isAdmin(userDto));
         return userDto;
     }
 }

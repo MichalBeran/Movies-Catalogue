@@ -30,6 +30,13 @@ export class HeaderComponent implements OnInit {
     return !isNullOrUndefined(this.user.id);
   }
 
+  isAdmin(){
+    if(this.isLoggedIn()){
+      return this.user.admin;
+    }
+    return false;
+  }
+
   logout() {
     this.service.logout();
     this.toMovies();

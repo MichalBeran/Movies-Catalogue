@@ -70,6 +70,7 @@ public class DatabaseSeeder {
         admin.setMail("admin@thisapp.dev");
         String passw = "DROP TABLE users;";
         admin.setId(userFacade.registerUser(admin, passw));
+        userFacade.makeAdmin(admin);
 
         pepa = new UserDto();
         pepa.setFirstName("Pepa");

@@ -102,7 +102,7 @@ public class UserFacadeImplTest extends AbstractJUnit4SpringContextTests {
     public void testSignIn(){
         Long id = userFacade.registerUser(userDto, "pepik");
 
-        assertThat(userFacade.signIn(userDto, "pepik")).isTrue();
+        assertThat(userFacade.signIn(userDto, "pepik")).isNotNull();
     }
 
     @Test

@@ -47,4 +47,15 @@ public class UsersController {
         }
         return userDto;
     }
+
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public UserDto login(@RequestBody String mail, @RequestBody String password) throws Exception {
+        UserDto loginUser = new UserDto();
+        loginUser.setMail(mail);
+        UserDto userDto = userFacade.signIn(loginUser, password);
+        if(userDto == null){
+            throw new Exception("LOGIN FAILED");
+        }
+        return userDto;
+    }
 }

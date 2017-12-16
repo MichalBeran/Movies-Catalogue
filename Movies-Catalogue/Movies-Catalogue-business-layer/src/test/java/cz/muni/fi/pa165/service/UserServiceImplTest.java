@@ -186,7 +186,7 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests {
 
         when(userDao.findByMail(user1.getMail())).thenReturn(user1);
 
-        assertThat(userService.signIn(user1, "pass")).isTrue();
+        assertThat(userService.signIn(user1, "pass")).isNotNull();
     }
 
     @Test
@@ -195,7 +195,7 @@ public class UserServiceImplTest extends AbstractJUnit4SpringContextTests {
 
         when(userDao.findByMail(user1.getMail())).thenReturn(user1);
 
-        assertThat(userService.signIn(user1, "password")).isFalse();
+        assertThat(userService.signIn(user1, "password")).isNull();
     }
 
     @Test

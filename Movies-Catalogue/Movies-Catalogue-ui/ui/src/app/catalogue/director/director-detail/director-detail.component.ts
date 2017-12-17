@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Director} from '../../../models/director.model';
 import {RestService} from '../../../services/rest.service';
-import DirectorrComponent} from '../director.component';
+import {DirectorComponent} from '../director.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {mergeMap} from 'rxjs/operators';
 import {Director} from '../director.common.component';

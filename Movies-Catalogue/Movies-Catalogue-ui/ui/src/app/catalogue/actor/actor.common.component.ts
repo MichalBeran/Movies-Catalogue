@@ -7,6 +7,7 @@ import {AppHelper} from '../../app.helper';
   template: ''
 })
 export class ActorCommonComponent implements OnInit {
+  public invalid = AppHelper.invalid;
 
 
   constructor(protected service: RestService, protected router: Router) {

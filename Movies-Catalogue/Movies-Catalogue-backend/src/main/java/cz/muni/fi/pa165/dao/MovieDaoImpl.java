@@ -8,6 +8,8 @@ package cz.muni.fi.pa165.dao;
 import cz.muni.fi.pa165.entities.Actor;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
+
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -40,6 +42,27 @@ public class MovieDaoImpl implements MovieDao{
                     + "attributes set or it has set Id already");
         }
         em.persist(entity);
+        List<Genre> genres = entity.getGenres();
+        List<Actor> actors = entity.getActors();
+        for(Genre genre: genres){
+            Genre emGenre = em.createQuery("SELECT g from Genre g where id=:id", Genre.class).setParameter("id", genre.getId()).getSingleResult();
+            List<Movie> movies = emGenre.getMovies() == null ? new ArrayList<>() : emGenre.getMovies();
+            if(!movies.contains(entity)){
+                movies.add(entity);
+                emGenre.setMovies(movies);
+            }
+            em.merge(emGenre);
+        }
+        for(Actor actor: actors){
+            Actor emActor = em.createQuery("SELECT a from Actor a where id=:id", Actor.class).setParameter("id", actor.getId()).getSingleResult();
+            List<Movie> movies = emActor.getMovies() == null ? new ArrayList<>() : emActor.getMovies();
+            if(!movies.contains(entity)) {
+                movies.add(entity);
+                emActor.setMovies(movies);
+            }
+            em.merge(emActor);
+        }
+
     }
 
     @Override
@@ -53,7 +76,8 @@ public class MovieDaoImpl implements MovieDao{
     @Override
     public List<Movie> findAll() {
         Query query = em.createQuery("SELECT m FROM Movie m ORDER by m.dateOfRelease", Movie.class);
-        return query.getResultList();
+        List<Movie> movies = query.getResultList();
+        return movies;
     }
 
     @Override
@@ -74,12 +98,16 @@ public class MovieDaoImpl implements MovieDao{
         // fix for ManyToMany relationship from the owning entities
         List<Genre> genres = movie.getGenres();
         for (Genre genre : genres) {
-            genre.getMovies().remove(movie);
+            List<Movie> movies = genre.getMovies();
+            movies.remove(movie);
+            genre.setMovies(movies);
             em.merge(genre);
         }
         List<Actor> actors = movie.getActors();
         for (Actor actor : actors) {
-            actor.getMovies().remove(movie);
+            List<Movie> movies = actor.getMovies();
+            movies.remove(movie);
+            actor.setMovies(movies);
             em.merge(actor);
         }
         em.remove(movie);

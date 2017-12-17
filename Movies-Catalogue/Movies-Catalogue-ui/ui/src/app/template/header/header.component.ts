@@ -12,18 +12,15 @@ import {AppHelper} from "../../app.helper";
 })
 export class HeaderComponent implements OnInit {
 
-  user = new User();
-
   constructor(private service: UserService, private router: Router) { }
 
   ngOnInit() {
     this.service.setRepository('users');
-    this.loadUser();
   }
 
-  loadUser() {
-    this.user =  AppHelper.getAuthenticated();
-    console.log("user loaded");
+  getLoggedUser(){
+    console.log("GET LOGGED USER");
+    return AppHelper.getAuthenticated();
   }
 
   isLoggedIn() {

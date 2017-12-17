@@ -7,11 +7,11 @@ export class AppHelper {
   }
 
   static getAuthenticated(): User {
-    return !isNullOrUndefined(JSON.parse(localStorage.getItem('currentUser'))) ? JSON.parse(localStorage.getItem('currentUser')) : new User();
+    return JSON.parse(localStorage.getItem('currentUser'));
   }
 
   static isAuthenticated(): boolean{
-    return !isNullOrUndefined(AppHelper.getAuthenticated().id);
+    return !isNullOrUndefined(AppHelper.getAuthenticated());
   }
 
   static isAdmin() : boolean{

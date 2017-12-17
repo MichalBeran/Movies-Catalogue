@@ -85,8 +85,12 @@ const routes: Routes = [
             component: MovieCreateComponent
           },
           {
-            path: 'detail',
+            path: 'detail/:id',
             component: MovieDetailComponent
+          },
+          {
+            path: 'edit/:id',
+            component: MovieCreateComponent
           }
         ]
       },
@@ -108,8 +112,12 @@ const routes: Routes = [
             component: ActorCreateComponent
           },
           {
-            path: 'detail',
+            path: 'detail/:id',
             component: ActorDetailComponent
+          },
+          {
+            path: 'edit/:id',
+            component: ActorCreateComponent
           }
         ]
       },
@@ -131,8 +139,12 @@ const routes: Routes = [
             component: DirectorCreateComponent
           },
           {
-            path: 'detail',
+            path: 'detail/:id',
             component: DirectorDetailComponent
+          },
+          {
+            path: 'edit/:id',
+            component: DirectorCreateComponent
           }
         ]
       },
@@ -159,7 +171,7 @@ const routes: Routes = [
             component: UserLoginComponent
           },
           {
-            path: 'detail',
+            path: 'detail/:id',
             component: UserDetailComponent
           }
         ]
@@ -182,8 +194,12 @@ const routes: Routes = [
             component: RatingCreateComponent
           },
           {
-            path: 'detail',
+            path: 'detail/:id',
             component: RatingDetailComponent
+          },
+          {
+            path: 'edit/:id',
+            component: RatingCreateComponent
           }
         ]
       },

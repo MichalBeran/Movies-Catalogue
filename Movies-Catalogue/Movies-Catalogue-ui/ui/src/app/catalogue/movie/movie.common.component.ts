@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RestService} from '../../services/rest.service';
 import {Router} from '@angular/router';
+import {AppHelper} from "../../app.helper";
 
 /**
 * @author Maros Grman
@@ -9,6 +10,10 @@ import {Router} from '@angular/router';
   template: ''
 })
 export class MovieCommonComponent implements OnInit {
+  public invalid = AppHelper.invalid;
+  public isUserLogged = AppHelper.isAuthenticated;
+  public isUserAdmin = AppHelper.isAdmin;
+  public getLoggedUser = AppHelper.getAuthenticated;
 
   constructor(protected service: RestService, protected router: Router) {
   }

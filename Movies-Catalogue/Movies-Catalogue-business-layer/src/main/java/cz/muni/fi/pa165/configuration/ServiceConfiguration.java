@@ -1,5 +1,9 @@
 package cz.muni.fi.pa165.configuration;
 
+import cz.muni.fi.pa165.dto.detail.MovieDetailDto;
+import cz.muni.fi.pa165.dto.view.ActorViewDto;
+import cz.muni.fi.pa165.dto.view.DirectorViewDto;
+import cz.muni.fi.pa165.dto.view.GenreViewDto;
 import cz.muni.fi.pa165.PersistenceApplicationContext;
 import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.entities.Actor;

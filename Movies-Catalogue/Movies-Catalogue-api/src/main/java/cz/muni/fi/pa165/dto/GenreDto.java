@@ -1,5 +1,6 @@
 package cz.muni.fi.pa165.dto;
 
+import java.util.List;
 import java.util.Objects;
 
 /**
@@ -10,6 +11,7 @@ public class GenreDto {
     private Long id;
     private String name;
     private String description;
+    private List<MovieDto> movies;
 
     public Long getId() {
         return id;
@@ -33,6 +35,14 @@ public class GenreDto {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<MovieDto> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<MovieDto> movies) {
+        this.movies = movies;
     }
 
     @Override

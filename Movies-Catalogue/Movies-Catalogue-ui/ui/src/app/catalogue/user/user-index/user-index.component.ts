@@ -28,6 +28,7 @@ export class UserIndexComponent extends UserCommonComponent implements OnInit {
   remove(id) {
     super.delete(id, () => this.refresh());
   }
+
   refresh() {
     this.service.get().subscribe(list => this.users = list);
   }

@@ -12,6 +12,9 @@ import {AppHelper} from '../../app.helper';
 })
 export class UserCommonComponent implements OnInit {
   public invalid = AppHelper.invalid;
+  public isUserLogged = AppHelper.isAuthenticated;
+  public isUserAdmin = AppHelper.isAdmin;
+  public getLoggedUser = AppHelper.getAuthenticated;
 
   constructor(protected service: UserService, protected router: Router) {
   }

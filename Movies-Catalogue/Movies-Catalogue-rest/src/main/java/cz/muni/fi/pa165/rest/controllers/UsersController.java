@@ -7,6 +7,7 @@ import cz.muni.fi.pa165.rest.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -79,5 +80,16 @@ public class UsersController {
     public boolean unmakeAdmin(@RequestBody UserDto dto) throws Exception {
         userFacade.unmakeAdmin(dto);
         return userFacade.isAdmin(dto);
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity delete(@PathVariable("id") Long id) throws Exception {
+        try {
+            UserDto stored = userFacade.findUserById(id);
+            userFacade.delete(stored);
+            return ResponseEntity.ok().build();
+        } catch (Exception ex) {
+            return ResponseEntity.notFound().build();
+        }
     }
 }

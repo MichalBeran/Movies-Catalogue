@@ -3,6 +3,11 @@ package cz.muni.fi.pa165;
 import com.google.common.io.Resources;
 import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.facade.*;
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
+import java.net.URL;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 @Component
 @Transactional
@@ -135,7 +142,7 @@ public class DatabaseSeeder {
         actors.add(jackie);
         foreigner.setActors(actors);
         foreigner.setDirector(martin);
-        foreigner.setImage(Resources.getResource("foreigner-img-base64.txt").toString());
+        foreigner.setImage(imageRead(Resources.getResource("foreigner-img-base64.txt")));
         foreignerId = movieFacade.createMovie(foreigner);
 
         wonderWoman = new CreateMovieDto();
@@ -151,7 +158,7 @@ public class DatabaseSeeder {
         actors.add(gal);
         wonderWoman.setActors(actors);
         wonderWoman.setDirector(patty);
-        wonderWoman.setImage(Resources.getResource("wonder-woman-img-base64.txt").toString());
+        wonderWoman.setImage(imageRead(Resources.getResource("wonder-woman-img-base64.txt")));
         wonderWomanId = movieFacade.createMovie(wonderWoman);
     }
 
@@ -173,5 +180,23 @@ public class DatabaseSeeder {
         pepaRating.setUser(admin);
         pepaRating.setDescription("Didn't like it at all");
         pepaRating.setId(ratingFacade.create(pepaRating));
+    }
+    
+    private String imageRead(URL url){
+        try {
+            String filePath = url.getPath();
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+            try {
+                String result = br.readLine();
+                System.out.println(result);
+                return result;
+                
+            } catch (IOException ex) {
+                Logger.getLogger(DatabaseSeeder.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(DatabaseSeeder.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

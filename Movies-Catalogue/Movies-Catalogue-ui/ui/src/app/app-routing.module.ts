@@ -35,6 +35,11 @@ const routes: Routes = [
     component: CatalogueComponent,
     children: [
       {
+        path: '',
+        redirectTo: 'movies/index',
+        pathMatch: 'full'
+      },
+      {
         path: 'genres',
         component: GenreComponent,
         children: [

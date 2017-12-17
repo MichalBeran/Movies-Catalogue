@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from '../../../models/user.model';
-import {RestService} from '../../../services/rest.service';
 import {UserService} from '../../../services/user.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {isNullOrUndefined} from 'util';
-import {UserCommonComponent} from "../user.common.component";
+import {UserCommonComponent} from '../user.common.component';
 
 /**
  * @author Michal Beran

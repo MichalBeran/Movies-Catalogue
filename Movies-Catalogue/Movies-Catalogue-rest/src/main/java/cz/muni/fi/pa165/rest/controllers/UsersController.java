@@ -50,12 +50,12 @@ public class UsersController {
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public UserDto get(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<UserDto> get(@PathVariable("id") Long id) throws Exception {
         UserDto userDto = userFacade.findUserById(id);
         if(userDto == null){
-            throw new Exception("NOT FOUND");
+            return ResponseEntity.notFound().build();
         }
-        return userDto;
+        return ResponseEntity.ok(userDto);
     }
 
     @RequestMapping(value="/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

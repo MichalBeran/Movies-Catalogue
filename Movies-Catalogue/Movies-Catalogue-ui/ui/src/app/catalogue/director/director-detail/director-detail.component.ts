@@ -4,7 +4,7 @@ import {RestService} from '../../../services/rest.service';
 import {DirectorComponent} from '../director.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {mergeMap} from 'rxjs/operators';
-import {Director} from '../director.common.component';
+import {DirectorCommonComponent} from '../director.common.component';
 
 @Component({
   selector: 'app-director-detail',

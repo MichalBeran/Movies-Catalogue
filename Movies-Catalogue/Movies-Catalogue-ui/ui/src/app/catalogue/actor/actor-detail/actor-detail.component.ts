@@ -4,7 +4,7 @@ import {RestService} from '../../../services/rest.service';
 import {ActorComponent} from '../actor.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {mergeMap} from 'rxjs/operators';
-import {Actor} from '../actor.common.component';
+import {ActorCommonComponent} from '../actor.common.component';
 
 @Component({
   selector: 'app-actor-detail',

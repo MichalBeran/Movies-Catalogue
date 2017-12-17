@@ -1,6 +1,6 @@
 import {BaseModel} from './base.model';
 
-export class Actor extends BaseModel {
+export class Director extends BaseModel {
   id?: number;
   firstName: string;
   lastName: string;

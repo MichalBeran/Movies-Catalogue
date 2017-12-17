@@ -48,12 +48,12 @@ public class MoviesController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<MovieDetailDto> get(@PathVariable("id") Long id) throws Exception {
-        MovieDetailDto dto = mapper.mapTo(movieFacade.findById(id), MovieDetailDto.class);
-        if (dto == null) {
-            // TODO: add exceptions to the project
+        try{
+            MovieDto dto = movieFacade.findById(id);
+            return ResponseEntity.ok(mapper.mapTo(dto, MovieDetailDto.class));
+        }catch(Exception e){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(mapper.mapTo(dto, MovieDetailDto.class));
     }
 
 

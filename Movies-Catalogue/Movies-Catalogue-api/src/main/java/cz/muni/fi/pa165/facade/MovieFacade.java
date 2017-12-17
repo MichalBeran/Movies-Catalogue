@@ -34,4 +34,5 @@ public interface MovieFacade {
     MovieDto findById(Long id);
     void delete(MovieDto dto);
     List<MovieDto> findAll();
+    MovieDto update(MovieDto dto);
 }

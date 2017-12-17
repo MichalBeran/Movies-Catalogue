@@ -1,3 +1,20 @@
-<p>
-  director-index works!
-</p>
+<h2>Directors</h2>
+<table class="table">
+  <thead>
+  <tr>
+    <th scope="col">Director name</th>
+    <th scope="col">Actions</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let director of directors">
+    <td>{{director.name}}</td>
+    <td>
+      <button class="btn btn-primary btn-sm">show movies</button>
+      <a routerLink="/directors/detail/{{director.id}}" class="btn btn-dark btn-sm">show detail</a>
+      <a routerLink="/directors/edit/{{director.id}}" class="btn btn-dark btn-sm">edit</a>
+      <button (click)="remove(director.id);" class="btn btn-danger btn-sm">delete</button>
+    </td>
+  </tr>
+  </tbody>
+</table>

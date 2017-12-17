@@ -1,3 +1,21 @@
-<p>
-  director-detail works!
-</p>
+<h2>
+  Detail
+</h2>
+
+<form #directorForm="ngForm" name="missionForm">
+  <div class="form-group">
+    <label for="director-firstName">Name</label>
+    <input disabled [(ngModel)]="director.firstName" #name="ngModel" name="director-firstName" type="text" class="form-control" id="director-firstName" placeholder="name">
+  </div>
+  <div class="form-group">
+    <label for="director-lastName">Description</label>
+    <textarea disabled [(ngModel)]="director.lastName" #name="ngModel" name="director-lastName" class="form-control" id="director-lastName" rows="3"></textarea>
+  </div>
+  <div class="form-group">
+    <label for="director-dateOfBirth">Description</label>
+    <textarea disabled [(ngModel)]="director.dateOfBirth" #name="ngModel" name="director-dateOfBirth" class="form-control" id="director-dateOfBirth" rows="3"></textarea>
+  </div>
+  <a routerLink="/director/edit/{{director.id}}" class="btn btn-dark btn-sm">edit</a>
+  <button (click)="remove(director.id)" class="btn btn-danger btn-sm">delete</button>
+
+</form>

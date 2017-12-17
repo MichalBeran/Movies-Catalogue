@@ -26,7 +26,15 @@ public class UsersController {
     private UserFacade userFacade;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UserDto> index() {return userFacade.findAllUsers();}
+    public List<UserDto> index() {
+        List<UserDto> list = userFacade.findAllUsers();
+        for(int i = 0; i<list.size(); i++){
+            UserDto u = list.get(i);
+            u.setAdmin(userFacade.isAdmin(u));
+            list.set(i, u);
+        }
+        return list;
+    }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
@@ -59,5 +67,17 @@ public class UsersController {
         }
         userDto.setAdmin(userFacade.isAdmin(userDto));
         return userDto;
+    }
+
+    @RequestMapping(value="/makeAdmin", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean makeAdmin(@RequestBody UserDto dto) throws Exception {
+        userFacade.makeAdmin(dto);
+        return userFacade.isAdmin(dto);
+    }
+
+    @RequestMapping(value="/unmakeAdmin", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public boolean unmakeAdmin(@RequestBody UserDto dto) throws Exception {
+        userFacade.unmakeAdmin(dto);
+        return userFacade.isAdmin(dto);
     }
 }

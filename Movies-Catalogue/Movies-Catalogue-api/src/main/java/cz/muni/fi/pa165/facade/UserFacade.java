@@ -48,4 +48,8 @@ public interface UserFacade {
      * Make user admin
      */
     void makeAdmin(UserDto u);
+    /**
+     * Make admin user only
+     */
+    void unmakeAdmin(UserDto u);
 }

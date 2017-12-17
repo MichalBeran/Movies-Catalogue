@@ -32,4 +32,11 @@ export class UserIndexComponent extends UserCommonComponent implements OnInit {
     this.service.get().subscribe(list => this.users = list);
   }
 
+  makeAdmin(model: User){
+    this.service.makeAdmin(model).subscribe(result => {model.admin = result; this.toIndexPage();});
+  }
+
+  unmakeAdmin(model: User){
+    this.service.unmakeAdmin(model).subscribe(result => {model.admin = result; this.toIndexPage();});
+  }
 }

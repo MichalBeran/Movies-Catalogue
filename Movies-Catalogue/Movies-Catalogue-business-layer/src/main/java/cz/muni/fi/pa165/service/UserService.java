@@ -48,4 +48,8 @@ public interface UserService {
      * Make user admin
      */
     void makeAdmin(User u);
+    /**
+     * Make admin user only
+     */
+    void unmakeAdmin(User u);
 }

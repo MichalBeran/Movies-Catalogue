@@ -73,4 +73,9 @@ public class UserFacadeImpl implements UserFacade {
     public void makeAdmin(UserDto u){
         userService.makeAdmin(mapper.mapTo(u, User.class));
     }
+
+    @Override
+    public void unmakeAdmin(UserDto u){
+        userService.unmakeAdmin(mapper.mapTo(u, User.class));
+    }
 }

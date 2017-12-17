@@ -102,6 +102,15 @@ public class UserServiceImpl implements UserService {
         userDao.update(databaseUser);
     }
 
+    @Override
+    public void unmakeAdmin(User u){
+        User databaseUser = userDao.findById(u.getId());
+        List<Role> roles = databaseUser.getRoles();
+        roles.remove(Role.ADMINISTRATOR);
+        databaseUser.setRoles(roles);
+        userDao.update(databaseUser);
+    }
+
     public static String getSha256(String value) {
         try{
             MessageDigest md = MessageDigest.getInstance("SHA-256");

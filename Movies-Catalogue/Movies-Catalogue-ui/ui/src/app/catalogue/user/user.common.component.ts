@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RestService} from '../../services/rest.service';
 import {Router} from '@angular/router';
-import {UserService} from "../../services/user.service";
+import {UserService} from '../../services/user.service';
 import {AppHelper} from '../../app.helper';
 
 /**
@@ -11,12 +11,13 @@ import {AppHelper} from '../../app.helper';
   template: ''
 })
 export class UserCommonComponent implements OnInit {
+  public invalid = AppHelper.invalid;
 
   constructor(protected service: UserService, protected router: Router) {
   }
 
   ngOnInit() {
-    console.log("setting user repo:");
+    console.log('setting user repo:');
     this.service.setRepository('users');
   }
 
@@ -32,7 +33,4 @@ export class UserCommonComponent implements OnInit {
     this.router.navigateByUrl(`users/index`);
   }
 
-  invalid(model: any): boolean {
-    return AppHelper.invalid(model);
-  }
 }

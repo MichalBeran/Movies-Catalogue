@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.rest;
 
 public class Api {
-    public static final String ROOT_URI_GENRES = "/genres";
-    public static final String ROOT_URI_USERS = "/users";
+    public static final String ROOT_API = "pa165/rest/";
+    public static final String ROOT_URI_GENRES = ROOT_API + "genres";
+    public static final String ROOT_URI_USERS = ROOT_API + "users";
 }

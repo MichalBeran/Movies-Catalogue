@@ -10,7 +10,7 @@ import {AppHelper} from '../../app.helper';
   template: ''
 })
 export class GenreCommonComponent implements OnInit {
-
+  public invalid = AppHelper.invalid;
 
   constructor(protected service: RestService, protected router: Router) {
   }
@@ -30,9 +30,4 @@ export class GenreCommonComponent implements OnInit {
   protected toIndexPage() {
     this.router.navigateByUrl(`genres/index`);
   }
-
-  invalid(model: any): boolean {
-    return AppHelper.invalid(model);
-  }
-
 }

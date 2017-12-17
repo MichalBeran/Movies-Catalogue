@@ -6,6 +6,10 @@ import cz.muni.fi.pa165.dto.view.DirectorViewDto;
 import cz.muni.fi.pa165.dto.view.GenreViewDto;
 import cz.muni.fi.pa165.PersistenceApplicationContext;
 import cz.muni.fi.pa165.dto.*;
+import cz.muni.fi.pa165.dto.detail.ActorDetailDto;
+import cz.muni.fi.pa165.dto.detail.DirectorDetailDto;
+import cz.muni.fi.pa165.dto.detail.GenreDetailDto;
+import cz.muni.fi.pa165.dto.view.MovieViewDto;
 import cz.muni.fi.pa165.entities.Actor;
 import cz.muni.fi.pa165.entities.Director;
 import cz.muni.fi.pa165.entities.Movie;
@@ -58,6 +62,14 @@ public class ServiceConfiguration {
                     .fields("genres", "genres", hintB(GenreViewDto.class))
                     .fields("actors", "actors", hintB(ActorViewDto.class))
                     .exclude("dateOfRelease");
+            mapping(ActorDto.class, ActorDetailDto.class)
+                    .fields("dateOfBirth", "dateOfBirth", FieldsMappingOptions.copyByReference())
+                    .fields("movies", "movies", hintB(MovieViewDto.class));
+            mapping(DirectorDto.class, DirectorDetailDto.class)
+                    .fields("dateOfBirth", "dateOfBirth", FieldsMappingOptions.copyByReference())
+                    .fields("movies", "movies", hintB(MovieViewDto.class));
+            mapping(GenreDto.class, GenreDetailDto.class)
+                    .fields("movies", "movies", hintB(MovieViewDto.class));
         }
     }
 }

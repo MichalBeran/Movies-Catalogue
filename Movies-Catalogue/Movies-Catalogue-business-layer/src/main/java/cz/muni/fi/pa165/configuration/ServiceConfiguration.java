@@ -17,6 +17,8 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
+import static org.dozer.loader.api.FieldsMappingOptions.hintB;
+
 /**
  * @author Michal
  */
@@ -37,9 +39,21 @@ public class ServiceConfiguration {
         protected void configure() {
             mapping(User.class, UserDto.class);
             mapping(CreateMovieDto.class, Movie.class).fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference());
-            mapping(MovieDto.class, Movie.class).fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference());
+            //mapping(MovieDto.class, Movie.class).fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference());
+            mapping(Movie.class, MovieDto.class)
+                    .fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference())
+                    .fields("genres", "genres", hintB(GenreDto.class))
+                    .fields("actors", "actors", hintB(ActorDto.class));
             mapping(DirectorDto.class, Director.class).fields("dateOfBirth", "dateOfBirth", FieldsMappingOptions.copyByReference());
             mapping(ActorDto.class, Actor.class).fields("dateOfBirth", "dateOfBirth", FieldsMappingOptions.copyByReference());
+
+            mapping(ActorDto.class, ActorViewDto.class).exclude("dateOfBirth");
+            mapping(DirectorDto.class, DirectorViewDto.class).exclude("dateOfBirth");
+            mapping(GenreDto.class, GenreViewDto.class);
+            mapping(MovieDto.class, MovieDetailDto.class)
+                    .fields("genres", "genres", hintB(GenreViewDto.class))
+                    .fields("actors", "actors", hintB(ActorViewDto.class))
+                    .exclude("dateOfRelease");
         }
     }
 }

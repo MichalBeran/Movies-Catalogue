@@ -1,12 +1,18 @@
 package cz.muni.fi.pa165.dto;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
 
 public class MovieDto {
-    
+
+//    public MovieDto(){
+//        this.actors = new ArrayList<>();
+//        this.genres = new ArrayList<>();
+//    }
+
     private Long id;
     
     private String title;

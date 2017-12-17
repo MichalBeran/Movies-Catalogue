@@ -17,7 +17,7 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.service.setRepository('users');
   }
-
+  
   getLoggedUser(){
     console.log("GET LOGGED USER");
     return AppHelper.getAuthenticated();

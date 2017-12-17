@@ -8,6 +8,7 @@ import cz.muni.fi.pa165.rest.Api;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
@@ -19,60 +20,57 @@ public class ActorsController {
 
     final static Logger logger = LoggerFactory.getLogger(ActorsController.class);
 
-    //TODO: test for bugs, certainly the methods will throw some exceptions for null pointers
-
     @Inject
     private ActorFacade actorFacade;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<ActorDto> index() {
-        return actorFacade.findAll();
+    public ResponseEntity<List<ActorDto>> index() {
+        return ResponseEntity.ok().body(actorFacade.findAll());
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final ActorDto create(@RequestBody ActorDto dto) throws Exception {
+    public final ResponseEntity<ActorDto> create(@RequestBody ActorDto dto) throws Exception {
         try {
-            logger.debug("dto incoming: "+dto.toString());
             Long id = actorFacade.create(dto);
-            return actorFacade.findById(id);
+            return ResponseEntity.ok(actorFacade.findById(id));
         } catch (Exception ex) {
-            throw new Exception(ex.getMessage(),ex);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ActorDto get(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<ActorDto> get(@PathVariable("id") Long id) throws Exception {
         ActorDto dto = actorFacade.findById(id);
         if (dto == null) {
-            // TODO: add exceptions to the project
-            throw new Exception("not found");
+            return ResponseEntity.notFound().build();
         }
-        return dto;
+        return ResponseEntity.ok(dto);
     }
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final ActorDto update(@PathVariable("id") Long id, @RequestBody ActorDto dto) throws Exception {
+    public final ResponseEntity<ActorDto> update(@PathVariable("id") Long id, @RequestBody ActorDto dto) throws Exception {
         try {
             ActorDto stored = actorFacade.findById(id);
-            stored.setFirstName(!dto.getFirstName().equals("") ? dto.getFirstName() : stored.getFirstName());
-            stored.setLastName(!dto.getLastName().equals("") ? dto.getLastName() : stored.getFirstName());
+            stored.setFirstName(!dto.getLastName().equals("") ? dto.getFirstName() : stored.getLastName());
+            stored.setLastName(!dto.getLastName().equals("") ? dto.getLastName() : stored.getLastName());
 
-            return actorFacade.update(stored);
+            return ResponseEntity.ok(actorFacade.update(stored));
         } catch (Exception ex) {
-            throw new Exception(ex.getMessage(),ex);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void delete(@PathVariable("id") Long id) throws Exception {
+    public final ResponseEntity delete(@PathVariable("id") Long id) throws Exception {
         try {
             ActorDto stored = actorFacade.findById(id);
             actorFacade.delete(stored);
+            return ResponseEntity.ok().build();
         } catch (Exception ex) {
-            throw new Exception("does not exist");
+            return ResponseEntity.notFound().build();
         }
     }
 

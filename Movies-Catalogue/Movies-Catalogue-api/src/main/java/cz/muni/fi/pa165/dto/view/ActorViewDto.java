@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package cz.muni.fi.pa165.dto;
+package cz.muni.fi.pa165.dto.view;
 
 import java.time.LocalDate;
 import java.util.Objects;
@@ -13,13 +13,13 @@ import java.util.Set;
  *
  * @author Maros
  */
-public class DirectorViewDto {
+public class ActorViewDto {
+
+    private Long id;
 
     private String firstName;
 
     private String lastName;
-
-    private Long id;
 
     public Long getId() {
         return id;
@@ -44,5 +44,6 @@ public class DirectorViewDto {
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
+
 
 }

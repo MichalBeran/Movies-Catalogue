@@ -3,9 +3,8 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          {{loadUser()}}
           <h1>Movies catalogue</h1>
-          <span *ngIf="isLoggedIn()">hello, {{user.firstName}}. <a href="#" (click)="logout()">Log out</a></span>
+          <span *ngIf="isLoggedIn()">hello, {{getLoggedUser().firstName}}. <a href="#" (click)="logout()">Log out</a></span>
           <span *ngIf="!isLoggedIn()">hello, stranger. <a routerLink="/users/login">Log in</a></span>
         </div>
         <div class="col-md-12">

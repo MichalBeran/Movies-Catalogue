@@ -13,7 +13,7 @@ export class RestService {
 
 
   //private baseUrl = 'https://jsonplaceholder.typicode.com/posts';
-  protected baseUrl = 'http://localhost:8080/';
+  protected baseUrl = 'http://localhost:8080/pa165/rest/';
   protected repository = this.baseUrl;
 
   public setRepository(name: string) {

@@ -3,6 +3,7 @@ import {User} from '../../models/user.model';
 import {isNullOrUndefined} from "util";
 import {UserService} from "../../services/user.service";
 import {Router} from "@angular/router";
+import {AppHelper} from "../../app.helper";
 
 @Component({
   selector: 'app-header',
@@ -21,20 +22,16 @@ export class HeaderComponent implements OnInit {
   }
 
   loadUser() {
-    const parsed = JSON.parse(localStorage.getItem('currentUser'));
-    this.user = !isNullOrUndefined(parsed) ? parsed : this.user;
+    this.user =  AppHelper.getAuthenticated();
     console.log("user loaded");
   }
 
   isLoggedIn() {
-    return !isNullOrUndefined(this.user.id);
+    return AppHelper.isAuthenticated();
   }
 
   isAdmin(){
-    if(this.isLoggedIn()){
-      return this.user.admin;
-    }
-    return false;
+    return AppHelper.isAdmin();
   }
 
   logout() {

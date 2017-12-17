@@ -20,7 +20,7 @@ import java.util.concurrent.ExecutionException;
 @RestController
 @RequestMapping(Api.ROOT_URI_USERS)
 public class UsersController {
-    final static Logger logger = LoggerFactory.getLogger(GenresController.class);
+    final static Logger logger = LoggerFactory.getLogger(UsersController.class);
 
     @Inject
     private UserFacade userFacade;

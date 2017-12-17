@@ -19,7 +19,7 @@ import java.util.List;
 @RequestMapping(Api.ROOT_URI_DIRECTORS)
 public class DirectorsController {
 
-    final static Logger logger = LoggerFactory.getLogger(GenresController.class);
+    final static Logger logger = LoggerFactory.getLogger(DirectorsController.class);
 
     //TODO: test for bugs, certainly the methods will throw some exceptions for null pointers
 

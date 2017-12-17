@@ -3,14 +3,17 @@
   <thead>
   <tr>
     <th scope="col">Movie name</th>
-    <th scope="col">Mash</th>
+    <th scope="col">Director</th>
+    <th scope="col">Genres</th>
+    <th scope="col">Actions</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let movie of movies">
-    <td>{{movie.name}}</td>
+    <td>{{movie.title}}</td>
+    <td>{{movie.director.firstName}} {{movie.director.lastName}}</td>
+    <td><span *ngFor="let genre of movie.genres" class="badge badge-info">{{genre.name}}</span></td>
     <td>
-      <button class="btn btn-primary btn-sm">show movies</button>
       <a routerLink="/movies/detail/{{movie.id}}" class="btn btn-dark btn-sm">show detail</a>
       <a routerLink="/movies/edit/{{movie.id}}" class="btn btn-dark btn-sm">edit</a>
       <button (click)="remove(movie.id);" class="btn btn-danger btn-sm">delete</button>

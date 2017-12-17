@@ -3,12 +3,19 @@
   <thead>
   <tr>
     <th scope="col">Director name</th>
+    <th scope="col">Born</th>
+    <th scope="col">Movies</th>
     <th scope="col">Actions</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let director of directors">
-    <td>{{director.name}}</td>
+    <td>{{director.firstName}} {{director.lastName}}</td>
+    <td>{{director.dateOfBirth.dayOfMonth}}.{{director.dateOfBirth.monthValue}}.{{director.dateOfBirth.year}}</td>
+    <td><span *ngFor="let movie of director.movies; let last=last;">
+      {{movie.title}}<span *ngIf="!last">,</span>
+    </span></td>
+
     <td>
       <button class="btn btn-primary btn-sm">show movies</button>
       <a routerLink="/directors/detail/{{director.id}}" class="btn btn-dark btn-sm">show detail</a>

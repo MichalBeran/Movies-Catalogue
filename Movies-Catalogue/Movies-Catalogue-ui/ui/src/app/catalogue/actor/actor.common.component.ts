@@ -7,7 +7,10 @@ import {AppHelper} from '../../app.helper';
   template: ''
 })
 export class ActorCommonComponent implements OnInit {
-
+  public invalid = AppHelper.invalid;
+  public isUserLogged = AppHelper.isAuthenticated;
+  public isUserAdmin = AppHelper.isAdmin;
+  public getLoggedUser = AppHelper.getAuthenticated;
 
   constructor(protected service: RestService, protected router: Router) {
   }

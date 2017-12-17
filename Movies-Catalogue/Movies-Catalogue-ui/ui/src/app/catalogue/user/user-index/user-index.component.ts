@@ -40,4 +40,5 @@ export class UserIndexComponent extends UserCommonComponent implements OnInit {
   unmakeAdmin(model: User){
     this.service.unmakeAdmin(model).subscribe(result => {model.admin = result; this.toIndexPage();});
   }
+
 }

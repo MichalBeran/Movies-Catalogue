@@ -85,7 +85,8 @@ public class MovieFacadeImpl implements MovieFacade {
 
     @Override
     public List<MovieDto> findAll() {
-        return beanMappingService.mapTo(movieService.getAllMovies(), MovieDto.class);
+        List<Movie> movies = movieService.getAllMovies();
+        return beanMappingService.mapTo(movies, MovieDto.class);
     }
 
 }

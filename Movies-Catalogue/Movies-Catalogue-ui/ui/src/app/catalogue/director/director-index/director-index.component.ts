@@ -14,7 +14,7 @@ export class DirectorIndexComponent extends DirectorCommonComponent implements O
 
   title = 'Directors';
 
-  director: Director[];
+  directors: Director[];
 
   constructor(protected service: RestService, protected router: Router) {
     super(service, router);

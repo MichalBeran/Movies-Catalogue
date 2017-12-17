@@ -1,8 +1,7 @@
 <h2>
   {{title}}
 </h2>
-
-<form #userForm="ngForm" name="userForm">
+<form #userForm="ngForm" name="userForm" (ngSubmit)="userForm.form.valid && login()">
   <div class="form-group">
     <label for="user-mail">Mail</label>
     <input [(ngModel)]="user.mail" #mail="ngModel" type="email" name="mail" class="form-control" id="user-mail" email pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" required

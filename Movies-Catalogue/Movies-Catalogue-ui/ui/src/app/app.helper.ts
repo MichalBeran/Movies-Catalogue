@@ -9,7 +9,15 @@ export class AppHelper {
   static getAuthenticated(): User {
     return JSON.parse(localStorage.getItem('currentUser'));
   }
+
   static isAuthenticated(): boolean{
     return !isNullOrUndefined(AppHelper.getAuthenticated());
+  }
+
+  static isAdmin() : boolean{
+    if(AppHelper.isAuthenticated()){
+      return AppHelper.getAuthenticated().admin;
+    }
+    return false;
   }
 }

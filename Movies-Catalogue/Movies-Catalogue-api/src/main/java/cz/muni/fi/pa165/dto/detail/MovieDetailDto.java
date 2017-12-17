@@ -1,5 +1,8 @@
-package cz.muni.fi.pa165.dto;
+package cz.muni.fi.pa165.dto.detail;
 
+import cz.muni.fi.pa165.dto.view.ActorViewDto;
+import cz.muni.fi.pa165.dto.view.GenreViewDto;
+import cz.muni.fi.pa165.dto.view.DirectorViewDto;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;

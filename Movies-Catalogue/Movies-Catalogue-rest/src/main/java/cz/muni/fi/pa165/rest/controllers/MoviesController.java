@@ -1,7 +1,7 @@
 package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.CreateMovieDto;
-import cz.muni.fi.pa165.dto.MovieDetailDto;
+import cz.muni.fi.pa165.dto.detail.MovieDetailDto;
 import cz.muni.fi.pa165.dto.MovieDto;
 import cz.muni.fi.pa165.facade.MovieFacade;
 import cz.muni.fi.pa165.mapping.BeanMappingService;

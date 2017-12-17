@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {RestService} from "./rest.service";
 import 'rxjs/add/operator/map';
+import {User} from "../models/user.model";
 
 
 const HttpOptions = {
@@ -41,4 +42,13 @@ export class UserService extends RestService {
     this.token = null;
     localStorage.removeItem('currentUser');
   }
+
+  makeAdmin(model: User):Observable<any>{
+    return this.http.put<any>(`${this.repository}/makeAdmin`, model, HttpOptions);
+  }
+
+  unmakeAdmin(model: User):Observable<any>{
+    return this.http.put<any>(`${this.repository}/unmakeAdmin`, model, HttpOptions);
+  }
+
 }

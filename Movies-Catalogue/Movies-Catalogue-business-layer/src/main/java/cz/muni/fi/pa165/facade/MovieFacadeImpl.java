@@ -89,6 +89,12 @@ public class MovieFacadeImpl implements MovieFacade {
         return beanMappingService.mapTo(movies, MovieDto.class);
     }
 
+    @Override
+    public MovieDto update(MovieDto dto) {
+        movieService.edit(beanMappingService.mapTo(dto, Movie.class));
+        return beanMappingService.mapTo(movieService.findById(dto.getId()), MovieDto.class);
+    }
+
 }
 
 

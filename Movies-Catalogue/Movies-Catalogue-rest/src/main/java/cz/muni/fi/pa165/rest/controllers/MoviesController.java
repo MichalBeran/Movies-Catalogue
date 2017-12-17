@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
+import org.springframework.http.ResponseEntity;
 
 @RestController
 @RequestMapping(Api.ROOT_URI_MOVIES)
@@ -30,35 +31,35 @@ public class MoviesController {
     private MovieFacade movieFacade;
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<MovieDetailDto> index() {
-        return mapper.mapTo(movieFacade.findAll(), MovieDetailDto.class);
+    public ResponseEntity<List<MovieDetailDto>> index() {
+        return ResponseEntity.ok(mapper.mapTo(movieFacade.findAll(), MovieDetailDto.class));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final MovieDto create(@RequestBody CreateMovieDto dto) throws Exception {
+    public final ResponseEntity<MovieDetailDto> create(@RequestBody CreateMovieDto dto) throws Exception {
         try {
             Long id = movieFacade.createMovie(dto);
-            return movieFacade.findById(id);
+            return ResponseEntity.ok(mapper.mapTo(movieFacade.findById(id), MovieDetailDto.class));
         } catch (Exception ex) {
-            throw new Exception(ex.getMessage(),ex);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public MovieDto get(@PathVariable("id") Long id) throws Exception {
-        MovieDto dto = movieFacade.findById(id);
-        if (dto == null) {
-            // TODO: add exceptions to the project
-            throw new Exception("not found");
+    public ResponseEntity<MovieDetailDto> get(@PathVariable("id") Long id) throws Exception {
+        try{
+            MovieDto dto = movieFacade.findById(id);
+            return ResponseEntity.ok(mapper.mapTo(dto, MovieDetailDto.class));
+        }catch(Exception e){
+            return ResponseEntity.notFound().build();
         }
-        return dto;
     }
 
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final MovieDto update(@PathVariable("id") Long id, @RequestBody MovieDto dto) throws Exception {
+    public final ResponseEntity<MovieDetailDto> update(@PathVariable("id") Long id, @RequestBody MovieDto dto) throws Exception {
         try {
             MovieDto stored = movieFacade.findById(id);
             stored.setDescription(!dto.getDescription().equals("") ? dto.getDescription() : stored.getDescription());
@@ -69,19 +70,20 @@ public class MoviesController {
             stored.setGenres(!dto.getGenres().equals("") ? dto.getGenres() : stored.getGenres());
             stored.setDateOfRelease(!dto.getDateOfRelease().equals("") ? dto.getDateOfRelease() : stored.getDateOfRelease());
 
-            throw new Exception("PICE");
+            return ResponseEntity.ok(mapper.mapTo(movieFacade.update(stored), MovieDetailDto.class));
         } catch (Exception ex) {
-            throw new Exception(ex.getMessage(),ex);
+            return ResponseEntity.badRequest().build();
         }
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final void delete(@PathVariable("id") Long id) throws Exception {
+    public final ResponseEntity delete(@PathVariable("id") Long id) throws Exception {
         try {
             MovieDto stored = movieFacade.findById(id);
             movieFacade.delete(stored);
+            return ResponseEntity.noContent().build();
         } catch (Exception ex) {
-            throw new Exception("does not exist");
+            return ResponseEntity.notFound().build();
         }
     }
 

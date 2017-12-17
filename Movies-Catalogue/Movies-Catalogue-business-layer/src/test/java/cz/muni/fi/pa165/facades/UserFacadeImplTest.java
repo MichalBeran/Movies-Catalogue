@@ -78,6 +78,15 @@ public class UserFacadeImplTest extends AbstractJUnit4SpringContextTests {
     }
 
     @Test
+    public void testIsNotAdmin(){
+        Long id = userFacade.registerUser(userDto, "pepik");
+        userDto.setId(id);
+        userFacade.makeAdmin(userDto);
+        userFacade.unmakeAdmin(userDto);
+        assertThat(userFacade.isAdmin(userDto)).isFalse();
+    }
+
+    @Test
     public void testFindUserById(){
         Long id = userFacade.registerUser(userDto, "pepik");
 

@@ -28,8 +28,17 @@ export class UserIndexComponent extends UserCommonComponent implements OnInit {
   remove(id) {
     super.delete(id, () => this.refresh());
   }
+
   refresh() {
     this.service.get().subscribe(list => this.users = list);
+  }
+
+  makeAdmin(model: User){
+    this.service.makeAdmin(model).subscribe(result => {model.admin = result; this.toIndexPage();});
+  }
+
+  unmakeAdmin(model: User){
+    this.service.unmakeAdmin(model).subscribe(result => {model.admin = result; this.toIndexPage();});
   }
 
 }

@@ -25,6 +25,7 @@ import {UserComponent} from './catalogue/user/user.component';
 import {UserIndexComponent} from './catalogue/user/user-index/user-index.component';
 import {UserRegisterComponent} from './catalogue/user/user-register/user-register.component';
 import {UserLoginComponent} from './catalogue/user/user-login/user-login.component';
+import {UserDetailComponent} from './catalogue/user/user-detail/user-detail.component';
 
 /**
  * @author Marek Urban
@@ -156,6 +157,10 @@ const routes: Routes = [
           {
             path: 'login',
             component: UserLoginComponent
+          },
+          {
+            path: 'detail',
+            component: UserDetailComponent
           }
         ]
       },

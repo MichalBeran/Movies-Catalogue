@@ -5,21 +5,21 @@
 <form #actorForm="ngForm" name="missionForm">
   <div class="form-group">
     <label for="actor-firstName">First name</label>
-    <input [(ngModel)]="actor.firstName" #name="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(firstName)}"  name="firstName" type="text" class="form-control" id="actor-firstName" placeholder="name">
+    <input [(ngModel)]="actor.firstName" #firstName="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(firstName)}"  name="firstName" type="text" class="form-control" id="actor-firstName" placeholder="name">
     <div *ngIf="invalid(firstName)" class="invalid-feedback">
       Please provide a valid first name. Name length must be between 3 and 50 characters.
     </div>
   </div>
   <div class="form-group">
     <label for="actor-lastName">Last name</label>
-    <input [(ngModel)]="actor.lastName" #name="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(lastName)}"  name="lastName" type="text" class="form-control" id="actor-lastName" placeholder="name">
+    <input [(ngModel)]="actor.lastName" #lastName="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(lastName)}"  name="lastName" type="text" class="form-control" id="actor-lastName" placeholder="name">
     <div *ngIf="invalid(lastName)" class="invalid-feedback">
       Please provide a valid last name. Last name length must be between 3 and 50 characters.
     </div>
   </div>
   <div class="form-group">
     <label for="actor-dateOfBirth">Date of Birth</label>
-    <input [(ngModel)]="actor.dateOfBirth" #name="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(dateOfBirth)}"  name="dateOfBirth" type="text" class="form-control" id="actor-dateOfBirth" placeholder="date">
+    <input [(ngModel)]="actor.dateOfBirth" #dateOfBirth="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(dateOfBirth)}"  name="dateOfBirth" type="text" class="form-control" id="actor-dateOfBirth" placeholder="date">
     <div *ngIf="invalid(dateOfBirth)" class="invalid-feedback">
       Please provide a valid date of birth.
     </div>

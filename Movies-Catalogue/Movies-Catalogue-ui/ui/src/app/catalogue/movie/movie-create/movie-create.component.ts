@@ -24,11 +24,6 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
   }
 
   ngOnInit() {
-    this.movie.genres = [{
-      id: '1'
-    }];
-    this.movie.actors = [{id:'1'}];
-    this.movie.director= {id:'1'};
 
     this.route.params.subscribe(params => {
       if (!isNullOrUndefined(params['id'])) {

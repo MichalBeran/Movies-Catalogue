@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.RatingDto;
+import cz.muni.fi.pa165.dto.detail.RatingDetailDto;
 import cz.muni.fi.pa165.facade.RatingFacade;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.rest.Api;
@@ -39,14 +40,15 @@ public class RatingsController {
     private RatingFacade ratingFacade;
     
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<RatingDto>> index() {
-        return ResponseEntity.ok(ratingFacade.findAll());
+    public ResponseEntity<List<RatingDetailDto>> index() {
+        return ResponseEntity.ok(mapper.mapTo(ratingFacade.findAll(), RatingDetailDto.class));
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<RatingDto> get(@PathVariable("id") Long id) throws Exception {
+    public ResponseEntity<RatingDetailDto> get(@PathVariable("id") Long id) throws Exception {
         try{
-            return ResponseEntity.ok(ratingFacade.findById(id));
+            RatingDto dto = ratingFacade.findById(id);
+            return ResponseEntity.ok(mapper.mapTo(dto, RatingDetailDto.class));
         }catch(Exception e){
             return ResponseEntity.notFound().build();
         }
@@ -54,10 +56,10 @@ public class RatingsController {
     
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final ResponseEntity<RatingDto> create(@RequestBody RatingDto dto) throws Exception {
+    public final ResponseEntity<RatingDetailDto> create(@RequestBody RatingDto dto) throws Exception {
         try {
             Long id = ratingFacade.create(dto);
-            return ResponseEntity.ok(ratingFacade.findById(id));
+            return ResponseEntity.ok(mapper.mapTo(ratingFacade.findById(id), RatingDetailDto.class));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }
@@ -65,7 +67,7 @@ public class RatingsController {
     
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public final ResponseEntity<RatingDto> update(@PathVariable("id") Long id, @RequestBody RatingDto dto) throws Exception {
+    public final ResponseEntity<RatingDetailDto> update(@PathVariable("id") Long id, @RequestBody RatingDto dto) throws Exception {
         try {
             RatingDto stored = ratingFacade.findById(id);
             stored.setActorsRating(dto.getActorsRating());
@@ -73,7 +75,7 @@ public class RatingsController {
             stored.setScenarioRating(dto.getScenarioRating());
             stored.setDescription(dto.getDescription());
             
-            return ResponseEntity.ok(ratingFacade.update(stored));
+            return ResponseEntity.ok(mapper.mapTo(ratingFacade.update(stored), RatingDetailDto.class));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }

@@ -86,6 +86,14 @@ public class DatabaseSeeder {
         pepa.setMail("pepa@thisapp.dev");
         passw = "pepaJePan";
         pepa.setId(userFacade.registerUser(pepa, passw));
+
+        UserDto shorty = new UserDto();
+        shorty.setFirstName("Shorty");
+        shorty.setLastName("Short");
+        shorty.setNick("Shorty");
+        shorty.setMail("me@me.me");
+        userFacade.registerUser(shorty, "me");
+
     }
 
         private void seedGenres() {

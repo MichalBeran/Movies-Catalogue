@@ -53,6 +53,7 @@ public class ServiceConfiguration {
 
             mapping(User.class, UserDto.class);
             mapping(CreateMovieDto.class, Movie.class).fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference()).fields("image", "image", FieldsMappingOptions.customConverter(StringToByteConverter.class));
+            mapping(CreateMovieDto.class, MovieDetailDto.class).fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference());
             //mapping(MovieDto.class, Movie.class).fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference());
             mapping(MovieDetailDto.class, Movie.class).fields("image", "image", FieldsMappingOptions.customConverter(StringToByteConverter.class));
             mapping(Movie.class, MovieDto.class)

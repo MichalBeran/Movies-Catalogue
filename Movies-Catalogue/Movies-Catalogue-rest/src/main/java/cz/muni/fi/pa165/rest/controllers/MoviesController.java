@@ -1,8 +1,10 @@
 package cz.muni.fi.pa165.rest.controllers;
 
-import cz.muni.fi.pa165.dto.CreateMovieDto;
+import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.dto.detail.MovieDetailDto;
-import cz.muni.fi.pa165.dto.MovieDto;
+import cz.muni.fi.pa165.facade.ActorFacade;
+import cz.muni.fi.pa165.facade.DirectorFacade;
+import cz.muni.fi.pa165.facade.GenreFacade;
 import cz.muni.fi.pa165.facade.MovieFacade;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.rest.Api;
@@ -13,6 +15,9 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.http.ResponseEntity;
 
@@ -30,6 +35,16 @@ public class MoviesController {
     @Inject
     private MovieFacade movieFacade;
 
+    @Inject
+    private GenreFacade genreFacade;
+
+    @Inject
+    private ActorFacade actorFacade;
+
+    @Inject
+    private DirectorFacade directorFacade;
+
+
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MovieDetailDto>> index() {
         return ResponseEntity.ok(mapper.mapTo(movieFacade.findAll(), MovieDetailDto.class));
@@ -39,6 +54,38 @@ public class MoviesController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<MovieDetailDto> create(@RequestBody CreateMovieDto dto) throws Exception {
         try {
+            List<GenreDto> genres = new ArrayList<>();
+            if(dto.getGenres() != null) {
+                for (GenreDto genre : dto.getGenres()) {
+                    if(genre.getId() != null) {
+                        genres.add(genreFacade.findById(genre.getId()));
+                    }
+                }
+            }
+            if(genres.size() < 1) {
+                genres.add(genreFacade.findById(1l));
+            }
+            dto.setGenres(genres);
+            List<ActorDto> actors = new ArrayList<>();
+            if(dto.getActors()!= null) {
+                for (ActorDto actor : dto.getActors()) {
+                    if(actor.getId() !=null) {
+                        actors.add(actorFacade.findById(actor.getId()));
+                    }
+                }
+            }
+            if(actors.size() < 1) {
+                actors.add(actorFacade.findById(1l));
+            }
+            dto.setActors(actors);
+            if(dto.getDirector().getId() != null){
+                dto.setDirector(directorFacade.findById(dto.getDirector().getId()));
+            }else{
+                dto.setDirector(directorFacade.findById(1l));
+            }
+            LocalDate ld = LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dto.setDateOfRelease(ld);
+
             Long id = movieFacade.createMovie(dto);
             return ResponseEntity.ok(mapper.mapTo(movieFacade.findById(id), MovieDetailDto.class));
         } catch (Exception ex) {

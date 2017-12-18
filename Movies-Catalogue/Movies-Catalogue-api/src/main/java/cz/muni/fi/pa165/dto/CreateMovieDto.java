@@ -26,6 +26,8 @@ public class CreateMovieDto {
 
     private String image;
 
+    private String date;
+
     @NotNull
     private LocalDate dateOfRelease;
 
@@ -97,6 +99,14 @@ public class CreateMovieDto {
 
     public void setDirector(DirectorDto director) {
         this.director = director;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override

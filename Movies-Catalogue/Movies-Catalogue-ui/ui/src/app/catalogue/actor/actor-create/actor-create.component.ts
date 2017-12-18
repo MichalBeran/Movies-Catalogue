@@ -44,7 +44,7 @@ export class ActorCreateComponent extends ActorCommonComponent implements OnInit
   }
 
   redirect(created: Actor) {
-    this.router.navigateByUrl(`actor/detail/${created.id}`);
+    this.router.navigateByUrl(`actors/detail/${created.id}`);
   }
 
   remove(id) {

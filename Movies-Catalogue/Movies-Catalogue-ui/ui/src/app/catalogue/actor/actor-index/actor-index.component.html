@@ -10,7 +10,7 @@
   <tbody>
   <tr *ngFor="let actor of actors">
     <td>{{actor.firstName}} {{actor.lastName}}</td>
-    <td>{{actor.dateOfBirth.dayOfMonth}}.{{actor.dateOfBirth.monthValue}}.{{actor.dateOfBirth.year}}</td>
+    <td>{{actor.date}}</td>
     <td>
       <button class="btn btn-primary btn-sm">show movies</button>
       <a routerLink="/actors/detail/{{actor.id}}" class="btn btn-dark btn-sm">show detail</a>

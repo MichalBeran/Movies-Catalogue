@@ -14,7 +14,6 @@ import {MovieCreate} from '../../../models/movie.create.model';
 export class MovieCreateComponent extends MovieCommonComponent implements OnInit {
 
   movie: MovieCreate = new MovieCreate();
-  files: FileList;
 
   title = 'Create';
   editing = false;

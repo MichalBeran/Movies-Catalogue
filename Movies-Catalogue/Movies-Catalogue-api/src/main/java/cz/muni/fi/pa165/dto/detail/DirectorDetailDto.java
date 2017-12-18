@@ -19,6 +19,8 @@ public class DirectorDetailDto {
 
     private String lastName;
 
+    private String date;
+
     private LocalDate dateOfBirth;
 
     private Set<MovieViewDto> movies;
@@ -64,7 +66,12 @@ public class DirectorDetailDto {
     public void setId(Long id) {
         this.id = id;
     }
-    
-    
-    
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

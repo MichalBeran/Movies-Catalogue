@@ -1,22 +1,27 @@
 <h2>
   {{title}}
 </h2>
-
-<form #genreForm="ngForm" name="missionForm">
-  <div class="form-group">
-    <label for="genre-name">Name</label>
-    <input [(ngModel)]="genre.name" #name="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(name)}"  name="name" type="text" class="form-control" id="genre-name" placeholder="Sci-Fi">
-    <div *ngIf="invalid(name)" class="invalid-feedback">
-      Please provide a valid name. Name length must be between 3 and 50 characters.
+<div *ngIf="isUserAdmin()">
+  <form #genreForm="ngForm" name="missionForm">
+    <div class="form-group">
+      <label for="genre-name">Name</label>
+      <input [(ngModel)]="genre.name" #name="ngModel" minlength="3" maxlength="50" required
+             [ngClass]="{'is-invalid': invalid(name)}" name="name" type="text" class="form-control" id="genre-name"
+             placeholder="Sci-Fi">
+      <div *ngIf="invalid(name)" class="invalid-feedback">
+        Please provide a valid name. Name length must be between 3 and 50 characters.
+      </div>
     </div>
-  </div>
-  <div class="form-group">
-    <label for="genre-description">Description</label>
-    <textarea [(ngModel)]="genre.description" #description="ngModel" minlength="3" maxlength="600" required [ngClass]="{'is-invalid': invalid(description)}" name="genre-description" class="form-control" id="genre-description" rows="3"></textarea>
-    <div *ngIf="invalid(description)" class="invalid-feedback">
-      Please provide a valid description. Description length must be between 3 and 600 characters.
+    <div class="form-group">
+      <label for="genre-description">Description</label>
+      <textarea [(ngModel)]="genre.description" #description="ngModel" minlength="3" maxlength="600" required
+                [ngClass]="{'is-invalid': invalid(description)}" name="genre-description" class="form-control"
+                id="genre-description" rows="3"></textarea>
+      <div *ngIf="invalid(description)" class="invalid-feedback">
+        Please provide a valid description. Description length must be between 3 and 600 characters.
+      </div>
     </div>
-  </div>
-  <button [disabled]="genreForm.invalid" class="btn btn-primary btn-sm" (click)="save()">Save</button>
-  <button *ngIf="editing==true" (click)="remove(genre.id)" class="btn btn-danger btn-sm">delete</button>
-</form>
+    <button [disabled]="genreForm.invalid" class="btn btn-primary btn-sm" (click)="save()">Save</button>
+    <button *ngIf="editing==true" (click)="remove(genre.id)" class="btn btn-danger btn-sm">delete</button>
+  </form>
+</div>

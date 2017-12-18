@@ -70,7 +70,7 @@ public class MovieServiceImplTest extends AbstractJUnit4SpringContextTests{
         movie.setTitle("MovieTitle");
         movie.setDateOfRelease(LocalDate.of(y, m, d));
         movie.setDescription("Date of relase" + y + m + d + ".");
-        movie.setImage("IHaveNoImage");
+        movie.setImage("IHaveNoImage".getBytes());
         return movie;
     }
 

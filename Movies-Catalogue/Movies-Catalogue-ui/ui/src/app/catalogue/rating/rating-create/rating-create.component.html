@@ -1,11 +1,14 @@
 <button (click)="toggleNewRatingForm()" class="btn btn-dark">Rate movie!</button>
 <div class="rating-create-container">
-  <form #ratingForm="ngForm">
+  <form #ratingForm="ngForm" name="ratingForm">
+    <!--<input [(ngModel)]="rating.overallRating" type="hidden" name="overall-rating" id="overall-rating-inp">-->
+    <!--<input [(ngModel)]="rating.actorsRating" type="hidden" name="actors-rating" id="actors-rating-inp">-->
+    <!--<input [(ngModel)]="rating.scenarioRating" type="hidden" name="scenario-rating" id="scenario-rating-inp">-->
 
     <div class="slider-group">
       <span class="description">Overall rating: </span>
       <span class="slider-in">
-    <input [(ngModel)]="rating.overallRating" name="overallRating" id="overall" data-slider-id='overall-slider' type="text" data-slider-min="0" data-slider-max="100"
+    <input name="overallRatingS" id="overall" data-slider-id='overall-slider' type="text" data-slider-min="0" data-slider-max="100"
            data-slider-step="2" data-slider-value="0"/>
   </span>
       <span class="value">
@@ -16,7 +19,7 @@
     <div class="slider-group">
       <span class="description">Actors rating: </span>
       <span class="slider-in">
-    <input [(ngModel)]="rating.actorsRating" name="actorsRating" id="actors" data-slider-id='actors-slider' type="text" data-slider-min="0" data-slider-max="100"
+    <input name="actorsRatingS" id="actors" data-slider-id='actors-slider' type="text" data-slider-min="0" data-slider-max="100"
            data-slider-step="2" data-slider-value="0"/>
   </span>
       <span class="value">
@@ -27,7 +30,7 @@
     <div class="slider-group">
       <span class="description">Scenario rating: </span>
       <span class="slider-in">
-    <input [(ngModel)]="rating.scenarioRating" name="scenarioRating" id="scenario" data-slider-id='scenario-slider' type="text" data-slider-min="0" data-slider-max="100"
+    <input name="scenarioRatingS" id="scenario" data-slider-id='scenario-slider' type="text" data-slider-min="0" data-slider-max="100"
            data-slider-step="2" data-slider-value="0"/>
   </span>
       <span class="value">
@@ -43,7 +46,7 @@
       </div>
     </div>
     <div class="form-group">
-      <button (click)="save()" class="btn btn-primary">Save</button>
+      <button [disabled]="ratingForm.invalid" (click)="save()" class="btn btn-primary">Save</button>
       <button (click)="toggleNewRatingForm()" class="btn btn-secondary">Cancel</button>
     </div>
   </form>

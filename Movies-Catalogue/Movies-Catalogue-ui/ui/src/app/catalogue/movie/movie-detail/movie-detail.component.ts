@@ -29,7 +29,7 @@ export class MovieDetailComponent extends MovieCommonComponent implements OnInit
 
     // Shit just got real
     this.route.data
-      .subscribe((movie: {movie: Movie}) => this.movie = movie.movie);
+      .subscribe((data: {movie: Movie}) => this.movie = data.movie);
   }
 
   remove(id) {

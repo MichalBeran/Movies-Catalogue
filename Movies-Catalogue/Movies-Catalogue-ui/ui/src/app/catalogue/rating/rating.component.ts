@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Input} from '@angular/core';
+import {AppHelper} from '../../app.helper';
+import {Movie} from '../../models/movie.model';
 
 @Component({
   selector: 'app-rating',
@@ -7,7 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RatingComponent implements OnInit {
 
-  constructor() { }
+  @Input() movie: Movie;
+  needsReload = 0;
+  isAuthenticated = AppHelper.isAuthenticated;
+
+  onChanged(changed: boolean) {
+    this.needsReload++;
+  }
+
+  constructor() {
+  }
 
   ngOnInit() {
   }

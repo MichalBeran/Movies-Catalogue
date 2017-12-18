@@ -7,6 +7,7 @@ package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.RatingDto;
 import cz.muni.fi.pa165.dto.detail.RatingDetailDto;
+import cz.muni.fi.pa165.facade.MovieFacade;
 import cz.muni.fi.pa165.facade.RatingFacade;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.rest.Api;
@@ -38,6 +39,9 @@ public class RatingsController {
 
     @Inject
     private RatingFacade ratingFacade;
+
+    @Inject
+    private MovieFacade movieFacade;
     
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<RatingDetailDto>> index() {
@@ -58,6 +62,7 @@ public class RatingsController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<RatingDetailDto> create(@RequestBody RatingDto dto) throws Exception {
         try {
+            dto.setMovie(movieFacade.findById(dto.getMovie().getId()));
             Long id = ratingFacade.create(dto);
             return ResponseEntity.ok(mapper.mapTo(ratingFacade.findById(id), RatingDetailDto.class));
         } catch (Exception ex) {

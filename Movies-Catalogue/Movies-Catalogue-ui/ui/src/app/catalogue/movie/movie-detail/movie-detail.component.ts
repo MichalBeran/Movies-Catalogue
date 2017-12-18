@@ -7,12 +7,12 @@ import {mergeMap} from 'rxjs/operators';
 import {MovieCommonComponent} from '../movie.common.component';
 
 /**
-* @author Maros
-*/
+ * @author Maros
+ */
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
-  styleUrls: ['./movie-detail.component.css']
+  styleUrls: ['./movie-detail.component.less']
 })
 export class MovieDetailComponent extends MovieCommonComponent implements OnInit {
 
@@ -28,14 +28,16 @@ export class MovieDetailComponent extends MovieCommonComponent implements OnInit
     super.ngOnInit();
 
     // Shit just got real
-    this.route.params.pipe(
-      mergeMap(params => this.service.find(params['id'])
-      ))
-      .subscribe(result => this.movie = result);
+    this.route.data
+      .subscribe((movie: {movie: Movie}) => this.movie = movie.movie);
   }
 
-  remove(id){
+  remove(id) {
     super.delete(id, () => super.toIndexPage());
+  }
+
+  getDate() {
+    return `${this.movie.dateOfRelease.dayOfMonth}.${this.movie.dateOfRelease.monthValue}.${this.movie.dateOfRelease.year}`
   }
 
 }

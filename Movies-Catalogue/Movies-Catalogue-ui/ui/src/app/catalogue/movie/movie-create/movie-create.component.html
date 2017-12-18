@@ -9,19 +9,22 @@
   </div>
   <div class="form-group">
     <label for="movie-description">Description</label>
-    <textarea [(ngModel)]="movie.description" #name="ngModel" name="movie-description" class="form-control" id="movie-description" rows="3"></textarea>
+    <textarea [(ngModel)]="movie.description" #description="ngModel" name="movie-description" class="form-control" id="movie-description" rows="3"></textarea>
   </div>
   <div class="form-group">
     <label for="movie-image">Image</label>
-    <textarea [(ngModel)]="movie.image" #name="ngModel" name="movie-image" class="form-control" id="movie-image" rows="3"></textarea>
+    <textarea [(ngModel)]="movie.image" #image="ngModel" name="movie-image" class="form-control" id="movie-image" rows="3" (change)="getFiles($event)">
+    </textarea>
   </div>
   <div class="form-group">
     <label for="movie-image">Image</label>
     <img src="{{movie.image}}">
+    {{movie.image}}
   </div>
+
   <div class="form-group">
-    <label for="movie-dateOfRelease">Date of release</label>
-    <textarea [(ngModel)]="movie.dateOfRelease" #name="ngModel" name="movie-dateOfRelease" class="form-control" id="movie-dateOfRelease" rows="3"></textarea>
+    <label for="movie-dateOfReleaseYear">Date of release</label>
+    <input type="date" [(ngModel)]="movie.date" #year="ngModel" name="movie-dateOfRelease-year" class="form-control" id="movie-dateOfReleaseYear" rows="3">
   </div>
   <button class="btn btn-primary btn-sm" (click)="save()">Save</button>
   <button *ngIf="editing==true" (click)="remove(movie.id)" class="btn btn-danger btn-sm">delete</button>

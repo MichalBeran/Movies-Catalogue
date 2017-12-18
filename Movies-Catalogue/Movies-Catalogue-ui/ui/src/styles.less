@@ -1,9 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
-
+@import "config";
 body,html{
   -webkit-font-smoothing: antialiased;
   background:#fcfcfc;
   font-size:14px;
+  height:100%;
+  height:100%;
 }
 a{
   font-family: "Poppins", sans-serif;
@@ -22,4 +24,22 @@ a{
 }
 span.badge{
   margin:2px;
+}
+.btn{margin:2px;}
+.flex-center-spaced{
+  display:flex;
+  justify-content: space-between;
+  > div{
+    display:flex;
+    align-items: center;
+    &:first-child{
+      flex-direction:column;
+
+    }
+  }
+}
+.nav-tabs{
+  a{
+    color:@clr-header-link-dark;
+  }
 }

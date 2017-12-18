@@ -53,3 +53,26 @@ header {
     }
   }
 }
+
+.dropdown-container{
+  display:none;
+  background: @clr-header-bottom;
+  color:@clr-header-link;
+  ul{
+    width:100%;
+    list-style: none;
+    padding-left:17px;
+    li{
+      display:block;
+      a{
+        display:block;
+        padding:10px;
+        color: @clr-header-link;
+        &:hover, &.active{
+        color: @clr-header-link--active;
+        }
+      }
+    }
+  }
+}
+

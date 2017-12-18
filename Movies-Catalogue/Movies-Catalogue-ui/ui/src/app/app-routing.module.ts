@@ -26,6 +26,7 @@ import {UserIndexComponent} from './catalogue/user/user-index/user-index.compone
 import {UserRegisterComponent} from './catalogue/user/user-register/user-register.component';
 import {UserLoginComponent} from './catalogue/user/user-login/user-login.component';
 import {UserDetailComponent} from './catalogue/user/user-detail/user-detail.component';
+import {MovieDetailResolver} from "./services/movie.detail.resolver.service";
 
 /**
  * @author Marek Urban
@@ -86,7 +87,10 @@ const routes: Routes = [
           },
           {
             path: 'detail/:id',
-            component: MovieDetailComponent
+            component: MovieDetailComponent,
+            resolve: {
+              movie: MovieDetailResolver
+            }
           },
           {
             path: 'edit/:id',

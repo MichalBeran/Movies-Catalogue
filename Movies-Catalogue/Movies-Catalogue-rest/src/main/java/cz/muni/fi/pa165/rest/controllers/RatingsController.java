@@ -40,14 +40,13 @@ public class RatingsController {
     
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<RatingDto>> index() {
-        return ResponseEntity.ok(mapper.mapTo(ratingFacade.findAll(), RatingDto.class));
+        return ResponseEntity.ok(ratingFacade.findAll());
     }
     
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<RatingDto> get(@PathVariable("id") Long id) throws Exception {
         try{
-            RatingDto dto = ratingFacade.findById(id);
-            return ResponseEntity.ok(mapper.mapTo(dto, RatingDto.class));
+            return ResponseEntity.ok(ratingFacade.findById(id));
         }catch(Exception e){
             return ResponseEntity.notFound().build();
         }
@@ -58,7 +57,7 @@ public class RatingsController {
     public final ResponseEntity<RatingDto> create(@RequestBody RatingDto dto) throws Exception {
         try {
             Long id = ratingFacade.create(dto);
-            return ResponseEntity.ok(mapper.mapTo(ratingFacade.findById(id), RatingDto.class));
+            return ResponseEntity.ok(ratingFacade.findById(id));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }
@@ -74,7 +73,7 @@ public class RatingsController {
             stored.setScenarioRating(dto.getScenarioRating());
             stored.setDescription(dto.getDescription());
             
-            return ResponseEntity.ok(mapper.mapTo(ratingFacade.update(stored), RatingDto.class));
+            return ResponseEntity.ok(ratingFacade.update(stored));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }

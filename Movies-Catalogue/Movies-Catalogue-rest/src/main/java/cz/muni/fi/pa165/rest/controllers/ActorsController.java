@@ -5,7 +5,6 @@ import cz.muni.fi.pa165.dto.detail.ActorDetailDto;
 import cz.muni.fi.pa165.facade.ActorFacade;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.rest.Api;
-import java.awt.image.RescaleOp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
@@ -14,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.ResponseEntity;
 
 @RestController
@@ -48,12 +48,12 @@ public class ActorsController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ActorDetailDto> get(@PathVariable("id") Long id) throws Exception {
-        ActorDetailDto dto = mapper.mapTo(actorFacade.findById(id), ActorDetailDto.class);
-        if (dto == null) {
-            // TODO: add exceptions to the project
+        try{
+            ActorDetailDto dto = mapper.mapTo(actorFacade.findById(id), ActorDetailDto.class);
+            return ResponseEntity.ok(dto);
+        }catch(InvalidDataAccessApiUsageException e){
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(dto);
     }
 
 

@@ -64,6 +64,8 @@ public class ActorsController {
             ActorDto stored = actorFacade.findById(id);
             stored.setFirstName(!dto.getFirstName().equals("") ? dto.getFirstName() : stored.getFirstName());
             stored.setLastName(!dto.getLastName().equals("") ? dto.getLastName() : stored.getFirstName());
+            stored.setDateOfBirth(!dto.getDateOfBirth().equals("") ? dto.getDateOfBirth() : stored.getDateOfBirth());
+
 
             return ResponseEntity.ok(mapper.mapTo(actorFacade.update(stored), ActorDetailDto.class));
         } catch (Exception ex) {

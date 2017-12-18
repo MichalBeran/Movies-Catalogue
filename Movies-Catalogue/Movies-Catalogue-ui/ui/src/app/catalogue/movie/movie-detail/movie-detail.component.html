@@ -33,7 +33,7 @@
     </div>
     <div class="movie-description">
       <div class="card bg-light mb-3">
-        <div class="card-header">Plot</div>
+        <div class="card-header"><b>Plot</b></div>
         <div class="card-body">
           <p class="card-text">{{movie.description}}</p>
         </div>
@@ -41,6 +41,7 @@
     </div>
   </div>
   <div class="tab-pane fade" id="movie-review" role="tabpanel" aria-labelledby="movie-review-tab">
+    <h2>{{movie.title}} reviews</h2>
     <app-rating></app-rating>
   </div>
 </div>

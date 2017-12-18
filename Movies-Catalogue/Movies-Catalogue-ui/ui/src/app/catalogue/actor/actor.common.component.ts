@@ -31,8 +31,4 @@ export class ActorCommonComponent implements OnInit {
     this.router.navigateByUrl(`actors/index`);
   }
 
-  invalid(model: any): boolean {
-    return AppHelper.invalid(model);
-  }
-
 }

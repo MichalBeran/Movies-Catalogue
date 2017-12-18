@@ -30,9 +30,5 @@ export class DirectorCommonComponent implements OnInit {
   protected toIndexPage() {
     this.router.navigateByUrl(`directors/index`);
   }
-
-  invalid(model: any): boolean {
-    return AppHelper.invalid(model);
-  }
-
+  
 }

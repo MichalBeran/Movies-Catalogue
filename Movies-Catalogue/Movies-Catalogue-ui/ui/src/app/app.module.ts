@@ -44,6 +44,7 @@ import {UserService} from "./services/user.service";
 import {RatingCommonComponent} from "./catalogue/rating/rating.common.component";
 import {DirectorCommonComponent} from "./catalogue/director/director.common.component";
 import {MovieDetailResolver} from "./services/movie.detail.resolver.service";
+import {MovieCommonComponent} from "./catalogue/movie/movie.common.component";
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import {MovieDetailResolver} from "./services/movie.detail.resolver.service";
     MovieIndexComponent,
     MovieDetailComponent,
     MovieCreateComponent,
+    MovieCommonComponent,
     RatingCommonComponent,
     RatingIndexComponent,
     RatingCreateComponent,

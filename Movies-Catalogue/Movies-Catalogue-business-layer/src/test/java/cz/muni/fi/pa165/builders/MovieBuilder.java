@@ -93,7 +93,7 @@ public class MovieBuilder {
         entity.setId(id);
         entity.setTitle(title);
         entity.setDescription(description);
-        entity.setImage(image);
+        entity.setImage((image == null) ? new byte[0] : image.getBytes());
         entity.setDateOfRelease(dateOfRelease);
         if(!genres.isEmpty())
         entity.setGenres(genres);

@@ -26,8 +26,9 @@ public class Movie {
     @Length(max = 600)
     private String description;
 
-    @Type(type="text")
-    private String image;
+    @Lob
+    @Basic(fetch = FetchType.LAZY)
+    private byte[] image;
 
     @NotNull
     private LocalDate dateOfRelease;
@@ -88,11 +89,11 @@ public class Movie {
         this.description = description;
     }
 
-    public String getImage() {
+    public byte[] getImage() {
         return image;
     }
 
-    public void setImage(String image) {
+    public void setImage(byte[] image) {
         this.image = image;
     }
 

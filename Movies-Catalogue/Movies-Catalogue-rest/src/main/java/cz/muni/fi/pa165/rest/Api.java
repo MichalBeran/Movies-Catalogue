@@ -7,4 +7,5 @@ public class Api {
     public static final String ROOT_URI_MOVIES = ROOT_API + "movies";
     public static final String ROOT_URI_ACTORS = ROOT_API + "actors";
     public static final String ROOT_URI_DIRECTORS = ROOT_API + "directors";
+    public static final String ROOT_URI_RATINGS = ROOT_API + "ratings";
 }

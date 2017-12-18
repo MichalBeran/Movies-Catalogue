@@ -43,6 +43,7 @@ import {AppHelper} from "./app.helper";
 import {UserService} from "./services/user.service";
 import {RatingCommonComponent} from "./catalogue/rating/rating.common.component";
 import {DirectorCommonComponent} from "./catalogue/director/director.common.component";
+import {MovieDetailResolver} from "./services/movie.detail.resolver.service";
 
 
 @NgModule({
@@ -89,7 +90,7 @@ import {DirectorCommonComponent} from "./catalogue/director/director.common.comp
     HttpClientModule,
     FormsModule
   ],
-  providers: [RestService, AppHelper, UserService],
+  providers: [RestService, AppHelper, UserService, MovieDetailResolver],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

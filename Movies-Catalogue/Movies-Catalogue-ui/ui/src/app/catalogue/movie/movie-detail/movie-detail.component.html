@@ -1,25 +1,47 @@
-<h2>
-  Detail
-</h2>
-
-<form #movieForm="ngForm" name="missionForm">
-  <div class="form-group">
-    <label for="movie-title">Name</label>
-    <input disabled [(ngModel)]="movie.title" #name="ngModel" name="movie-title" type="text" class="form-control" id="movie-title" placeholder="Mash">
+<ul class="nav nav-tabs mb-3" id="movie-tabs" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="movie-detail-tab" data-toggle="pill" href="#movie-detail" role="tab"
+       aria-controls="movie-detail" aria-selected="true">Detail</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="movie-review-tab" data-toggle="pill" href="#movie-review" role="tab"
+       aria-controls="movie-review" aria-selected="false">Reviews</a>
+  </li>
+</ul>
+<div class="tab-content" id="pills-tabContent">
+  <div class="tab-pane fade show active" id="movie-detail" role="tabpanel" aria-labelledby="movie-detail-tab">
+    <div class="movie-detail">
+      <div class="movie-image-container">
+        <img src="{{movie.image}}" alt="movie-image" class="img-thumbnail">
+      </div>
+      <div class="movie-detail-container">
+        <h2>{{movie.title}}</h2>
+        <p><b>Date of release:</b> {{getDate()}}</p>
+        <p><b>Director:</b> {{movie.director.firstName}} {{movie.director.lastName}}</p>
+        <p><b>Actors:</b>
+          <span *ngFor="let actor of movie.actors; let last=last">
+            {{actor.firstName}} {{actor.lastName}}
+            <span *ngIf="!last">,</span>
+          </span>
+        </p>
+        <p>
+          <span *ngFor="let genre of movie.genres">
+            <span class="badge badge-info">{{genre.name}}</span>
+          </span>
+        </p>
+      </div>
+    </div>
+    <div class="movie-description">
+      <div class="card bg-light mb-3">
+        <div class="card-header"><b>Plot</b></div>
+        <div class="card-body">
+          <p class="card-text">{{movie.description}}</p>
+        </div>
+      </div>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="movie-description">Description</label>
-    <textarea disabled [(ngModel)]="movie.description" #name="ngModel" name="movie-description" class="form-control" id="movie-description" rows="3"></textarea>
+  <div class="tab-pane fade" id="movie-review" role="tabpanel" aria-labelledby="movie-review-tab">
+    <h2>{{movie.title}} reviews</h2>
+    <app-rating></app-rating>
   </div>
-  <div class="form-group">
-    <label for="movie-image">Image</label>
-    <img src="{{movie.image}}">
-  </div>
-  <div class="form-group">
-    <label for="movie-dateOfRelease">Date of Release</label>
-    <textarea disabled [(ngModel)]="movie.dateOfRelease" #name="ngModel" name="movie-dateOfRelease" class="form-control" id="movie-dateOfRelease" rows="3"></textarea>
-  </div>
-  <a routerLink="/movies/edit/{{movie.id}}" class="btn btn-dark btn-sm">edit</a>
-  <button (click)="remove(movie.id)" class="btn btn-danger btn-sm">delete</button>
-
-</form>
+</div>

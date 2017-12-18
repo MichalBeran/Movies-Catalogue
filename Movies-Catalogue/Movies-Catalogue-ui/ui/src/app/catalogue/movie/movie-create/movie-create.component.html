@@ -5,7 +5,7 @@
 <form #movieForm="ngForm" name="missionForm">
   <div class="form-group">
     <label for="movie-title">Name</label>
-    <input [(ngModel)]="movie.title" #name="ngModel" name="movie-title" type="text" class="form-control" id="movie-title" placeholder="Mash" minlength="1"  required [ngClass]="{'is-invalid': invalid(name)}">
+    <input [(ngModel)]="movie.title" #name="ngModel" name="movie-title" type="text" class="form-control" id="movie-title" placeholder="title" minlength="2"  required [ngClass]="{'is-invalid': invalid(name)}">
     <div *ngIf="invalid(name)" class="invalid-feedback">
       Please enter movie title that is at least 1 character long.
     </div>

@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.GenreDto;
 import cz.muni.fi.pa165.dto.detail.GenreDetailDto;
+import cz.muni.fi.pa165.dto.detail.MovieDetailDto;
 import cz.muni.fi.pa165.facade.GenreFacade;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.rest.Api;
@@ -30,6 +31,15 @@ public class GenresController {
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<GenreDetailDto>> index() {
         return ResponseEntity.ok().body(mapper.mapTo(genreFacade.findAll(), GenreDetailDto.class));
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<MovieDetailDto>> getMovies(@PathVariable("id") Long id) throws Exception {
+        GenreDto dto = genreFacade.findById(id);
+        if (dto == null) {
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(mapper.mapTo(dto.getMovies(), MovieDetailDto.class));
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,

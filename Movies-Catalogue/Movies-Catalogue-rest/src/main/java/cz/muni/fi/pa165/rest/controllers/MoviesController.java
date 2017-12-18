@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.dto.detail.MovieDetailDto;
+import cz.muni.fi.pa165.dto.detail.GenreDetailDto;
 import cz.muni.fi.pa165.facade.ActorFacade;
 import cz.muni.fi.pa165.facade.DirectorFacade;
 import cz.muni.fi.pa165.facade.GenreFacade;
@@ -34,6 +35,8 @@ public class MoviesController {
 
     @Inject
     private MovieFacade movieFacade;
+    @Inject
+    private GenreFacade genreFacade;
 
     @Inject
     private GenreFacade genreFacade;
@@ -98,6 +101,35 @@ public class MoviesController {
         try{
             MovieDto dto = movieFacade.findById(id);
             return ResponseEntity.ok(mapper.mapTo(dto, MovieDetailDto.class));
+        }catch(Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<MovieDetailDto>> getTop(@PathVariable("id") Long id) throws Exception {
+        try{
+            GenreDto dto = genreFacade.findById(id);
+            return ResponseEntity.ok(mapper.mapTo(movieFacade.getTopMovies(dto), MovieDetailDto.class));
+        }catch(Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(value = "/{years}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<MovieDetailDto>> getNew(@PathVariable("years") int years) throws Exception {
+        try{
+            return ResponseEntity.ok(mapper.mapTo(movieFacade.getNewestMovies(years), MovieDetailDto.class));
+        }catch(Exception e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<MovieDetailDto>> getRec(@PathVariable("id") Long id) throws Exception {
+        try{
+            MovieDto dto = movieFacade.findById(id);
+            return ResponseEntity.ok(mapper.mapTo(movieFacade.getRecommendedMovies(dto), MovieDetailDto.class));
         }catch(Exception e){
             return ResponseEntity.notFound().build();
         }

@@ -53,10 +53,13 @@ public class DirectorsController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<DirectorDetailDto> update(@PathVariable("id") Long id, @RequestBody DirectorDto dto) throws Exception {
         try {
-            if(!dto.getId().equals(id)){
-                throw new Exception("Ids don't match.");
-            }
-            return ResponseEntity.ok(mapper.mapTo(directorFacade.update(dto), DirectorDetailDto.class));
+            DirectorDto stored = directorFacade.findById(id);
+            stored.setFirstName(!dto.getFirstName().equals("") ? dto.getFirstName() : stored.getFirstName());
+            stored.setLastName(!dto.getLastName().equals("") ? dto.getLastName() : stored.getFirstName());
+            stored.setDateOfBirth(!dto.getDateOfBirth().equals("") ? dto.getDateOfBirth() : stored.getDateOfBirth());
+
+
+            return ResponseEntity.ok(mapper.mapTo(directorFacade.update(stored), DirectorDetailDto.class));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }

@@ -30,5 +30,4 @@ export class DirectorCommonComponent implements OnInit {
   protected toIndexPage() {
     this.router.navigateByUrl(`directors/index`);
   }
-  
 }

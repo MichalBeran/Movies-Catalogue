@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {User} from '../../models/user.model';
-import {isNullOrUndefined} from "util";
-import {UserService} from "../../services/user.service";
-import {Router} from "@angular/router";
-import {AppHelper} from "../../app.helper";
+import {isNullOrUndefined} from 'util';
+import {UserService} from '../../services/user.service';
+import {Router} from '@angular/router';
+import {AppHelper} from '../../app.helper';
+declare const $: any;
 
 @Component({
   selector: 'app-header',
@@ -17,9 +18,9 @@ export class HeaderComponent implements OnInit {
   ngOnInit() {
     this.service.setRepository('users');
   }
-  
+
   getLoggedUser(){
-    console.log("GET LOGGED USER");
+    console.log('GET LOGGED USER');
     return AppHelper.getAuthenticated();
   }
 
@@ -39,6 +40,11 @@ export class HeaderComponent implements OnInit {
   toMovies() {
     this.router.navigateByUrl(`movies/index`);
 
+  }
+
+  dropdownMenuToggle(e) {
+    e.preventDefault();
+    $('.dropdown-container').slideToggle(500, 'easeOutExpo');
   }
 
 }

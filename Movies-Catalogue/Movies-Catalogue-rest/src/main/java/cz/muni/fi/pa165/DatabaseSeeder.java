@@ -92,8 +92,8 @@ public class DatabaseSeeder {
         shorty.setLastName("Short");
         shorty.setNick("Shorty");
         shorty.setMail("me@me.me");
-        userFacade.registerUser(shorty, "me");
-
+        shorty.setId(userFacade.registerUser(shorty, "me"));
+        userFacade.makeAdmin(shorty);
     }
 
         private void seedGenres() {

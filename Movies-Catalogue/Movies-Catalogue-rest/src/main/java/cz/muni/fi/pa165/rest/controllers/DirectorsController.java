@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 @RestController
 @RequestMapping(Api.ROOT_URI_DIRECTORS)
@@ -41,11 +42,12 @@ public class DirectorsController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<DirectorDetailDto> get(@PathVariable("id") Long id) throws Exception {
-        DirectorDetailDto dto = mapper.mapTo(directorFacade.findById(id), DirectorDetailDto.class);
-        if (dto == null) {
-            return ResponseEntity.notFound().build();
+        try{
+            DirectorDetailDto dto = mapper.mapTo(directorFacade.findById(id), DirectorDetailDto.class);
+            return ResponseEntity.ok(dto);
+        }catch(InvalidDataAccessApiUsageException e){
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(dto);
     }
 
 

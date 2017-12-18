@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 @RestController
 @RequestMapping(Api.ROOT_URI_GENRES)
@@ -45,11 +46,12 @@ public class GenresController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<GenreDetailDto> get(@PathVariable("id") Long id) throws Exception {
-        GenreDto dto = genreFacade.findById(id);
-        if (dto == null) {
-            return ResponseEntity.notFound().build();
+        try{
+            GenreDto dto = genreFacade.findById(id);
+            return ResponseEntity.ok(mapper.mapTo(dto, GenreDetailDto.class));
+        }catch(InvalidDataAccessApiUsageException e){
+            return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(mapper.mapTo(dto, GenreDetailDto.class));
     }
 
 

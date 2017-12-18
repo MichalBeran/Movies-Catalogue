@@ -6,10 +6,10 @@
 package cz.muni.fi.pa165.dto.view;
 
 /**
- *
  * @author Dominik
  */
 public class UserViewDto {
+    private Long id;
     private String firstName;
     private String lastName;
     private String mail;
@@ -46,6 +46,13 @@ public class UserViewDto {
     public void setNick(String nick) {
         this.nick = nick;
     }
-    
-    
+
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
 }

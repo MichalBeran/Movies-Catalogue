@@ -19,13 +19,6 @@ export class MovieDetailResolver implements Resolve<Movie> {
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Movie> {
     const id = route.paramMap.get('id');
 
-    return this.service.find(id).take(1).map(movie => {
-      if (movie) {
-        return movie;
-      } else { // id not found
-        this.router.navigate(['/movies']);
-        return null;
-      }
-    });
+    return this.service.find(id);
   }
 }

@@ -1,5 +1,6 @@
 import {BaseModel} from './base.model';
 import {User} from './user.model';
+import {Movie} from './movie.model';
 
 export class Rating extends BaseModel {
   id?: number;
@@ -8,5 +9,12 @@ export class Rating extends BaseModel {
   overallRating: number;
   scenarioRating: number;
   actorsRating: number;
-  user: User;
+  user: any;
+  movie: any;
+
+  constructor() {
+    super();
+    this.user = new User();
+    this.movie = new User();
+  }
 }

@@ -1,5 +1,5 @@
-import {User} from "./models/user.model";
-import {isNullOrUndefined} from "util";
+import {User} from './models/user.model';
+import {isNullOrUndefined} from 'util';
 
 export class AppHelper {
   static invalid(model: any): boolean {
@@ -14,8 +14,8 @@ export class AppHelper {
     return !isNullOrUndefined(AppHelper.getAuthenticated());
   }
 
-  static isAdmin() : boolean{
-    if(AppHelper.isAuthenticated()){
+  static isAdmin(): boolean{
+    if (AppHelper.isAuthenticated()){
       return AppHelper.getAuthenticated().admin;
     }
     return false;

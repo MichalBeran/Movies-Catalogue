@@ -3,9 +3,17 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
-          <h1>Movies catalogue</h1>
-          <span *ngIf="isLoggedIn()">hello, {{getLoggedUser().firstName}}. <a href="#" (click)="logout()">Log out</a></span>
-          <span *ngIf="!isLoggedIn()">hello, stranger. <a routerLink="/users/login">Log in</a></span>
+          <div class="flex-center-spaced">
+            <div>
+              <h1>Movies catalogue</h1>
+              <span *ngIf="isLoggedIn()">hello, {{getLoggedUser().firstName}}. <a href="#"
+                                                                                  (click)="logout()">Log out</a></span>
+              <span *ngIf="!isLoggedIn()">hello, stranger. <a routerLink="/users/login">Log in</a></span>
+            </div>
+            <div class=" d-sm-none">
+              <a (click)="dropdownMenuToggle($event)" class="btn btn-link">Menu</a>
+            </div>
+          </div>
         </div>
         <div class="col-md-12">
           <!--<h2>Hi {{currentUser.nick}}</h2>-->
@@ -13,7 +21,7 @@
       </div>
     </div>
   </div>
-  <div id="header-bottom">
+  <div id="header-bottom" class="d-none d-sm-block">
     <div class="container">
       <div class="row">
         <div class="col-md-12">
@@ -27,7 +35,62 @@
           </ul>
         </div>
       </div>
-
+    </div>
+  </div>
+  <div class="container-fluid dropdown-container">
+    <div class="row">
+      <div class="col">
+        <div class="dropdown">
+          <ul>
+            <li>
+              <a routerLink="movies" routerLinkActive="active">Movies</a>
+              <ul>
+                <li>
+                  <a routerLink="movies/index" routerLinkActive="active">Index</a>
+                </li>
+                <li>
+                  <a routerLink="movies/create" routerLinkActive="active">New</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a routerLink="genres" routerLinkActive="active">Genres</a>
+              <ul>
+                <li>
+                  <a routerLink="genres/index" routerLinkActive="active">Index</a>
+                  <a routerLink="genres/create" routerLinkActive="active">New</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a routerLink="actors" routerLinkActive="active">Actors</a>
+              <ul>
+                <li>
+                  <a routerLink="actors/index" routerLinkActive="active">Index</a>
+                  <a routerLink="actors/create" routerLinkActive="active">New</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a routerLink="directors" routerLinkActive="active">Directors</a>
+              <ul>
+                <li>
+                  <a routerLink="directors/index" routerLinkActive="active">Index</a>
+                  <a routerLink="directors/create" routerLinkActive="active">New</a>
+                </li>
+              </ul>
+            </li>
+            <li *ngIf="isAdmin()">
+              <a routerLink="users" routerLinkActive="active"></a>
+              <ul>
+                <li>
+                  <a routerLink="users/index" routerLinkActive="active">Index</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
   </div>
 

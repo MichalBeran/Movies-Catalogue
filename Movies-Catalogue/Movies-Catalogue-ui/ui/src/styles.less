@@ -23,3 +23,16 @@ a{
 span.badge{
   margin:2px;
 }
+.btn{margin:2px;}
+.flex-center-spaced{
+  display:flex;
+  justify-content: space-between;
+  > div{
+    display:flex;
+    align-items: center;
+    &:first-child{
+      flex-direction:column;
+
+    }
+  }
+}

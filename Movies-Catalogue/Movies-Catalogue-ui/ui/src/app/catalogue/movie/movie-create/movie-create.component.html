@@ -5,27 +5,37 @@
 <form #movieForm="ngForm" name="missionForm">
   <div class="form-group">
     <label for="movie-title">Name</label>
-    <input [(ngModel)]="movie.title" #name="ngModel" name="movie-title" type="text" class="form-control" id="movie-title" placeholder="Mash">
+    <input [(ngModel)]="movie.title" #name="ngModel" name="movie-title" type="text" class="form-control" id="movie-title" placeholder="Mash" minlength="1"  required [ngClass]="{'is-invalid': invalid(name)}">
+    <div *ngIf="invalid(name)" class="invalid-feedback">
+      Please enter movie title that is at least 1 character long.
+    </div>
   </div>
   <div class="form-group">
     <label for="movie-description">Description</label>
-    <textarea [(ngModel)]="movie.description" #description="ngModel" name="movie-description" class="form-control" id="movie-description" rows="3"></textarea>
+    <textarea [(ngModel)]="movie.description" #description="ngModel" name="movie-description" class="form-control" id="movie-description" rows="3"  minlength="5"  required [ngClass]="{'is-invalid': invalid(description)}"></textarea>
+    <div *ngIf="invalid(description)" class="invalid-feedback">
+      Please enter movie description that is at least 5 characters long.
+    </div>
   </div>
   <div class="form-group">
     <label for="movie-image">Image</label>
-    <textarea [(ngModel)]="movie.image" #image="ngModel" name="movie-image" class="form-control" id="movie-image" rows="3" (change)="getFiles($event)">
-    </textarea>
-  </div>
-  <div class="form-group">
-    <label for="movie-image">Image</label>
-    <img src="{{movie.image}}">
-    {{movie.image}}
+    <input type="file" [(ngModel)]="file" #image="ngModel" name="movie-image" class="form-control" id="movie-image" (change)="changeListener($event)" accept="image/jpeg,image/gif,image/png" valid-file [ngClass]="{'is-invalid': invalid(image)}">
+    <div *ngIf="invalid(image)" class="invalid-feedback">
+      Please enter a valid image.
+    </div>
+    <div>
+      <img src="{{movie.image}}">
+    </div>
   </div>
 
+
   <div class="form-group">
-    <label for="movie-dateOfReleaseYear">Date of release</label>
-    <input type="date" [(ngModel)]="movie.date" #year="ngModel" name="movie-dateOfRelease-year" class="form-control" id="movie-dateOfReleaseYear" rows="3">
+    <label for="movie-dateOfRelease">Date of release</label>
+    <input type="date" [(ngModel)]="movie.date" #date="ngModel" name="movie-dateOfRelease" class="form-control" id="movie-dateOfRelease" required [ngClass]="{'is-invalid': invalid(date)}">
+    <div *ngIf="invalid(date)" class="invalid-feedback">
+      Please enter a valid date of release.
+    </div>
   </div>
-  <button class="btn btn-primary btn-sm" (click)="save()">Save</button>
+  <button [disabled]="movieForm.invalid" class="btn btn-primary btn-sm" (click)="save()">Save</button>
   <button *ngIf="editing==true" (click)="remove(movie.id)" class="btn btn-danger btn-sm">delete</button>
 </form>

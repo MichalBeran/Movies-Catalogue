@@ -1,10 +1,7 @@
 package cz.muni.fi.pa165.rest.controllers;
 
-import cz.muni.fi.pa165.dto.ActorDto;
-import cz.muni.fi.pa165.dto.CreateMovieDto;
-import cz.muni.fi.pa165.dto.GenreDto;
+import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.dto.detail.MovieDetailDto;
-import cz.muni.fi.pa165.dto.MovieDto;
 import cz.muni.fi.pa165.facade.ActorFacade;
 import cz.muni.fi.pa165.facade.DirectorFacade;
 import cz.muni.fi.pa165.facade.GenreFacade;
@@ -58,19 +55,37 @@ public class MoviesController {
     public final ResponseEntity<MovieDetailDto> create(@RequestBody CreateMovieDto dto) throws Exception {
         try {
             List<GenreDto> genres = new ArrayList<>();
-            for (GenreDto genre: dto.getGenres()){
-                genres.add(genreFacade.findById(genre.getId()));
+            if(dto.getGenres() != null) {
+                for (GenreDto genre : dto.getGenres()) {
+                    if(genre.getId() != null) {
+                        genres.add(genreFacade.findById(genre.getId()));
+                    }
+                }
+            }
+            if(genres.size() < 1) {
+                genres.add(genreFacade.findById(1l));
             }
             dto.setGenres(genres);
             List<ActorDto> actors = new ArrayList<>();
-            for (ActorDto actor: dto.getActors()){
-                actors.add(actorFacade.findById(actor.getId()));
+            if(dto.getActors()!= null) {
+                for (ActorDto actor : dto.getActors()) {
+                    if(actor.getId() !=null) {
+                        actors.add(actorFacade.findById(actor.getId()));
+                    }
+                }
+            }
+            if(actors.size() < 1) {
+                actors.add(actorFacade.findById(1l));
             }
             dto.setActors(actors);
-            dto.setDirector(directorFacade.findById(dto.getDirector().getId()));
-
-            LocalDate ld = LocalDate.parse(dto.date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            if(dto.getDirector().getId() != null){
+                dto.setDirector(directorFacade.findById(dto.getDirector().getId()));
+            }else{
+                dto.setDirector(directorFacade.findById(1l));
+            }
+            LocalDate ld = LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             dto.setDateOfRelease(ld);
+
             Long id = movieFacade.createMovie(dto);
             return ResponseEntity.ok(mapper.mapTo(movieFacade.findById(id), MovieDetailDto.class));
         } catch (Exception ex) {

@@ -141,7 +141,6 @@ public class DatabaseSeeder {
         foreigner = new CreateMovieDto();
         foreigner.setTitle("The foreigner");
         foreigner.setDescription("A humble businessman with a buried past seeks justice when his daughter is killed in an act of terrorism. A cat-and-mouse conflict ensues with a government official, whose past may hold clues to the killers' identities.");
-        foreigner.setDescription("dscr");
         foreigner.setDateOfRelease(LocalDate.of(2017, 9, 30));
         List<GenreDto> genres = new ArrayList<>();
         genres.add(action);
@@ -156,7 +155,6 @@ public class DatabaseSeeder {
         wonderWoman = new CreateMovieDto();
         wonderWoman.setTitle("Wonder Woman");
         wonderWoman.setDescription("When a pilot crashes and tells of conflict in the outside world, Diana, an Amazonian warrior in training, leaves home to fight a war, discovering her full powers and true destiny.");
-        wonderWoman.setDescription("dscr");
         wonderWoman.setDateOfRelease(LocalDate.of(2017, 6, 1));
         genres = new ArrayList<>();
         genres.add(action);

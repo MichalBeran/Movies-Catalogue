@@ -37,11 +37,11 @@ import static org.dozer.loader.api.FieldsMappingOptions.hintB;
  */
 @Configuration
 @Import(PersistenceApplicationContext.class)
-@ComponentScan(basePackageClasses={ActorServiceImpl.class, ActorFacadeImpl.class})
+@ComponentScan(basePackageClasses = {ActorServiceImpl.class, ActorFacadeImpl.class})
 public class ServiceConfiguration {
-    
+
     @Bean
-    public Mapper dozer(){
+    public Mapper dozer() {
         DozerBeanMapper dozer = new DozerBeanMapper();
         dozer.addMapping(new DozerCustomConfig());
         return dozer;
@@ -69,7 +69,7 @@ public class ServiceConfiguration {
             mapping(MovieDto.class, MovieDetailDto.class)
                     .fields("genres", "genres", hintB(GenreViewDto.class))
                     .fields("actors", "actors", hintB(ActorViewDto.class))
-                    .exclude("dateOfRelease");
+                    .fields("dateOfRelease", "dateOfRelease", FieldsMappingOptions.copyByReference());
             mapping(ActorDto.class, ActorDetailDto.class)
                     .fields("dateOfBirth", "dateOfBirth", FieldsMappingOptions.copyByReference())
                     .fields("movies", "movies", hintB(MovieViewDto.class));
@@ -81,23 +81,23 @@ public class ServiceConfiguration {
         }
     }
 
-    public static class StringToByteConverter extends DozerConverter<String, byte[]> implements CustomConverter{
-        public StringToByteConverter(){
+    public static class StringToByteConverter extends DozerConverter<String, byte[]> implements CustomConverter {
+        public StringToByteConverter() {
             super(String.class, byte[].class);
         }
 
-        public byte[] convertTo(String source, byte[] destination){
-            if(source == null){
+        public byte[] convertTo(String source, byte[] destination) {
+            if (source == null) {
                 return new byte[0];
-            }else{
+            } else {
                 return source.getBytes();
             }
         }
 
-        public String convertFrom(byte[] source, String destination){
-            if(source == null){
+        public String convertFrom(byte[] source, String destination) {
+            if (source == null) {
                 return new String();
-            }else{
+            } else {
                 return new String(source);
             }
         }

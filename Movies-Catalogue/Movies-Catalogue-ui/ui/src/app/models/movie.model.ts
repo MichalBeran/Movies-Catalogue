@@ -5,6 +5,10 @@ id?: number;
 title: string;
 description: string;
 image: string;
-dateOfRelease: string;
+dateOfRelease: {
+  year: string,
+  monthValue: string,
+  dayOfMonth: string
+};
 
 }

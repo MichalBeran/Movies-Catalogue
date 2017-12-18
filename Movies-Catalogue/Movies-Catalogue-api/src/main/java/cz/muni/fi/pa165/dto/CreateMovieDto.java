@@ -26,6 +26,7 @@ public class CreateMovieDto {
 
     private String image;
 
+    public String date;
     @NotNull
     private LocalDate dateOfRelease;
 
@@ -43,6 +44,7 @@ public class CreateMovieDto {
     }
 
     public CreateMovieDto() {
+        this.date = "";
         this.genres = new ArrayList();
         this.actors = new ArrayList();
     }

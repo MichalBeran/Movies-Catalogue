@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {MovieCommonComponent} from "../movie.common.component";
-import {RestService} from "../../../services/rest.service";
+import {MovieCommonComponent} from '../movie.common.component';
+import {RestService} from '../../../services/rest.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Movie} from "../../../models/movie.model";
+import {Movie} from '../../../models/movie.model';
 import {isNullOrUndefined} from 'util';
+import {MovieCreate} from '../../../models/movie.create.model';
 
 @Component({
   selector: 'app-movie-create',
@@ -12,8 +13,8 @@ import {isNullOrUndefined} from 'util';
 })
 export class MovieCreateComponent extends MovieCommonComponent implements OnInit {
 
-  movie: Movie = new Movie();
-  files : FileList;
+  movie: MovieCreate = new MovieCreate();
+  files: FileList;
 
   title = 'Create';
   editing = false;
@@ -23,6 +24,12 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
   }
 
   ngOnInit() {
+    this.movie.genres = [{
+      id: '1'
+    }];
+    this.movie.actors = [{id:'1'}];
+    this.movie.director= {id:'1'};
+
     this.route.params.subscribe(params => {
       if (!isNullOrUndefined(params['id'])) {
         this.service.find(params['id']).subscribe(res => this.setFormForEdit(res));
@@ -48,7 +55,7 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
     super.delete(id, () => super.toIndexPage());
   }
 
-  private setFormForEdit(movie: Movie) {
+  private setFormForEdit(movie: any) {
     this.title = `Update`;
     this.movie = movie;
     this.editing = true;

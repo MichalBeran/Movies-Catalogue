@@ -1,3 +1,50 @@
-<p>
-  rating-create works!
-</p>
+<button (click)="toggleNewRatingForm()" class="btn btn-dark">Rate movie!</button>
+<div class="rating-create-container">
+  <form #ratingForm="ngForm">
+
+    <div class="slider-group">
+      <span class="description">Overall rating: </span>
+      <span class="slider-in">
+    <input [(ngModel)]="rating.overallRating" name="overallRating" id="overall" data-slider-id='overall-slider' type="text" data-slider-min="0" data-slider-max="100"
+           data-slider-step="2" data-slider-value="0"/>
+  </span>
+      <span class="value">
+    <span id="overall-val">0</span>%
+  </span>
+    </div>
+
+    <div class="slider-group">
+      <span class="description">Actors rating: </span>
+      <span class="slider-in">
+    <input [(ngModel)]="rating.actorsRating" name="actorsRating" id="actors" data-slider-id='actors-slider' type="text" data-slider-min="0" data-slider-max="100"
+           data-slider-step="2" data-slider-value="0"/>
+  </span>
+      <span class="value">
+    <span id="actors-val">0</span>%
+  </span>
+    </div>
+
+    <div class="slider-group">
+      <span class="description">Scenario rating: </span>
+      <span class="slider-in">
+    <input [(ngModel)]="rating.scenarioRating" name="scenarioRating" id="scenario" data-slider-id='scenario-slider' type="text" data-slider-min="0" data-slider-max="100"
+           data-slider-step="2" data-slider-value="0"/>
+  </span>
+      <span class="value">
+    <span id="scenario-val">0</span>%
+  </span>
+    </div>
+
+    <div class="form-group">
+      <label for="rating-description"><b>Description:</b></label>
+      <textarea [(ngModel)]="rating.description" #description="ngModel" minlength="3" maxlength="600" required [ngClass]="{'is-invalid': invalid(description)}" name="rating-description" class="form-control" id="rating-description" rows="3"></textarea>
+      <div *ngIf="invalid(description)" class="invalid-feedback">
+        Please provide a valid description. Description length must be between 3 and 600 characters.
+      </div>
+    </div>
+    <div class="form-group">
+      <button (click)="save()" class="btn btn-primary">Save</button>
+      <button (click)="toggleNewRatingForm()" class="btn btn-secondary">Cancel</button>
+    </div>
+  </form>
+</div>

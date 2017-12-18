@@ -14,6 +14,7 @@ import {MovieCreate} from '../../../models/movie.create.model';
 export class MovieCreateComponent extends MovieCommonComponent implements OnInit {
 
   movie: MovieCreate = new MovieCreate();
+  file;
 
   title = 'Create';
   editing = false;
@@ -29,6 +30,20 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
         this.service.find(params['id']).subscribe(res => this.setFormForEdit(res));
       }
     });
+  }
+
+  changeListener($event) : void {
+    this.readThis($event.target);
+  }
+
+  readThis(inputValue: any): void {
+    var file:File = inputValue.files[0];
+    var myReader:FileReader = new FileReader();
+
+    myReader.onloadend = (e) => {
+      this.movie.image = myReader.result;
+    }
+    myReader.readAsDataURL(file);
   }
 
   save() {

@@ -19,14 +19,15 @@
   </div>
   <div class="form-group">
     <label for="movie-image">Image</label>
-    <textarea [(ngModel)]="movie.image" #image="ngModel" name="movie-image" class="form-control" id="movie-image" rows="3">
-    </textarea>
+    <input type="file" [(ngModel)]="file" #image="ngModel" name="movie-image" class="form-control" id="movie-image" (change)="changeListener($event)" accept="image/jpeg,image/gif,image/png" valid-file [ngClass]="{'is-invalid': invalid(image)}">
+    <div *ngIf="invalid(image)" class="invalid-feedback">
+      Please enter a valid image.
+    </div>
+    <div>
+      <img src="{{movie.image}}">
+    </div>
   </div>
-  <div class="form-group">
-    <label for="movie-image">Image</label>
-    <img src="{{movie.image}}">
-    {{movie.image}}
-  </div>
+
 
   <div class="form-group">
     <label for="movie-dateOfRelease">Date of release</label>

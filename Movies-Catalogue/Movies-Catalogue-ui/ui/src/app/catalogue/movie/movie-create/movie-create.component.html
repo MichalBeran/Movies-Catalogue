@@ -17,6 +17,34 @@
       Please enter movie description that is at least 5 characters long.
     </div>
   </div>
+
+  <div class="form-group">
+    <label for="movie-description">Director</label>
+    <select [(ngModel)]="movie.director.id" class="directors-sel form-control" name="director">
+      <option *ngFor="let director of directors" value="{{director.id}}">{{director.firstName}} {{director.lastName}}</option>
+    </select>
+  </div>
+
+  <div class="form-group">
+    <label for="s2actrs">Actors</label>
+    <select class="form-control" name="s2actrs" id="s2actrs" multiple></select>
+    <!--<select [(ngModel)]="actorsSel" class="directors-sel form-control" name="actors" multiple>-->
+      <!--<option *ngFor="let actor of actors" value="{{actor.id}}">{{actor.firstName}} {{actor.lastName}}</option>-->
+    <!--</select>-->
+  </div>
+
+
+
+
+
+  <div class="form-group">
+    <label for="s2gnrs">Genres</label>
+    <select class="form-control" name="s2gnrs" id="s2gnrs" multiple></select>
+    <!--<select [(ngModel)]="genresSel" class="directors-sel form-control" name="genres" multiple>-->
+      <!--<option *ngFor="let genre of genres" value="{{genre.id}}">{{genre.name}}</option>-->
+    <!--</select>-->
+  </div>
+
   <div class="form-group">
     <label for="movie-image">Image</label>
     <input type="file" [(ngModel)]="file" #image="ngModel" name="movie-image" class="form-control" id="movie-image" (change)="changeListener($event)" accept="image/jpeg,image/gif,image/png" valid-file [ngClass]="{'is-invalid': invalid(image)}">

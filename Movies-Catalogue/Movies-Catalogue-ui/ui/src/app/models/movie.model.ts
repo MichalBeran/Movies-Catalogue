@@ -5,6 +5,7 @@ export class Movie extends BaseModel {
   title: string;
   description: string;
   image: string;
+  date: string;
   dateOfRelease: {
     year: string,
     monthValue: string,
@@ -16,6 +17,7 @@ export class Movie extends BaseModel {
     this.title = '';
     this.description = '';
     this.image = '';
+    this.date = '';
     this.dateOfRelease = {
       year: '',
       monthValue: '',

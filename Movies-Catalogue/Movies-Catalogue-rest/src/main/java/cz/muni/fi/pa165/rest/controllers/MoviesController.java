@@ -98,6 +98,7 @@ public class MoviesController {
     public ResponseEntity<MovieDetailDto> get(@PathVariable("id") Long id) throws Exception {
         try{
             MovieDto dto = movieFacade.findById(id);
+            dto.setDate(dto.getDateOfRelease().toString());
             return ResponseEntity.ok(mapper.mapTo(dto, MovieDetailDto.class));
         }catch(InvalidDataAccessApiUsageException e){
             return ResponseEntity.notFound().build();
@@ -109,16 +110,39 @@ public class MoviesController {
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<MovieDetailDto> update(@PathVariable("id") Long id, @RequestBody MovieDto dto) throws Exception {
         try {
-            MovieDto stored = movieFacade.findById(id);
-            stored.setDescription(!dto.getDescription().equals("") ? dto.getDescription() : stored.getDescription());
-            stored.setTitle(!dto.getTitle().equals("") ? dto.getTitle() : stored.getTitle());
-            stored.setImage(!dto.getImage().equals("") ? dto.getImage() : stored.getImage());
-            stored.setDirector(!dto.getDirector().equals("") ? dto.getDirector() : stored.getDirector());
-            stored.setActors(!dto.getActors().equals("") ? dto.getActors() : stored.getActors());
-            stored.setGenres(!dto.getGenres().equals("") ? dto.getGenres() : stored.getGenres());
-            stored.setDateOfRelease(!dto.getDateOfRelease().equals("") ? dto.getDateOfRelease() : stored.getDateOfRelease());
+            List<GenreDto> genres = new ArrayList<>();
+            if(dto.getGenres() != null) {
+                for (GenreDto genre : dto.getGenres()) {
+                    if(genre.getId() != null) {
+                        genres.add(genreFacade.findById(genre.getId()));
+                    }
+                }
+            }
+            if(genres.size() < 1) {
+                genres.add(genreFacade.findById(1l));
+            }
+            dto.setGenres(genres);
+            List<ActorDto> actors = new ArrayList<>();
+            if(dto.getActors()!= null) {
+                for (ActorDto actor : dto.getActors()) {
+                    if(actor.getId() !=null) {
+                        actors.add(actorFacade.findById(actor.getId()));
+                    }
+                }
+            }
+            if(actors.size() < 1) {
+                actors.add(actorFacade.findById(1l));
+            }
+            dto.setActors(actors);
+            if(dto.getDirector().getId() != null){
+                dto.setDirector(directorFacade.findById(dto.getDirector().getId()));
+            }else{
+                dto.setDirector(directorFacade.findById(1l));
+            }
+            LocalDate ld = LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dto.setDateOfRelease(ld);
 
-            return ResponseEntity.ok(mapper.mapTo(movieFacade.update(stored), MovieDetailDto.class));
+            return ResponseEntity.ok(mapper.mapTo(movieFacade.update(dto), MovieDetailDto.class));
         } catch (Exception ex) {
             return ResponseEntity.badRequest().build();
         }

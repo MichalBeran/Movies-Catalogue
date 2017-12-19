@@ -13,6 +13,9 @@ public class MovieDto {
 //        this.genres = new ArrayList<>();
 //    }
 
+    public MovieDto(){
+        this.date = "";
+    }
     private Long id;
     
     private String title;
@@ -22,6 +25,8 @@ public class MovieDto {
     private String image;
 
     private LocalDate dateOfRelease;
+
+    private String date;
 
     private List<GenreDto> genres;
 
@@ -121,6 +126,13 @@ public class MovieDto {
         }
         return true;
     }
-    
-    
+
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

@@ -4,18 +4,19 @@
 
 <form #actorForm="ngForm" name="missionForm">
   <div class="form-group">
-    <label for="actor-firstName">FirstName</label>
+    <label for="actor-firstName">First name</label>
     <input disabled [(ngModel)]="actor.firstName" #firstName="ngModel" name="actor-firstName" type="text" class="form-control" id="actor-firstName" placeholder="name">
   </div>
   <div class="form-group">
-    <label for="actor-lastName">LastName</label>
+    <label for="actor-lastName">Last Name</label>
     <input disabled [(ngModel)]="actor.lastName" #lastName="ngModel" name="actor-lastName" type="text" class="form-control" id="actor-lastName" placeholder="name">
   </div>
   <div class="form-group">
-    <label for="actor-dateOfBirth">DateOfBirth</label>
+    <label for="actor-dateOfBirth">Date of birth</label>
     <input disabled [(ngModel)]="actor.date" #lastName="ngModel" name="actor-dateOfBirth" type="text" class="form-control" id="actor-dateOfBirth" placeholder="date">
   </div>
-  <a routerLink="/actors/edit/{{actor.id}}" class="btn btn-dark btn-sm">edit</a>
-  <button (click)="remove(actor.id)" class="btn btn-danger btn-sm">delete</button>
-
+  <div *ngIf="isUserAdmin()">
+    <a routerLink="/actors/edit/{{actor.id}}" class="btn btn-dark btn-sm">edit</a>
+    <button (click)="remove(actor.id)" class="btn btn-danger btn-sm">delete</button>
+  </div>
 </form>

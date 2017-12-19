@@ -39,7 +39,12 @@ export class DirectorCreateComponent extends DirectorCommonComponent implements 
       this.service.create(this.director).subscribe(result => this.redirect(result));
     } else {
       // update
-      this.service.update(this.director).subscribe(result => this.redirect(result));
+      var dir = new Director();
+      dir.id = this.director.id;
+      dir.firstName = this.director.firstName;
+      dir.lastName = this.director.lastName;
+      dir.date = this.director.date;
+      this.service.update(dir).subscribe(result => this.redirect(result));
     }
   }
 

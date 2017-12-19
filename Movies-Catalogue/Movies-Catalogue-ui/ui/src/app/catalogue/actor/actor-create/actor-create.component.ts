@@ -39,7 +39,12 @@ export class ActorCreateComponent extends ActorCommonComponent implements OnInit
       this.service.create(this.actor).subscribe(result => this.redirect(result));
     } else {
       // update
-      this.service.update(this.actor).subscribe(result => this.redirect(result));
+      var act = new Actor();
+      act.id = this.actor.id;
+      act.firstName = this.actor.firstName;
+      act.lastName = this.actor.lastName;
+      act.date = this.actor.date;
+      this.service.update(act).subscribe(result => this.redirect(result));
     }
   }
 

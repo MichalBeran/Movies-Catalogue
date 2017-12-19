@@ -12,7 +12,7 @@ import {MovieCommonComponent} from '../movie.common.component';
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
-  styleUrls: ['./movie-detail.component.less']
+  styleUrls: ['./movie-detail.component.less'],
   providers: [RecomMoviesService]
 })
 export class MovieDetailComponent extends MovieCommonComponent implements OnInit {

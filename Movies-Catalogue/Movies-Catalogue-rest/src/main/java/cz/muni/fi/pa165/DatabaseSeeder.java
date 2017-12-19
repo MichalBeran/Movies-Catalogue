@@ -174,7 +174,7 @@ public class DatabaseSeeder {
         rosamundPike = new ActorDto();
         rosamundPike.setFirstName("Rosamund");
         rosamundPike.setLastName("Pike");
-        rosamundPike.setDateOfBirth(LocalDate.of(1979, 51, 27));
+        rosamundPike.setDateOfBirth(LocalDate.of(1979, 1, 27));
         rosamundPike.setId(actorFacade.create(rosamundPike));
         
         salmanKhan = new ActorDto();

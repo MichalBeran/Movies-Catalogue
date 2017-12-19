@@ -49,6 +49,21 @@ public class UsersController {
         }
     }
 
+    @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity<UserDto> update(@PathVariable("id") Long id, @RequestBody UserDto dto) throws Exception {
+        try {
+            UserDto stored = userFacade.findUserById(id);
+            stored.setNick(!dto.getNick().equals("") ? dto.getNick() : stored.getNick());
+            stored.setMail(!dto.getMail().equals("") ? dto.getMail() : stored.getMail());
+            stored.setFirstName(!dto.getFirstName().equals("") ? dto.getFirstName() : stored.getFirstName());
+            stored.setLastName(!dto.getLastName().equals("") ? dto.getLastName() : stored.getLastName());
+            return ResponseEntity.ok(userFacade.update(dto, dto.getPassword()));
+        } catch (Exception ex) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<UserDto> get(@PathVariable("id") Long id) throws Exception {
         try{

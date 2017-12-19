@@ -15,8 +15,10 @@
     <td><span *ngFor="let genre of movie.genres" class="badge badge-info">{{genre.name}}</span></td>
     <td>
       <a routerLink="/movies/detail/{{movie.id}}" class="btn btn-dark btn-sm">show detail</a>
-      <a routerLink="/movies/edit/{{movie.id}}" class="btn btn-dark btn-sm">edit</a>
-      <button (click)="remove(movie.id);" class="btn btn-danger btn-sm">delete</button>
+      <div *ngIf="isUserAdmin()">
+        <a routerLink="/movies/edit/{{movie.id}}" class="btn btn-dark btn-sm">edit</a>
+        <button (click)="remove(movie.id);" class="btn btn-danger btn-sm">delete</button>
+      </div>
     </td>
   </tr>
   </tbody>

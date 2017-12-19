@@ -44,7 +44,7 @@ export class DirectorCreateComponent extends DirectorCommonComponent implements 
   }
 
   redirect(created: Director) {
-    this.router.navigateByUrl(`director/detail/${created.id}`);
+    this.router.navigateByUrl(`directors/detail/${created.id}`);
   }
 
   remove(id) {

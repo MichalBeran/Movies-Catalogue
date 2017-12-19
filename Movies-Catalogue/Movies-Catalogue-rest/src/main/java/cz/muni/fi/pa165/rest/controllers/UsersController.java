@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 
 /**
  * @author Michal
@@ -51,11 +51,12 @@ public class UsersController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<UserDto> get(@PathVariable("id") Long id) throws Exception {
-        UserDto userDto = userFacade.findUserById(id);
-        if(userDto == null){
+        try{
+            UserDto userDto = userFacade.findUserById(id);
+            return ResponseEntity.ok(userDto);
+        }catch(InvalidDataAccessApiUsageException e){
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(userDto);
     }
 
     @RequestMapping(value="/login", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

@@ -19,6 +19,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.ResponseEntity;
 
 @RestController
@@ -99,7 +100,7 @@ public class MoviesController {
             MovieDto dto = movieFacade.findById(id);
             dto.setDate(dto.getDateOfRelease().toString());
             return ResponseEntity.ok(mapper.mapTo(dto, MovieDetailDto.class));
-        }catch(Exception e){
+        }catch(InvalidDataAccessApiUsageException e){
             return ResponseEntity.notFound().build();
         }
     }

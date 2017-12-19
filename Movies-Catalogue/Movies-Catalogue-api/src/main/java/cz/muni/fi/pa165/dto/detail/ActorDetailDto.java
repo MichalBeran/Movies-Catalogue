@@ -21,6 +21,8 @@ public class ActorDetailDto {
 
     private String lastName;
 
+    private String date;
+
     private LocalDate dateOfBirth;
 
     private Set<MovieViewDto> movies;
@@ -63,6 +65,14 @@ public class ActorDetailDto {
 
     public void setMovies(Set<MovieViewDto> movies) {
         this.movies = movies;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     @Override

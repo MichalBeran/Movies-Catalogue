@@ -1,7 +1,7 @@
 <h2>
   {{title}}
 </h2>
-
+<div *ngIf="isUserAdmin()">
 <form #actorForm="ngForm" name="missionForm">
   <div class="form-group">
     <label for="actor-firstName">First name</label>
@@ -17,8 +17,9 @@
       Please provide a valid last name. Last name length must be between 3 and 50 characters.
     </div>
   </div>
-  <label for="actor-dateOfReleaseYear">Date of release</label>
-  <input type="date" [(ngModel)]="actor.date" #year="ngModel" name="actor-dateOfRelease-year" class="form-control" id="actor-dateOfReleaseYear" rows="3">
+  <label for="actor-date">Date of release</label>
+  <input type="date" [(ngModel)]="actor.date" #year="ngModel" name="actor-date" class="form-control" id="actor-date" rows="3">
   <button [disabled]="actorForm.invalid" class="btn btn-primary btn-sm" (click)="save()">Save</button>
   <button *ngIf="editing==true" (click)="remove(actor.id)" class="btn btn-danger btn-sm">delete</button>
 </form>
+</div>

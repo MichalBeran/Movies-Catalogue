@@ -11,7 +11,7 @@
   <tbody>
   <tr *ngFor="let director of directors">
     <td>{{director.firstName}} {{director.lastName}}</td>
-    <td>{{director.dateOfBirth.dayOfMonth}}.{{director.dateOfBirth.monthValue}}.{{director.dateOfBirth.year}}</td>
+    <td>{{director.date}}</td>
     <td><span *ngFor="let movie of director.movies; let last=last;">
       {{movie.title}}<span *ngIf="!last">,</span>
     </span></td>
@@ -19,8 +19,10 @@
     <td>
       <button class="btn btn-primary btn-sm">show movies</button>
       <a routerLink="/directors/detail/{{director.id}}" class="btn btn-dark btn-sm">show detail</a>
-      <a routerLink="/directors/edit/{{director.id}}" class="btn btn-dark btn-sm">edit</a>
-      <button (click)="remove(director.id);" class="btn btn-danger btn-sm">delete</button>
+      <div *ngIf="isUserAdmin()">
+        <a routerLink="/directors/edit/{{director.id}}" class="btn btn-dark btn-sm">edit</a>
+        <button (click)="remove(director.id);" class="btn btn-danger btn-sm">delete</button>
+      </div>
     </td>
   </tr>
   </tbody>

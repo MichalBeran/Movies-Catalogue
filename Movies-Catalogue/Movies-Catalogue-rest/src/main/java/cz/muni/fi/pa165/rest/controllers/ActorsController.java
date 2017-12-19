@@ -5,15 +5,17 @@ import cz.muni.fi.pa165.dto.detail.ActorDetailDto;
 import cz.muni.fi.pa165.facade.ActorFacade;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
 import cz.muni.fi.pa165.rest.Api;
-import java.awt.image.RescaleOp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.InvalidDataAccessApiUsageException;
 import org.springframework.http.ResponseEntity;
 
 @RestController
@@ -31,13 +33,21 @@ public class ActorsController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<ActorDetailDto>> index() {
-        return ResponseEntity.ok(mapper.mapTo(actorFacade.findAll(), ActorDetailDto.class));
+        List<ActorDetailDto> list = mapper.mapTo(actorFacade.findAll(), ActorDetailDto.class);
+        for(int i = 0; i<list.size(); i++){
+            ActorDetailDto u = list.get(i);
+            u.setDate(u.getDateOfBirth().toString());
+            list.set(i, u);
+        }
+        return ResponseEntity.ok(list);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
     public final ResponseEntity<ActorDetailDto> create(@RequestBody ActorDto dto) throws Exception {
         try {
+            LocalDate ld = LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dto.setDateOfBirth(ld);
             logger.debug("dto incoming: "+dto.toString());
             Long id = actorFacade.create(dto);
             return ResponseEntity.ok(mapper.mapTo(actorFacade.findById(id), ActorDetailDto.class));
@@ -48,12 +58,13 @@ public class ActorsController {
 
     @RequestMapping(value = "/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<ActorDetailDto> get(@PathVariable("id") Long id) throws Exception {
-        ActorDetailDto dto = mapper.mapTo(actorFacade.findById(id), ActorDetailDto.class);
-        if (dto == null) {
-            // TODO: add exceptions to the project
+        try{
+            ActorDetailDto dto = mapper.mapTo(actorFacade.findById(id), ActorDetailDto.class);
+            dto.setDate(dto.getDateOfBirth().toString());
+            return ResponseEntity.ok(dto);
+        }catch(InvalidDataAccessApiUsageException e){
             return ResponseEntity.badRequest().build();
         }
-        return ResponseEntity.ok(dto);
     }
 
 
@@ -62,6 +73,8 @@ public class ActorsController {
     public final ResponseEntity<ActorDetailDto> update(@PathVariable("id") Long id, @RequestBody ActorDto dto) throws Exception {
         try {
             ActorDto stored = actorFacade.findById(id);
+            LocalDate ld = LocalDate.parse(dto.getDate(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+            dto.setDateOfBirth(ld);
             stored.setFirstName(!dto.getFirstName().equals("") ? dto.getFirstName() : stored.getFirstName());
             stored.setLastName(!dto.getLastName().equals("") ? dto.getLastName() : stored.getFirstName());
             stored.setDateOfBirth(!dto.getDateOfBirth().equals("") ? dto.getDateOfBirth() : stored.getDateOfBirth());

@@ -20,7 +20,7 @@
     <td>
       <a routerLink="/users/detail/{{user.id}}" class="btn btn-dark btn-sm">show detail</a>
       <div *ngIf="isUserAdmin()">
-        <!--<a routerLink="/users/edit/{{user.id}}" class="btn btn-dark btn-sm">edit</a>-->
+        <a routerLink="/users/edit/{{user.id}}" class="btn btn-dark btn-sm">edit</a>
         <button (click)="remove(user.id);" class="btn btn-danger btn-sm">delete</button>
         <button *ngIf="!user.admin" (click)="makeAdmin(user)" class="btn btn-danger btn-sm">make admin</button>
         <button *ngIf="user.admin" (click)="unmakeAdmin(user)" class="btn btn-danger btn-sm">unmake admin</button>

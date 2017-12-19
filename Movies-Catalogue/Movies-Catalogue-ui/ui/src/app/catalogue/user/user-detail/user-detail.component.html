@@ -32,7 +32,7 @@
     </div>
   </div>
   <div *ngIf="isUserAdmin()">
-    <!--<a routerLink="/users/edit/{{user.id}}" class="btn btn-dark btn-sm">edit</a>-->
+    <a routerLink="/users/edit/{{user.id}}" class="btn btn-dark btn-sm">edit</a>
     <button (click)="remove(user.id)" class="btn btn-danger btn-sm">delete</button>
   </div>
 </form>

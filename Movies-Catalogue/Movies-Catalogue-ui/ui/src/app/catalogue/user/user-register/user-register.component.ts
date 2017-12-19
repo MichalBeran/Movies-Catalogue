@@ -53,6 +53,7 @@ export class UserRegisterComponent extends UserCommonComponent implements OnInit
   private setFormForEdit(user: User) {
     this.title = `Update`;
     this.user = user;
+    this.user.password = "";
     this.editing = true;
   }
 

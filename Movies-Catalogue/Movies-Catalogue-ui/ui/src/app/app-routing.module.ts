@@ -171,6 +171,10 @@ const routes: Routes = [
             component: UserRegisterComponent
           },
           {
+            path: 'edit/:id',
+            component: UserRegisterComponent
+          },
+          {
             path: 'login',
             component: UserLoginComponent
           },

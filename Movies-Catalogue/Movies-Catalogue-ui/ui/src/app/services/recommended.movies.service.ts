@@ -22,7 +22,7 @@ export class RecomMoviesService extends RestService {
   }
 
   find(id): Observable<Movie[]> {
-    return this.http.get<Movie[]>(`${this.repository}/movies/recom/${id}`);
+    return this.http.get<Movie[]>(`${this.repository}/recom/${id}`);
   }
 
 }

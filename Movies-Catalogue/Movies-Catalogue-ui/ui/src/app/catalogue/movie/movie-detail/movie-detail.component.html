@@ -39,6 +39,14 @@
         </div>
       </div>
     </div>
+	<div class="movie-description">
+      <div class="card bg-light mb-3">
+        <div class="card-header"><b>Recommended movies</b></div>
+        <div class="card-body">
+          <a *ngFor="let movie of recomMovies" href="/movies/detail/{{movie.id}}"><img src="{{movie.image}}" width="100px"/><p>{{movie.title}}</p></a>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="tab-pane fade" id="movie-review" role="tabpanel" aria-labelledby="movie-review-tab">
     <h2>{{movie.title}} reviews</h2>

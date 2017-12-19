@@ -35,12 +35,7 @@
     <label for="user-password">Password</label>
     <input type="password" [(ngModel)]="user.password" #password="ngModel" name="user-password" class="form-control" id="user-password" required [ngClass]="{'is-invalid': invalid(password)}">
     <div *ngIf="invalid(password)" class="invalid-feedback">
-      <div *ngIf="editing">
-        Please enter your current password.
-      </div>
-      <div *ngIf="!editing">
-        Please enter your new password.
-      </div>
+      Please enter your new password.
     </div>
   </div>
   <button [disabled]="userForm.invalid" class="btn btn-primary btn-sm" (click)="save()">Save</button>

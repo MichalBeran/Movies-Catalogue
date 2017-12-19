@@ -72,7 +72,6 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
   }
 
   save() {
-    this.movie.dateOfRelease = null;
     this.service.setRepository('movies');
     if (isNullOrUndefined(this.movie.id)) {
       // create
@@ -95,6 +94,7 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
       this.service.create(this.movie).subscribe(result => this.redirect(result));
     } else {
       // update
+      this.movie.dateOfRelease = null;
       this.movie.actors = [];
       this.actorsSel = $('#s2actrs').select2('data');
       this.actorsSel.forEach((selection: any) => {

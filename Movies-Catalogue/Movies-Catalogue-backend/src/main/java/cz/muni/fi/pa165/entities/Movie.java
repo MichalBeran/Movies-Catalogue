@@ -1,9 +1,11 @@
 package cz.muni.fi.pa165.entities;
 
-import org.hibernate.annotations.Type;
+import org.hibernate.annotations.*;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
+import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 import java.util.Collections;
@@ -45,6 +47,7 @@ public class Movie {
     private Director director;
 
     @OneToMany(mappedBy = "movie")
+    @Cascade({CascadeType.DELETE})
     private List<Rating> ratings;
 
     public List<Rating> getRatings() {

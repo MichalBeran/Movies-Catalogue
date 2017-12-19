@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Director;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 
@@ -110,6 +111,11 @@ public class MovieDaoImpl implements MovieDao{
             actor.setMovies(movies);
             em.merge(actor);
         }
+        Director director = movie.getDirector();
+        List<Movie> movies = director.getMovies();
+        movies.remove(movie);
+        director.setMovies(movies);
+        em.merge(director);
         em.remove(movie);
     }
     

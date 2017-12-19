@@ -15,7 +15,9 @@
     <label for="director-dateOfBirth">DateOfBirth</label>
     <input disabled [(ngModel)]="director.date" #lastName="ngModel" name="director-dateOfBirth" type="text" class="form-control" id="director-dateOfBirth" placeholder="date">
   </div>
-  <a routerLink="/directors/edit/{{director.id}}" class="btn btn-dark btn-sm">edit</a>
-  <button (click)="remove(director.id)" class="btn btn-danger btn-sm">delete</button>
+  <div *ngIf="isUserAdmin()">
+    <a routerLink="/directors/edit/{{director.id}}" class="btn btn-dark btn-sm">edit</a>
+    <button (click)="remove(director.id)" class="btn btn-danger btn-sm">delete</button>
+  </div>
 
 </form>

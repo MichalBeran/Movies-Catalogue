@@ -11,7 +11,7 @@ export class MovieCreate extends BaseModel {
   genres: Genre[];
   actors: Actor[];
   director: Director;
-
+  dateOfRelease: any;
   constructor() {
     super();
     this.title = '';

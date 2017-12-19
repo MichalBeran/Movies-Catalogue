@@ -63,6 +63,7 @@ public class RootWebContext extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(final ViewControllerRegistry registry){
         registry.addViewController("/pa165").setViewName("forward:index.html");
+        registry.addViewController("/PA165").setViewName("forward:index.html");
 
     }
 

@@ -45,6 +45,7 @@ import {RatingCommonComponent} from "./catalogue/rating/rating.common.component"
 import {DirectorCommonComponent} from "./catalogue/director/director.common.component";
 import {MovieDetailResolver} from "./services/movie.detail.resolver.service";
 import {MovieCommonComponent} from "./catalogue/movie/movie.common.component";
+import {ActorCommonComponent} from "./catalogue/actor/actor.common.component";
 
 
 @NgModule({
@@ -76,6 +77,7 @@ import {MovieCommonComponent} from "./catalogue/movie/movie.common.component";
     DirectorCreateComponent,
     DirectorDetailComponent,
     ActorIndexComponent,
+    ActorCommonComponent,
     ActorCreateComponent,
     ActorDetailComponent,
     SidenavComponent,

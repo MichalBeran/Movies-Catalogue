@@ -6,6 +6,9 @@ export class Movie extends BaseModel {
   description: string;
   image: string;
   date: string;
+  director: any;
+  actors: any;
+  genres: any;
   dateOfRelease: {
     year: string,
     monthValue: string,

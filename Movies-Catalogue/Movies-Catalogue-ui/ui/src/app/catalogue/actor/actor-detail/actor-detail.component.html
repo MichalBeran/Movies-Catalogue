@@ -13,7 +13,7 @@
   </div>
   <div class="form-group">
     <label for="actor-dateOfBirth">DateOfBirth</label>
-    <input disabled [(ngModel)]="actor.dateOfBirth" #lastName="ngModel" name="actor-dateOfBirth" type="text" class="form-control" id="actor-dateOfBirth" placeholder="date">
+    <input disabled [(ngModel)]="actor.date" #lastName="ngModel" name="actor-dateOfBirth" type="text" class="form-control" id="actor-dateOfBirth" placeholder="date">
   </div>
   <a routerLink="/actors/edit/{{actor.id}}" class="btn btn-dark btn-sm">edit</a>
   <button (click)="remove(actor.id)" class="btn btn-danger btn-sm">delete</button>

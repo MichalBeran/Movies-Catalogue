@@ -1,24 +1,30 @@
 <h2>
   {{title}}
 </h2>
+<div *ngIf="isUserAdmin()">
+  <form #directorForm="ngForm" name="missionForm">
+    <div class="form-group">
+      <label for="director-firstName">First name</label>
+      <input [(ngModel)]="director.firstName" #firstName="ngModel" minlength="3" maxlength="50" required
+             [ngClass]="{'is-invalid': invalid(firstName)}" name="firstName" type="text" class="form-control"
+             id="director-firstName" placeholder="name">
+      <div *ngIf="invalid(firstName)" class="invalid-feedback">
+        Please provide a valid first name. Name length must be between 3 and 50 characters.
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="director-lastName">Last name</label>
+      <input [(ngModel)]="director.lastName" #lastName="ngModel" minlength="3" maxlength="50" required
+             [ngClass]="{'is-invalid': invalid(lastName)}" name="lastName" type="text" class="form-control"
+             id="director-lastName" placeholder="name">
+      <div *ngIf="invalid(lastName)" class="invalid-feedback">
+        Please provide a valid last name. Last name length must be between 3 and 50 characters.
+      </div>
+    </div>
+    <label for="director-date">Date of birth</label>
+    <input type="date" [(ngModel)]="director.date" #year="ngModel" name="director-date" class="form-control" id="director-date" rows="3">
+    <button [disabled]="directorForm.invalid" class="btn btn-primary btn-sm" (click)="save()">Save</button>
+    <button *ngIf="editing==true" (click)="remove(director.id)" class="btn btn-danger btn-sm">delete</button>
+  </form>
+</div>
 
-<form #directorForm="ngForm" name="missionForm">
-  <div class="form-group">
-    <label for="director-firstName">First name</label>
-    <input [(ngModel)]="director.firstName" #firstName="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(firstName)}"  name="firstName" type="text" class="form-control" id="director-firstName" placeholder="name">
-    <div *ngIf="invalid(firstName)" class="invalid-feedback">
-      Please provide a valid first name. Name length must be between 3 and 50 characters.
-    </div>
-  </div>
-  <div class="form-group">
-    <label for="director-lastName">Last name</label>
-    <input [(ngModel)]="director.lastName" #lastName="ngModel" minlength="3" maxlength="50" required [ngClass]="{'is-invalid': invalid(lastName)}"  name="lastName" type="text" class="form-control" id="director-lastName" placeholder="name">
-    <div *ngIf="invalid(lastName)" class="invalid-feedback">
-      Please provide a valid last name. Last name length must be between 3 and 50 characters.
-    </div>
-  </div>
-  <label for="actor-dateOfReleaseYear">Date of release</label>
-  <input type="date" [(ngModel)]="actor.date" #year="ngModel" name="actor-dateOfRelease-year" class="form-control" id="actor-dateOfReleaseYear" rows="3">
-  <button [disabled]="directorForm.invalid" class="btn btn-primary btn-sm" (click)="save()">Save</button>
-  <button *ngIf="editing==true" (click)="remove(director.id)" class="btn btn-danger btn-sm">delete</button>
-</form>

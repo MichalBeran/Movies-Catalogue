@@ -2,6 +2,7 @@ package cz.muni.fi.pa165.rest.controllers;
 
 import cz.muni.fi.pa165.dto.*;
 import cz.muni.fi.pa165.dto.detail.MovieDetailDto;
+import cz.muni.fi.pa165.dto.view.MovieViewDto;
 import cz.muni.fi.pa165.facade.ActorFacade;
 import cz.muni.fi.pa165.facade.DirectorFacade;
 import cz.muni.fi.pa165.facade.GenreFacade;
@@ -155,6 +156,17 @@ public class MoviesController {
             movieFacade.delete(stored);
             return ResponseEntity.noContent().build();
         } catch (Exception ex) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+    
+    @RequestMapping(value = "recom/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity<List<MovieDetailDto>> getReccomendedMovies(@PathVariable("id") Long id) throws Exception{
+        try{
+            MovieDto model = movieFacade.findById(id);
+            List<MovieDto> candidates = movieFacade.getRecommendedMovies(model);
+            return ResponseEntity.ok(mapper.mapTo(candidates, MovieDetailDto.class));
+        }catch(InvalidDataAccessApiUsageException e){
             return ResponseEntity.notFound().build();
         }
     }

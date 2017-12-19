@@ -7,7 +7,8 @@ import {AppHelper} from "../../app.helper";
 * @author Maros Grman
 */
 @Component({
-  template: ''
+  template: '',
+  providers: [RestService]
 })
 export class MovieCommonComponent implements OnInit {
   public invalid = AppHelper.invalid;

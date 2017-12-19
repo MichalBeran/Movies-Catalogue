@@ -74,8 +74,10 @@ public class MovieServiceImpl implements MovieService{
         Iterator itr = genresOfFilm.iterator();
         if(itr.hasNext()){
             Genre genreOfFilm = genreService.findById(((Genre) itr.next()).getId());
-            List<Movie> recommendedMovies = genreOfFilm.getMovies();
-            return new ArrayList<>(recommendedMovies);
+            List<Movie> moviesOfGenre = genreOfFilm.getMovies();
+            List<Movie> recommendedMovies = new ArrayList<>(moviesOfGenre);
+            recommendedMovies.remove(m);
+            return recommendedMovies;
         }else{
             return new ArrayList<>();
         }

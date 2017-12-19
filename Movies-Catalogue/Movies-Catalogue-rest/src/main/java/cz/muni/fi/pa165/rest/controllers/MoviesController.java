@@ -161,11 +161,11 @@ public class MoviesController {
     }
     
     @RequestMapping(value = "recom/{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public final ResponseEntity<List<MovieViewDto>> getReccomendedMovies(@PathVariable("id") Long id) throws Exception{
+    public final ResponseEntity<List<MovieDetailDto>> getReccomendedMovies(@PathVariable("id") Long id) throws Exception{
         try{
             MovieDto model = movieFacade.findById(id);
             List<MovieDto> candidates = movieFacade.getRecommendedMovies(model);
-            return ResponseEntity.ok(mapper.mapTo(candidates, MovieViewDto.class));
+            return ResponseEntity.ok(mapper.mapTo(candidates, MovieDetailDto.class));
         }catch(InvalidDataAccessApiUsageException e){
             return ResponseEntity.notFound().build();
         }

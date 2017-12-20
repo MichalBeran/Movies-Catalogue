@@ -83,14 +83,12 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
         this.movie.actors.push(a);
       });
       this.movie.genres = [];
-      this.genresSel = $('#s2actrs').select2('data');
-      console.log(this.genresSel);
+      this.genresSel = $('#s2gnrs').select2('data');
       this.genresSel.forEach((selection: any) => {
         const g = new Genre();
         g.id = selection.id;
         this.movie.genres.push(g);
       });
-
       this.service.create(this.movie).subscribe(result => this.redirect(result));
     } else {
       // update
@@ -103,8 +101,7 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
         this.movie.actors.push(a);
       });
       this.movie.genres = [];
-      this.genresSel = $('#s2actrs').select2('data');
-      console.log(this.genresSel);
+      this.genresSel = $('#s2gnrs').select2('data');
       this.genresSel.forEach((selection: any) => {
         const g = new Genre();
         g.id = selection.id;
@@ -173,6 +170,10 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
     });
     $('#s2gnrs').val(this.genresSel);
     $('#s2gnrs').trigger('change');
+  }
+
+  getDate() {
+    return `${this.movie.dateOfRelease.dayOfMonth}.${this.movie.dateOfRelease.monthValue}.${this.movie.dateOfRelease.year}`
   }
 }
 

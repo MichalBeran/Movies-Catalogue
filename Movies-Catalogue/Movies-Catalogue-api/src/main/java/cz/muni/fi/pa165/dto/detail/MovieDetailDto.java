@@ -17,6 +17,8 @@ public class MovieDetailDto {
 
     private String image;
 
+    private String date;
+
     private LocalDate dateOfRelease;
 
     private List<GenreViewDto> genres;
@@ -89,4 +91,11 @@ public class MovieDetailDto {
         this.director = director;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 }

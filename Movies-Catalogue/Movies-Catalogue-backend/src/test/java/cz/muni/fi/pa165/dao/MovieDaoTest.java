@@ -34,6 +34,7 @@ public class MovieDaoTest {
     private Logger logger;
 
     private Genre comedy;
+    private Genre action;
     private Actor angelinaJolie;
     private Actor bradPitt;
     private Director stevenSpielberg;
@@ -59,6 +60,10 @@ public class MovieDaoTest {
         comedy.setName("Comedy");
         comedy.setDescription("Comedy movies");
 
+        action = new Genre();
+        action.setName("Action");
+        action.setDescription("action movies");
+
         angelinaJolie = new Actor();
         angelinaJolie.setFirstName("Angelina");
         angelinaJolie.setLastName("Jolie");
@@ -76,6 +81,7 @@ public class MovieDaoTest {
 
         em.getTransaction().begin();
         em.persist(comedy);
+        em.persist(action);
         em.persist(angelinaJolie);
         em.persist(bradPitt);
         em.persist(stevenSpielberg);
@@ -102,7 +108,9 @@ public class MovieDaoTest {
         
         List<Genre> awesomeGenres = new ArrayList<>();
         awesomeGenres.add(comedy);
+        awesomeGenres.add(action);
         movie.setGenres(awesomeGenres);
+        action.setMovies(awesomeMovies);
         comedy.setMovies(awesomeMovies);
 
 
@@ -164,5 +172,34 @@ public class MovieDaoTest {
         em.getTransaction().commit();
      
         assertThat(dao.findAll()).doesNotContain(movie);
+    }
+
+    @Test
+    public void testUpdate(){
+        em.getTransaction().begin();
+        dao.create(movie);
+        em.getTransaction().commit();
+
+        List<Movie> movies = dao.findAll();
+        assertThat(dao.findAll().get(0).getGenres()).contains(action);
+
+        List<Genre> genres = movie.getGenres();
+        genres.remove(action);
+        em.getTransaction().begin();
+        dao.update(movie);
+        em.getTransaction().commit();
+        movies = dao.findAll();
+
+        assertThat(dao.findAll().get(0).getGenres()).doesNotContain(action);
+
+        genres = movie.getGenres();
+        genres.add(action);
+        em.getTransaction().begin();
+        dao.update(movie);
+        em.getTransaction().commit();
+        movies = dao.findAll();
+
+        assertThat(dao.findAll().get(0).getGenres()).contains(action);
+
     }
 }

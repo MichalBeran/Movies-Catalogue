@@ -14,10 +14,10 @@
     <td>{{movie.director.firstName}} {{movie.director.lastName}}</td>
     <td><span *ngFor="let genre of movie.genres" class="badge badge-info">{{genre.name}}</span></td>
     <td>
-      <a routerLink="/movies/detail/{{movie.id}}" class="btn btn-dark btn-sm">show detail</a>
-      <div *ngIf="isUserAdmin()">
-        <a routerLink="/movies/edit/{{movie.id}}" class="btn btn-dark btn-sm">edit</a>
-        <button (click)="remove(movie.id);" class="btn btn-danger btn-sm">delete</button>
+      <div class="btn-group btn-group-sm" role="group" aria-label="...">
+        <a routerLink="/movies/detail/{{movie.id}}" class="btn btn-dark btn-sm">detail</a>
+        <a *ngIf="isUserAdmin()" routerLink="/movies/edit/{{movie.id}}" class="btn btn-secondary btn-sm">edit</a>
+        <button *ngIf="isUserAdmin()" (click)="remove(movie.id);" class="btn btn-danger btn-sm">delete</button>
       </div>
     </td>
   </tr>

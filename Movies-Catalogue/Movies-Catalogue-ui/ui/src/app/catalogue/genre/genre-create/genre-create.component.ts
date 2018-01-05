@@ -18,7 +18,7 @@ export class GenreCreateComponent extends GenreCommonComponent implements OnInit
 
   genre: Genre = new Genre();
 
-  title = 'Create';
+  title = 'Genre Create';
   editing = false;
 
   constructor(protected service: RestService, protected router: Router, private route: ActivatedRoute) {
@@ -52,7 +52,7 @@ export class GenreCreateComponent extends GenreCommonComponent implements OnInit
   }
 
   private setFormForEdit(genre: Genre) {
-    this.title = `Update`;
+    this.title = `Genre Update`;
     this.genre = genre;
     this.editing = true;
   }

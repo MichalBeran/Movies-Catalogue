@@ -18,7 +18,7 @@ export class UserDetailComponent extends UserCommonComponent implements OnInit {
 
   user: User = new User();
 
-  title = 'Detail';
+  title = 'User Detail';
   editing = false;
 
   constructor(protected service: UserService, protected router: Router, private route: ActivatedRoute) {

@@ -17,7 +17,7 @@ export class UserRegisterComponent extends UserCommonComponent implements OnInit
 
   user: User = new User();
 
-  title = 'Register';
+  title = 'User Register';
   editing = false;
 
   constructor(protected service: UserService, protected router: Router, private route: ActivatedRoute) {
@@ -51,9 +51,9 @@ export class UserRegisterComponent extends UserCommonComponent implements OnInit
   }
 
   private setFormForEdit(user: User) {
-    this.title = `Update`;
+    this.title = `User Update`;
     this.user = user;
-    this.user.password = "";
+    this.user.password = '';
     this.editing = true;
   }
 

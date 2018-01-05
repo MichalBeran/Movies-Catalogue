@@ -43,7 +43,19 @@
       <div class="card bg-light mb-3">
         <div class="card-header"><b>Recommended movies</b></div>
         <div class="card-body">
-          <a *ngFor="let movie of recomMovies" href="/movies/detail/{{movie.id}}"><img src="{{movie.image}}" width="100px"/><p>{{movie.title}}</p></a>
+          <div *ngFor="let movie of recomMovies" class="card card-image-left">
+            <div class="card-image">
+              <img class="img-thumbnail" src="{{movie.image}}">
+            </div>
+            <div class="card-body">
+              <h5 class="card-title"><a href="/movies/detail/{{movie.id}}">{{movie.title}}</a></h5>
+              <h6 class="card-subtitle mb-2 text-muted">{{movie.dateOfRelease.dayOfMonth}}.{{movie.dateOfRelease.monthValue}}.{{movie.dateOfRelease.year}}</h6>
+              <p class="card-text">{{(movie.description.length>170)? (movie.description | slice:0:170)+'...':(movie.description)}}</p>
+              <span *ngFor="let genre of movie.genres">
+                <span class="badge badge-info">{{genre.name}}</span>
+              </span>
+            </div>
+          </div>
         </div>
       </div>
     </div>

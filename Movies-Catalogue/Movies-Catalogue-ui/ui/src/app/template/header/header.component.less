@@ -4,11 +4,21 @@ header {
   box-shadow: 0px 1px 15px 1px rgba(113, 106, 202, 0.5);
 
   #header-top {
-    height: 90px;
+    height: 100px;
     width: 100%;
     background: @clr-header-top;
     display: flex;
     align-items: center;
+
+    .logo{
+      .logo-bg{
+        background:url('../../../assets/logo.png');
+        background-position:bottom;
+        background-size:contain;
+        height:75px;
+        width:150px;
+      }
+    }
 
     h1 {
       margin:0;

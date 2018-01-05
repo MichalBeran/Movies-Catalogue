@@ -48,7 +48,7 @@
               <img class="img-thumbnail" src="{{movie.image}}">
             </div>
             <div class="card-body">
-              <h5 class="card-title"><a href="/movies/detail/{{movie.id}}">{{movie.title}}</a></h5>
+              <h5 class="card-title"><a routerLink="/movies/detail/{{movie.id}}">{{movie.title}}</a></h5>
               <h6 class="card-subtitle mb-2 text-muted">{{movie.dateOfRelease.dayOfMonth}}.{{movie.dateOfRelease.monthValue}}.{{movie.dateOfRelease.year}}</h6>
               <p class="card-text">{{(movie.description.length>170)? (movie.description | slice:0:170)+'...':(movie.description)}}</p>
               <span *ngFor="let genre of movie.genres">

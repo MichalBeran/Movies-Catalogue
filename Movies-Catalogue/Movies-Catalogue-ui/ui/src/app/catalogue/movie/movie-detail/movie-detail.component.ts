@@ -21,18 +21,21 @@ export class MovieDetailComponent extends MovieCommonComponent implements OnInit
 
   movie: Movie = new Movie;
   recomMovies: Movie[];
-  
+
   constructor(protected service: RecomMoviesService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
+    // fix for redirects to the same page with different params:
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
   }
 
   async ngOnInit() {
     super.ngOnInit();
-
     // Shit just got real
     this.route.data
-      .subscribe((data: {movie: Movie}) => this.movie = data.movie);
-	this.service.find(this.movie.id).subscribe(list => this.recomMovies = list);
+      .subscribe((data: { movie: Movie }) => this.movie = data.movie);
+    this.service.find(this.movie.id).subscribe(list => this.recomMovies = list);
   }
 
   remove(id) {
@@ -42,5 +45,4 @@ export class MovieDetailComponent extends MovieCommonComponent implements OnInit
   getDate() {
     return `${this.movie.dateOfRelease.dayOfMonth}.${this.movie.dateOfRelease.monthValue}.${this.movie.dateOfRelease.year}`
   }
-
 }

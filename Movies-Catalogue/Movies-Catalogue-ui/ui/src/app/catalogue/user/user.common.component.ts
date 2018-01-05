@@ -20,7 +20,6 @@ export class UserCommonComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('setting user repo:');
     this.service.setRepository('users');
   }
 

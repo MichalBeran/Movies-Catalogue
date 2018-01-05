@@ -10,11 +10,15 @@ import {Movie} from '../../models/movie.model';
 export class RatingComponent implements OnInit {
 
   @Input() movie: Movie;
-  needsReload = 0;
+  detailNeedsReload = 0;
+  indexNeedsReload = 0;
   isAuthenticated = AppHelper.isAuthenticated;
 
-  onChanged(changed: boolean) {
-    this.needsReload++;
+  onDetailChanged(changed: boolean) {
+    this.indexNeedsReload++;
+  }
+  onIndexChanged(changed: boolean) {
+    this.detailNeedsReload++;
   }
 
   constructor() {

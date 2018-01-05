@@ -24,7 +24,7 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
   actorsSel: number[] = [];
   genresSel: number[] = [];
 
-  title = 'Create';
+  title = 'Movie Create';
   editing = false;
   directors: Director[];
   actors: Actor[];
@@ -125,7 +125,7 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
     this.genresSel = [];
     movie.genres.map(genre => this.genresSel.push(genre.id));
 
-    this.title = `Update`;
+    this.title = `Movie Update`;
     this.movie = movie;
     this.editing = true;
 

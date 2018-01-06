@@ -49,7 +49,13 @@ public class MoviesController {
 
     @RequestMapping(method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<List<MovieDetailDto>> index() {
-        return ResponseEntity.ok(mapper.mapTo(movieFacade.findAll(), MovieDetailDto.class));
+        List<MovieDetailDto> list = mapper.mapTo(movieFacade.findAll(), MovieDetailDto.class);
+        for(int i = 0; i<list.size(); i++){
+            MovieDetailDto movie = list.get(i);
+            movie.setOverallRating(movieFacade.getMovieOverallRating(mapper.mapTo(movie, MovieDto.class)));
+            list.set(i, movie);
+        }
+        return ResponseEntity.ok(list);
     }
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE,

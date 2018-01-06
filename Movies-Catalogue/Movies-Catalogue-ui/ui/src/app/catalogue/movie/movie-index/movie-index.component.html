@@ -5,6 +5,7 @@
     <th scope="col">Movie name</th>
     <th scope="col">Director</th>
     <th scope="col">Genres</th>
+    <th scope="col">Rating</th>
     <th scope="col">Actions</th>
   </tr>
   </thead>
@@ -14,6 +15,27 @@
     <td>{{movie.director.firstName}} {{movie.director.lastName}}</td>
     <td><span *ngFor="let genre of movie.genres" class="badge badge-info">{{genre.name}}</span></td>
     <td>
+      <span *ngIf="movie.overallRating > -1" style="font-size: larger">
+        <div class="mdi-set" data-toggle="tooltip" data-placement="top" title="{{movie.overallRating}} %" style="color: #f89406">
+          <i *ngIf="movie.overallRating/10 >= 1" class="mdi-star"></i>
+          <i *ngIf="movie.overallRating/10 >= 0.5 &&movie.overallRating/10 < 1" class="mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/10 < 0.5" class="mdi-star-outline"></i>
+          <i *ngIf="movie.overallRating/10 >= 2" class="mdi-star"></i>
+          <i *ngIf="movie.overallRating/10 >= 1.5 &&movie.overallRating/10 < 2" class="mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/10 < 1.5" class="mdi-star-outline"></i>
+          <i *ngIf="movie.overallRating/10 >= 3" class="mdi-star"></i>
+          <i *ngIf="movie.overallRating/10 >= 2.5 &&movie.overallRating/10 < 3" class="mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/10 < 2.5" class="mdi-star-outline"></i>
+          <i *ngIf="movie.overallRating/10 >= 4" class="mdi-star"></i>
+          <i *ngIf="movie.overallRating/10 >= 3.5 &&movie.overallRating/10 < 4" class="mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/10 < 3.5" class="mdi-star-outline"></i>
+          <i *ngIf="movie.overallRating/10 >= 5" class="mdi-star"></i>
+          <i *ngIf="movie.overallRating/10 >= 4.5 &&movie.overallRating/10 < 5" class="mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/10 < 4.5" class="mdi-star-outline"></i>
+        </div>
+      </span>
+    </td>
+    <td>
       <div class="btn-group btn-group-sm" role="group" aria-label="...">
         <a routerLink="/movies/detail/{{movie.id}}" class="btn btn-dark btn-sm">detail</a>
         <a *ngIf="isUserAdmin()" routerLink="/movies/edit/{{movie.id}}" class="btn btn-secondary btn-sm">edit</a>
@@ -21,5 +43,6 @@
       </div>
     </td>
   </tr>
+
   </tbody>
 </table>

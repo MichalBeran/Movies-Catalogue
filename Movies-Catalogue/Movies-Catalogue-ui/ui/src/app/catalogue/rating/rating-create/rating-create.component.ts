@@ -152,9 +152,9 @@ export class RatingCreateComponent extends RatingCommonComponent implements OnIn
           this.refresh();
           this.showAsEdit(result);
         });
-        this.toggleNewRatingForm();
         this.btnText = 'Edit my review';
       }
+      this.toggleNewRatingForm();
     }
   }
 

@@ -1,7 +1,9 @@
 <h2>
   Director Detail
 </h2>
-
+<div *ngIf="error" class="alert alert-danger">
+  {{error}}
+</div>
 <form #directorForm="ngForm" name="missionForm">
   <div class="form-group">
     <label for="director-firstName">First name</label>

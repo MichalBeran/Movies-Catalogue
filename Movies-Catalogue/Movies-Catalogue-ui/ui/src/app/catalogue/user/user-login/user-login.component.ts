@@ -21,6 +21,7 @@ export class UserLoginComponent extends UserCommonComponent implements OnInit {
   editing = false;
   returnUrl: string;
   loading = false;
+  error = null;
 
   constructor(protected service: UserService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
@@ -51,6 +52,8 @@ export class UserLoginComponent extends UserCommonComponent implements OnInit {
         },
         error => {
           this.loading = false;
+          this.error = "Login failed. User mail or password is wrong.";
+          this.user.password = "";
         });
     //.subscribe(() => this.toIndexPage());
   }

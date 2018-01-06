@@ -1,6 +1,9 @@
 <h2>
   {{title}}
 </h2>
+<div *ngIf="error" class="alert alert-danger">
+  {{error}}
+</div>
 <form #userForm="ngForm" name="userForm" (ngSubmit)="userForm.form.valid && login()">
   <div class="form-group">
     <label for="user-mail">Mail</label>

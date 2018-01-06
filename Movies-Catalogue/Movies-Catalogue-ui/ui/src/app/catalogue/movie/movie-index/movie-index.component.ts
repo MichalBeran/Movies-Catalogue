@@ -52,6 +52,11 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
     });
   }
 
+  clearSearch(){
+    this.searchString = '';
+    this.search();
+  }
+
   setTooltips() {
     setTimeout(function () {
       const ratings = $('.rating-stars');

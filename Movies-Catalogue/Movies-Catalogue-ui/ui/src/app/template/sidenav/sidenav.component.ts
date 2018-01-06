@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {AppHelper} from '../../app.helper';
 
 @Component({
   selector: 'app-sidenav',
@@ -7,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SidenavComponent implements OnInit {
 
+  isAdmin = AppHelper.isAdmin;
   constructor() { }
 
   ngOnInit() {

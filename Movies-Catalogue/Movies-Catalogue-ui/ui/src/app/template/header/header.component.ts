@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {User} from '../../models/user.model';
 import {isNullOrUndefined} from 'util';
 import {UserService} from '../../services/user.service';
@@ -11,12 +11,22 @@ declare const $: any;
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.less']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit, AfterViewInit {
+
 
   constructor(private service: UserService, private router: Router) { }
 
   ngOnInit() {
     this.service.setRepository('users');
+  }
+  ngAfterViewInit(): void {
+    const that = this;
+    $(document).ready(function(){
+
+    });
+    $('.dropdown-container a').click(function(){
+      that.dropdownMenuToggle(null);
+    })
   }
 
   getLoggedUser() {
@@ -43,7 +53,9 @@ export class HeaderComponent implements OnInit {
   }
 
   dropdownMenuToggle(e) {
-    e.preventDefault();
+    if (!isNullOrUndefined(e)) {
+      e.preventDefault();
+    }
     $('.dropdown-container').slideToggle(500, 'easeOutExpo');
   }
 

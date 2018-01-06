@@ -7,7 +7,7 @@
       <label for="director-firstName">First name</label>
       <input [(ngModel)]="director.firstName" #firstName="ngModel" minlength="3" maxlength="50" required
              [ngClass]="{'is-invalid': invalid(firstName)}" name="firstName" type="text" class="form-control"
-             id="director-firstName" placeholder="name">
+             id="director-firstName" >
       <div *ngIf="invalid(firstName)" class="invalid-feedback">
         Please provide a valid first name. Name length must be between 3 and 50 characters.
       </div>
@@ -16,7 +16,7 @@
       <label for="director-lastName">Last name</label>
       <input [(ngModel)]="director.lastName" #lastName="ngModel" minlength="3" maxlength="50" required
              [ngClass]="{'is-invalid': invalid(lastName)}" name="lastName" type="text" class="form-control"
-             id="director-lastName" placeholder="name">
+             id="director-lastName" >
       <div *ngIf="invalid(lastName)" class="invalid-feedback">
         Please provide a valid last name. Last name length must be between 3 and 50 characters.
       </div>

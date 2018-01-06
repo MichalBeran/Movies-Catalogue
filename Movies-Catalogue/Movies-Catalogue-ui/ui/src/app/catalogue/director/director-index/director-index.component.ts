@@ -15,7 +15,6 @@ export class DirectorIndexComponent extends DirectorCommonComponent implements O
   title = 'Directors';
 
   directors: Director[];
-  error = null;
 
   constructor(protected service: RestService, protected router: Router) {
     super(service, router);
@@ -28,7 +27,6 @@ export class DirectorIndexComponent extends DirectorCommonComponent implements O
   }
   remove(id) {
     super.delete(id, () => this.refresh());
-    this.error = super.getError();
   }
   refresh() {
     this.service.get().subscribe(list => this.directors = list);

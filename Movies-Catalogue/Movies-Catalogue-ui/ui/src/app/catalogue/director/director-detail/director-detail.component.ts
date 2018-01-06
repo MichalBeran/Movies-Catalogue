@@ -16,7 +16,6 @@ export class DirectorDetailComponent extends DirectorCommonComponent implements 
   title = 'Director detail';
 
   director: Director = new Director;
-  error = null;
 
   constructor(protected service: RestService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
@@ -33,7 +32,6 @@ export class DirectorDetailComponent extends DirectorCommonComponent implements 
 
   remove(id){
     super.delete(id, () => super.toIndexPage());
-    this.error = super.getError();
   }
 
 }

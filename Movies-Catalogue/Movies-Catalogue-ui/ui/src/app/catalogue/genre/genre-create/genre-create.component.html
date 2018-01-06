@@ -7,7 +7,7 @@
       <label for="genre-name">Name</label>
       <input [(ngModel)]="genre.name" #name="ngModel" minlength="3" maxlength="50" required
              [ngClass]="{'is-invalid': invalid(name)}" name="name" type="text" class="form-control" id="genre-name"
-             placeholder="Sci-Fi">
+             >
       <div *ngIf="invalid(name)" class="invalid-feedback">
         Please provide a valid name. Name length must be between 3 and 50 characters.
       </div>

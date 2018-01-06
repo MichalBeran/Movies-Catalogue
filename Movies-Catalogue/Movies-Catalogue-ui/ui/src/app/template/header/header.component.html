@@ -3,17 +3,23 @@
     <div class="container">
       <div class="row">
         <div class="col-md-12">
+          <div class="d-sm-none small-title">
+            <h3>Movies Catalogue</h3>
+          </div>
           <div class="flex-center-spaced">
-            <div>
+            <div class="d-none d-sm-block">
               <div class="logo">
                 <div class="logo-bg"></div>
               </div>
               <!--<h1>Movies catalogue</h1>-->
-              <span *ngIf="isLoggedIn()">hello, {{getLoggedUser().firstName}}. <a href="#" (click)="logout()">Log out</a></span>
-              <span *ngIf="!isLoggedIn()">hello, stranger. <a routerLink="/users/login">Log in</a></span>
+
+            </div>
+            <div class="user">
+              <span *ngIf="isLoggedIn()"><h5>hello, {{getLoggedUser().firstName}}.</h5> <a class="btn btn-outline-warning" href="#" (click)="logout()">Log out</a></span>
+              <span *ngIf="!isLoggedIn()"><h5 class="d-none d-sm-inline">hello, stranger!</h5> <a class="btn btn-outline-warning" routerLink="/users/login">Log in</a> or <a class="btn btn-outline-info" routerLink="/users/create">Sign up</a></span>
             </div>
             <div class=" d-sm-none">
-              <a (click)="dropdownMenuToggle($event)" class="btn btn-link">Menu</a>
+              <a href="#" (click)="dropdownMenuToggle($event)" class="btn btn-outline-info">Menu</a>
             </div>
           </div>
         </div>
@@ -45,50 +51,39 @@
         <div class="dropdown">
           <ul>
             <li>
-              <a routerLink="movies" routerLinkActive="active">Movies</a>
-              <ul>
+              <a routerLink="/movies" routerLinkActive="active">Movies</a>
+              <ul *ngIf="isAdmin()" >
                 <li>
-                  <a routerLink="movies/index" routerLinkActive="active">Index</a>
-                </li>
-                <li>
-                  <a routerLink="movies/create" routerLinkActive="active">New</a>
+                  <a routerLink="/movies/create" routerLinkActive="active">New</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a routerLink="genres" routerLinkActive="active">Genres</a>
-              <ul>
+              <a routerLink="/genres" routerLinkActive="active">Genres</a>
+              <ul *ngIf="isAdmin()" >
                 <li>
-                  <a routerLink="genres/index" routerLinkActive="active">Index</a>
-                  <a routerLink="genres/create" routerLinkActive="active">New</a>
+                  <a routerLink="/genres/create" routerLinkActive="active">New</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a routerLink="actors" routerLinkActive="active">Actors</a>
-              <ul>
+              <a routerLink="/actors" routerLinkActive="active">Actors</a>
+              <ul *ngIf="isAdmin()" >
                 <li>
-                  <a routerLink="actors/index" routerLinkActive="active">Index</a>
-                  <a routerLink="actors/create" routerLinkActive="active">New</a>
+                  <a routerLink="/actors/create" routerLinkActive="active">New</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a routerLink="directors" routerLinkActive="active">Directors</a>
-              <ul>
+              <a routerLink="/directors" routerLinkActive="active">Directors</a>
+              <ul *ngIf="isAdmin()" >
                 <li>
-                  <a routerLink="directors/index" routerLinkActive="active">Index</a>
-                  <a routerLink="directors/create" routerLinkActive="active">New</a>
+                  <a routerLink="/directors/create" routerLinkActive="active">New</a>
                 </li>
               </ul>
             </li>
             <li *ngIf="isAdmin()">
-              <a routerLink="users" routerLinkActive="active"></a>
-              <ul>
-                <li>
-                  <a routerLink="users/index" routerLinkActive="active">Index</a>
-                </li>
-              </ul>
+              <a routerLink="/users" routerLinkActive="active">Users</a>
             </li>
           </ul>
         </div>

@@ -4,6 +4,7 @@ import {Movie} from '../../../models/movie.model';
 import {MovieComponent} from '../movie.component';
 import {Router} from '@angular/router';
 import {MovieCommonComponent} from '../movie.common.component';
+import {MovieService} from "../../../services/movie.service";
 
 declare const $: any;
 
@@ -20,8 +21,9 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
   title = 'Movies';
 
   movies: Movie[];
+  searchString = "";
 
-  constructor(protected service: RestService, protected router: Router) {
+  constructor(protected service: MovieService, protected router: Router) {
     super(service, router);
   }
 
@@ -38,6 +40,13 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
 
   refresh() {
     this.service.get().subscribe(list => {
+      this.movies = list;
+      this.setTooltips();
+    });
+  }
+
+  search(){
+    this.service.search(this.searchString).subscribe(list => {
       this.movies = list;
       this.setTooltips();
     });

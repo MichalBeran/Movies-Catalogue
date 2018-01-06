@@ -165,5 +165,11 @@ public class MovieDaoImpl implements MovieDao{
         em.merge(director);
         em.remove(movie);
     }
-    
+
+    @Override
+    public List<Movie> findAllByTitle(String serachString) {
+        Query query = em.createQuery("SELECT m FROM Movie m where lower(title) LIKE lower(:title) ORDER by m.dateOfRelease", Movie.class).setParameter("title", "%"+serachString+"%");
+        List<Movie> movies = query.getResultList();
+        return movies;
+    }
 }

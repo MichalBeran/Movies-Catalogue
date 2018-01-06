@@ -117,4 +117,9 @@ public class MovieServiceImpl implements MovieService{
         }
         return overall;
     }
+
+    @Override
+    public List<Movie> findAllByTitle(String serachString) {
+        return movieDao.findAllByTitle(serachString);
+    }
 }

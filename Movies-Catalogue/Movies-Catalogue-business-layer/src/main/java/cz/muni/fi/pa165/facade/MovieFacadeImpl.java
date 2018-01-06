@@ -99,6 +99,11 @@ public class MovieFacadeImpl implements MovieFacade {
     public int getMovieOverallRating(MovieDto movie) {
         return movieService.getMovieOverallRating(beanMappingService.mapTo(movie, Movie.class));
     }
+
+    @Override
+    public List<MovieDto> findAllByTitle(String serachString) {
+        return beanMappingService.mapTo(movieService.findAllByTitle(serachString), MovieDto.class);
+    }
 }
 
 

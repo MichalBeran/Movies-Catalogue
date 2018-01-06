@@ -12,6 +12,8 @@ export class DirectorCommonComponent implements OnInit {
   public isUserAdmin = AppHelper.isAdmin;
   public getLoggedUser = AppHelper.getAuthenticated;
 
+  private error = null;
+
   constructor(protected service: RestService, protected router: Router) {
   }
 
@@ -20,7 +22,8 @@ export class DirectorCommonComponent implements OnInit {
   }
 
   protected delete(id, callback: () => void) {
-    this.service.delete(id).subscribe(res => callback());
+    //this.service.delete(id).subscribe(res => callback());
+    this.service.delete(id).subscribe(res => callback(), error => {this.error = "Cannot delete director. First you need to delete all movies of this director."});
   }
 
   public afterDelete(res) {
@@ -29,5 +32,9 @@ export class DirectorCommonComponent implements OnInit {
 
   protected toIndexPage() {
     this.router.navigateByUrl(`directors/index`);
+  }
+
+  public getError(){
+    return this.error;
   }
 }

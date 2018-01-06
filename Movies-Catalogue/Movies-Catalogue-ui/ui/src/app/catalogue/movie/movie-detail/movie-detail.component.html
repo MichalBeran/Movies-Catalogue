@@ -29,6 +29,15 @@
             <span class="badge badge-info">{{genre.name}}</span>
           </span>
         </p>
+        <p>
+          <b>Overall rating:</b>
+            <span *ngIf="movie.overallRating > -1" class="badge badge-warning" style="font-size: large">
+              {{movie.overallRating}} %
+            </span>
+            <span *ngIf="movie.overallRating < 0">
+              Movie is not rated yet
+            </span>
+        </p>
       </div>
     </div>
     <div class="movie-description">

@@ -95,6 +95,10 @@ public class MovieFacadeImpl implements MovieFacade {
         return beanMappingService.mapTo(movieService.findById(dto.getId()), MovieDto.class);
     }
 
+    @Override
+    public int getMovieOverallRating(MovieDto movie) {
+        return movieService.getMovieOverallRating(beanMappingService.mapTo(movie, Movie.class));
+    }
 }
 
 

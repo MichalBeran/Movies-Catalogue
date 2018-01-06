@@ -16,7 +16,7 @@ export class UserCommonComponent implements OnInit {
   public isUserAdmin = AppHelper.isAdmin;
   public getLoggedUser = AppHelper.getAuthenticated;
 
-  private error = null;
+  private err = null;
 
   constructor(protected service: UserService, protected router: Router) {
   }
@@ -26,7 +26,7 @@ export class UserCommonComponent implements OnInit {
   }
 
   protected delete(id, callback: () => void) {
-    this.service.delete(id).subscribe(res => callback(), error => {this.error = "Cannot delete user."});
+    this.service.delete(id).subscribe(res => callback(), error => {this.err = "Cannot delete user."});
   }
 
   public afterDelete(res) {
@@ -38,7 +38,7 @@ export class UserCommonComponent implements OnInit {
   }
 
   public getError(){
-    return this.error;
+    return this.err;
   }
 
 }

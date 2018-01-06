@@ -15,8 +15,8 @@
     <td>{{movie.director.firstName}} {{movie.director.lastName}}</td>
     <td><span *ngFor="let genre of movie.genres" class="badge badge-info">{{genre.name}}</span></td>
     <td>
-      <span *ngIf="movie.overallRating > -1" style="font-size: larger">
-        <div class="mdi-set" data-toggle="tooltip" data-placement="top" title="{{movie.overallRating}} %" style="color: #f89406">
+      <span data-toggle="tooltip" data-placement="top" title="{{movie.overallRating}} %" class="rating-stars" *ngIf="movie.overallRating > -1">
+        <div class="mdi-set">
           <i *ngIf="movie.overallRating/20 >= 1" class="mdi mdi-star"></i>
           <i *ngIf="movie.overallRating/20 >= 0.5 && movie.overallRating/20 < 1" class="mdi mdi-star-half"></i>
           <i *ngIf="movie.overallRating/20 < 0.5" class="mdi mdi-star-outline"></i>

@@ -28,12 +28,12 @@
       <div class="row">
         <div class="col-md-12">
           <ul>
-            <li><a routerLink="movies" routerLinkActive="active">Movies</a></li>
-            <li><a routerLink="genres" routerLinkActive="active">Genres</a></li>
-            <li><a routerLink="actors" routerLinkActive="active">Actors</a></li>
-            <li><a routerLink="directors" routerLinkActive="active">Directors</a></li>
+            <li><a routerLink="/movies" routerLinkActive="active">Movies</a></li>
+            <li><a routerLink="/genres" routerLinkActive="active">Genres</a></li>
+            <li><a routerLink="/actors" routerLinkActive="active">Actors</a></li>
+            <li><a routerLink="/directors" routerLinkActive="active">Directors</a></li>
             <!--<li><a routerLink="ratings" routerLinkActive="active">Ratings</a></li>-->
-            <li *ngIf="isAdmin()"><a routerLink="users" routerLinkActive="active">Users</a></li>
+            <li *ngIf="isAdmin()"><a routerLink="/users" routerLinkActive="active">Users</a></li>
           </ul>
         </div>
       </div>

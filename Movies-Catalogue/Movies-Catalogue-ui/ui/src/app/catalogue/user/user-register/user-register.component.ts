@@ -19,6 +19,7 @@ export class UserRegisterComponent extends UserCommonComponent implements OnInit
 
   title = 'User Register';
   editing = false;
+  regError = null;
 
   constructor(protected service: UserService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
@@ -35,10 +36,10 @@ export class UserRegisterComponent extends UserCommonComponent implements OnInit
   save() {
     if (isNullOrUndefined(this.user.id)) {
       // create
-      this.service.create(this.user).subscribe(result => this.redirect(result));
+      this.service.create(this.user).subscribe(result => this.redirect(result), error => {this.regError = "Registration failed. This e-mail or nick is probably used already. Try another one."});
     } else {
       // update
-      this.service.update(this.user).subscribe(result => this.redirect(result));
+      this.service.update(this.user).subscribe(result => this.redirect(result), error => {this.regError = "Update failed. This e-mail or nick is probably used already. Try another one."});
     }
   }
 

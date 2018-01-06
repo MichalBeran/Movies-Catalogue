@@ -1,7 +1,9 @@
 <h2>
   {{title}}
 </h2>
-
+<div *ngIf="regError" class="alert alert-danger">
+  {{regError}}
+</div>
 <form #userForm="ngForm" name="missionForm">
   <div class="form-group">
     <label for="user-nick">Nick</label>
@@ -32,7 +34,8 @@
     </div>
   </div>
   <div class="form-group">
-    <label for="user-password">Password</label>
+    <label *ngIf="editing==false" for="user-password">Password</label>
+    <label *ngIf="editing==true" for="user-password">New password</label>
     <input type="password" [(ngModel)]="user.password" #password="ngModel" name="user-password" class="form-control" id="user-password" required [ngClass]="{'is-invalid': invalid(password)}">
     <div *ngIf="invalid(password)" class="invalid-feedback">
       Please enter your new password.

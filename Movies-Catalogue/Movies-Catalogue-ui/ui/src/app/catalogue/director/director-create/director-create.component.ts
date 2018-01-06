@@ -18,7 +18,7 @@ export class DirectorCreateComponent extends DirectorCommonComponent implements 
 
   director: Director = new Director();
 
-  title = 'Create';
+  title = 'Director Create';
   editing = false;
 
   constructor(protected service: RestService, protected router: Router, private route: ActivatedRoute) {
@@ -39,7 +39,12 @@ export class DirectorCreateComponent extends DirectorCommonComponent implements 
       this.service.create(this.director).subscribe(result => this.redirect(result));
     } else {
       // update
-      this.service.update(this.director).subscribe(result => this.redirect(result));
+      var dir = new Director();
+      dir.id = this.director.id;
+      dir.firstName = this.director.firstName;
+      dir.lastName = this.director.lastName;
+      dir.date = this.director.date;
+      this.service.update(dir).subscribe(result => this.redirect(result));
     }
   }
 
@@ -52,7 +57,7 @@ export class DirectorCreateComponent extends DirectorCommonComponent implements 
   }
 
   private setFormForEdit(director: Director) {
-    this.title = `Update`;
+    this.title = `Director Update`;
     this.director = director;
     this.editing = true;
   }

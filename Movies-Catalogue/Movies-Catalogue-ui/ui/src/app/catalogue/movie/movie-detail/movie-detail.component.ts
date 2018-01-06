@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Movie} from '../../../models/movie.model';
-import {RestService} from '../../../services/rest.service';
+import {RecomMoviesService} from '../../../services/recommended.movies.service';
 import {MovieComponent} from '../movie.component';
 import {ActivatedRoute, Router} from '@angular/router';
 import {mergeMap} from 'rxjs/operators';
@@ -12,24 +12,30 @@ import {MovieCommonComponent} from '../movie.common.component';
 @Component({
   selector: 'app-movie-detail',
   templateUrl: './movie-detail.component.html',
-  styleUrls: ['./movie-detail.component.less']
+  styleUrls: ['./movie-detail.component.less'],
+  providers: [RecomMoviesService]
 })
 export class MovieDetailComponent extends MovieCommonComponent implements OnInit {
 
   title = 'Movie detail';
 
   movie: Movie = new Movie;
+  recomMovies: Movie[];
 
-  constructor(protected service: RestService, protected router: Router, private route: ActivatedRoute) {
+  constructor(protected service: RecomMoviesService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
+    // fix for redirects to the same page with different params:
+    this.router.routeReuseStrategy.shouldReuseRoute = function () {
+      return false;
+    };
   }
 
   async ngOnInit() {
     super.ngOnInit();
-
     // Shit just got real
     this.route.data
-      .subscribe((data: {movie: Movie}) => this.movie = data.movie);
+      .subscribe((data: { movie: Movie }) => this.movie = data.movie);
+    this.service.find(this.movie.id).subscribe(list => this.recomMovies = list);
   }
 
   remove(id) {
@@ -39,5 +45,4 @@ export class MovieDetailComponent extends MovieCommonComponent implements OnInit
   getDate() {
     return `${this.movie.dateOfRelease.dayOfMonth}.${this.movie.dateOfRelease.monthValue}.${this.movie.dateOfRelease.year}`
   }
-
 }

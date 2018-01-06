@@ -16,16 +16,17 @@ export class UserCommonComponent implements OnInit {
   public isUserAdmin = AppHelper.isAdmin;
   public getLoggedUser = AppHelper.getAuthenticated;
 
+  protected error = null;
+
   constructor(protected service: UserService, protected router: Router) {
   }
 
   ngOnInit() {
-    console.log('setting user repo:');
     this.service.setRepository('users');
   }
 
   protected delete(id, callback: () => void) {
-    this.service.delete(id).subscribe(res => callback());
+    this.service.delete(id).subscribe(res => callback(), error => {this.error = "Cannot delete user. Try to delete all ratings of this user first."});
   }
 
   public afterDelete(res) {
@@ -35,5 +36,4 @@ export class UserCommonComponent implements OnInit {
   protected toIndexPage() {
     this.router.navigateByUrl(`users/index`);
   }
-
 }

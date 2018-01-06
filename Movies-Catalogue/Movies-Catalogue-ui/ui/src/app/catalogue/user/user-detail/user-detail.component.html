@@ -31,7 +31,13 @@
       Please enter your last name.
     </div>
   </div>
-  <a routerLink="/users/edit/{{user.id}}" class="btn btn-dark btn-sm">edit</a>
-  <button (click)="remove(user.id)" class="btn btn-danger btn-sm">delete</button>
+  <div *ngIf="isUserLogged()">
+    <div *ngIf="getLoggedUser().id == user.id">
+      <a routerLink="/users/edit/{{user.id}}" class="btn btn-dark btn-sm">edit</a>
+    </div>
+  </div>
+  <div *ngIf="isUserAdmin()">
+    <button (click)="remove(user.id)" class="btn btn-danger btn-sm">delete</button>
+  </div>
 </form>
 

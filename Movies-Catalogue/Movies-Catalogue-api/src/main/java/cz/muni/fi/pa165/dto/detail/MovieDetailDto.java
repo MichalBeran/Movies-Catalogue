@@ -17,6 +17,8 @@ public class MovieDetailDto {
 
     private String image;
 
+    private String date;
+
     private LocalDate dateOfRelease;
 
     private List<GenreViewDto> genres;
@@ -24,6 +26,8 @@ public class MovieDetailDto {
     private List<ActorViewDto> actors;
 
     private DirectorViewDto director;
+
+    private int overallRating;
 
     public Long getId() {
         return id;
@@ -89,4 +93,19 @@ public class MovieDetailDto {
         this.director = director;
     }
 
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
+
+    public int getOverallRating() {
+        return overallRating;
+    }
+
+    public void setOverallRating(int overallRating) {
+        this.overallRating = overallRating;
+    }
 }

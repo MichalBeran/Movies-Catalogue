@@ -1,4 +1,7 @@
 <h2>Users</h2>
+<div *ngIf="error" class="alert alert-danger">
+  {{error}}
+</div>
 <table class="table table-responsive ">
   <thead>
   <tr>
@@ -18,12 +21,12 @@
     <td>{{user.lastName}}</td>
     <td>{{user.admin}}</td>
     <td>
-      <a routerLink="/users/detail/{{user.id}}" class="btn btn-dark btn-sm">show detail</a>
-      <div *ngIf="isUserAdmin()">
-        <a routerLink="/users/edit/{{user.id}}" class="btn btn-dark btn-sm">edit</a>
-        <button (click)="remove(user.id);" class="btn btn-danger btn-sm">delete</button>
-        <button *ngIf="!user.admin" (click)="makeAdmin(user)" class="btn btn-danger btn-sm">make admin</button>
-        <button *ngIf="user.admin" (click)="unmakeAdmin(user)" class="btn btn-danger btn-sm">unmake admin</button>
+      <div class="btn-group btn-group-sm" role="group">
+        <a routerLink="/users/detail/{{user.id}}" class="btn btn-dark btn-sm">detail</a>
+        <button *ngIf="isUserAdmin()" (click)="remove(user.id);" class="btn btn-danger btn-sm">delete</button>
+        <button *ngIf="isUserAdmin() && !user.admin" (click)="makeAdmin(user)" class="btn btn-info btn-sm">grant admin</button>
+        <button *ngIf="isUserAdmin() && user.admin" (click)="unmakeAdmin(user)" class="btn btn-warning btn-sm">revoke admin</button>
+        <a *ngIf="isUserLogged() && getLoggedUser().id == user.id" routerLink="/users/edit/{{user.id}}" class="btn btn-secondary btn-sm">edit</a>
       </div>
     </td>
   </tr>

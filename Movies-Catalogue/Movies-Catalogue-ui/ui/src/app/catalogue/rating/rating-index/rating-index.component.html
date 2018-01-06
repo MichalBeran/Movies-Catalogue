@@ -5,18 +5,18 @@
         <h4 class="card-title">{{rating.user?.firstName}} {{rating.user?.lastName}}</h4>
         <h6 class="card-subtitle mb-2 text-muted"></h6>
         <p class="card-text">{{rating.description}}</p>
-          <div class="card-text">
-            <div>
-              <b>overall:</b> {{rating.overallRating}}%
-            </div>
-            <div><b>actors:</b> {{rating.actorsRating}}%</div>
-            <div><b>scenario:</b> {{rating.scenarioRating}}%</div>
+        <div class="card-text">
+          <div>
+            <b>overall:</b> {{rating.overallRating}}%
           </div>
-          <a *ngIf="getAuthenticated()?.id == rating.user?.id;else blankA" href="" (click)="remove($event, rating.id)"
-             class="card-link">Delete my review</a>
-          <ng-template #blankA><span class="h20 op0">&nbsp;</span></ng-template>
+          <div><b>actors:</b> {{rating.actorsRating}}%</div>
+          <div><b>scenario:</b> {{rating.scenarioRating}}%</div>
         </div>
+        <a *ngIf="getAuthenticated()?.id == rating.user?.id;else blankA" href="" (click)="remove($event, rating.id)"
+           class="card-link">Delete my review</a>
+        <ng-template #blankA><span class="h20 op0">&nbsp;</span></ng-template>
       </div>
+    </div>
   </div>
 </div>
 

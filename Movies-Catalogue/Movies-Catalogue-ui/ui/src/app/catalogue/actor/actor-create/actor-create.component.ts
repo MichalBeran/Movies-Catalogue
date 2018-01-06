@@ -18,7 +18,7 @@ export class ActorCreateComponent extends ActorCommonComponent implements OnInit
 
   actor: Actor = new Actor();
 
-  title = 'Create';
+  title = 'Actor Create';
   editing = false;
 
   constructor(protected service: RestService, protected router: Router, private route: ActivatedRoute) {
@@ -39,7 +39,12 @@ export class ActorCreateComponent extends ActorCommonComponent implements OnInit
       this.service.create(this.actor).subscribe(result => this.redirect(result));
     } else {
       // update
-      this.service.update(this.actor).subscribe(result => this.redirect(result));
+      var act = new Actor();
+      act.id = this.actor.id;
+      act.firstName = this.actor.firstName;
+      act.lastName = this.actor.lastName;
+      act.date = this.actor.date;
+      this.service.update(act).subscribe(result => this.redirect(result));
     }
   }
 
@@ -52,7 +57,7 @@ export class ActorCreateComponent extends ActorCommonComponent implements OnInit
   }
 
   private setFormForEdit(actor: Actor) {
-    this.title = `Update`;
+    this.title = `Actor Update`;
     this.actor = actor;
     this.editing = true;
   }

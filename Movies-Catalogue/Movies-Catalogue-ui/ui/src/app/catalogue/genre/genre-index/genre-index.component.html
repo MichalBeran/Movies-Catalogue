@@ -10,12 +10,13 @@
   <tr *ngFor="let genre of genres">
     <td>{{genre.name}}</td>
     <td>
-      <button class="btn btn-primary btn-sm">show movies</button>
-      <a routerLink="/genres/detail/{{genre.id}}" class="btn btn-dark btn-sm">show detail</a>
-      <div *ngIf="isUserAdmin()">
-        <a routerLink="/genres/edit/{{genre.id}}" class="btn btn-dark btn-sm">edit</a>
-        <button (click)="remove(genre.id);" class="btn btn-danger btn-sm">delete</button>
+      <!--<button class="btn btn-primary btn-sm">show movies</button>-->
+      <div class="btn-group btn-group-sm" role="group" aria-label="...">
+        <a routerLink="/genres/detail/{{genre.id}}" class="btn btn-dark btn-sm">detail</a>
+        <a *ngIf="isUserAdmin()" routerLink="/genres/edit/{{genre.id}}" class="btn btn-secondary btn-sm">edit</a>
+        <button *ngIf="isUserAdmin()" (click)="remove(genre.id);" class="btn btn-danger btn-sm">delete</button>
       </div>
+
     </td>
   </tr>
   </tbody>

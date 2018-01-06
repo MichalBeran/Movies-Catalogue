@@ -5,6 +5,7 @@
     <th scope="col">Movie name</th>
     <th scope="col">Director</th>
     <th scope="col">Genres</th>
+    <th scope="col">Rating</th>
     <th scope="col">Actions</th>
   </tr>
   </thead>
@@ -14,12 +15,34 @@
     <td>{{movie.director.firstName}} {{movie.director.lastName}}</td>
     <td><span *ngFor="let genre of movie.genres" class="badge badge-info">{{genre.name}}</span></td>
     <td>
-      <a routerLink="/movies/detail/{{movie.id}}" class="btn btn-dark btn-sm">show detail</a>
-      <div *ngIf="isUserAdmin()">
-        <a routerLink="/movies/edit/{{movie.id}}" class="btn btn-dark btn-sm">edit</a>
-        <button (click)="remove(movie.id);" class="btn btn-danger btn-sm">delete</button>
+      <span data-toggle="tooltip" data-placement="top" title="{{movie.overallRating}} %" class="rating-stars" *ngIf="movie.overallRating > -1">
+        <div class="mdi-set">
+          <i *ngIf="movie.overallRating/20 >= 1" class="mdi mdi-star"></i>
+          <i *ngIf="movie.overallRating/20 >= 0.5 && movie.overallRating/20 < 1" class="mdi mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/20 < 0.5" class="mdi mdi-star-outline"></i>
+          <i *ngIf="movie.overallRating/20 >= 2" class="mdi mdi-star"></i>
+          <i *ngIf="movie.overallRating/20 >= 1.5 && movie.overallRating/20 < 2" class="mdi mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/20 < 1.5" class="mdi mdi-star-outline"></i>
+          <i *ngIf="movie.overallRating/20 >= 3" class="mdi mdi-star"></i>
+          <i *ngIf="movie.overallRating/20 >= 2.5 && movie.overallRating/20 < 3" class="mdi mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/20 < 2.5" class="mdi mdi-star-outline"></i>
+          <i *ngIf="movie.overallRating/20 >= 4" class="mdi mdi-star"></i>
+          <i *ngIf="movie.overallRating/20 >= 3.5 && movie.overallRating/20 < 4" class="mdi mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/20 < 3.5" class="mdi mdi-star-outline"></i>
+          <i *ngIf="movie.overallRating/20 >= 5" class="mdi mdi-star"></i>
+          <i *ngIf="movie.overallRating/20 >= 4.5 && movie.overallRating/20 < 5" class="mdi mdi-star-half"></i>
+          <i *ngIf="movie.overallRating/20 < 4.5" class="mdi mdi-star-outline"></i>
+        </div>
+      </span>
+    </td>
+    <td>
+      <div class="btn-group btn-group-sm" role="group" aria-label="...">
+        <a routerLink="/movies/detail/{{movie.id}}" class="btn btn-dark btn-sm">detail</a>
+        <a *ngIf="isUserAdmin()" routerLink="/movies/edit/{{movie.id}}" class="btn btn-secondary btn-sm">edit</a>
+        <button *ngIf="isUserAdmin()" (click)="remove(movie.id);" class="btn btn-danger btn-sm">delete</button>
       </div>
     </td>
   </tr>
+
   </tbody>
 </table>

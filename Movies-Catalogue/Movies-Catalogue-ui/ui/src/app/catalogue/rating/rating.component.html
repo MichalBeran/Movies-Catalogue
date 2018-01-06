@@ -1,2 +1,2 @@
-<app-rating-create (onChanged)="onChanged($event)" [movie]="movie" *ngIf="isAuthenticated()"></app-rating-create>
-<app-rating-index [needsReload]="needsReload" [movie]="movie"></app-rating-index>
+<app-rating-create [needsReload]="detailNeedsReload" (onChanged)="onDetailChanged($event)" [movie]="movie" *ngIf="isAuthenticated()"></app-rating-create>
+<app-rating-index [needsReload]="indexNeedsReload" (onChanged)="onIndexChanged($event)" [movie]="movie"></app-rating-index>

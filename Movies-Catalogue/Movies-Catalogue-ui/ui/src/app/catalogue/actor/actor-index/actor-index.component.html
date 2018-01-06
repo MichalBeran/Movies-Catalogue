@@ -10,13 +10,13 @@
   <tbody>
   <tr *ngFor="let actor of actors">
     <td>{{actor.firstName}} {{actor.lastName}}</td>
-    <td>{{actor.date}}</td>
+    <td>{{actor.dateOfBirth.dayOfMonth}}.{{actor.dateOfBirth.monthValue}}.{{actor.dateOfBirth.year}}</td>
     <td>
-      <button class="btn btn-primary btn-sm">show movies</button>
-      <a routerLink="/actors/detail/{{actor.id}}" class="btn btn-dark btn-sm">show detail</a>
-      <div *ngIf="isUserAdmin()">
-        <a routerLink="/actors/edit/{{actor.id}}" class="btn btn-dark btn-sm">edit</a>
-        <button (click)="remove(actor.id);" class="btn btn-danger btn-sm">delete</button>
+      <!--<button class="btn btn-primary btn-sm">show movies</button>-->
+      <div class="btn-group btn-group-sm" role="group" aria-label="...">
+        <a routerLink="/actors/detail/{{actor.id}}" class="btn btn-dark btn-sm">detail</a>
+        <a *ngIf="isUserAdmin()" routerLink="/actors/edit/{{actor.id}}" class="btn btn-secondary btn-sm">edit</a>
+        <button *ngIf="isUserAdmin()" (click)="remove(actor.id);" class="btn btn-danger btn-sm">delete</button>
       </div>
     </td>
   </tr>

@@ -6,6 +6,7 @@
 package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Director;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 
@@ -70,6 +71,53 @@ public class MovieDaoImpl implements MovieDao{
         if (entity == null) {
             throw new IllegalArgumentException("Entity can not be null");
         }
+        if(entity.getId() == null){
+            throw new IllegalArgumentException("Entity ID can not be null");
+        }
+        Movie stored = em.find(Movie.class, entity.getId());
+        if(stored == null){
+            throw new IllegalArgumentException("Entity is not saved in database");
+        }
+        List<Genre> storedGenres = stored.getGenres();
+        List<Actor> storedActors = stored.getActors();
+        for(Genre genre: storedGenres){
+            Genre emGenre = em.createQuery("SELECT g from Genre g where id=:id", Genre.class).setParameter("id", genre.getId()).getSingleResult();
+            List<Movie> movies = emGenre.getMovies() == null ? new ArrayList<>() : emGenre.getMovies();
+            if(movies.contains(stored)){
+                movies.remove(stored);
+                emGenre.setMovies(movies);
+            }
+            em.merge(emGenre);
+        }
+        for(Actor actor: storedActors){
+            Actor emActor = em.createQuery("SELECT a from Actor a where id=:id", Actor.class).setParameter("id", actor.getId()).getSingleResult();
+            List<Movie> movies = emActor.getMovies() == null ? new ArrayList<>() : emActor.getMovies();
+            if(movies.contains(stored)) {
+                movies.remove(stored);
+                emActor.setMovies(movies);
+            }
+            em.merge(emActor);
+        }
+        List<Genre> genres = entity.getGenres();
+        List<Actor> actors = entity.getActors();
+        for(Genre genre: genres){
+            Genre emGenre = em.createQuery("SELECT g from Genre g where id=:id", Genre.class).setParameter("id", genre.getId()).getSingleResult();
+            List<Movie> movies = emGenre.getMovies() == null ? new ArrayList<>() : emGenre.getMovies();
+            if(!movies.contains(entity)){
+                movies.add(entity);
+                emGenre.setMovies(movies);
+            }
+            em.merge(emGenre);
+        }
+        for(Actor actor: actors){
+            Actor emActor = em.createQuery("SELECT a from Actor a where id=:id", Actor.class).setParameter("id", actor.getId()).getSingleResult();
+            List<Movie> movies = emActor.getMovies() == null ? new ArrayList<>() : emActor.getMovies();
+            if(!movies.contains(entity)) {
+                movies.add(entity);
+                emActor.setMovies(movies);
+            }
+            em.merge(emActor);
+        }
         em.merge(entity);
     }
 
@@ -110,6 +158,11 @@ public class MovieDaoImpl implements MovieDao{
             actor.setMovies(movies);
             em.merge(actor);
         }
+        Director director = movie.getDirector();
+        List<Movie> movies = director.getMovies();
+        movies.remove(movie);
+        director.setMovies(movies);
+        em.merge(director);
         em.remove(movie);
     }
     

@@ -35,4 +35,5 @@ public interface MovieFacade {
     void delete(MovieDto dto);
     List<MovieDto> findAll();
     MovieDto update(MovieDto dto);
+    int getMovieOverallRating(MovieDto movie);
 }

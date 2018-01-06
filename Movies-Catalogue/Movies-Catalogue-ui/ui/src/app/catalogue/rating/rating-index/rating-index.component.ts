@@ -1,4 +1,4 @@
-import {Component, Input, OnChanges, OnInit, SimpleChanges} from '@angular/core';
+import {Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges} from '@angular/core';
 import {Router} from '@angular/router';
 import {RestService} from '../../../services/rest.service';
 import {RatingCommonComponent} from '../rating.common.component';
@@ -17,6 +17,8 @@ export class RatingIndexComponent extends RatingCommonComponent implements OnIni
 
   @Input() needsReload: number;
   @Input() movie: Movie;
+  @Output() onChanged = new EventEmitter<boolean>();
+
   lastReload: 0;
   title = 'Ratings';
 
@@ -36,14 +38,13 @@ export class RatingIndexComponent extends RatingCommonComponent implements OnIni
   }
 
   ngOnInit() {
-    console.log('movie:' + this.movie.id);
     super.ngOnInit();
     this.refresh();
   }
 
   remove(e, id) {
     e.preventDefault();
-    super.delete(id, () => this.refresh());
+    super.delete(id, () => {this.refresh(); this.onChanged.emit(true); });
   }
 
   refresh() {

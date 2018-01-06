@@ -36,4 +36,5 @@ public interface MovieFacade {
     List<MovieDto> findAll();
     MovieDto update(MovieDto dto);
     int getMovieOverallRating(MovieDto movie);
+    List<MovieDto> findAllByTitle(String serachString);
 }

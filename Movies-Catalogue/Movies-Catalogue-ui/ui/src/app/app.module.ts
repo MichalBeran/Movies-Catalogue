@@ -46,6 +46,7 @@ import {DirectorCommonComponent} from "./catalogue/director/director.common.comp
 import {MovieDetailResolver} from "./services/movie.detail.resolver.service";
 import {MovieCommonComponent} from "./catalogue/movie/movie.common.component";
 import {ActorCommonComponent} from "./catalogue/actor/actor.common.component";
+import {MovieService} from "./services/movie.service";
 
 
 @NgModule({
@@ -94,7 +95,7 @@ import {ActorCommonComponent} from "./catalogue/actor/actor.common.component";
     HttpClientModule,
     FormsModule
   ],
-  providers: [RestService, AppHelper, UserService, MovieDetailResolver],
+  providers: [RestService, AppHelper, UserService, MovieDetailResolver, MovieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

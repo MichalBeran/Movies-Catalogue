@@ -14,6 +14,7 @@ export class Movie extends BaseModel {
     monthValue: string,
     dayOfMonth: string
   };
+  overallRating: any;
 
   constructor() {
     super();

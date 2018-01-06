@@ -27,6 +27,8 @@ public class MovieDetailDto {
 
     private DirectorViewDto director;
 
+    private int overallRating;
+
     public Long getId() {
         return id;
     }
@@ -97,5 +99,13 @@ public class MovieDetailDto {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public int getOverallRating() {
+        return overallRating;
+    }
+
+    public void setOverallRating(int overallRating) {
+        this.overallRating = overallRating;
     }
 }

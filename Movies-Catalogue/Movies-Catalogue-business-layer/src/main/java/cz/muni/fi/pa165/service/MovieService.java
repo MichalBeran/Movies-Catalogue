@@ -43,6 +43,13 @@ public interface MovieService {
      * @return Similiar movies
      */
     List<Movie> getRecommendedMovies(Movie m);
-    
-    
+
+    /**
+     * Method returns movie overall rating
+     * @param m movie that we want to know his overall rating
+     * @return overall rating or -1 if there is no ratings.
+     */
+    int getMovieOverallRating(Movie m);
+
+
 }

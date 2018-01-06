@@ -100,7 +100,9 @@ public class MoviesController {
         try{
             MovieDto dto = movieFacade.findById(id);
             dto.setDate(dto.getDateOfRelease().toString());
-            return ResponseEntity.ok(mapper.mapTo(dto, MovieDetailDto.class));
+            MovieDetailDto detailDto = mapper.mapTo(dto, MovieDetailDto.class);
+            detailDto.setOverallRating(movieFacade.getMovieOverallRating(dto));
+            return ResponseEntity.ok(detailDto);
         }catch(InvalidDataAccessApiUsageException e){
             return ResponseEntity.notFound().build();
         }

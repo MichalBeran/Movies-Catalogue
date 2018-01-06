@@ -11,6 +11,8 @@ import cz.muni.fi.pa165.entities.Movie;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+
+import cz.muni.fi.pa165.entities.Rating;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -96,5 +98,23 @@ public class MovieServiceImpl implements MovieService{
         }
         return topMovies;
     }
-    
+
+    @Override
+    public int getMovieOverallRating(Movie m) {
+        int overall = 0;
+        Movie movie = movieDao.findById(m.getId());
+        if(movie == null){
+            throw new IllegalArgumentException("This movie does not exist in database");
+        }
+        List<Rating> ratings = movie.getRatings();
+        for(Rating r : ratings){
+            overall += r.getOverallRating();
+        }
+        if (ratings.size() > 0) {
+            overall = overall / ratings.size();
+        }else {
+            overall = -1;
+        }
+        return overall;
+    }
 }

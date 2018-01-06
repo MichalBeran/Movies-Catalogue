@@ -16,7 +16,6 @@ export class UserIndexComponent extends UserCommonComponent implements OnInit {
   title= 'Users';
 
   users: User[];
-  error = null;
 
   constructor(protected service: UserService, protected router: Router) {
     super(service, router);
@@ -28,7 +27,6 @@ export class UserIndexComponent extends UserCommonComponent implements OnInit {
   }
   remove(id) {
     super.delete(id, () => this.refresh());
-    this.error = super.getError();
   }
 
   refresh() {

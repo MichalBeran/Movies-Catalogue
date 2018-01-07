@@ -20,8 +20,8 @@
     </span></td>
 
     <td>
-      <button class="btn btn-primary btn-sm" (click)="getMovies(director.id)">show movies</button>
       <div class="btn-group btn-group-sm" role="group">
+        <a routerLink="/movies/index/director/{{director.id}}" class="btn btn-info btn-sm">show movies</a>
         <a routerLink="/directors/detail/{{director.id}}" class="btn btn-dark btn-sm">detail</a>
         <a *ngIf="isUserAdmin()" routerLink="/directors/edit/{{director.id}}" class="btn btn-secondary btn-sm">edit</a>
         <button *ngIf="isUserAdmin()" (click)="remove(director.id);" class="btn btn-danger btn-sm">delete</button>

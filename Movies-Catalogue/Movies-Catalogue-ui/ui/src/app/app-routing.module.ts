@@ -82,6 +82,10 @@ const routes: Routes = [
             component: MovieIndexComponent
           },
           {
+            path: 'index/:filter/:id',
+            component: MovieIndexComponent
+          },
+          {
             path: 'create',
             component: MovieCreateComponent
           },

@@ -39,4 +39,5 @@ public interface MovieFacade {
     List<MovieDto> findAllByTitle(String serachString);
     List<MovieDto> findAllByActor(Long actorId);
     List<MovieDto> findAllByDirector(Long directorId);
+    List<MovieDto> findAllByGenre(Long genreId);
 }

@@ -228,5 +228,21 @@ public class MoviesController {
         }
     }
 
+    @RequestMapping(value = "byGenre", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity<List<MovieDetailDto>> searchMovies(@RequestBody GenreDto searchDto){
+        try{
+            Long id = searchDto.getId();
+            List<MovieDetailDto> list = mapper.mapTo(movieFacade.findAllByGenre(id), MovieDetailDto.class);
+            for(int i = 0; i<list.size(); i++){
+                MovieDetailDto movie = list.get(i);
+                movie.setOverallRating(movieFacade.getMovieOverallRating(mapper.mapTo(movie, MovieDto.class)));
+                list.set(i, movie);
+            }
+            return ResponseEntity.ok(list);
+        }catch(InvalidDataAccessApiUsageException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }

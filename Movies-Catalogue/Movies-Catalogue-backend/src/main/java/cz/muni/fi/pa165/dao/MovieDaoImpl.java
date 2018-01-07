@@ -63,6 +63,13 @@ public class MovieDaoImpl implements MovieDao{
             }
             em.merge(emActor);
         }
+        Director emDirector = entity.getDirector();
+        List<Movie> movies = emDirector.getMovies() == null ? new ArrayList<>() : emDirector.getMovies();
+            if(!movies.contains(entity)) {
+                movies.add(entity);
+                emDirector.setMovies(movies);
+            }
+            em.merge(emDirector);
 
     }
 

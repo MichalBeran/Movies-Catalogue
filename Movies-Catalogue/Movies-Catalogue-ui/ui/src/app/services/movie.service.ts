@@ -22,4 +22,12 @@ export class MovieService extends RestService {
   search(searchString: String): Observable<Movie[]> {
     return this.http.post<Movie[]>(`${this.repository}/search`, {title: searchString}, HttpOptions);
   }
+
+  moviesByActor(id): Observable<Movie[]> {
+    return this.http.post<Movie[]>(`${this.repository}/byActor`, {id: id}, HttpOptions);
+  }
+
+  moviesByDirector(id): Observable<Movie[]> {
+    return this.http.post<Movie[]>(`${this.repository}/byDirector`, {id: id}, HttpOptions);
+  }
 }

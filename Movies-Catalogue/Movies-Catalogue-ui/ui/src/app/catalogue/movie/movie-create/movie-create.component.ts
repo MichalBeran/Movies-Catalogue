@@ -38,6 +38,7 @@ export class MovieCreateComponent extends MovieCommonComponent implements OnInit
 
     this.route.params.subscribe(params => {
       if (!isNullOrUndefined(params['id'])) {
+        this.service.setRepository('movies');
         this.service.find(params['id']).subscribe(res => this.setFormForEdit(res));
       } else {
         this.callOthers();

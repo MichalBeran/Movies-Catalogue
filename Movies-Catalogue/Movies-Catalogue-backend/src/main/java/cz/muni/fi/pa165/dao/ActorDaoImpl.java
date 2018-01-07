@@ -5,6 +5,8 @@ import cz.muni.fi.pa165.entities.Actor;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.PersistenceContext;
+
+import cz.muni.fi.pa165.entities.Movie;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -58,5 +60,11 @@ public class ActorDaoImpl implements ActorDao{
     public void delete(Long id) {
         Actor entity = findById(id);
         manager.remove(entity);
+    }
+
+    @Override
+    public List<Movie> getAllMoviesForActor(Long id) {
+        Actor actor = findById(id);
+        return actor.getMovies();
     }
 }

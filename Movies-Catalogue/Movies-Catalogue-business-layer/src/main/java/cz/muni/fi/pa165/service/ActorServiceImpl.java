@@ -8,6 +8,8 @@ package cz.muni.fi.pa165.service;
 import cz.muni.fi.pa165.dao.ActorDao;
 import cz.muni.fi.pa165.entities.Actor;
 import java.util.List;
+
+import cz.muni.fi.pa165.entities.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -48,4 +50,8 @@ public class ActorServiceImpl implements ActorService {
         actorDao.delete(id);
     }
 
+    @Override
+    public List<Movie> getAllMoviesForActor(Long id) {
+        return actorDao.getAllMoviesForActor(id);
+    }
 }

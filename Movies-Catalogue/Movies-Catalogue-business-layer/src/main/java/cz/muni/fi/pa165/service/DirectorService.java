@@ -53,4 +53,12 @@ public interface DirectorService {
      * @param id identifier
      */
     void delete(Long id);
+
+    /**
+     * Get movies for director.
+     *
+     * @param id Director id
+     * @return list of movies
+     */
+    List<Movie> getAllMoviesForDirector(Long id);
 }

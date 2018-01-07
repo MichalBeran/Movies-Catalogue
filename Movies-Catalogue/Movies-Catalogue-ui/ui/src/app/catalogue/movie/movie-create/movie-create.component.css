@@ -1,3 +1,7 @@
 img[src=""] {
   display: none;
 }
+
+.pic{
+	width:100%;
+}

@@ -8,6 +8,8 @@ package cz.muni.fi.pa165.service;
 import cz.muni.fi.pa165.dao.DirectorDao;
 import cz.muni.fi.pa165.entities.Director;
 import java.util.List;
+
+import cz.muni.fi.pa165.entities.Movie;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,5 +48,10 @@ public class DirectorServiceImpl implements DirectorService {
     @Override
     public void delete(Long id) {
         directorDao.delete(id);
+    }
+
+    @Override
+    public List<Movie> getAllMoviesForDirector(Long id) {
+        return directorDao.getAllMoviesForDirector(id);
     }
 }

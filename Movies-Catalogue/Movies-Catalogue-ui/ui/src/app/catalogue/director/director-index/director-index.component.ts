@@ -31,4 +31,8 @@ export class DirectorIndexComponent extends DirectorCommonComponent implements O
   refresh() {
     this.service.get().subscribe(list => this.directors = list);
   }
+
+  getMovies(id){
+    this.router.navigate(['/movies/index',{director: id}]);
+  }
 }

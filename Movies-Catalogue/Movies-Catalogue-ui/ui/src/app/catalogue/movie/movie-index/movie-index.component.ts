@@ -5,7 +5,7 @@ import {MovieComponent} from '../movie.component';
 import {Router} from '@angular/router';
 import {MovieCommonComponent} from '../movie.common.component';
 import {MovieService} from "../../../services/movie.service";
-
+import {ActivatedRoute} from "@angular/router";
 declare const $: any;
 
 /**
@@ -23,7 +23,7 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
   movies: Movie[];
   searchString = "";
 
-  constructor(protected service: MovieService, protected router: Router) {
+  constructor(protected service: MovieService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
   }
 
@@ -40,7 +40,15 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
 
   refresh() {
     this.service.get().subscribe(list => {
-      this.movies = list;
+      var actId = this.route.snapshot.paramMap.get('actor');
+      var dirId = this.route.snapshot.paramMap.get('director');
+      if(actId != null){
+        this.getMoviesByActor(actId);
+      }else if(dirId != null){
+        this.getMoviesByDirector(dirId);
+      }else {
+        this.movies = list;
+      }
       this.setTooltips();
     });
   }
@@ -55,6 +63,18 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
   clearSearch(){
     this.searchString = '';
     this.search();
+  }
+
+  getMoviesByActor(id){
+    this.service.moviesByActor(id).subscribe(list => {
+      this.movies = list;
+    });
+  }
+
+  getMoviesByDirector(id) {
+    this.service.moviesByDirector(id).subscribe(list => {
+      this.movies = list;
+    });
   }
 
   setTooltips() {

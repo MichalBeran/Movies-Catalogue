@@ -15,7 +15,7 @@
         <img src="{{movie.image}}" alt="movie-image" class="img-thumbnail">
       </div>
       <div class="movie-detail-container">
-        <h2>{{movie.title}}</h2>
+		<h2>{{movie.title}}</h2>
         <p><b>Date of release:</b> {{getDate()}}</p>
         <p><b>Director:</b> {{movie.director.firstName}} {{movie.director.lastName}}</p>
         <p><b>Actors:</b>
@@ -39,6 +39,7 @@
             </span>
         </p>
       </div>
+	  <a *ngIf="isUserAdmin()" routerLink="/movies/edit/{{movie.id}}" class="btn btn-secondary btn-sm">Edit movie</a>
     </div>
     <div class="movie-description">
       <div class="card bg-light mb-3">

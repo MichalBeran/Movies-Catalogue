@@ -33,6 +33,6 @@ export class ActorIndexComponent extends ActorCommonComponent implements OnInit 
   }
 
   getMovies(id){
-    this.router.navigate(['/movies/index',{actor: id}]);
+    this.router.navigate(['/movies/index', {actor: id}]);
   }
 }

@@ -42,6 +42,9 @@ public class DatabaseSeeder {
 
     private UserDto admin;
     private UserDto pepa;
+    private UserDto peter;
+    private UserDto hent;
+    private UserDto lojzik;
 
     private GenreDto adventure;
     private GenreDto action;
@@ -58,6 +61,8 @@ public class DatabaseSeeder {
     private ActorDto katrinaKaif;
     private ActorDto willFerrell;
     private ActorDto melGibson;
+    private ActorDto markHamill;
+    private ActorDto harrisonFord;
 
     private DirectorDto martin;
     private DirectorDto patty;
@@ -65,6 +70,9 @@ public class DatabaseSeeder {
     private DirectorDto scottCooper;
     private DirectorDto aliAbbasZafar;
     private DirectorDto seanAnders;
+    private DirectorDto georgeLucas;
+    private DirectorDto stevenSpiel;
+    private DirectorDto sethGordon;
 
     private CreateMovieDto wonderWoman;
     private Long wonderWomanId;
@@ -78,9 +86,30 @@ public class DatabaseSeeder {
     private Long tigerZindaId;
     private CreateMovieDto daddyHome;
     private Long daddyHomeId;
+    private CreateMovieDto starWars4;
+    private Long starWars4Id;
+    private CreateMovieDto starWars5;
+    private Long starWars5Id;
+    private CreateMovieDto indiana;
+    private Long indianaId;
+    private CreateMovieDto baywatch;
+    private Long baywatchId;
+    private CreateMovieDto StarWars6;
+    private Long starWars6Id;
+
 
     private RatingDto adminRating;
     private RatingDto pepaRating;
+    private RatingDto peterRating;
+    private RatingDto hentRating;
+    private RatingDto hentRatingBaywatch;
+    private RatingDto peterRatingDaddy;
+    private RatingDto peterRatingStarWars5;
+    private RatingDto hentRatingJumanji;
+    private RatingDto peterRatingJumanji;
+    private RatingDto lojzikRatingTiger;
+    private RatingDto lojzikRatingHostiles;
+    private RatingDto pepaRatingStarWars6;
 
     public void seed() {
         seedUsers();
@@ -116,6 +145,30 @@ public class DatabaseSeeder {
         shorty.setMail("me@me.me");
         shorty.setId(userFacade.registerUser(shorty, "me"));
         userFacade.makeAdmin(shorty);
+
+        peter = new UserDto();
+        peter.setFirstName("Peter");
+        peter.setLastName("Mayhew");
+        peter.setNick("Chewie");
+        peter.setMail("peter@thisapp.dev");
+        passw = "pepaNieJePan";
+        peter.setId(userFacade.registerUser(peter, passw));
+
+        hent = new UserDto();
+        hent.setFirstName("John");
+        hent.setLastName("Hent");
+        hent.setNick("hent");
+        hent.setMail("hent@thisapp.dev");
+        passw = "hentJePan";
+        hent.setId(userFacade.registerUser(hent, passw));
+
+        lojzik = new UserDto();
+        lojzik.setFirstName("Luis");
+        lojzik.setLastName("NeverMind");
+        lojzik.setNick("lojzik");
+        lojzik.setMail("lojza@thisapp.dev");
+        passw = "pepaLepa";
+        lojzik.setId(userFacade.registerUser(lojzik, passw));
     }
 
         private void seedGenres() {
@@ -200,6 +253,18 @@ public class DatabaseSeeder {
         melGibson.setLastName("Gibson");
         melGibson.setDateOfBirth(LocalDate.of(1956, 1, 3));
         melGibson.setId(actorFacade.create(melGibson));
+
+        markHamill = new ActorDto();
+        markHamill.setFirstName("Mark");
+        markHamill.setLastName("Hamill");
+        markHamill.setDateOfBirth(LocalDate.of(1951, 9, 25));
+        markHamill.setId(actorFacade.create(markHamill));
+
+        harrisonFord = new ActorDto();
+        harrisonFord.setFirstName("Harrison");
+        harrisonFord.setLastName("Ford");
+        harrisonFord.setDateOfBirth(LocalDate.of(1942, 7, 13));
+        harrisonFord.setId(actorFacade.create(harrisonFord));
         
     }
 
@@ -239,6 +304,24 @@ public class DatabaseSeeder {
         seanAnders.setLastName("Anders");
         seanAnders.setDateOfBirth(LocalDate.of(1965, 12, 10));
         seanAnders.setId(directorFacade.create(seanAnders));
+
+        georgeLucas = new DirectorDto();
+        georgeLucas.setFirstName("George");
+        georgeLucas.setLastName("Lucas");
+        georgeLucas.setDateOfBirth(LocalDate.of(1944, 5, 14));
+        georgeLucas.setId(directorFacade.create(georgeLucas));
+
+        stevenSpiel = new DirectorDto();
+        stevenSpiel.setFirstName("Steven");
+        stevenSpiel.setLastName("Spielberg");
+        stevenSpiel.setDateOfBirth(LocalDate.of(1946, 12, 18));
+        stevenSpiel.setId(directorFacade.create(stevenSpiel));
+
+        sethGordon = new DirectorDto();
+        sethGordon.setFirstName("Seth");
+        sethGordon.setLastName("Gordon");
+        sethGordon.setDateOfBirth(LocalDate.of(1974, 6, 15));
+        sethGordon.setId(directorFacade.create(sethGordon));
     }
 
     private void seedMovies() {
@@ -334,7 +417,83 @@ public class DatabaseSeeder {
         daddyHome.setDirector(seanAnders);
         daddyHome.setImage(imageRead(Resources.getResource("daddy-home-img-base64.txt")));
         daddyHomeId = movieFacade.createMovie(daddyHome);
-        
+
+        starWars4 = new CreateMovieDto();
+        starWars4.setTitle("Star Wars: Episode IV - A New Hope");
+        starWars4.setDescription("Luke Skywalker joins forces with a Jedi Knight, a cocky pilot, a Wookiee and two droids to save the galaxy from the Empire's world-destroying battle-station while also attempting to rescue Princess Leia from the evil Darth Vader.");
+        starWars4.setDateOfRelease(LocalDate.of(1977,5,25));
+        genres = new ArrayList();
+        genres.add(action);
+        genres.add(adventure);
+        starWars4.setGenres(genres);
+        actors = new ArrayList();
+        actors.add(markHamill);
+        actors.add(harrisonFord);
+        starWars4.setActors(actors);
+        starWars4.setDirector(georgeLucas);
+        starWars4.setImage(imageRead(Resources.getResource("star-wars-4-img-base64.txt")));
+        starWars4Id = movieFacade.createMovie(starWars4);
+
+        starWars5 = new CreateMovieDto();
+        starWars5.setTitle("Star Wars: Episode V - The Empire Strikes Back");
+        starWars5.setDescription("After the rebels are overpowered by the Empire on the ice planet Hoth, Luke Skywalker begins Jedi training with Yoda. His friends accept shelter from a questionable ally as Darth Vader hunts them in a plan to capture Luke.");
+        starWars5.setDateOfRelease(LocalDate.of(1980,5,21));
+        genres = new ArrayList();
+        genres.add(action);
+        genres.add(adventure);
+        starWars5.setGenres(genres);
+        actors = new ArrayList();
+        actors.add(markHamill);
+        actors.add(harrisonFord);
+        starWars5.setActors(actors);
+        starWars5.setDirector(georgeLucas);
+        starWars5.setImage(imageRead(Resources.getResource("star-wars-5-img-base64.txt")));
+        starWars5Id = movieFacade.createMovie(starWars5);
+
+        indiana = new CreateMovieDto();
+        indiana.setTitle("Indiana Jones and the Kingdom of the Crystal Skull");
+        indiana.setDescription("Famed archaeologist and adventurer Dr. Henry \"Indiana\" Jones, Jr. is called back into action, when he becomes entangled in a Soviet plot to uncover the secret behind mysterious artifacts known as the Crystal Skulls.");
+        indiana.setDateOfRelease(LocalDate.of(2008,5,18));
+        genres = new ArrayList();
+        genres.add(action);
+        genres.add(adventure);
+        indiana.setGenres(genres);
+        actors = new ArrayList();
+        actors.add(harrisonFord);
+        indiana.setActors(actors);
+        indiana.setDirector(stevenSpiel);
+        indiana.setImage(imageRead(Resources.getResource("indiana-jones-img-base64.txt")));
+        indianaId = movieFacade.createMovie(indiana);
+
+        baywatch = new CreateMovieDto();
+        baywatch.setTitle("Baywatch");
+        baywatch.setDescription("Devoted lifeguard Mitch Buchannon butts heads with a brash new recruit, as they uncover a criminal plot that threatens the future of the bay.");
+        baywatch.setDateOfRelease(LocalDate.of(2017,5,25));
+        genres = new ArrayList();
+        genres.add(comedy);
+        baywatch.setGenres(genres);
+        actors = new ArrayList();
+        actors.add(dwayneJohnson);
+        baywatch.setActors(actors);
+        baywatch.setDirector(sethGordon);
+        baywatch.setImage(imageRead(Resources.getResource("baywatch-img-base64.txt")));
+        baywatchId = movieFacade.createMovie(baywatch);
+
+        StarWars6 = new CreateMovieDto();
+        StarWars6.setTitle("Star Wars: Episode VI - Return of the Jedi");
+        StarWars6.setDescription("fter a daring mission to rescue Han Solo from Jabba the Hutt, the rebels dispatch to Endor to destroy a more powerful Death Star. Meanwhile, Luke struggles to help Vader back from the dark side without falling into the Emperor's trap.");
+        StarWars6.setDateOfRelease(LocalDate.of(1983,5,25));
+        genres = new ArrayList();
+        genres.add(action);
+        genres.add(adventure);
+        StarWars6.setGenres(genres);
+        actors = new ArrayList();
+        actors.add(markHamill);
+        actors.add(harrisonFord);
+        StarWars6.setActors(actors);
+        StarWars6.setDirector(georgeLucas);
+        StarWars6.setImage(imageRead(Resources.getResource("star-wars-6-img-base64.txt")));
+        starWars6Id = movieFacade.createMovie(StarWars6);
     }
 
     private void seedRatings() {
@@ -348,13 +507,103 @@ public class DatabaseSeeder {
         adminRating.setId(ratingFacade.create(adminRating));
 
         pepaRating = new RatingDto();
-        pepaRating.setOverallRating(0);
-        pepaRating.setActorsRating(0);
-        pepaRating.setScenarioRating(0);
+        pepaRating.setOverallRating(40);
+        pepaRating.setActorsRating(30);
+        pepaRating.setScenarioRating(50);
         pepaRating.setMovie(movieFacade.findById(wonderWomanId));
-        pepaRating.setUser(admin);
-        pepaRating.setDescription("Didn't like it at all");
+        pepaRating.setUser(pepa);
+        pepaRating.setDescription("This movie was average, at best. Really poor acting on Gal Gadots part. The story was very predictable, CGI was poor, and the story was phoned in. I really couldn't care less about any of the characters, and there actions were incredible illogical. I had hope with a twist at the end that it would get better, but once again, it just fell flat.");
         pepaRating.setId(ratingFacade.create(pepaRating));
+
+        peterRating = new RatingDto();
+        peterRating.setOverallRating(90);
+        peterRating.setActorsRating(100);
+        peterRating.setScenarioRating(90);
+        peterRating.setMovie(movieFacade.findById(starWars4Id));
+        peterRating.setUser(peter);
+        peterRating.setDescription("Star wars made epic fantasy real. For a generation of people it has defined what the cinema experience is meant to be. Today it is probable that pc games will offer a deeper and more satisfying entertainment solution, but for pure visual and aural pleasure, mixed with basic emotional manipulation, there has never and will never be a better example of cinema than when star wars appeared over 25 years ago.");
+        peterRating.setId(ratingFacade.create(peterRating));
+
+        hentRating = new RatingDto();
+        hentRating.setOverallRating(30);
+        hentRating.setActorsRating(50);
+        hentRating.setScenarioRating(20);
+        hentRating.setMovie(movieFacade.findById(indianaId));
+        hentRating.setUser(hent);
+        hentRating.setDescription("Why, Lucas??? Why? Why...? ...Why??? Please! Tell me!!! Why???! Why?!!! WHY???!!!!");
+        hentRating.setId(ratingFacade.create(hentRating));
+
+        hentRatingBaywatch = new RatingDto();
+        hentRatingBaywatch.setOverallRating(20);
+        hentRatingBaywatch.setActorsRating(40);
+        hentRatingBaywatch.setScenarioRating(10);
+        hentRatingBaywatch.setMovie(movieFacade.findById(baywatchId));
+        hentRatingBaywatch.setUser(hent);
+        hentRatingBaywatch.setDescription("The only good thing about the movie is the cameo of Pamela Anderson and David Hasselhoff, but just look for the clips on youtube and you will be totally fine.");
+        hentRatingBaywatch.setId(ratingFacade.create(hentRatingBaywatch));
+
+        peterRatingDaddy = new RatingDto();
+        peterRatingDaddy.setOverallRating(20);
+        peterRatingDaddy.setActorsRating(35);
+        peterRatingDaddy.setScenarioRating(10);
+        peterRatingDaddy.setMovie(movieFacade.findById(daddyHomeId));
+        peterRatingDaddy.setUser(peter);
+        peterRatingDaddy.setDescription("Is this movie going to make any money? I'm asking because if it does, I should shut up and dedicate myself to gardening or something like that. Clearly, money is the only reason behind this enterprise and I'm giving it a 2 and not a 1 out of respect for the crew and all their hard work.Phew.");
+        peterRatingDaddy.setId(ratingFacade.create(peterRatingDaddy));
+
+        peterRatingStarWars5 = new RatingDto();
+        peterRatingStarWars5.setOverallRating(92);
+        peterRatingStarWars5.setActorsRating(95);
+        peterRatingStarWars5.setScenarioRating(90);
+        peterRatingStarWars5.setMovie(movieFacade.findById(starWars5Id));
+        peterRatingStarWars5.setUser(peter);
+        peterRatingStarWars5.setDescription("The first Star Wars movie, is a Sci-fi and cinematic masterpiece. But where Star Wars capitalized, Empire Strikes Back took it to the next level.");
+        peterRatingStarWars5.setId(ratingFacade.create(peterRatingStarWars5));
+
+        hentRatingJumanji = new RatingDto();
+        hentRatingJumanji.setOverallRating(60);
+        hentRatingJumanji.setActorsRating(75);
+        hentRatingJumanji.setScenarioRating(50);
+        hentRatingJumanji.setMovie(movieFacade.findById(jumanjiId));
+        hentRatingJumanji.setUser(hent);
+        hentRatingJumanji.setDescription("Jumanji 1995 has many memorial moments for example: The reveal of the Jumanji board, monkeys robbing a police car, the stampede, sinking floors, the flooded room with some crocodiles, the incredible use of the sound track, basically a lot of stuff. The original is well crafted and now it's 2017 and we have Jumanji: Welcome to the Jungle. It's a fun, action comedy film with really cool references to the first film.");
+        hentRatingJumanji.setId(ratingFacade.create(hentRatingJumanji));
+
+        peterRatingJumanji = new RatingDto();
+        peterRatingJumanji.setOverallRating(40);
+        peterRatingJumanji.setActorsRating(45);
+        peterRatingJumanji.setScenarioRating(30);
+        peterRatingJumanji.setMovie(movieFacade.findById(jumanjiId));
+        peterRatingJumanji.setUser(peter);
+        peterRatingJumanji.setDescription("A boring mediocre adventure movie filled by unnecessary joke and drama, along with bad cgi moments.");
+        peterRatingJumanji.setId(ratingFacade.create(peterRatingJumanji));
+
+        lojzikRatingTiger = new RatingDto();
+        lojzikRatingTiger.setOverallRating(68);
+        lojzikRatingTiger.setActorsRating(70);
+        lojzikRatingTiger.setScenarioRating(80);
+        lojzikRatingTiger.setMovie(movieFacade.findById(tigerZindaId));
+        lojzikRatingTiger.setUser(lojzik);
+        lojzikRatingTiger.setDescription("Full entertainment best action movie of Bollywood.");
+        lojzikRatingTiger.setId(ratingFacade.create(lojzikRatingTiger));
+
+        lojzikRatingHostiles = new RatingDto();
+        lojzikRatingHostiles.setOverallRating(72);
+        lojzikRatingHostiles.setActorsRating(70);
+        lojzikRatingHostiles.setScenarioRating(90);
+        lojzikRatingHostiles.setMovie(movieFacade.findById(hostilesId));
+        lojzikRatingHostiles.setUser(lojzik);
+        lojzikRatingHostiles.setDescription("Christian Bale shines in emotional journey that has a powerful and relevant message.");
+        lojzikRatingHostiles.setId(ratingFacade.create(lojzikRatingHostiles));
+
+        pepaRatingStarWars6 = new RatingDto();
+        pepaRatingStarWars6.setOverallRating(90);
+        pepaRatingStarWars6.setActorsRating(90);
+        pepaRatingStarWars6.setScenarioRating(90);
+        pepaRatingStarWars6.setMovie(movieFacade.findById(starWars6Id));
+        pepaRatingStarWars6.setUser(pepa);
+        pepaRatingStarWars6.setDescription("A fine ending - especially after having seen Episode III.");
+        pepaRatingStarWars6.setId(ratingFacade.create(pepaRatingStarWars6));
     }
     
     private String imageRead(URL url){

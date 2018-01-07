@@ -25,8 +25,6 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
 
   constructor(protected service: MovieService, protected router: Router, private route: ActivatedRoute) {
     super(service, router);
-    this.route.params.subscribe( params => console.log(params) );
-    console.log(this.route.snapshot.paramMap.get('id'));
   }
 
   ngOnInit() {

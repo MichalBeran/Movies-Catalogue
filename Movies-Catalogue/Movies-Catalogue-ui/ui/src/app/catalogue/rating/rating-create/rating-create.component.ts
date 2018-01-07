@@ -115,11 +115,19 @@ export class RatingCreateComponent extends RatingCommonComponent implements OnIn
       $('#overall-val').text(slideEvent.value);
       thatRating.overallRating = slideEvent.value;
     });
+	overall.on('slideStop', function (slideEvent) {
+      $('#overall-val').text(slideEvent.value);
+      thatRating.overallRating = slideEvent.value;
+    });
     this.sliders.overall = overall;
 
     const actors = $('#actors');
     actors.slider({value: this.rating.actorsRating});
     actors.on('slide', function (slideEvent) {
+      $('#actors-val').text(slideEvent.value);
+      thatRating.actorsRating = slideEvent.value;
+    })
+	actors.on('slideStop', function (slideEvent) {
       $('#actors-val').text(slideEvent.value);
       thatRating.actorsRating = slideEvent.value;
     })
@@ -129,6 +137,10 @@ export class RatingCreateComponent extends RatingCommonComponent implements OnIn
     const scenario = $('#scenario');
     scenario.slider({value: this.rating.scenarioRating});
     scenario.on('slide', function (slideEvent) {
+      $('#scenario-val').text(slideEvent.value);
+      thatRating.scenarioRating = slideEvent.value;
+    });
+	scenario.on('slideStop', function (slideEvent) {
       $('#scenario-val').text(slideEvent.value);
       thatRating.scenarioRating = slideEvent.value;
     });

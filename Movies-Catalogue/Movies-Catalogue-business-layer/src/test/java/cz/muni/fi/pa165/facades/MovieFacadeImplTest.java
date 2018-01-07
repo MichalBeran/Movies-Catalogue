@@ -127,6 +127,137 @@ public class MovieFacadeImplTest extends AbstractTransactionalJUnit4SpringContex
         assertThat(mm.getGenres()).contains(genreFacade.findById(idG2));
 
     }
-
+    
+    @Test
+    public void findByIdTest(){
+        MovieDto mov = movieFacade.findById(idM);
+        assertThat(mov).isNotNull();
+    }
+    
+    @Test
+    public void deleteMovieTest(){
+        CreateMovieDto movieDto = new CreateMovieDtoBuilder().title("Film1")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+        Long idToDelete = movieFacade.createMovie(movieDto);
+        List<MovieDto> movies = movieFacade.findAll();
+        int numberOfFilmsBeforeDelete = movies.size();
+        
+        String name = movieFacade.deleteMovie(idToDelete);
+        assertThat(name).isNotNull();
+        assertThat(name).isEqualTo(movieDto.getTitle());
+        
+        movies = movieFacade.findAll();
+        
+        assertThat(movies.size()).isEqualTo(numberOfFilmsBeforeDelete - 1);
+    }
+    
+    @Test
+    public void findAllTest(){
+        CreateMovieDto movieDto = new CreateMovieDtoBuilder().title("Film1")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+        movieFacade.createMovie(movieDto);
+        
+        assertThat(movieFacade.findAll().size()).isEqualTo(2);
+    }
+    
+    @Test
+    public void findAllByTitleTest(){
+        CreateMovieDto movieDto = new CreateMovieDtoBuilder().title("Film part 1")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+        CreateMovieDto movieDto2 = new CreateMovieDtoBuilder().title("Film part 2")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+        Long id1 = movieFacade.createMovie(movieDto);
+        Long id2 = movieFacade.createMovie(movieDto2);
+        
+        MovieDto movie1 = movieFacade.findById(id1);
+        MovieDto movie2 = movieFacade.findById(id2);
+        
+        List<MovieDto> foundMovies = movieFacade.findAllByTitle(movieDto.getTitle());
+        assertThat(foundMovies).containsOnly(movie1);
+        
+        foundMovies = movieFacade.findAllByTitle("Film part");
+        assertThat(foundMovies).containsOnly(movie1, movie2);
+        
+    }
+    
+    @Test
+    public void findAllByGenreTest(){
+        CreateMovieDto movieDto1 = new CreateMovieDtoBuilder().title("Film1")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).genre(genreFacade.findById(idG)).build();
+        CreateMovieDto movieDto2 = new CreateMovieDtoBuilder().title("Film2")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).genre(genreFacade.findById(idG)).
+                genre(genreFacade.findById(idG2)).build();
+        CreateMovieDto movieDto3 = new CreateMovieDtoBuilder().title("Film3")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).genre(genreFacade.findById(idG2)).build();
+        Long id1 = movieFacade.createMovie(movieDto1);
+        Long id2 = movieFacade.createMovie(movieDto2);
+        Long id3 = movieFacade.createMovie(movieDto3);
+        MovieDto movie1 = movieFacade.findById(id1);
+        MovieDto movie2 = movieFacade.findById(id2);
+        MovieDto movie3 = movieFacade.findById(id3);
+        MovieDto defaultMovie = movieFacade.findById(idM);
+        
+        List<MovieDto> movies = movieFacade.findAllByGenre(idG);
+        assertThat(movies).containsOnly(movie1, movie2, defaultMovie);
+        movies = movieFacade.findAllByGenre(idG2);
+        assertThat(movies).containsOnly(movie2, movie3);
+    }
+    
+    @Test
+    public void findAllByActorTest(){
+        ActorDto act = new ActorDto();
+        act.setFirstName("Firsta");
+        act.setLastName("Lasta");
+        Long actorId = actorFacade.create(act);
+        
+        CreateMovieDto movieDto1 = new CreateMovieDtoBuilder().title("Film1")
+                .actor(actorFacade.findById(actorId)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+        CreateMovieDto movieDto2 = new CreateMovieDtoBuilder().title("Film2")
+                .actor(actorFacade.findById(idA)).actor(actorFacade.findById(actorId)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+        Long id1 = movieFacade.createMovie(movieDto1);
+        Long id2 = movieFacade.createMovie(movieDto2);
+        MovieDto movie1 = movieFacade.findById(id1);
+        MovieDto movie2 = movieFacade.findById(id2);
+        MovieDto defaultMovie = movieFacade.findById(idM);
+        
+        List<MovieDto> movies = movieFacade.findAllByActor(idA);
+        assertThat(movies).containsOnly(defaultMovie, movie2);
+        movies = movieFacade.findAllByActor(actorId);
+        assertThat(movies).containsOnly(movie1, movie2);
+    }
+   
+    @Test
+    public void findAllByDirectorTest(){
+        DirectorDto dir = new DirectorDto();
+        dir.setFirstName("First");
+        dir.setLastName("Last");
+        Long directorId = directorFacade.create(dir);
+        
+        CreateMovieDto movieDto1 = new CreateMovieDtoBuilder().title("Film1")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(idD))
+                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+        CreateMovieDto movieDto2 = new CreateMovieDtoBuilder().title("Film2")
+                .actor(actorFacade.findById(idA)).director(directorFacade.findById(directorId))
+                .dateOfRelease(LocalDate.of(2017,11,26)).build();
+        Long id1 = movieFacade.createMovie(movieDto1);
+        Long id2 = movieFacade.createMovie(movieDto2);
+        MovieDto movie1 = movieFacade.findById(id1);
+        MovieDto movie2 = movieFacade.findById(id2);
+        MovieDto defaultMovie = movieFacade.findById(idM);
+        
+        List<MovieDto> movies = movieFacade.findAllByDirector(directorId);
+        assertThat(movies).containsOnly(movie2);
+        movies = movieFacade.findAllByDirector(idD);
+        assertThat(movies).containsOnly(defaultMovie, movie1);
+    }
     
 }

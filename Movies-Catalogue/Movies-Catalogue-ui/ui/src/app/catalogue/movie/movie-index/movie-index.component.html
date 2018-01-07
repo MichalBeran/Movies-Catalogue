@@ -1,5 +1,18 @@
-<h2>Movies</h2>
-<table class="table table-responsive ">
+<div class="row">
+  <div class="col-md-3 col-xs-12">
+    <h2>Movies</h2>
+  </div>
+  <form #searchForm="ngForm" name="searchForm" class="col-md-9 col-xs-12">
+    <div class="input-group mb-3 mt-1">
+      <input [(ngModel)]="searchString" name="searchString" type="text" class="form-control" id="search" placeholder="Search movie...">
+      <div class="input-group-append">
+        <button type="submit" class="btn btn-dark" (click)="search()">Search</button>
+        <button type="submit" class="btn btn-secondary" (click)="clearSearch()">Clear</button>
+      </div>
+    </div>
+  </form>
+</div>
+<table class="table table-responsive d-md-table">
   <thead>
   <tr>
     <th scope="col">Movie name</th>

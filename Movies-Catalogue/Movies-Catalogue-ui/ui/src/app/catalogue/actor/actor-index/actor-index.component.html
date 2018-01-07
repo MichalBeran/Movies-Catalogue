@@ -1,5 +1,5 @@
 <h2>Actors</h2>
-<table class="table table-responsive ">
+<table class="table table-responsive d-md-table">
   <thead>
   <tr>
     <th scope="col">Actor name</th>
@@ -12,7 +12,7 @@
     <td>{{actor.firstName}} {{actor.lastName}}</td>
     <td>{{actor.dateOfBirth.dayOfMonth}}.{{actor.dateOfBirth.monthValue}}.{{actor.dateOfBirth.year}}</td>
     <td>
-      <!--<button class="btn btn-primary btn-sm">show movies</button>-->
+      <button class="btn btn-primary btn-sm" (click)="getMovies(actor.id)">show movies</button>
       <div class="btn-group btn-group-sm" role="group" aria-label="...">
         <a routerLink="/actors/detail/{{actor.id}}" class="btn btn-dark btn-sm">detail</a>
         <a *ngIf="isUserAdmin()" routerLink="/actors/edit/{{actor.id}}" class="btn btn-secondary btn-sm">edit</a>

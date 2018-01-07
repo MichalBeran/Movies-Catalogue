@@ -5,6 +5,8 @@ import cz.muni.fi.pa165.entities.Director;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import javax.persistence.PersistenceContext;
+
+import cz.muni.fi.pa165.entities.Movie;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -58,5 +60,11 @@ public class DirectorDaoImpl implements DirectorDao{
     public void delete(Long id) {
         Director entity = findById(id);
         manager.remove(entity);
+    }
+
+    @Override
+    public List<Movie> getAllMoviesForDirector(Long id) {
+        Director director = findById(id);
+        return director.getMovies();
     }
 }

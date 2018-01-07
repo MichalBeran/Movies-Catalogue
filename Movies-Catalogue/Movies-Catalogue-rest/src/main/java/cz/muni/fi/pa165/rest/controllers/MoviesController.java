@@ -16,6 +16,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
+import javax.persistence.criteria.CriteriaBuilder;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -178,5 +179,70 @@ public class MoviesController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @RequestMapping(value = "search", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity<List<MovieDetailDto>> searchMovies(@RequestBody MovieDetailDto searchDto){
+        try{
+            String searchString = searchDto.getTitle();
+            List<MovieDetailDto> list = mapper.mapTo(movieFacade.findAllByTitle(searchString), MovieDetailDto.class);
+            for(int i = 0; i<list.size(); i++){
+                MovieDetailDto movie = list.get(i);
+                movie.setOverallRating(movieFacade.getMovieOverallRating(mapper.mapTo(movie, MovieDto.class)));
+                list.set(i, movie);
+            }
+            return ResponseEntity.ok(list);
+        }catch(InvalidDataAccessApiUsageException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(value = "byActor", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity<List<MovieDetailDto>> searchMovies(@RequestBody ActorDto searchDto){
+        try{
+            Long id = searchDto.getId();
+            List<MovieDetailDto> list = mapper.mapTo(movieFacade.findAllByActor(id), MovieDetailDto.class);
+            for(int i = 0; i<list.size(); i++){
+                MovieDetailDto movie = list.get(i);
+                movie.setOverallRating(movieFacade.getMovieOverallRating(mapper.mapTo(movie, MovieDto.class)));
+                list.set(i, movie);
+            }
+            return ResponseEntity.ok(list);
+        }catch(InvalidDataAccessApiUsageException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(value = "byDirector", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity<List<MovieDetailDto>> searchMovies(@RequestBody DirectorDto searchDto){
+        try{
+            Long id = searchDto.getId();
+            List<MovieDetailDto> list = mapper.mapTo(movieFacade.findAllByDirector(id), MovieDetailDto.class);
+            for(int i = 0; i<list.size(); i++){
+                MovieDetailDto movie = list.get(i);
+                movie.setOverallRating(movieFacade.getMovieOverallRating(mapper.mapTo(movie, MovieDto.class)));
+                list.set(i, movie);
+            }
+            return ResponseEntity.ok(list);
+        }catch(InvalidDataAccessApiUsageException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @RequestMapping(value = "byGenre", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+    public final ResponseEntity<List<MovieDetailDto>> searchMovies(@RequestBody GenreDto searchDto){
+        try{
+            Long id = searchDto.getId();
+            List<MovieDetailDto> list = mapper.mapTo(movieFacade.findAllByGenre(id), MovieDetailDto.class);
+            for(int i = 0; i<list.size(); i++){
+                MovieDetailDto movie = list.get(i);
+                movie.setOverallRating(movieFacade.getMovieOverallRating(mapper.mapTo(movie, MovieDto.class)));
+                list.set(i, movie);
+            }
+            return ResponseEntity.ok(list);
+        }catch(InvalidDataAccessApiUsageException e){
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 
 }

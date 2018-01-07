@@ -51,5 +51,13 @@ public interface MovieService {
      */
     int getMovieOverallRating(Movie m);
 
+    /**
+     * Find movies with name
+     *
+     * @param serachString
+     * @return List of found movies
+     */
+    List<Movie> findAllByTitle(String serachString);
+
 
 }

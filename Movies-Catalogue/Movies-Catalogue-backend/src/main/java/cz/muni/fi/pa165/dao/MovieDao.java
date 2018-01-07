@@ -54,4 +54,12 @@ public interface MovieDao {
      * @throws IllegalArgumentException, if entity was not found in database
      */
     void delete(Long id);
+
+    /**
+     * Find movies with name
+     *
+     * @param serachString
+     * @return List of found movies
+     */
+    List<Movie> findAllByTitle(String serachString);
 }

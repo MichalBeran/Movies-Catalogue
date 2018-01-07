@@ -66,4 +66,12 @@ public interface GenreService {
      * @param id identifier
      */
     void delete(Long id);
+
+    /**
+     * Get movies for genre.
+     *
+     * @param id Genre id
+     * @return list of movies
+     */
+    List<Movie> getAllMoviesForGenre(Long id);
 }

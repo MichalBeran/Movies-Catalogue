@@ -31,4 +31,8 @@ export class ActorIndexComponent extends ActorCommonComponent implements OnInit 
   refresh() {
     this.service.get().subscribe(list => this.actors = list);
   }
+
+  getMovies(id){
+    this.router.navigate(['/movies/index',{actor: id}]);
+  }
 }

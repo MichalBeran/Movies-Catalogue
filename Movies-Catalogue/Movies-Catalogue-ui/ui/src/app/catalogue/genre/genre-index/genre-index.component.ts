@@ -34,4 +34,8 @@ export class GenreIndexComponent extends GenreCommonComponent implements OnInit 
   refresh() {
     this.service.get().subscribe(list => this.genres = list);
   }
+
+  getMovies(id){
+    this.router.navigate(['/movies/index',{genre: id}]);
+  }
 }

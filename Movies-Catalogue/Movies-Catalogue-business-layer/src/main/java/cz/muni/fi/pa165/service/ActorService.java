@@ -6,6 +6,8 @@
 package cz.muni.fi.pa165.service;
 
 import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Movie;
+
 import java.util.List;
 
 /**
@@ -52,4 +54,12 @@ public interface ActorService {
      * @param id identifier
      */
     void delete(Long id);
+
+    /**
+     * Get movies for actor.
+     *
+     * @param id Actor id
+     * @return list of movies
+     */
+    List<Movie> getAllMoviesForActor(Long id);
 }

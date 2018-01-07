@@ -12,7 +12,7 @@ export class DirectorCommonComponent implements OnInit {
   public isUserAdmin = AppHelper.isAdmin;
   public getLoggedUser = AppHelper.getAuthenticated;
 
-  protected error = null;
+  public error = null;
 
   constructor(protected service: RestService, protected router: Router) {
   }

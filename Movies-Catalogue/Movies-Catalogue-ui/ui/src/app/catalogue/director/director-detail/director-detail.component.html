@@ -7,15 +7,15 @@
 <form #directorForm="ngForm" name="missionForm">
   <div class="form-group">
     <label for="director-firstName">First name</label>
-    <input disabled [(ngModel)]="director.firstName" #firstName="ngModel" name="director-firstName" type="text" class="form-control" id="director-firstName" placeholder="name">
+    <input disabled [(ngModel)]="director.firstName" #firstName="ngModel" name="director-firstName" type="text" class="form-control" id="director-firstName" >
   </div>
   <div class="form-group">
     <label for="director-lastName">Last name</label>
-    <input disabled [(ngModel)]="director.lastName" #lastName="ngModel" name="director-lastName" type="text" class="form-control" id="director-lastName" placeholder="name">
+    <input disabled [(ngModel)]="director.lastName" #lastName="ngModel" name="director-lastName" type="text" class="form-control" id="director-lastName" >
   </div>
   <div class="form-group">
     <label for="director-dateOfBirth">Date of birth</label>
-    <input disabled [(ngModel)]="director.date" #lastName="ngModel" name="director-dateOfBirth" type="text" class="form-control" id="director-dateOfBirth" placeholder="date">
+    <input disabled [(ngModel)]="director.date" #lastName="ngModel" name="director-dateOfBirth" type="text" class="form-control" id="director-dateOfBirth" >
   </div>
   <div *ngIf="isUserAdmin()">
     <a routerLink="/directors/edit/{{director.id}}" class="btn btn-dark btn-sm">edit</a>

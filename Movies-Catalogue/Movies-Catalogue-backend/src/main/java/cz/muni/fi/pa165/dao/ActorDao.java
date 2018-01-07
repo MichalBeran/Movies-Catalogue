@@ -1,6 +1,7 @@
 package cz.muni.fi.pa165.dao;
 
 import cz.muni.fi.pa165.entities.Actor;
+import cz.muni.fi.pa165.entities.Movie;
 
 import java.util.List;
 
@@ -43,4 +44,12 @@ public interface ActorDao {
      * @param id id of entity
      */
     void delete(Long id);
+
+    /**
+     * Get movies for actor.
+     *
+     * @param id Actor id
+     * @return list of movies
+     */
+    List<Movie> getAllMoviesForActor(Long id);
 }

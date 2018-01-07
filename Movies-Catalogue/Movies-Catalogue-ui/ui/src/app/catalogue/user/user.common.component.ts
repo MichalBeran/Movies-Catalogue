@@ -16,7 +16,7 @@ export class UserCommonComponent implements OnInit {
   public isUserAdmin = AppHelper.isAdmin;
   public getLoggedUser = AppHelper.getAuthenticated;
 
-  protected error = null;
+  public error = null;
 
   constructor(protected service: UserService, protected router: Router) {
   }

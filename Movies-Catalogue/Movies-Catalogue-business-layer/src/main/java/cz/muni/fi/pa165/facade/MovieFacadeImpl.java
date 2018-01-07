@@ -11,9 +11,7 @@ import cz.muni.fi.pa165.dto.MovieDto;
 import cz.muni.fi.pa165.entities.Genre;
 import cz.muni.fi.pa165.entities.Movie;
 import cz.muni.fi.pa165.mapping.BeanMappingService;
-import cz.muni.fi.pa165.service.GenreService;
-import cz.muni.fi.pa165.service.MovieService;
-import cz.muni.fi.pa165.service.RatingService;
+import cz.muni.fi.pa165.service.*;
 
 import java.util.List;
 
@@ -37,6 +35,12 @@ public class MovieFacadeImpl implements MovieFacade {
 
     @Autowired
     private RatingService ratingService;
+
+    @Autowired
+    private ActorService actorService;
+
+    @Autowired
+    private DirectorService directorService;
 
     @Autowired
     private BeanMappingService beanMappingService;
@@ -98,6 +102,26 @@ public class MovieFacadeImpl implements MovieFacade {
     @Override
     public int getMovieOverallRating(MovieDto movie) {
         return movieService.getMovieOverallRating(beanMappingService.mapTo(movie, Movie.class));
+    }
+
+    @Override
+    public List<MovieDto> findAllByTitle(String serachString) {
+        return beanMappingService.mapTo(movieService.findAllByTitle(serachString), MovieDto.class);
+    }
+
+    @Override
+    public List<MovieDto> findAllByActor(Long actorId) {
+        return beanMappingService.mapTo(actorService.getAllMoviesForActor(actorId), MovieDto.class);
+    }
+
+    @Override
+    public List<MovieDto> findAllByDirector(Long directorId) {
+        return beanMappingService.mapTo(directorService.getAllMoviesForDirector(directorId), MovieDto.class);
+    }
+
+    @Override
+    public List<MovieDto> findAllByGenre(Long genreId) {
+        return beanMappingService.mapTo(genreService.getAllMoviesForGenre(genreId), MovieDto.class);
     }
 }
 

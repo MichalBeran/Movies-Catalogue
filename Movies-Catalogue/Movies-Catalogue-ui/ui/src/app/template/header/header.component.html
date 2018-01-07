@@ -9,14 +9,16 @@
           <div class="flex-center-spaced">
             <div class="d-none d-sm-block">
               <div class="logo">
-                <div class="logo-bg"></div>
+                <div class="logo-bg">
+                  <span class="logo-bg-timer">13:58:23.97</span>
+                </div>
               </div>
               <!--<h1>Movies catalogue</h1>-->
 
             </div>
             <div class="user">
               <span *ngIf="isLoggedIn()"><h5>hello, {{getLoggedUser().firstName}}.</h5> <a class="btn btn-outline-warning" href="#" (click)="logout()">Log out</a></span>
-              <span *ngIf="!isLoggedIn()"><h5 class="d-none d-sm-inline">hello, stranger!</h5> <a class="btn btn-outline-warning" routerLink="/users/login">Log in</a> or <a class="btn btn-outline-info" routerLink="/users/create">Sign up</a></span>
+              <span *ngIf="!isLoggedIn()"><h5 class="d-none d-md-inline">hello, stranger!</h5> <a class="btn btn-outline-warning" routerLink="/users/login">Log in</a> or <a class="btn btn-outline-info" routerLink="/users/create">Sign up</a></span>
             </div>
             <div class=" d-sm-none">
               <a href="#" (click)="dropdownMenuToggle($event)" class="btn btn-outline-info">Menu</a>

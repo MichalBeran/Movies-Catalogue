@@ -4,7 +4,7 @@ header {
   box-shadow: 0px 1px 15px 1px rgba(113, 106, 202, 0.5);
 
   #header-top {
-    height: 100px;
+    height: 110px;
     width: 100%;
     background: @clr-header-top;
     display: flex;
@@ -12,11 +12,22 @@ header {
 
     .logo{
       .logo-bg{
-        background:url('../../../assets/logo.png');
+        background:url('../../../assets/logo4.png');
         background-position:bottom;
         background-size:contain;
-        height:75px;
-        width:150px;
+        background-repeat:no-repeat;
+        height:90px;
+        width:240px;
+        .logo-bg-timer{
+          display:block;
+          color:red;
+          font-size:15px;
+          text-shadow:0 0 2px #ff9a9a;
+          font-family:'Quantico';
+          position:relative;
+          top:42px;
+          left:9px;
+        }
       }
     }
     .small-title h3{

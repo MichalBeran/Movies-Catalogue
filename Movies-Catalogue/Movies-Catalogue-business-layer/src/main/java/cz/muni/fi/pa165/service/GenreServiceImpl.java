@@ -54,4 +54,9 @@ public class GenreServiceImpl implements GenreService {
     public void delete(Long id) {
         genreDao.delete(id);
     }
+
+    @Override
+    public List<Movie> getAllMoviesForGenre(Long id) {
+        return genreDao.getAllMoviesForGenre(id);
+    }
 }

@@ -81,4 +81,10 @@ public class GenreDaoImpl implements GenreDao {
         }
         return null;
     }
+
+    @Override
+    public List<Movie> getAllMoviesForGenre(Long id) {
+        Genre genre = findById(id);
+        return genre.getMovies();
+    }
 }

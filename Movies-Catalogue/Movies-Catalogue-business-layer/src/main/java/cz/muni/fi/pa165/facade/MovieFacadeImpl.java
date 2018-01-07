@@ -118,6 +118,11 @@ public class MovieFacadeImpl implements MovieFacade {
     public List<MovieDto> findAllByDirector(Long directorId) {
         return beanMappingService.mapTo(directorService.getAllMoviesForDirector(directorId), MovieDto.class);
     }
+
+    @Override
+    public List<MovieDto> findAllByGenre(Long genreId) {
+        return beanMappingService.mapTo(genreService.getAllMoviesForGenre(genreId), MovieDto.class);
+    }
 }
 
 

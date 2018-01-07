@@ -42,10 +42,13 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
     this.service.get().subscribe(list => {
       var actId = this.route.snapshot.paramMap.get('actor');
       var dirId = this.route.snapshot.paramMap.get('director');
+      var genId = this.route.snapshot.paramMap.get('genre');
       if(actId != null){
         this.getMoviesByActor(actId);
       }else if(dirId != null){
         this.getMoviesByDirector(dirId);
+      }else if(genId != null){
+        this.getMoviesByGenre(genId);
       }else {
         this.movies = list;
       }
@@ -73,6 +76,12 @@ export class MovieIndexComponent extends MovieCommonComponent implements OnInit 
 
   getMoviesByDirector(id) {
     this.service.moviesByDirector(id).subscribe(list => {
+      this.movies = list;
+    });
+  }
+
+  getMoviesByGenre(id) {
+    this.service.moviesByGenre(id).subscribe(list => {
       this.movies = list;
     });
   }
